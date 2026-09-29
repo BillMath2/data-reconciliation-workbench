@@ -10,9 +10,9 @@ Screenshots and a short recording will be the primary way to review this project
 
 ## Project status
 
-**P01 is in progress.** The repository now contains a Python CLI, validated configuration loading, driver smoke tests, locked dependencies, a Dockerfile, Docker Compose, and a GitHub Actions workflow. The ingestion pipeline, reconciliation workflow, AI integration, and web screen are not implemented yet.
+**P01 is complete.** The repository contains a Python CLI, validated configuration loading, driver smoke tests, locked dependencies, a Dockerfile, Docker Compose, and a GitHub Actions workflow. The ingestion pipeline, reconciliation workflow, AI integration, and web screen are not implemented yet. Next is P02: source contracts and synthetic fixtures.
 
-Local verification: **13 unit tests pass; 2 SQL integration tests are skipped** pending a running database. Docker image builds, live SQL checks, and the GitHub Actions run remain unverified. See [development setup](docs/development.md) for the acceptance gate.
+**Verified in GitHub Actions: 15 tests passed**, including both live SQL Server integration tests. The runtime and test images built successfully; database readiness, health, parameter binding, Unicode, commit, and rollback checks passed. See the [successful run](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36504051164) and [P01 validation record](docs/p01-validation.md).
 
 ## Run the foundation with Docker Compose
 
@@ -38,7 +38,7 @@ The database uses a named volume and stays inside the Compose network. `down` st
 
 - **Docker:** separate runtime/test image targets, a non-root Python process, a pinned SQL Server image, readiness checks, private database networking, and persistent storage.
 - **SQL verification:** health, parameter binding, Unicode, commit, and rollback checks against real SQL Server when enabled.
-- **Automation:** GitHub Actions builds the images and runs the same Compose checks on pushes and pull requests; the workflow has not been run yet.
+- **Automation:** GitHub Actions builds the images and runs the same Compose checks on pushes and pull requests; the foundation workflow has passed against real SQL Server.
 - **Reproducibility:** uv lockfile, explicit configuration, synthetic-data scope, and a Docker build context that excludes credentials.
 
 See the [implementation plan](docs/implementation-plan.md) for the remaining work, [development setup](docs/development.md) for tooling and troubleshooting, and [demonstration guide](docs/demo-guide.md) for the README/screenshot/recording sequence.

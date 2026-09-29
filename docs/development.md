@@ -4,9 +4,11 @@
 
 Implemented: Python 3.12 package, CLI entry point, configuration validation, redacted CLI errors, uv lockfile, unit tests, opt-in SQL integration tests, Docker runtime/test targets, Compose database readiness, and a GitHub Actions workflow.
 
-Verified on Windows: Python 3.12.14, uv 0.12.20, mssql-python 1.15.0 import, lint/format checks, and 13 passing unit tests. Two live SQL integration tests are skipped by default. This is not evidence that SQL connectivity or transactions passed.
+Verified on Windows: Python 3.12.14, uv 0.12.20, mssql-python 1.15.0 import, lint/format checks, and 13 passing unit tests. Local runs still skip two SQL integration tests unless explicitly enabled against a running database.
 
-P01 remains open until a Docker host builds both images, starts SQL Server, passes `health` and `db-smoke`, and passes the integration suite with `--run-sql`. The workflow is prepared locally; it has not been pushed or executed on GitHub. Docker Desktop and native SQL Server have not been installed as part of this work.
+**P01 is complete.** [GitHub Actions run 36504051164](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36504051164), for commit `5552a3b`, built both images, started SQL Server, passed `config-check`, `health`, and `db-smoke`, and passed all 15 tests with `--run-sql`. The `sql-checks` artifact confirms zero skipped integration tests in that run. See the [validation record](p01-validation.md).
+
+The container execution was verified on GitHub's Ubuntu runner. Docker Desktop and native SQL Server have not been installed as part of this work; local container execution is not claimed. A Docker host is needed to repeat the Compose demonstration locally.
 
 ## Container setup
 

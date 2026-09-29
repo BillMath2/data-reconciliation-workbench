@@ -1,7 +1,7 @@
 # Data Reconciliation Workbench: implementation plan
 
 Date: 2026-09-28  
-Status: P01 in progress. Container-based foundation implemented; live SQL Server verification remains outstanding. Estimates are planning defaults.
+Status: P01 complete. Container builds and live SQL Server checks passed in GitHub Actions; P02 is next. See the [P01 validation record](p01-validation.md). Estimates are planning defaults.
 
 ### How to read the plan
 
