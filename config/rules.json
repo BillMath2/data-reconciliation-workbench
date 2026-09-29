@@ -1,6 +1,6 @@
 {
   "rule_set_version": "1.0.0",
-  "execution": "Fixed checks to implement in P04. This file is metadata, not an executable rules language.",
+  "execution": "Fixed checks implemented by workbench.sources, workbench.validation, and workbench.freshness. This file is metadata, not an executable rules language.",
   "rules": [
     {"id": "SRC_SCHEMA", "scope": "load", "action": "fail_load", "parameters": {"contract_version": "1.0.0", "extra_fields": "reject", "missing_columns": "reject", "malformed_records": "reject"}},
     {"id": "SRC_MANIFEST_COUNT", "scope": "load", "action": "fail_load", "parameters": {"count_header": false, "count_duplicates": true}},

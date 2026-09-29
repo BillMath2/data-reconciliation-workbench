@@ -4,7 +4,7 @@ Contract and rule-set version: **1.0.0**. All names, IDs, and events are fiction
 
 ## What is implemented
 
-The three source contracts, field ownership, rule metadata, deterministic source generator, read-only mock registry API, SQL department bootstrap, and independent expected outcomes are checked in. This supplies inputs for P03/P04; it does not implement ingestion, validation, quarantine, or publication.
+The three source contracts, field ownership, rule metadata, deterministic source generator, read-only mock registry API, SQL department bootstrap, and independent expected outcomes are checked in. P04 now implements their adapters, validation, quarantine, and publication path; see the [ingestion guide](ingestion.md) and its pending SQL acceptance gate.
 
 | Source | Contract | Authoritative fields | Transport |
 |---|---|---|---|
@@ -17,7 +17,7 @@ Each contract lists the field's target curated column. [Field ownership](../conf
 ## Identity, types, and normalization
 
 - Keys: `department_id`, `project_id`, and `(activity_date, activity_id)` respectively.
-- IDs: trim surrounding whitespace, uppercase ASCII letters, allow only `A-Z`, digits, `_`, and `-`; maximum 16 characters. Preserve raw values separately when ingestion is implemented.
+- IDs: trim surrounding whitespace, uppercase ASCII letters, allow only `A-Z`, digits, `_`, and `-`; maximum 16 characters. Raw values are preserved in staged evidence.
 - Names: trimmed, nonempty strings up to 100 characters. Statuses: trimmed lowercase strings from the allowed set in the contract.
 - Department activity flag: SQL `BIT`, represented as a JSON boolean. An inactive department or paused/closed project is still a known reference; v1 does not reject activities solely for that state.
 - Business dates: calendar-valid `YYYY-MM-DD` in `America/New_York`. A parseable row date differing from the manifest fails the entire load. Missing or unparseable row dates are individual required/format findings and have no valid business key.
@@ -25,7 +25,7 @@ Each contract lists the field's target curated column. [Field ownership](../conf
 - CSV units: trim whitespace, parse only decimal digits, and require an integer from 0 through 2,147,483,647. Completed rows require at least one unit; planned/cancelled rows require zero. No floats, negative values, scientific notation, or silent numeric coercion.
 - Missing values: absent/null/blank after trimming. A missing required CSV **column** is a load error; a blank required **cell** is a row finding.
 
-Fixed rule IDs and parameters are in [rules.json](../config/rules.json). A load fails for unknown schema versions, missing/extra columns or record fields, malformed CSV/JSON structure, invalid manifest metadata/counts, mixed valid business dates, incomplete pagination, or duplicate reference keys. Other row findings preserve evidence and quarantine the affected row. These are P04 implementation requirements, not claims that the validation engine already exists.
+Fixed rule IDs and parameters are in [rules.json](../config/rules.json). A load fails for unknown schema versions, missing/extra columns or record fields, malformed CSV/JSON structure, invalid manifest metadata/counts, mixed valid business dates, incomplete pagination, or duplicate reference keys. Other row findings preserve evidence and quarantine the affected row. Local tests cover these checks; SQL integration tests cover their durable publication behavior and await CI.
 
 ## Snapshot and reconciliation semantics
 
@@ -43,7 +43,7 @@ The unknown-department scenario has a separate reference hash and requires a fre
 
 ## Golden expectations
 
-[golden.json](../fixtures/expected/golden.json) is maintained independently from the generator. The generator never reads or writes it. Its row-level exclusions and correction instructions are the reference for future pipeline tests.
+[golden.json](../fixtures/expected/golden.json) is maintained independently from the generator. The generator never reads or writes it. Its exclusions and totals are the assertions used by P04's validation/publication tests and the future reconciliation tests.
 
 | Dataset | Source rows | Expected accepted rows | Source completed units | Expected accepted units |
 |---|---:|---:|---:|---:|
@@ -53,7 +53,7 @@ The unknown-department scenario has a separate reference hash and requires a fre
 
 In the golden file, ordinals 95-97 reference `PRJ-UNKNOWN`, ordinal 98 has a blank project ID, and ordinals 99/100 are exact copies of ordinals 1/2. These exclude four invalid rows (8 units) and two duplicate extras (5 units): `202 - 189 = 8 + 5`.
 
-The correction removes the duplicate extras and repairs the four project assignments while retaining activity IDs. Only the repaired records receive the correction timestamp. Publication/replay behavior is specified in the expected file but will be exercised only after the pipeline exists.
+The correction removes the duplicate extras and repairs the four project assignments while retaining activity IDs. Only the repaired records receive the correction timestamp. P04's integration tests use the independent expected file to verify publication and replay; those live checks are pending.
 
 ## Reproduce and inspect the sources
 
@@ -93,6 +93,6 @@ The opt-in integration suite creates a uniquely named `workbench_fixture_test_<u
 
 ## Scenario coverage and validation limits
 
-[scenarios.json](../fixtures/scenarios.json) maps S01-S12 to source files or procedural steps. S09/S10/S11 describe replay, replacement, and injected publication failure; their engine behavior is P04/P05 work. S12 has separate manifest-count, header, date, and pagination faults. An additional empty-day fixture distinguishes zero activity from a missing feed.
+[scenarios.json](../fixtures/scenarios.json) maps S01-S12 to source files or procedural steps. P04 tests cover replay, replacement, and injected publication failure for S09/S10/S11. S12 has separate manifest-count, header, date, and pagination faults. An additional empty-day fixture distinguishes zero activity from a missing feed. P05 adds saved reconciliation results and the guided demonstration.
 
 P02 local verification covers fixture reproducibility/hashes, reference relationships, field ownership/rule references, exact golden inputs and independently specified outcomes, correction changes, mock API behavior, and a real HTTP pagination smoke test. [GitHub Actions run 36508588521](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36508588521) subsequently passed all 33 tests, including four live SQL checks, and verified the rebuilt mock registry container. See [P02 validation](p02-validation.md). P03 schema verification is a separate pending gate.

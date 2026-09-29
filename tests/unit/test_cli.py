@@ -60,3 +60,25 @@ def test_missing_settings_exit_code(monkeypatch, capsys):
     monkeypatch.delenv("WB_SQL_PASSWORD", raising=False)
     assert cli.main(["config-check"]) == 2
     assert "WB_SQL_PASSWORD" in capsys.readouterr().err
+
+
+def test_failed_ingestion_exits_nonzero_with_recorded_load(configured, monkeypatch, capsys):
+    monkeypatch.setattr(
+        cli.pipeline,
+        "load_projects",
+        lambda *a, **k: {
+            "status": "failed",
+            "code": "SRC_PAGINATION",
+            "load_id": "recorded-attempt",
+        },
+    )
+    assert cli.main(["load-projects"]) == 5
+    assert json.loads(capsys.readouterr().out)["load_id"] == "recorded-attempt"
+
+
+@pytest.mark.parametrize("command", ["load-departments", "load-activities", "freshness"])
+def test_ingestion_required_arguments_are_checked_before_connecting(command, capsys):
+    with pytest.raises(SystemExit) as caught:
+        cli.main([command])
+    assert caught.value.code == 2
+    assert "requires" in capsys.readouterr().err

@@ -3,21 +3,51 @@
 import argparse
 import json
 import sys
+from contextlib import closing
+from datetime import UTC, datetime
 from pathlib import Path
 
-from workbench import bootstrap, db, migrations
+from workbench import bootstrap, db, freshness, migrations, pipeline
 from workbench.config import ConfigurationError, load_settings
+from workbench.validation import LoadError, parse_date, parse_timestamp
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="workbench")
     parser.add_argument("--env-file", type=Path, help="Explicit configuration file (optional)")
     parser.add_argument("--migration-dir", type=Path, default=migrations.DEFAULT_MIGRATIONS)
+    parser.add_argument("--csv", type=Path)
+    parser.add_argument("--manifest", type=Path)
+    parser.add_argument("--registry-url", default="http://mock-registry:8001/projects")
+    parser.add_argument("--reference-hash")
+    parser.add_argument("--actor", default="cli")
+    parser.add_argument("--business-date", type=parse_date)
+    parser.add_argument(
+        "--now", type=parse_timestamp, help="Injected UTC clock: YYYY-MM-DDTHH:MM:SSZ"
+    )
     parser.add_argument(
         "command",
-        choices=("config-check", "health", "db-smoke", "db-create", "migrate", "db-setup"),
+        choices=(
+            "config-check",
+            "health",
+            "db-smoke",
+            "db-create",
+            "migrate",
+            "db-setup",
+            "seed-departments",
+            "load-departments",
+            "load-projects",
+            "load-activities",
+            "freshness",
+        ),
     )
     args = parser.parse_args(argv)
+    if args.command == "load-activities" and (args.csv is None or args.manifest is None):
+        parser.error("load-activities requires --csv and --manifest")
+    if args.command == "load-departments" and not args.reference_hash:
+        parser.error("load-departments requires --reference-hash")
+    if args.command == "freshness" and args.business_date is None:
+        parser.error("freshness requires --business-date")
     try:
         settings = load_settings(args.env_file)
     except ConfigurationError as error:
@@ -36,9 +66,30 @@ def main(argv: list[str] | None = None) -> int:
                 result = bootstrap.create_database(settings)
             elif args.command == "migrate":
                 result = migrations.migrate(settings, args.migration_dir)
-            else:
+            elif args.command == "db-setup":
                 result = bootstrap.setup_database(settings, args.migration_dir)
-        except (migrations.MigrationError, bootstrap.BootstrapError) as error:
+            elif args.command == "seed-departments":
+                migrations.validate_database_name(settings.database)
+                sql = Path("fixtures/generated/reference/departments.sql").read_text("utf-8")
+                with (
+                    closing(db.connect(settings)) as connection,
+                    closing(connection.cursor()) as cursor,
+                ):
+                    migrations.execute_batch(cursor, sql)
+                    connection.commit()
+                result = {"status": "ok", "check": "department-seed"}
+            elif args.command == "load-departments":
+                result = pipeline.load_departments(settings, args.reference_hash, actor=args.actor)
+            elif args.command == "load-projects":
+                result = pipeline.load_projects(settings, args.registry_url, actor=args.actor)
+            elif args.command == "freshness":
+                now = args.now.replace(tzinfo=UTC) if args.now else datetime.now(UTC)
+                result = freshness.inspect(settings, args.business_date, now)
+            else:
+                result = pipeline.load_activities(
+                    settings, args.csv, args.manifest, actor=args.actor
+                )
+        except (migrations.MigrationError, bootstrap.BootstrapError, LoadError) as error:
             print(json.dumps({"status": "error", "message": str(error)}), file=sys.stderr)
             return 4
         except ImportError:
@@ -67,7 +118,7 @@ def main(argv: list[str] | None = None) -> int:
             )
             return 3
     print(json.dumps(result))
-    return 0
+    return 5 if result.get("status") == "failed" else 0
 
 
 if __name__ == "__main__":

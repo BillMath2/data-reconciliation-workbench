@@ -10,9 +10,9 @@ Screenshots and a short recording will be the primary way to review this project
 
 ## Project status
 
-**P01 and P02 are complete; P03 is implemented locally and awaits SQL CI verification.** The foundation now includes source contracts and fixtures, a mock registry API, eight SQL tables, transactional migrations, and separate setup/runtime database credentials. The ingestion pipeline, reconciliation workflow, AI integration, and workbench screen remain planned.
+**P01 and P02 are complete. P03 has a corrective migration pending verification; P04 is implemented locally.** SQL, REST, and CSV ingestion now capture source evidence, quarantine invalid rows, and publish valid data through a restricted SQL login. Reruns, date replacement, audit events, and freshness checks are implemented. Reconciliation reports, the guided demo, AI integration, and the workbench screen remain planned.
 
-**P02 verification in GitHub Actions: 33 tests passed**, including all four SQL checks, plus the mock registry container check. See the [successful P02 run](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36508588521) and [validation record](docs/p02-validation.md). **P03 local verification: 53 tests passed; 17 SQL tests skipped.** Lint, formatting, fixture reproduction, and Compose configuration validation passed. New migrations, permissions, and container execution require the next CI run; see [P03 validation](docs/p03-validation.md).
+**Current local checks: 110 tests passed; 33 SQL tests skipped.** P03's [CI run](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36572081104) passed database setup and runtime checks but found an identifier constraint rejecting valid hyphenated IDs (62 tests passed, 8 failed). Migration 004 addresses that defect; the next CI run must verify it together with P04. See [P03 findings](docs/p03-validation.md) and [P04 validation](docs/p04-validation.md). The last fully successful baseline is [P02](docs/p02-validation.md).
 
 ## Run the foundation with Docker Compose
 
@@ -35,7 +35,7 @@ The setup script creates or upgrades `.env.workbench` with distinct generated ad
 
 The `migrate` service creates the `workbench` database, applies pending migrations, and provisions the restricted `workbench_app` login. Rerunning it leaves applied migrations unchanged. The regular `workbench` service uses that runtime login. See the [schema and migration guide](docs/database-schema.md).
 
-The database uses a named volume and stays inside the Compose network. `down` stops containers and preserves that volume. SQL tests create and remove their own uniquely named disposable databases; the application tables remain empty until ingestion is implemented in P04. There is no workbench screen yet. The Compose file accepts Microsoft's SQL Server Developer EULA for development use.
+The database uses a named volume and stays inside the Compose network. `down` stops containers and preserves that volume. SQL tests create and remove their own uniquely named disposable databases and start the mock registry. Setup leaves the application tables empty; follow the [ingestion guide](docs/ingestion.md) to seed and load them. There is no workbench screen yet. The Compose file accepts Microsoft's SQL Server Developer EULA for development use.
 
 ## Inspect the synthetic sources
 
@@ -47,13 +47,13 @@ The database uses a named volume and stays inside the Compose network. `down` st
 
 The registry serves `http://127.0.0.1:8001/projects` with stable pagination. For the container version, use `docker compose --env-file .env.workbench --profile sources up -d --build --wait mock-registry`.
 
-The [source-contract guide](docs/source-contracts.md) documents field ownership, manifests, fixture regeneration, the SQL seed, and S01-S12 scenario inputs. [Independent golden expectations](fixtures/expected/golden.json) specify the six excluded rows and expected totals; these describe the future pipeline result, not an already implemented reconciliation engine.
+The [source-contract guide](docs/source-contracts.md) documents field ownership, manifests, fixture regeneration, the SQL seed, and S01-S12 scenario inputs. [Independent golden expectations](fixtures/expected/golden.json) specify the six excluded rows and expected totals. Local validation produces 94 accepted golden rows; SQL publication and correction assertions await CI. The reconciliation engine is P05 work.
 
 ## Engineering evidence
 
 - **Docker:** separate runtime/test image targets, a non-root Python process, a pinned SQL Server image, readiness checks, private database networking, and persistent storage.
-- **SQL engineering:** eight-table schema, source-row lineage, relational constraints, transactional migration ledger, and a restricted runtime role. New integration tests cover migration rollback and permissions; live P03 verification is pending.
-- **Automation:** GitHub Actions builds the images and runs the same Compose checks on pushes and pull requests; the foundation workflow has passed against real SQL Server.
+- **SQL engineering:** ten tables, source-row lineage, saved validation findings, atomic publication, an applied-version ledger, and a restricted runtime role. Integration tests cover migration rollback, permissions, reruns, and correction; live verification is pending.
+- **Automation:** GitHub Actions builds the images and runs the same Compose checks on pushes and pull requests. The latest SQL failure and its pending correction are documented above.
 - **Reproducibility:** uv lockfile, explicit configuration, synthetic-data scope, and a Docker build context that excludes credentials.
 
 See the [implementation plan](docs/implementation-plan.md) for the remaining work, [development setup](docs/development.md) for tooling and troubleshooting, and [demonstration guide](docs/demo-guide.md) for the README/screenshot/recording sequence.

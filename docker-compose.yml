@@ -66,7 +66,7 @@ services:
     command: ["db-setup"]
 
   mock-registry:
-    profiles: ["sources"]
+    profiles: ["sources", "test"]
     build:
       context: .
       target: runtime
@@ -87,9 +87,14 @@ services:
       context: .
       target: test
     platform: linux/amd64
-    environment: *workbench-environment
+    environment:
+      <<: *workbench-environment
+      WB_TEST_REGISTRY_URL: http://mock-registry:8001/projects
+      WB_SQL_RUNTIME_PASSWORD: ${WB_SQL_RUNTIME_PASSWORD:?Run scripts/initialize-demo.ps1 to create runtime credentials}
     depends_on:
       sqlserver:
+        condition: service_healthy
+      mock-registry:
         condition: service_healthy
     command: ["-q", "-p", "no:cacheprovider", "--run-sql"]
 

@@ -23,7 +23,7 @@ def test_database_identifiers_reject_system_names_and_unsafe_characters(name):
 
 def test_repository_migrations_are_ordered_single_batches():
     files = discover(Path(__file__).resolve().parents[2] / "sql/migrations")
-    assert [m.version for m in files] == [1, 2, 3]
+    assert [m.version for m in files] == [1, 2, 3, 4, 5]
 
 
 @pytest.mark.parametrize(

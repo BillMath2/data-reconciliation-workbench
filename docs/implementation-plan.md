@@ -1,7 +1,7 @@
 # Data Reconciliation Workbench: implementation plan
 
 Date: 2026-09-28  
-Status: P01 and P02 complete (see [P01 validation](p01-validation.md) and [P02 validation](p02-validation.md)). P03 schema, migrations, runtime role, and CI extensions are implemented locally; live SQL acceptance awaits the next CI run. See [schema guide](database-schema.md) and [P03 validation](p03-validation.md). P04 follows that gate. Estimates remain planning defaults; confirm the P03 estimate review after SQL verification.
+Status: P01 and P02 complete. P03's CI found an identifier-constraint defect; migration 004 addresses it without changing applied scripts, with verification pending. P04 ingestion, validation, quarantine, atomic publication, and freshness checks are available for integration testing; neither P03 nor P04 is accepted until the next SQL CI run passes. See [P03 findings](p03-validation.md), [P04 validation](p04-validation.md), and [ingestion guide](ingestion.md). Estimates remain planning defaults; review integration rework after that run before P05.
 
 ### How to read the plan
 
@@ -123,6 +123,8 @@ Quarantine is a durable disposition of a staged row plus its validation findings
 This is a 12-table target plus three views, created incrementally. P03 establishes the migration ledger, load/input/staging objects, and typed curated tables; later packages add findings, reconciliation, audit, and investigation objects as needed. Shared staging holds raw payloads; curated entities retain typed columns, relational keys, and constraints.
 
 P03's initial eight tables and three migrations are documented in the [database schema guide](database-schema.md). The Compose `migrate` service uses administrator access for setup; the regular application service uses the separate `workbench_app` login. The report schema is reserved but has no views yet.
+
+P04 adds migration 004's identifier correction and migration 005's `Exception` and `AuditEvent` tables, bringing the implementation to ten tables. Its adapters, row rules, publication transactions, and CLI commands are described in the [ingestion guide](ingestion.md). Reconciliation result persistence remains P05; exception lifecycle and UI permissions remain P06/P08.
 
 Keep infrastructure names generic (`SourceRow`, `Load`, `Exception`, evidence services). Keep research-domain tables explicit (`Project`, `Activity`) rather than creating a generic entity framework. A later access-reconciliation variant can reuse ingestion, evidence, UI, and assistant components, but requires its own domain contracts, curated schema, and rules; it is not assumed to be only a fixture swap.
 

@@ -1,5 +1,4 @@
 from contextlib import closing
-from dataclasses import replace
 from datetime import date, datetime
 from pathlib import Path
 from shutil import copytree
@@ -8,43 +7,22 @@ from uuid import uuid4
 import pytest
 
 from workbench.bootstrap import create_database
-from workbench.config import load_settings
 from workbench.db import connect
-from workbench.migrations import MigrationError, execute_batch, migrate
+from workbench.migrations import MigrationError, discover, execute_batch, migrate
 
 pytestmark = pytest.mark.integration
 ROOT = Path(__file__).resolve().parents[2]
 MIGRATIONS = ROOT / "sql/migrations"
-
-
-@pytest.fixture
-def database():
-    settings = replace(
-        load_settings(), database="workbench_schema_test_" + uuid4().hex, connect_timeout=30
-    )
-    assert create_database(settings)["created"] is True
-    try:
-        yield settings
-    finally:
-        # Delete only the isolated database this fixture just created.
-        with closing(connect(replace(settings, database="master"))) as admin:
-            admin.autocommit = True
-            with closing(admin.cursor()) as cursor:
-                execute_batch(
-                    cursor,
-                    f"ALTER DATABASE [{settings.database}] "
-                    "SET SINGLE_USER WITH ROLLBACK IMMEDIATE;",
-                )
-                execute_batch(cursor, f"DROP DATABASE [{settings.database}];")
+VERSIONS = [m.version for m in discover(MIGRATIONS)]
 
 
 def test_empty_database_migrates_and_repeats_without_reapplying(database):
     assert create_database(database)["created"] is False
-    assert migrate(database, MIGRATIONS)["applied"] == [1, 2, 3]
+    assert migrate(database, MIGRATIONS)["applied"] == VERSIONS
     assert migrate(database, MIGRATIONS)["applied"] == []
     with closing(connect(database)) as connection, closing(connection.cursor()) as cursor:
         cursor.execute("SELECT version FROM meta.SchemaMigration ORDER BY version")
-        assert [r[0] for r in cursor.fetchall()] == [1, 2, 3]
+        assert [r[0] for r in cursor.fetchall()] == VERSIONS
         cursor.execute(
             "SELECT s.name, t.name FROM sys.tables AS t "
             "JOIN sys.schemas AS s ON s.schema_id=t.schema_id"
@@ -54,6 +32,8 @@ def test_empty_database_migrates_and_repeats_without_reapplying(database):
             ("source", "Department"),
             ("ops", "InputArtifact"),
             ("ops", "Load"),
+            ("ops", "Exception"),
+            ("ops", "AuditEvent"),
             ("stg", "SourceRow"),
             ("core", "Department"),
             ("core", "Project"),
@@ -64,23 +44,24 @@ def test_empty_database_migrates_and_repeats_without_reapplying(database):
 def test_failed_migration_rolls_back_ddl_and_ledger_and_can_retry(database, tmp_path):
     destination = tmp_path / "migrations"
     copytree(MIGRATIONS, destination)
-    bad = destination / "004_probe.sql"
+    next_version = len(VERSIONS) + 1
+    bad = destination / f"{next_version:03}_probe.sql"
     bad.write_text(
         "CREATE TABLE ops.FailureProbe (id INT); THROW 51010, 'Injected migration failure', 1;",
         encoding="utf-8",
     )
-    with pytest.raises(MigrationError, match="004_probe.sql"):
+    with pytest.raises(MigrationError, match=bad.name):
         migrate(database, destination)
     with closing(connect(database)) as connection, closing(connection.cursor()) as cursor:
         cursor.execute("SELECT COUNT(*) FROM meta.SchemaMigration")
-        assert cursor.fetchone()[0] == 3
+        assert cursor.fetchone()[0] == len(VERSIONS)
         cursor.execute("SELECT OBJECT_ID(N'ops.FailureProbe', N'U')")
         assert cursor.fetchone()[0] is None
     bad.write_text("CREATE TABLE ops.FailureProbe (id INT);", encoding="utf-8")
-    assert migrate(database, destination)["applied"] == [4]
+    assert migrate(database, destination)["applied"] == [next_version]
     assert migrate(database, destination)["applied"] == []
     with pytest.raises(MigrationError, match="history"):
-        migrate(database, MIGRATIONS)  # An older checkout must not silently ignore version 4.
+        migrate(database, MIGRATIONS)  # An older checkout must not silently ignore newer versions.
 
 
 def test_existing_p02_source_seed_is_preserved(database):
@@ -92,6 +73,23 @@ def test_existing_p02_source_seed_is_preserved(database):
     with closing(connect(database)) as connection, closing(connection.cursor()) as cursor:
         cursor.execute("SELECT COUNT(*) FROM source.Department")
         assert cursor.fetchone()[0] == 5
+
+
+def test_identifier_patch_accepts_literal_separators_and_rejects_other_characters(database):
+    migrate(database, MIGRATIONS)
+    with closing(connect(database)) as connection, closing(connection.cursor()) as cursor:
+        load = stage(cursor, "department-reference")
+        connection.commit()
+        sql = "INSERT INTO core.Department "
+        sql += "(department_id, department_name, is_active, origin_load_id, origin_row_ordinal) "
+        sql += "VALUES (?, N'Synthetic', 1, ?, 1)"
+        for identifier in ("DEPT-01", "D_02-A", "ABC123", "-", "_"):
+            cursor.execute(sql, (identifier, load))
+            connection.commit()
+        for identifier in ("", "lower", "A B", "A.", "A/", "A[", "A ", "É", "A\t"):
+            with pytest.raises(Exception, match="CK_Department_Id"):
+                cursor.execute(sql, (identifier, load))
+            connection.rollback()
 
 
 def stage(cursor, source):

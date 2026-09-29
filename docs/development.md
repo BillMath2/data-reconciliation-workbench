@@ -12,7 +12,7 @@ The container execution was verified on GitHub's Ubuntu runner. Docker Desktop a
 
 **P02 is complete:** [run 36508588521](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36508588521) passed all 33 tests, including four live SQL checks, and verified the mock registry container. See [P02 validation](p02-validation.md) and [source contracts and fixture commands](source-contracts.md).
 
-P03 adds the application schema, migration runner, and restricted runtime credentials. The current local suite has **53 passing tests and 17 SQL tests skipped**. P03's SQL/container acceptance awaits a new CI run. See [P03 validation](p03-validation.md) and the [database schema guide](database-schema.md). One upstream Starlette TestClient deprecation warning remains; it does not fail the suite.
+P03's live CI found an identifier-constraint defect; the appended migration 004 addresses it, pending verification. P04 adds ingestion, validation, saved findings, atomic publication, and freshness. The current local suite has **110 passing tests and 33 SQL tests skipped**. See [P03 findings](p03-validation.md), [P04 validation](p04-validation.md), and the [ingestion guide](ingestion.md). One upstream Starlette TestClient deprecation warning remains; it does not fail the suite.
 
 ## Container setup
 
@@ -54,7 +54,7 @@ Install [uv](https://docs.astral.sh/uv/getting-started/installation/) if it is n
 
 On Linux/macOS use the corresponding `uv` commands directly. Unit tests run without a database. `config-check` checks configuration only; it does not prove SQL connectivity. The Compose server name is resolvable inside Compose, so run SQL checks inside the container unless using a separately configured database endpoint.
 
-Commands return JSON and exit with 0 for success, 2 for invalid configuration, 3 for unavailable drivers or failed SQL operations, and 4 for safe migration/bootstrap diagnostics. No environment file is loaded implicitly. `--env-file` explicitly opts into a file; process variables override its values. The existing root `.env` is left untouched.
+Commands return JSON and exit with 0 for success, 2 for invalid configuration/arguments, 3 for unavailable drivers or failed SQL operations, 4 for safe preflight/migration/bootstrap diagnostics, and 5 for recorded failed ingestion attempts. No environment file is loaded implicitly. `--env-file` explicitly opts into a file; process variables override its values. The existing root `.env` is left untouched.
 
 ## Live SQL checks and driver fallback
 
@@ -66,10 +66,12 @@ P02's additional integration tests create and later remove a uniquely named disp
 
 P03's tests also create and remove isolated `workbench_schema_test_<uuid>` databases. They verify migration reapplication is a no-op, a failed migration rolls back its DDL and ledger row, older migration sets are rejected, source seed data survives migration, business keys and lineage FKs hold, publication uniqueness holds, and the runtime role permits pipeline writes while rejecting DDL/source/ledger changes. These tests must pass on real SQL Server before P03 is complete.
 
+P04's integration tests require `WB_SQL_RUNTIME_PASSWORD` as well as the administrator connection. They migrate and seed isolated databases, provision the restricted login, then run ingestion with that login against real SQL and the registry HTTP service. The Compose test profile starts both dependencies. Direct Python runs also need a running registry at `WB_TEST_REGISTRY_URL` (default `http://127.0.0.1:8001/projects`). Tests verify rollback, no-op history, partition replacement, source failures, reference dependencies, and freshness. They do not modify the configured application database.
+
 If `mssql-python` blocks progress, install the optional Python fallback with `uv sync --locked --extra odbc`, install Microsoft ODBC Driver 18 on the execution host, and explicitly set `WB_SQL_DRIVER=pyodbc` for direct Python checks. Repeat the same live smoke tests before choosing the fallback. The default Docker image currently contains the primary driver only; adopting the fallback there also requires updating its OS packages and Compose configuration. See the [Microsoft Python driver guide](https://learn.microsoft.com/en-us/sql/connect/python/mssql-python/python-sql-driver-mssql-python-quickstart?view=sql-server-ver17) and [pyodbc connection documentation](https://github.com/mkleehammer/pyodbc/wiki/Connecting-to-SQL-Server-from-Windows).
 
 ## CI and demonstrations
 
-The Actions workflow has a Python lint/unit-test job and a separate Compose build/SQL-test job. Each SQL job generates two disposable masked credentials, starts the database, runs `db-setup` twice to verify repeatability, checks the runtime image with its restricted login, runs integration tests, saves test output, and removes its database volume afterward. No real-data or LLM credentials are needed.
+The Actions workflow has a Python lint/unit-test job and a separate Compose build/SQL-test job. Each SQL job generates two disposable masked credentials, starts the database, runs `db-setup` twice, checks the restricted runtime login, starts the registry, seeds the department source, loads all three sources through the CLI, verifies an identical rerun, and runs integration tests. It saves test output and removes its disposable volume afterward. No real-data or LLM credentials are needed.
 
 Actions is verification, not website hosting: its service containers last for the job. See [GitHub's service-container documentation](https://docs.github.com/en/actions/tutorials/use-containerized-services/use-docker-service-containers). A Codespaces launch path can be added later for remote live sessions. The primary portfolio deliverables remain the README, actual screenshots, and a recording described in the [demo guide](demo-guide.md).

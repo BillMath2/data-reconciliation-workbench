@@ -1,6 +1,14 @@
 # P03 validation record
 
-Status: implemented locally; live SQL Server acceptance is pending.
+Status: initial CI failed; corrective migration implemented, verification pending.
+
+## CI findings and correction
+
+[Foundation checks run 36572081104](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36572081104) verified commit `2ec55374342d314a41785ee142ec078b8b65a5df`. The Python job passed. SQL readiness, database creation/migration reruns, runtime login provisioning, and runtime driver probes passed. The test artifact (`sql-checks`, ID `11034179449`, created 2026-09-29 13:02 UTC) reports **62 passed, 8 failed**.
+
+All eight failures arose while inserting the valid department ID `DEPT-01`: `CK_Department_Id` rejected it before the tests could reach their intended assertions. Migration [004_identifier_checks.sql](../sql/migrations/004_identifier_checks.sql) replaces the identifier checks across all three curated tables with explicit ASCII character checks after removing literal hyphens/underscores. Applied scripts 001-003 remain unchanged. A regression test covers valid separators, lowercase, whitespace, punctuation, and non-ASCII input. This correction is not yet verified against SQL Server.
+
+The correction ships with P04. The next CI run must pass both packages; neither is marked complete. See [P04 validation](p04-validation.md).
 
 ## Implemented
 
@@ -11,7 +19,7 @@ Status: implemented locally; live SQL Server acceptance is pending.
 - Compose setup service and CI setup/rerun checks; 13 additional real-SQL integration cases.
 - [Schema guide](database-schema.md), updated setup instructions, and P02's verified CI record.
 
-## Observed locally
+## Original P03 local observations (before P04)
 
 | Check | Result |
 |---|---|
@@ -32,4 +40,4 @@ After this revision is pushed, the updated GitHub Actions workflow must:
 3. Pass the full test suite with `--run-sql`, including empty-database migration, no-op reapplication, rollback of failed DDL plus its ledger entry, recovery, source-seed preservation, relational/lineage constraints, publication uniqueness, and role permissions.
 4. Verify the mock registry container and clean up disposable infrastructure.
 
-Record that run/commit and its artifact here before marking P03 complete or starting P04. Reassess the P03/P04 estimates after observing any SQL integration rework; retain the plan's 120-160-hour budget until that evidence exists.
+Record the corrected run/commit and its artifact here before marking P03 complete. The current suite and required P04 evidence are in [P04 validation](p04-validation.md). Reassess integration rework after the corrected run; retain the plan's 120-160-hour budget until that evidence exists.
