@@ -1,0 +1,30 @@
+{
+  "expectation_version": "1.0.0",
+  "authorship": "Independently specified; never produced by the fixture generator or ingestion code.",
+  "business_date": "2026-09-25",
+  "clean": {"file": "activity/clean.csv", "raw_rows": 100, "accepted_rows": 100, "source_completed_count": 100, "curated_completed_count": 100, "source_completed_units": 201, "curated_completed_units": 201},
+  "golden": {
+    "file": "activity/golden.csv",
+    "raw_rows": 100,
+    "accepted_rows": 94,
+    "source_completed_count": 100,
+    "curated_completed_count": 94,
+    "source_completed_units": 202,
+    "curated_completed_units": 189,
+    "excluded_duplicate_rows": 2,
+    "excluded_invalid_rows": 4,
+    "excluded_duplicate_units": 5,
+    "excluded_invalid_units": 8,
+    "exclusions": [
+      {"row_ordinal": 95, "activity_id": "ACT-0095", "rule_id": "ACTIVITY_UNKNOWN_PROJECT", "field": "project_id", "value": "PRJ-UNKNOWN"},
+      {"row_ordinal": 96, "activity_id": "ACT-0096", "rule_id": "ACTIVITY_UNKNOWN_PROJECT", "field": "project_id", "value": "PRJ-UNKNOWN"},
+      {"row_ordinal": 97, "activity_id": "ACT-0097", "rule_id": "ACTIVITY_UNKNOWN_PROJECT", "field": "project_id", "value": "PRJ-UNKNOWN"},
+      {"row_ordinal": 98, "activity_id": "ACT-0098", "rule_id": "ROW_REQUIRED", "field": "project_id", "value": ""},
+      {"row_ordinal": 99, "activity_id": "ACT-0001", "rule_id": "ACTIVITY_DUPLICATE", "duplicate_of_ordinal": 1},
+      {"row_ordinal": 100, "activity_id": "ACT-0002", "rule_id": "ACTIVITY_DUPLICATE", "duplicate_of_ordinal": 2}
+    ]
+  },
+  "corrected": {"file": "activity/corrected.csv", "raw_rows": 98, "accepted_rows": 98, "source_completed_count": 98, "curated_completed_count": 98, "source_completed_units": 197, "curated_completed_units": 197, "excluded_duplicate_rows": 0, "excluded_invalid_rows": 0},
+  "correction": {"remove_raw_ordinals": [99, 100], "repair_project_assignments": {"ACT-0095": "PRJ-020", "ACT-0096": "PRJ-021", "ACT-0097": "PRJ-022", "ACT-0098": "PRJ-023"}, "source_updated_at_for_repaired_rows": "2026-09-26T10:00:00Z", "preserve_activity_ids": true},
+  "replay": {"repeat": "corrected", "expected_behavior": "no_op", "curated_completed_count": 98, "curated_completed_units": 197}
+}

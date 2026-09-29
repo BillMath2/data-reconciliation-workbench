@@ -19,6 +19,7 @@ jobs:
       - run: uv sync --locked --python 3.12
       - run: uv run --locked ruff check .
       - run: uv run --locked ruff format --check .
+      - run: uv run --locked workbench-fixtures --check fixtures/generated
       - run: uv run --locked pytest -q
 
   sql-server:
@@ -47,6 +48,10 @@ jobs:
           mkdir -p runs
           set -o pipefail
           docker compose --profile test run --build --rm tests 2>&1 | tee runs/sql-checks.txt
+      - name: Verify the mock registry container
+        run: |
+          docker compose --profile sources up -d --build --wait --wait-timeout 120 mock-registry
+          curl --fail --silent --show-error http://127.0.0.1:8001/projects
       - name: Save test output
         if: always()
         uses: actions/upload-artifact@v4
@@ -56,4 +61,4 @@ jobs:
           if-no-files-found: ignore
       - name: Remove disposable containers and test database
         if: always()
-        run: docker compose --profile test down --volumes --remove-orphans
+        run: docker compose --profile test --profile sources down --volumes --remove-orphans

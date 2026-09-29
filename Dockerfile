@@ -14,6 +14,8 @@ ENV UV_LINK_MODE=copy \
     PATH="/app/.venv/bin:$PATH"
 COPY pyproject.toml uv.lock README.md ./
 COPY src ./src
+COPY config ./config
+COPY fixtures ./fixtures
 
 FROM base AS test
 RUN uv sync --locked --no-editable

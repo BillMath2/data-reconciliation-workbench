@@ -1,7 +1,7 @@
 # Data Reconciliation Workbench: implementation plan
 
 Date: 2026-09-28  
-Status: P01 complete. Container builds and live SQL Server checks passed in GitHub Actions; P02 is next. See the [P01 validation record](p01-validation.md). Estimates are planning defaults.
+Status: P01 complete (see [validation record](p01-validation.md)). P02 contracts, fixtures, and mock registry are implemented and locally tested; new SQL seed/container verification awaits CI. See [source contracts](source-contracts.md). P03 is next after that verification. Estimates are planning defaults.
 
 ### How to read the plan
 
@@ -87,6 +87,8 @@ All writes pass through application services. The assistant receives a bounded e
 ## 4. Data contracts and ownership
 
 Use fictional departments and projects. Initial demonstration size: 5 departments, 25 projects, and 100 activity rows. Generate a separate larger fixture for the SQL tuning exercise.
+
+P02's versioned contracts, authoritative-field mapping, fixed rule IDs, source artifacts, and independent expected results are documented in [source-contracts.md](source-contracts.md). The checked-in fixture generator recreates the source artifacts without reading or rewriting expected results.
 
 | Source | Required fields | Grain / key | Authority |
 |---|---|---|---|
@@ -267,7 +269,7 @@ docs/                 # Plan, architecture, dictionary, runbooks, demo
 scripts/              # Setup, database lifecycle, and demo helpers
 ```
 
-The foundation subset is implemented; the domain pipeline, fixtures, API, and screen remain planned. Keep credentials, generated runs, and local environments out of version control and Docker build context. Commit only synthetic fixtures and sanitized configuration templates. Add demonstration screenshots and recording links as the corresponding features become available.
+The foundation, contracts, fixtures, and mock source API are implemented. The domain pipeline, workbench API, and screen remain planned. The mock API lives in `src/workbench/mock_registry.py`, and the generator in `src/workbench/fixtures.py`. Keep credentials, generated runs, and local environments out of version control and Docker build context. Commit only synthetic fixtures and sanitized configuration templates. Add demonstration screenshots and recording links as the corresponding features become available.
 
 ## 9. Risks and decision checkpoints
 

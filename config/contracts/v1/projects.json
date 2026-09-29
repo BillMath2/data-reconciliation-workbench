@@ -1,0 +1,22 @@
+{
+  "contract_version": "1.0.0",
+  "source_id": "project-registry",
+  "transport": {"kind": "rest", "method": "GET", "path": "/projects", "cursor_parameter": "cursor", "page_size": 10},
+  "grain": "one project per project_id in a fixed snapshot",
+  "key": ["project_id"],
+  "snapshot_policy": "fixed reference fixture set per demo database",
+  "envelope": {
+    "required": ["schema_version", "snapshot_id", "reference_set_sha256", "exported_at", "total_count", "next_cursor", "items"],
+    "terminal_cursor": null,
+    "consistency": "All pages must share snapshot_id, reference_set_sha256, exported_at and total_count; unique records received must equal total_count."
+  },
+  "fields": [
+    {"name": "project_id", "type": "string", "required": true, "max_length": 16, "normalization": "trim_ascii_upper", "target": "core.Project.project_id"},
+    {"name": "project_name", "type": "string", "required": true, "max_length": 100, "normalization": "trim", "target": "core.Project.project_name"},
+    {"name": "department_id", "type": "string", "required": true, "max_length": 16, "normalization": "trim_ascii_upper", "references": "department-reference.department_id", "target": "core.Project.department_id"},
+    {"name": "project_status", "type": "string", "required": true, "allowed": ["active", "paused", "closed"], "normalization": "trim_lower", "target": "core.Project.project_status"},
+    {"name": "updated_at", "type": "utc_timestamp", "required": true, "target": "core.Project.updated_at"}
+  ],
+  "rules": ["SRC_SCHEMA", "SRC_PAGINATION", "ROW_REQUIRED", "ROW_FORMAT", "ROW_ENUM", "ROW_TIMESTAMP", "REF_DUPLICATE", "PROJECT_UNKNOWN_DEPARTMENT"],
+  "notes": "Status is descriptive. A known paused/closed project remains a valid activity reference."
+}

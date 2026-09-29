@@ -1,0 +1,27 @@
+[
+  {
+    "department_id": "DEPT-01",
+    "department_name": "Synthetic Department 1",
+    "is_active": true
+  },
+  {
+    "department_id": "DEPT-02",
+    "department_name": "Synthetic Department 2",
+    "is_active": true
+  },
+  {
+    "department_id": "DEPT-03",
+    "department_name": "Synthetic Department 3",
+    "is_active": true
+  },
+  {
+    "department_id": "DEPT-04",
+    "department_name": "Synthetic Department 4",
+    "is_active": true
+  },
+  {
+    "department_id": "DEPT-05",
+    "department_name": "Synthetic Department 5",
+    "is_active": true
+  }
+]

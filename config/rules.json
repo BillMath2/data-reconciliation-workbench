@@ -1,0 +1,21 @@
+{
+  "rule_set_version": "1.0.0",
+  "execution": "Fixed checks to implement in P04. This file is metadata, not an executable rules language.",
+  "rules": [
+    {"id": "SRC_SCHEMA", "scope": "load", "action": "fail_load", "parameters": {"contract_version": "1.0.0", "extra_fields": "reject", "missing_columns": "reject", "malformed_records": "reject"}},
+    {"id": "SRC_MANIFEST_COUNT", "scope": "load", "action": "fail_load", "parameters": {"count_header": false, "count_duplicates": true}},
+    {"id": "SRC_BUSINESS_DATE", "scope": "load", "action": "fail_load", "parameters": {"all_parseable_row_dates_match_manifest": true, "date_format": "YYYY-MM-DD", "unparseable_row_date": "ROW_FORMAT", "missing_row_date": "ROW_REQUIRED"}},
+    {"id": "SRC_PAGINATION", "scope": "load", "action": "fail_load", "parameters": {"stable_snapshot": true, "repeated_cursor": "reject", "require_declared_total": true}},
+    {"id": "FEED_STALE", "scope": "feed", "action": "warn", "parameters": {"timezone": "America/New_York", "due_next_day_local": "09:00:00"}},
+    {"id": "ROW_REQUIRED", "scope": "row", "action": "quarantine", "parameters": {"blank_after_trim_is_missing": true, "null_is_missing": true}},
+    {"id": "ROW_FORMAT", "scope": "row", "action": "quarantine", "parameters": {"enforce_lengths_and_types": true, "normalized_identifier_pattern": "^[A-Z0-9_-]+$", "invalid_date": "quarantine", "timestamp_check": "ROW_TIMESTAMP", "units_check": "ACTIVITY_UNITS"}},
+    {"id": "ROW_ENUM", "scope": "row", "action": "quarantine", "parameters": {"allowed_values": "source contract"}},
+    {"id": "ROW_TIMESTAMP", "scope": "row", "action": "quarantine", "parameters": {"format": "YYYY-MM-DDTHH:MM:SSZ", "calendar_valid": true}},
+    {"id": "REF_DUPLICATE", "scope": "load", "action": "fail_load", "parameters": {"unique_keys": "source contract"}},
+    {"id": "PROJECT_UNKNOWN_DEPARTMENT", "scope": "row", "action": "quarantine", "parameters": {"reference": "department-reference"}},
+    {"id": "ACTIVITY_UNITS", "scope": "row", "action": "quarantine", "parameters": {"completed_minimum": 1, "other_status_units": 0, "numeric_maximum": 2147483647}},
+    {"id": "ACTIVITY_CONFLICT", "scope": "key_group", "action": "quarantine", "parameters": {"policy": "exclude every row for conflicting complete business key"}},
+    {"id": "ACTIVITY_DUPLICATE", "scope": "row", "action": "exclude_duplicate", "parameters": {"keep": "first captured ordinal"}},
+    {"id": "ACTIVITY_UNKNOWN_PROJECT", "scope": "row", "action": "quarantine", "parameters": {"reference": "valid curated project from fixed reference set"}}
+  ]
+}

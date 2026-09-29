@@ -1,0 +1,23 @@
+{
+  "contract_version": "1.0.0",
+  "source_id": "daily-activity",
+  "transport": {"kind": "csv", "encoding": "utf-8", "delimiter": ",", "line_ending": "LF", "header_order": ["activity_id", "project_id", "activity_date", "activity_status", "completed_units", "source_updated_at"]},
+  "grain": "one activity per business date and activity_id",
+  "key": ["activity_date", "activity_id"],
+  "snapshot_policy": "full replacement for one business date, including a manifest-declared empty day",
+  "business_timezone": "America/New_York",
+  "freshness": {"due_local_time": "09:00:00", "days_after_business_date": 1, "clock": "injected; missing current-day artifact after deadline is stale even if an older load exists"},
+  "manifest_required": ["schema_version", "source_id", "business_date", "exported_at", "row_count", "reference_set_id", "reference_set_sha256"],
+  "fields": [
+    {"name": "activity_id", "type": "string", "required": true, "max_length": 16, "normalization": "trim_ascii_upper", "target": "core.Activity.activity_id"},
+    {"name": "project_id", "type": "string", "required": true, "max_length": 16, "normalization": "trim_ascii_upper", "references": "project-registry.project_id", "target": "core.Activity.project_id"},
+    {"name": "activity_date", "type": "date", "required": true, "format": "YYYY-MM-DD", "target": "core.Activity.activity_date"},
+    {"name": "activity_status", "type": "string", "required": true, "allowed": ["planned", "completed", "cancelled"], "normalization": "trim_lower", "target": "core.Activity.activity_status"},
+    {"name": "completed_units", "type": "integer", "required": true, "wire_pattern": "^[0-9]+$", "minimum": 0, "maximum": 2147483647, "target": "core.Activity.completed_units"},
+    {"name": "source_updated_at", "type": "utc_timestamp", "required": true, "target": "core.Activity.source_updated_at"}
+  ],
+  "rules": ["SRC_SCHEMA", "SRC_MANIFEST_COUNT", "SRC_BUSINESS_DATE", "FEED_STALE", "ROW_REQUIRED", "ROW_FORMAT", "ROW_ENUM", "ROW_TIMESTAMP", "ACTIVITY_UNITS", "ACTIVITY_CONFLICT", "ACTIVITY_DUPLICATE", "ACTIVITY_UNKNOWN_PROJECT"],
+  "duplicate_policy": "After normalization: conflicting payloads for a complete key quarantine the entire key group; for identical payloads retain the lowest captured row ordinal. Compare all six fields. Missing/unparseable keys are individual invalid rows, never grouped together.",
+  "primary_exclusion_order": ["ROW_REQUIRED", "ROW_FORMAT", "ROW_ENUM", "ROW_TIMESTAMP", "ACTIVITY_UNITS", "ACTIVITY_CONFLICT", "ACTIVITY_DUPLICATE", "ACTIVITY_UNKNOWN_PROJECT"],
+  "accounting": "Each raw row has one disposition and at most one primary exclusion reason. Retain all additional findings. Only an otherwise valid retained copy publishes."
+}

@@ -1,0 +1,19 @@
+{
+  "version": "1.0.0",
+  "scope": "Source inputs and expected future pipeline behavior. P02 does not implement validation/publication or fault recovery.",
+  "scenarios": [
+    {"id": "S01", "activity": "clean", "expected": "100 accepted; 201 completed units"},
+    {"id": "S02", "activity": "duplicates", "expected": "98 accepted; exclude ordinals 99 and 100 with ACTIVITY_DUPLICATE"},
+    {"id": "S03", "activity": "conflict", "expected": "98 accepted; quarantine ordinals 1 and 2 with ACTIVITY_CONFLICT"},
+    {"id": "S04", "activity": "golden", "expected": "ordinals 95-97 have ACTIVITY_UNKNOWN_PROJECT; see composite golden expectations"},
+    {"id": "S05", "activity": "golden", "expected": "ordinal 98 has ROW_REQUIRED; see composite golden expectations"},
+    {"id": "S06", "activity_variants": ["invalid-status", "invalid-units"], "expected": "ordinal 1 excluded; invalid units make the source unit total unknown, not zero"},
+    {"id": "S07", "activity": "unknown-department", "registry_scenario": "unknown-department", "isolation": "fresh database/reference set", "expected": "PRJ-001 has PROJECT_UNKNOWN_DEPARTMENT; activity ordinals 1, 26, 51, 76 lack a valid project"},
+    {"id": "S08", "activity": null, "business_date": "2026-09-25", "clock_before": "2026-09-26T12:59:59Z", "clock_after": "2026-09-26T13:00:01Z", "expected": "No current-day feed after the 09:00 New York deadline yields FEED_STALE; before deadline does not"},
+    {"id": "S09", "activity": "corrected", "operations": ["load", "repeat_identical_load"], "expected": "one publication, 98 activities and 197 units; second attempt is no-op"},
+    {"id": "S10", "operations": ["load_golden", "load_corrected"], "expected": "94/189 becomes 98/197; replace partition and preserve history"},
+    {"id": "S11", "operations": ["load_golden", "fail_corrected_before_commit", "retry_corrected"], "expected": "failure leaves 94/189 published; retry produces 98/197 exactly once", "fault_hook": "P04 transaction test"},
+    {"id": "S12", "activity_variants": ["manifest-mismatch", "schema-mismatch", "mixed-date"], "registry_scenario": "incomplete", "expected": "each fault tested independently fails its load; no partial publication"}
+  ],
+  "additional": [{"activity": "empty", "expected": "valid header plus manifest row_count=0; publish an empty date rather than flag a missing feed"}]
+}

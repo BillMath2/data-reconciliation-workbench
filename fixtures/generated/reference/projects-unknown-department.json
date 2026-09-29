@@ -1,0 +1,184 @@
+{
+  "schema_version": "1.0.0",
+  "snapshot_id": "registry-unknown-department-v1",
+  "reference_set_sha256": "53dcc5b90150f2a8b37650f321a8f486ff94ff8ea38f50062bb424b43faf96b2",
+  "exported_at": "2026-09-24T12:00:00Z",
+  "total_count": 25,
+  "items": [
+    {
+      "project_id": "PRJ-001",
+      "project_name": "Synthetic Research Project 01",
+      "department_id": "DEPT-UNKNOWN",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-002",
+      "project_name": "Synthetic Research Project 02",
+      "department_id": "DEPT-02",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-003",
+      "project_name": "Synthetic Research Project 03",
+      "department_id": "DEPT-03",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-004",
+      "project_name": "Synthetic Research Project 04",
+      "department_id": "DEPT-04",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-005",
+      "project_name": "Synthetic Research Project 05",
+      "department_id": "DEPT-05",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-006",
+      "project_name": "Synthetic Research Project 06",
+      "department_id": "DEPT-01",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-007",
+      "project_name": "Synthetic Research Project 07",
+      "department_id": "DEPT-02",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-008",
+      "project_name": "Synthetic Research Project 08",
+      "department_id": "DEPT-03",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-009",
+      "project_name": "Synthetic Research Project 09",
+      "department_id": "DEPT-04",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-010",
+      "project_name": "Synthetic Research Project 10",
+      "department_id": "DEPT-05",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-011",
+      "project_name": "Synthetic Research Project 11",
+      "department_id": "DEPT-01",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-012",
+      "project_name": "Synthetic Research Project 12",
+      "department_id": "DEPT-02",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-013",
+      "project_name": "Synthetic Research Project 13",
+      "department_id": "DEPT-03",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-014",
+      "project_name": "Synthetic Research Project 14",
+      "department_id": "DEPT-04",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-015",
+      "project_name": "Synthetic Research Project 15",
+      "department_id": "DEPT-05",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-016",
+      "project_name": "Synthetic Research Project 16",
+      "department_id": "DEPT-01",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-017",
+      "project_name": "Synthetic Research Project 17",
+      "department_id": "DEPT-02",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-018",
+      "project_name": "Synthetic Research Project 18",
+      "department_id": "DEPT-03",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-019",
+      "project_name": "Synthetic Research Project 19",
+      "department_id": "DEPT-04",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-020",
+      "project_name": "Synthetic Research Project 20",
+      "department_id": "DEPT-05",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-021",
+      "project_name": "Synthetic Research Project 21",
+      "department_id": "DEPT-01",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-022",
+      "project_name": "Synthetic Research Project 22",
+      "department_id": "DEPT-02",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-023",
+      "project_name": "Synthetic Research Project 23",
+      "department_id": "DEPT-03",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-024",
+      "project_name": "Synthetic Research Project 24",
+      "department_id": "DEPT-04",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    },
+    {
+      "project_id": "PRJ-025",
+      "project_name": "Synthetic Research Project 25",
+      "department_id": "DEPT-05",
+      "project_status": "active",
+      "updated_at": "2026-09-24T12:00:00Z"
+    }
+  ]
+}

@@ -8,5 +8,9 @@
 !src/**
 !tests/
 !tests/**
+!config/
+!config/**
+!fixtures/
+!fixtures/**
 **/__pycache__/
 **/*.pyc

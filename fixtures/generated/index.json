@@ -1,0 +1,37 @@
+{
+  "fixture_version": "1.0.0",
+  "reference_sets": {
+    "default": "bc71a537ea07ddde1303891fae681da3aabf452b51b5f82a1aed32c74b5e2b9f",
+    "unknown-department": "53dcc5b90150f2a8b37650f321a8f486ff94ff8ea38f50062bb424b43faf96b2"
+  },
+  "sha256": {
+    "activity/clean.csv": "f538370c58798f86b3802a4ccae54453878b4f5dbe6b4264baef75f2322a26e7",
+    "activity/clean.manifest.json": "b29fdb3e3b62fd0544ade8d954e79e0229070c52d703b4f6ffc12fe5bd9da81d",
+    "activity/conflict.csv": "b1d99a9182086d01e5456acf8e0d31d0917f4be2fb0a6cb9e5dc37df42afa2ec",
+    "activity/conflict.manifest.json": "b29fdb3e3b62fd0544ade8d954e79e0229070c52d703b4f6ffc12fe5bd9da81d",
+    "activity/corrected.csv": "48a8450813e145274c58031e7ad0757ddd3e1236bb6c570bd5c1cd3f15ad8904",
+    "activity/corrected.manifest.json": "8d6e5ab9023665ab41c2f286932bb861c5b2860b114606b61f56e08988742a7e",
+    "activity/duplicates.csv": "3bafa68af133ae2da31ed0f6300af65485412136aa291239d983249308694497",
+    "activity/duplicates.manifest.json": "b29fdb3e3b62fd0544ade8d954e79e0229070c52d703b4f6ffc12fe5bd9da81d",
+    "activity/empty.csv": "4a787665d9d5bd65dc4501adc6cc41dae98a7f0853abfcfcf556d6958e70eb23",
+    "activity/empty.manifest.json": "4700fb077ff53d46a66bc075de6ac2b70fa0dfa604d18cb3d857c5e5e4faf69e",
+    "activity/golden.csv": "652b2c89e9c69e655db09484a4070f1507e5aeeb4c89d650e0e00d12c7a485d0",
+    "activity/golden.manifest.json": "b29fdb3e3b62fd0544ade8d954e79e0229070c52d703b4f6ffc12fe5bd9da81d",
+    "activity/invalid-status.csv": "42890f8db07b285fe0522844922a49d3836eae16d99514996953835f84a97933",
+    "activity/invalid-status.manifest.json": "b29fdb3e3b62fd0544ade8d954e79e0229070c52d703b4f6ffc12fe5bd9da81d",
+    "activity/invalid-units.csv": "f610fd9219a202591eb80a8099ff042681c86ca6c7fb6c65c9fe265230b2c320",
+    "activity/invalid-units.manifest.json": "b29fdb3e3b62fd0544ade8d954e79e0229070c52d703b4f6ffc12fe5bd9da81d",
+    "activity/manifest-mismatch.csv": "f538370c58798f86b3802a4ccae54453878b4f5dbe6b4264baef75f2322a26e7",
+    "activity/manifest-mismatch.manifest.json": "2e602837fd9480fc86752b5b01dd11bd89d8f725d8fe13a4e95458f453cac974",
+    "activity/mixed-date.csv": "470dc397f1e63f632d135867f23d09c82f80605296f9a515ed40802bc4f1b6ec",
+    "activity/mixed-date.manifest.json": "b29fdb3e3b62fd0544ade8d954e79e0229070c52d703b4f6ffc12fe5bd9da81d",
+    "activity/schema-mismatch.csv": "e048f3441908185528ff20b9ae4b641d9a897cad6d5e0229ecebd1ee6ca97ebf",
+    "activity/schema-mismatch.manifest.json": "b29fdb3e3b62fd0544ade8d954e79e0229070c52d703b4f6ffc12fe5bd9da81d",
+    "activity/unknown-department.csv": "f538370c58798f86b3802a4ccae54453878b4f5dbe6b4264baef75f2322a26e7",
+    "activity/unknown-department.manifest.json": "04ae966cb242a33a312db49e816603763ab4c8926482e0a18baa18ea8d748ea4",
+    "reference/departments.json": "92df072a330663d99d62e712780d78ba3902f57574ba5110ffb054e038b51cbe",
+    "reference/departments.sql": "8fb6aec7c567711da0520681ecfc2dc2a4b3d084cde619a678d57ac1a6bd0e8f",
+    "reference/projects-default.json": "2c91efb2e33c6ed3a7342911111e108cf1c4fcae2af5fdf12df23eb8067645fa",
+    "reference/projects-unknown-department.json": "59996eae9a14d313154038bd744d7d800577aee74051012cb5400fb4cbd0a144"
+  }
+}

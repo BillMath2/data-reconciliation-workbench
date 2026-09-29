@@ -10,9 +10,9 @@ Screenshots and a short recording will be the primary way to review this project
 
 ## Project status
 
-**P01 is complete.** The repository contains a Python CLI, validated configuration loading, driver smoke tests, locked dependencies, a Dockerfile, Docker Compose, and a GitHub Actions workflow. The ingestion pipeline, reconciliation workflow, AI integration, and web screen are not implemented yet. Next is P02: source contracts and synthetic fixtures.
+**P01 is complete; P02 is implemented locally.** Versioned source contracts, fixed validation-rule metadata, synthetic fixtures, a paginated mock registry API, and a department SQL seed script are now available. The ingestion pipeline, reconciliation workflow, AI integration, and workbench screen remain planned. Next is P03: application schema and migrations, after P02's new SQL/container checks pass in CI.
 
-**Verified in GitHub Actions: 15 tests passed**, including both live SQL Server integration tests. The runtime and test images built successfully; database readiness, health, parameter binding, Unicode, commit, and rollback checks passed. See the [successful run](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36504051164) and [P01 validation record](docs/p01-validation.md).
+**P01 verification in GitHub Actions: 15 tests passed**, including both live SQL Server driver tests. See the [successful foundation run](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36504051164) and [P01 validation record](docs/p01-validation.md). **P02 local verification: 29 tests passed**, fixture reproduction matched all 29 generated files, and a real HTTP smoke test retrieved 25 unique projects. Four SQL tests are skipped locally; the new seed checks and container build changes await a new CI run.
 
 ## Run the foundation with Docker Compose
 
@@ -32,7 +32,19 @@ docker compose --env-file .env.workbench down
 
 The setup script creates `.env.workbench` with a generated demo password and preserves existing configuration. On other platforms, copy `.env.example` to `.env.workbench` and set a strong unique password before running the same Docker commands.
 
-The database uses a named volume and stays inside the Compose network. `down` stops the containers and preserves that volume. P01 uses temporary tables only; it does not create application tables or serve a web page. The Compose file accepts Microsoft's SQL Server Developer EULA for development use.
+The database uses a named volume and stays inside the Compose network. `down` stops the containers and preserves that volume. The P01 CLI uses temporary tables only. With `--run-sql`, the P02 tests also create and remove a uniquely named disposable user database to test the source seed. Application tables and the workbench screen are not implemented. The Compose file accepts Microsoft's SQL Server Developer EULA for development use.
+
+## Inspect the synthetic sources
+
+```powershell
+.\scripts\uv.ps1 sync --locked --python 3.12
+.\scripts\uv.ps1 run --locked workbench-fixtures --check fixtures/generated
+.\scripts\uv.ps1 run --locked workbench-registry
+```
+
+The registry serves `http://127.0.0.1:8001/projects` with stable pagination. For the container version, use `docker compose --env-file .env.workbench --profile sources up -d --build --wait mock-registry`.
+
+The [source-contract guide](docs/source-contracts.md) documents field ownership, manifests, fixture regeneration, the SQL seed, and S01-S12 scenario inputs. [Independent golden expectations](fixtures/expected/golden.json) specify the six excluded rows and expected totals; these describe the future pipeline result, not an already implemented reconciliation engine.
 
 ## Engineering evidence
 

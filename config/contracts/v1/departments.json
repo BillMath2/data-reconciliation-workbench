@@ -1,0 +1,15 @@
+{
+  "contract_version": "1.0.0",
+  "source_id": "department-reference",
+  "transport": {"kind": "sql", "table": "source.Department", "order_by": ["department_id"]},
+  "grain": "one department per department_id",
+  "key": ["department_id"],
+  "snapshot_policy": "fixed reference fixture set per demo database",
+  "fields": [
+    {"name": "department_id", "type": "string", "required": true, "max_length": 16, "normalization": "trim_ascii_upper", "target": "core.Department.department_id"},
+    {"name": "department_name", "type": "string", "required": true, "max_length": 100, "normalization": "trim", "target": "core.Department.department_name"},
+    {"name": "is_active", "type": "boolean", "required": true, "sql_type": "bit", "target": "core.Department.is_active"}
+  ],
+  "rules": ["SRC_SCHEMA", "ROW_REQUIRED", "ROW_FORMAT", "REF_DUPLICATE"],
+  "notes": "An inactive department is a valid known reference; inactivity alone does not quarantine an activity."
+}

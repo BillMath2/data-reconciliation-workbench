@@ -4,11 +4,13 @@
 
 Implemented: Python 3.12 package, CLI entry point, configuration validation, redacted CLI errors, uv lockfile, unit tests, opt-in SQL integration tests, Docker runtime/test targets, Compose database readiness, and a GitHub Actions workflow.
 
-Verified on Windows: Python 3.12.14, uv 0.12.20, mssql-python 1.15.0 import, lint/format checks, and 13 passing unit tests. Local runs still skip two SQL integration tests unless explicitly enabled against a running database.
+P01 verification on Windows: Python 3.12.14, uv 0.12.20, mssql-python 1.15.0 import, lint/format checks, and 13 passing unit tests. Local runs skip SQL integration tests unless explicitly enabled against a running database.
 
 **P01 is complete.** [GitHub Actions run 36504051164](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36504051164), for commit `5552a3b`, built both images, started SQL Server, passed `config-check`, `health`, and `db-smoke`, and passed all 15 tests with `--run-sql`. The `sql-checks` artifact confirms zero skipped integration tests in that run. See the [validation record](p01-validation.md).
 
 The container execution was verified on GitHub's Ubuntu runner. Docker Desktop and native SQL Server have not been installed as part of this work; local container execution is not claimed. A Docker host is needed to repeat the Compose demonstration locally.
+
+P02 adds source contracts/fixtures and the mock registry. The current local suite has 29 passing tests and four SQL tests skipped. New department seed tests and updated container builds await a new CI run; the P01 results above apply only to their recorded revision. See [source contracts and fixture commands](source-contracts.md). The local API tests pass with one upstream Starlette TestClient deprecation warning about its HTTPX backend; the separate real HTTP smoke test also passes.
 
 ## Container setup
 
@@ -56,6 +58,8 @@ Commands return JSON and exit with 0 for success, 2 for invalid configuration, a
 `health` executes a read-only round trip. `db-smoke` binds text containing Unicode, quotes, and punctuation; commits one row to a session-local temporary table; rolls back a second row; and verifies that only the committed row remains. The temporary table disappears when the connection closes. No application data is modified.
 
 The Compose test service passes `--run-sql`, so missing or failing SQL access fails the tests instead of silently skipping them. The default local pytest invocation clearly reports SQL tests as skipped.
+
+P02's additional integration tests create and later remove a uniquely named disposable user database for the department seed. They test repeatability, rejection of changed reference data, and refusal to seed system databases. Run them only with credentials authorized to create a test database; they do not seed the configured application's database.
 
 If `mssql-python` blocks progress, install the optional Python fallback with `uv sync --locked --extra odbc`, install Microsoft ODBC Driver 18 on the execution host, and explicitly set `WB_SQL_DRIVER=pyodbc` for direct Python checks. Repeat the same live smoke tests before choosing the fallback. The default Docker image currently contains the primary driver only; adopting the fallback there also requires updating its OS packages and Compose configuration. See the [Microsoft Python driver guide](https://learn.microsoft.com/en-us/sql/connect/python/mssql-python/python-sql-driver-mssql-python-quickstart?view=sql-server-ver17) and [pyodbc connection documentation](https://github.com/mkleehammer/pyodbc/wiki/Connecting-to-SQL-Server-from-Windows).
 

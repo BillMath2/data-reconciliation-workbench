@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0",
+  "policy": "A field has exactly one authoritative source. A reference joins to that source; it does not overwrite its fields. No last-writer-wins precedence.",
+  "sources": {
+    "department-reference": {"owns": ["department_id", "department_name", "is_active"], "contract": "contracts/v1/departments.json"},
+    "project-registry": {"owns": ["project_id", "project_name", "department_id", "project_status", "updated_at"], "contract": "contracts/v1/projects.json", "clarification": "department_id here owns the project's assignment; the department source owns department identity/name/state"},
+    "daily-activity": {"owns": ["activity_id", "project_id", "activity_date", "activity_status", "completed_units", "source_updated_at"], "contract": "contracts/v1/activities.json", "clarification": "project_id here owns the activity's assignment; the registry owns project identity and descriptive fields"}
+  },
+  "derived": {"load_id": "ingestion", "row_ordinal": "capture order starting at 1, excluding header", "artifact_sha256": "raw bytes", "disposition": "deterministic validation", "completed_count": "reconciliation", "completed_units_total": "reconciliation"}
+}
