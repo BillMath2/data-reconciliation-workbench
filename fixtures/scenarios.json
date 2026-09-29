@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "scope": "Source inputs and expected pipeline behavior. P04 implements adapters, validation, freshness, and publication; live SQL verification is pending. P05 adds persisted reconciliation and the guided demo.",
+  "scope": "Source inputs and expected pipeline behavior. P04 implements adapters, validation, freshness, and publication; P04 live SQL verification passed. P05 adds persisted reconciliation and the guided demo, with its new SQL checks pending.",
   "scenarios": [
     {"id": "S01", "activity": "clean", "expected": "100 accepted; 201 completed units"},
     {"id": "S02", "activity": "duplicates", "expected": "98 accepted; exclude ordinals 99 and 100 with ACTIVITY_DUPLICATE"},

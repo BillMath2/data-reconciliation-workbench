@@ -5,6 +5,7 @@ from contextlib import closing, suppress
 from pathlib import Path
 from uuid import uuid4
 
+from workbench import reconciliation
 from workbench.config import Settings
 from workbench.db import connect
 from workbench.migrations import execute_batch, validate_database_name
@@ -220,6 +221,8 @@ def publish(cursor, load_id, capture, rows, fault=None):
         "finished_at=SYSUTCDATETIME(), published_at=SYSUTCDATETIME() WHERE load_id=?",
         (status, str(previous[0]) if previous else None, load_id),
     )
+    if capture.source == "daily-activity":
+        reconciliation.save(cursor, load_id, capture, rows)
     if fault is not None:
         fault("before_commit")
     return status

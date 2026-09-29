@@ -2,7 +2,7 @@
 
 The pipeline reads the department SQL table, follows the registry's REST pagination, and parses an activity CSV plus its manifest. It retains captured input, applies the fixed v1 rules, saves every finding, and publishes valid rows. Counts and decisions are deterministic Python/SQL operations. No AI participates in ingestion.
 
-**Verification:** local adapter/rule checks pass. SQL publication, rollback, permissions, and P03's corrective migration await the next CI run; see [P04 validation](p04-validation.md).
+**Verification:** P04 passed 143 tests including all 33 SQL cases, publication rollback, permissions, and the P03 correction. See [P04 verification](p04-validation.md). P05 now extends publication with saved reconciliation/evidence; those new checks await CI.
 
 ## Run the sources and load a date
 
@@ -58,7 +58,7 @@ flowchart LR
 4. Compute an evaluation key from source/date, raw input hash, captured metadata (including the manifest), contract/rule versions, and the reference hash. A successful existing key produces a new `no_op` attempt, linked to its prior publication, with an audit event; it does not duplicate staging or curated rows. Replaying an already superseded success is also a no-op and leaves the current partition intact. It is not an undo operation.
 5. In one transaction, supersede the previous publication, delete only the selected activity date, insert accepted rows, mark the new load current, and write its publication audit event. A valid empty snapshot deletes the date's rows. On failure, roll back all publication changes and separately record the failed attempt. Failed keys can be retried.
 
-There is no reconciliation-result table yet. P05 will extend the publication transaction with those results. Exception resolution/acknowledgement belongs to P06; P04 retains historical findings without claiming they are resolved. Capture and staging are immutable through the application path; the runtime role cannot update/delete captured artifacts or delete history. Staging/state transition rules remain application-enforced, not a protection against arbitrary direct SQL from a compromised runtime account.
+P05 now saves reconciliation and its bounded evidence packet inside the publication transaction; see the [report guide](reconciliation.md). Exception resolution/acknowledgement belongs to P06; P04 retains historical findings without claiming they are resolved. Capture and staging are immutable through the application path; the runtime role cannot update/delete captured artifacts or delete history. Staging/state transition rules remain application-enforced, not a protection against arbitrary direct SQL from a compromised runtime account.
 
 ## Fixed reference sets and failure codes
 

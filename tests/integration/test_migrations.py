@@ -34,6 +34,7 @@ def test_empty_database_migrates_and_repeats_without_reapplying(database):
             ("ops", "Load"),
             ("ops", "Exception"),
             ("ops", "AuditEvent"),
+            ("ops", "ReconciliationResult"),
             ("stg", "SourceRow"),
             ("core", "Department"),
             ("core", "Project"),

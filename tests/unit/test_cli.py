@@ -76,9 +76,24 @@ def test_failed_ingestion_exits_nonzero_with_recorded_load(configured, monkeypat
     assert json.loads(capsys.readouterr().out)["load_id"] == "recorded-attempt"
 
 
-@pytest.mark.parametrize("command", ["load-departments", "load-activities", "freshness"])
+@pytest.mark.parametrize(
+    "command", ["load-departments", "load-activities", "freshness", "reconcile", "evidence"]
+)
 def test_ingestion_required_arguments_are_checked_before_connecting(command, capsys):
     with pytest.raises(SystemExit) as caught:
         cli.main([command])
     assert caught.value.code == 2
     assert "requires" in capsys.readouterr().err
+
+
+def test_evidence_export_preserves_existing_files(configured, monkeypatch, tmp_path, capsys):
+    packet = {"load_id": "test-load", "citation_ids": []}
+    monkeypatch.setattr(cli.reports, "read", lambda *a, **k: {"packet": packet})
+    target = tmp_path / "evidence.json"
+    command = ["evidence", "--business-date", "2026-09-25", "--output", str(target)]
+    assert cli.main(command) == 0
+    assert json.loads(target.read_text()) == packet
+    original = target.read_bytes()
+    assert cli.main(command) == 4
+    assert target.read_bytes() == original
+    assert "private-password" not in capsys.readouterr().out

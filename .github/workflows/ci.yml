@@ -48,21 +48,30 @@ jobs:
           docker compose run --rm workbench config-check
           docker compose run --rm workbench health
           docker compose run --rm workbench db-smoke
-      - name: Verify registry and ingestion commands
+      - name: Record verified SQL reconciliation walkthrough
         run: |
           docker compose --profile sources up -d --build --wait --wait-timeout 120 mock-registry
           curl --fail --silent --show-error http://127.0.0.1:8001/projects
           docker compose --profile tools run --rm migrate seed-departments
-          reference_hash=$(python3 -c 'import json; print(json.load(open("fixtures/generated/index.json"))["reference_sets"]["default"])')
-          docker compose run --rm workbench load-departments --reference-hash "$reference_hash"
-          docker compose run --rm workbench load-projects
-          docker compose run --rm workbench load-activities --csv fixtures/generated/activity/golden.csv --manifest fixtures/generated/activity/golden.manifest.json
-          docker compose run --rm workbench load-activities --csv fixtures/generated/activity/golden.csv --manifest fixtures/generated/activity/golden.manifest.json
+          mkdir -p runs
+          docker compose run --rm --user "$(id -u):$(id -g)" --volume "$PWD/runs:/app/runs" -e WB_BUILD_REVISION="$GITHUB_SHA" workbench demo --output-dir /app/runs/demo
       - name: Run tests including real SQL Server transactions
         run: |
           mkdir -p runs
           set -o pipefail
           docker compose --profile test run --build --rm tests 2>&1 | tee runs/sql-checks.txt
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.12.20"
+      - name: Render captured demo output
+        run: uv run --locked --python 3.12 python scripts/render-demo.py runs/demo/recording.json runs/demo/media
+      - name: Save SQL walkthrough and evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sql-demo
+          path: runs/demo/
+          if-no-files-found: ignore
       - name: Save test output
         if: always()
         uses: actions/upload-artifact@v4

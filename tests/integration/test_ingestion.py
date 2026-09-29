@@ -7,11 +7,13 @@ from pathlib import Path
 
 import pytest
 
+from workbench import demo, reconciliation, reports
 from workbench.bootstrap import provision_runtime
 from workbench.db import connect
 from workbench.freshness import inspect
 from workbench.migrations import execute_batch, migrate
 from workbench.pipeline import load_activities, load_departments, load_projects
+from workbench.validation import LoadError
 
 pytestmark = pytest.mark.integration
 ROOT = Path(__file__).resolve().parents[2]
@@ -264,3 +266,100 @@ def test_freshness_does_not_substitute_an_older_day_and_empty_day_is_available(r
     assert activity(runtime, "manifest-mismatch")["status"] == "failed"
     result = inspect(runtime, date(2026, 9, 25), clock)
     assert result["available"] is True and result["failed_refresh"] is True
+
+
+def test_saved_reconciliation_and_evidence_survive_correction_and_noop(runtime):
+    references(runtime)
+    first = activity(runtime, "golden")
+    assert first["status"] == "published_with_exceptions", first
+    initial = reports.read(runtime, load_id=first["load_id"])
+    assert initial["summary"]["completed_count_difference"] == 6
+    assert initial["summary"]["completed_unit_difference"] == 13
+    assert len([e for e in initial["packet"]["evidence"] if e["kind"] == "finding"]) == 6
+    assert activity(runtime, "corrected")["status"] == "published"
+    historical = reports.read(runtime, load_id=first["load_id"])
+    assert historical["packet"] == initial["packet"]
+    assert historical["summary"] == initial["summary"]
+    assert historical["is_current"] is False
+    current = reports.read(runtime, business_date=date(2026, 9, 25))
+    assert current["summary"]["source_completed_count"] == 98
+    assert current["summary"]["completed_count_difference"] == 0
+    repeated = activity(runtime, "corrected")
+    reused = reports.read(runtime, load_id=repeated["load_id"])
+    assert reused["packet"] == current["packet"]
+    assert reused["requested_status"] == "no_op"
+    assert query(runtime, "SELECT COUNT(*) FROM ops.ReconciliationResult") == [(2,)]
+    assert query(
+        runtime,
+        "SELECT SUM(activity_count), SUM(completed_count), SUM(completed_units) "
+        "FROM report.vw_ProjectActivity",
+    ) == [(98, 98, 197)]
+    assert query(
+        runtime,
+        "SELECT source_completed_count, curated_completed_count "
+        "FROM report.vw_LoadReconciliation WHERE is_current=1",
+    ) == [(98, 98)]
+
+
+def test_unknown_units_and_empty_day_have_distinct_saved_totals(runtime):
+    references(runtime)
+    failed_units = activity(runtime, "invalid-units")
+    summary = reports.read(runtime, load_id=failed_units["load_id"])["summary"]
+    assert summary["source_completed_units"] is None
+    assert summary["curated_completed_units"] == 198
+    empty = activity(runtime, "empty")
+    assert reports.read(runtime, load_id=empty["load_id"])["summary"]["source_completed_units"] == 0
+
+
+def test_reconciliation_and_packet_roll_back_with_failed_publication(runtime):
+    references(runtime)
+    first = activity(runtime, "golden")
+    before = reports.read(runtime, load_id=first["load_id"])
+
+    def fault(point):
+        if point == "before_commit":
+            raise RuntimeError("Fault after reconciliation INSERT")
+
+    failed = activity(runtime, "corrected", fault=fault)
+    assert failed["status"] == "failed"
+    assert query(
+        runtime,
+        "SELECT COUNT(*) FROM ops.ReconciliationResult WHERE load_id=?",
+        (failed["load_id"],),
+    ) == [(0,)]
+    assert reports.read(runtime, load_id=first["load_id"]) == before
+    with pytest.raises(LoadError, match="No saved reconciliation"):
+        reports.read(runtime, load_id=failed["load_id"])
+
+
+def test_reconciliation_detects_actual_sql_mismatch_and_rolls_back(runtime, monkeypatch):
+    references(runtime)
+    original_save = reconciliation.save
+
+    def corrupt_then_check(cursor, load_id, capture, rows):
+        cursor.execute(
+            "UPDATE core.Activity SET completed_units=completed_units+1 "
+            "WHERE activity_id='ACT-0001' AND origin_load_id=?",
+            (load_id,),
+        )
+        return original_save(cursor, load_id, capture, rows)
+
+    monkeypatch.setattr(reconciliation, "save", corrupt_then_check)
+    result = activity(runtime, "golden")
+    assert result["code"] == "RECONCILIATION_MISMATCH", result
+    assert totals(runtime) == (0, 0)
+    assert query(runtime, "SELECT COUNT(*) FROM ops.ReconciliationResult") == [(0,)]
+
+
+def test_demo_records_verified_walkthrough_and_refuses_to_destroy_history(runtime, tmp_path):
+    destination = tmp_path / "demo"
+    assert demo.run(runtime, destination, registry())["status"] == "ok"
+    manifest = json.loads((destination / "recording.json").read_text())
+    assert manifest["mode"] == "sql-server" and manifest["status"] == "verified"
+    assert len(manifest["frames"]) == 3
+    assert "no_op" in (destination / "transcript.txt").read_text()
+    assert len((destination / "demo.cast").read_text().splitlines()) == 4
+    assert (destination / "golden-evidence.json").exists()
+    with pytest.raises(LoadError, match="fresh migrated"):
+        demo.run(runtime, tmp_path / "second", registry())
+    assert totals(runtime) == (98, 197)

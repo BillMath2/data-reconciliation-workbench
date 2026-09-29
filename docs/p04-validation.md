@@ -1,6 +1,13 @@
 # P04 validation record
 
-Status: implemented locally; P03 correction and live SQL acceptance are pending.
+Status: complete for P04 and the P03 corrective migration.
+
+## Verified CI revision
+
+- Run: [36575474984](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36575474984), commit `02216b934fbf7a6e2937052917d10a818e90f516` (`adding P04`).
+- Both Python and SQL jobs passed. SQL artifact `11038275046`, created 2026-09-29 13:32 UTC, reports **143 passed, 1 warning in 108.85s**: 110 non-SQL tests and all 33 SQL tests, with no skips.
+- Setup/migration reruns, the identifier regression, actual REST/SQL/CSV ingestion with the runtime login, CLI no-op, correction, transaction rollback, and the mock container all passed.
+- [Baseline CLI captures and replay](images/p04-baseline/README.md) use actual output from this run. They do not claim to show P05's later reconciliation workflow.
 
 ## Implemented
 
@@ -28,11 +35,11 @@ The suite has one pre-existing upstream Starlette TestClient HTTPX deprecation w
 
 ## P03 prerequisite defect
 
-[Run 36572081104](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36572081104), commit `2ec55374342d314a41785ee142ec078b8b65a5df`, passed setup/migration reruns and runtime driver checks but had **62 tests pass and 8 fail**. All eight failures occurred when the original department identifier check rejected `DEPT-01`. The appended correction uses explicit ASCII alphabet checks after removing literal separators and adds a SQL regression case. Its effectiveness still requires the next live run; see [P03 validation](p03-validation.md).
+[Run 36572081104](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36572081104), commit `2ec55374342d314a41785ee142ec078b8b65a5df`, passed setup/migration reruns and runtime driver checks but had **62 tests pass and 8 fail**. All eight failures occurred when the original department identifier check rejected `DEPT-01`. The appended correction uses explicit ASCII alphabet checks after removing literal separators and adds a SQL regression case. Its effectiveness was verified by run 36575474984; see [P03 validation](p03-validation.md).
 
-## Required next CI evidence
+## Acceptance gates verified by this run
 
-The workflow must build the updated images, apply all five migrations, verify the identifier regression, seed the SQL source, load all three sources with runtime credentials, and execute an identical CLI rerun. Its SQL suite must pass all 33 integration cases with no skips, including:
+The workflow built the images, applied all five P04 migrations, verified the identifier regression, seeded the SQL source, loaded all three sources with runtime credentials, and executed an identical CLI rerun. Its SQL suite passed all 33 integration cases with no skips, including:
 
 - Golden publication, corrected replacement, empty day, and preservation of other dates.
 - No-op history/audit and the successful-evaluation uniqueness constraint.
@@ -40,4 +47,4 @@ The workflow must build the updated images, apply all five migrations, verify th
 - Structural faults, unknown references, failed dependencies, and rejection of changed reference data.
 - Actual REST pagination, actual SQL source reads, runtime grants, and freshness derived from SQL state.
 
-Record the new run/commit and test artifact before accepting P03/P04 or starting P05. P05 still owns persisted reconciliation, the guided CLI demonstration, screenshots/recording, and the evidence packet for the AI slice.
+The successful run above satisfies these gates. P05 adds persisted reconciliation, the guided CLI demonstration, and the saved evidence packet; its new SQL checks require a separate run.

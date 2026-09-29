@@ -1,14 +1,14 @@
 # P03 validation record
 
-Status: initial CI failed; corrective migration implemented, verification pending.
+Status: complete. The correction passed [run 36575474984](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36575474984), commit `02216b934fbf7a6e2937052917d10a818e90f516`, together with P04: 143 passed, including all 33 SQL cases. See [P04 verification](p04-validation.md).
 
 ## CI findings and correction
 
 [Foundation checks run 36572081104](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36572081104) verified commit `2ec55374342d314a41785ee142ec078b8b65a5df`. The Python job passed. SQL readiness, database creation/migration reruns, runtime login provisioning, and runtime driver probes passed. The test artifact (`sql-checks`, ID `11034179449`, created 2026-09-29 13:02 UTC) reports **62 passed, 8 failed**.
 
-All eight failures arose while inserting the valid department ID `DEPT-01`: `CK_Department_Id` rejected it before the tests could reach their intended assertions. Migration [004_identifier_checks.sql](../sql/migrations/004_identifier_checks.sql) replaces the identifier checks across all three curated tables with explicit ASCII character checks after removing literal hyphens/underscores. Applied scripts 001-003 remain unchanged. A regression test covers valid separators, lowercase, whitespace, punctuation, and non-ASCII input. This correction is not yet verified against SQL Server.
+All eight failures arose while inserting the valid department ID `DEPT-01`: `CK_Department_Id` rejected it before the tests could reach their intended assertions. Migration [004_identifier_checks.sql](../sql/migrations/004_identifier_checks.sql) replaces the identifier checks across all three curated tables with explicit ASCII character checks after removing literal hyphens/underscores. Applied scripts 001-003 remain unchanged. A regression test covers valid separators, lowercase, whitespace, punctuation, and non-ASCII input. This correction subsequently passed the SQL regression in run 36575474984.
 
-The correction ships with P04. The next CI run must pass both packages; neither is marked complete. See [P04 validation](p04-validation.md).
+The correction shipped with P04 and its SQL regression passed in the successful run above. The initial failure remains documented here as historical evidence.
 
 ## Implemented
 
@@ -31,7 +31,7 @@ The correction ships with P04. The next CI run must pass both packages; neither 
 
 No Docker engine or SQL Server is available on the local Windows host. P02's [successful CI run](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36508588521) validates the previous revision only.
 
-## Remaining acceptance gate
+## Original acceptance checklist (now verified)
 
 After this revision is pushed, the updated GitHub Actions workflow must:
 
@@ -40,4 +40,4 @@ After this revision is pushed, the updated GitHub Actions workflow must:
 3. Pass the full test suite with `--run-sql`, including empty-database migration, no-op reapplication, rollback of failed DDL plus its ledger entry, recovery, source-seed preservation, relational/lineage constraints, publication uniqueness, and role permissions.
 4. Verify the mock registry container and clean up disposable infrastructure.
 
-Record the corrected run/commit and its artifact here before marking P03 complete. The current suite and required P04 evidence are in [P04 validation](p04-validation.md). Reassess integration rework after the corrected run; retain the plan's 120-160-hour budget until that evidence exists.
+The successful run and artifact are recorded above and in the P04 validation record. The current suite and required P04 evidence are in [P04 validation](p04-validation.md). Reassess integration rework after the corrected run; retain the plan's 120-160-hour budget until that evidence exists.

@@ -12,7 +12,7 @@ The container execution was verified on GitHub's Ubuntu runner. Docker Desktop a
 
 **P02 is complete:** [run 36508588521](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36508588521) passed all 33 tests, including four live SQL checks, and verified the mock registry container. See [P02 validation](p02-validation.md) and [source contracts and fixture commands](source-contracts.md).
 
-P03's live CI found an identifier-constraint defect; the appended migration 004 addresses it, pending verification. P04 adds ingestion, validation, saved findings, atomic publication, and freshness. The current local suite has **110 passing tests and 33 SQL tests skipped**. See [P03 findings](p03-validation.md), [P04 validation](p04-validation.md), and the [ingestion guide](ingestion.md). One upstream Starlette TestClient deprecation warning remains; it does not fail the suite.
+**P03/P04 are complete:** run 36575474984 passed all 143 tests, including 33 SQL cases and the identifier correction. P05 adds saved reconciliation/evidence and the guided recording. Its local suite has **126 passing tests and 38 SQL tests skipped**; new SQL acceptance is pending. See [P04 verification](p04-validation.md), [P05 validation](p05-validation.md), and [reconciliation commands](reconciliation.md). One upstream Starlette TestClient deprecation warning remains.
 
 ## Container setup
 

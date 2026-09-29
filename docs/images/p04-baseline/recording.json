@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "mode": "ci-baseline",
+  "status": "verified",
+  "source_run": "https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36575474984",
+  "source_commit": "02216b934fbf7a6e2937052917d10a818e90f516",
+  "note": "Captured P04 SQL output. New P05 reconciliation and correction recording await their CI run.",
+  "frames": [
+    {
+      "title": "$ workbench load-activities  (golden fixture)",
+      "text": "{\n  \"status\": \"published_with_exceptions\",\n  \"load_id\": \"c2300d21-cacc-4320-a07e-0b07273bd265\",\n  \"raw_rows\": 100,\n  \"accepted\": 94,\n  \"excluded_duplicate\": 2,\n  \"excluded_invalid\": 4\n}"
+    },
+    {
+      "title": "$ workbench load-activities  (identical rerun)",
+      "text": "{\n  \"status\": \"no_op\",\n  \"load_id\": \"de93f07e-e77d-4acb-bb9a-029fefa3e5f3\",\n  \"reused_load_id\": \"c2300d21-cacc-4320-a07e-0b07273bd265\"\n}"
+    },
+    {
+      "title": "$ pytest --run-sql  (P04 verified baseline)",
+      "text": "143 passed, 1 warning in 108.85s (0:01:48)\n\nSource: sql-checks artifact 11038275046\n\nIncludes real SQL Server tests for:\n  - Golden-to-corrected date replacement\n  - No-op reruns and history\n  - Rollback and successful retry\n  - Restricted runtime permissions\n\nP05 reconciliation and its guided recording require a new CI run."
+    }
+  ]
+}

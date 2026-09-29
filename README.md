@@ -1,18 +1,22 @@
 # Data Reconciliation Workbench
 
-An operational workbench for investigating why a source export and a report disagree. Python and SQL Server perform validation and reconciliation; an optional AI assistant explains the recorded evidence.
+An operational workbench for investigating why a source export and a report disagree. Python and SQL Server perform validation and reconciliation. An optional AI explanation layer is planned next.
 
 The planned demonstration follows **100 source rows → 94 accepted activities → 98/98 after source correction**. Every exclusion has a recorded reason, and repeating a successful load leaves counts unchanged.
 
 ## Watch the demonstration
 
-Screenshots and a short recording will be the primary way to review this project. Capture begins when the CLI workflow is ready in P05; the web screen follows in P07. These materials are not available yet. The [demonstration guide](docs/demo-guide.md) defines what the recording will show.
+[![Recorded SQL ingestion: 100 source rows, 94 accepted, two duplicate extras and four invalid rows](docs/images/p04-baseline/step-1.png)](docs/images/p04-baseline/walkthrough.gif)
+
+**[Watch the 33-second SQL baseline replay](docs/images/p04-baseline/walkthrough.gif)** — actual CLI output from the successful P04 CI run, rendered as terminal captures with reading pauses. It shows the discrepancy, an unchanged rerun, and the passing SQL test suite. [Recording provenance](docs/images/p04-baseline/recording.json) identifies the run and commit. This is a paced output replay, not desktop video.
+
+P05's expanded walkthrough records **100/94 → corrected 98/98 → no-op**, including unit totals and saved evidence. Its new SQL run is pending; CI will upload the complete recording and images as `sql-demo`. See the [demo commands](docs/reconciliation.md#record-the-sql-walkthrough) and [demonstration guide](docs/demo-guide.md).
 
 ## Project status
 
-**P01 and P02 are complete. P03 has a corrective migration pending verification; P04 is implemented locally.** SQL, REST, and CSV ingestion now capture source evidence, quarantine invalid rows, and publish valid data through a restricted SQL login. Reruns, date replacement, audit events, and freshness checks are implemented. Reconciliation reports, the guided demo, AI integration, and the workbench screen remain planned.
+**P01-P04 are complete; P05 is implemented locally and awaits SQL verification.** The new reconciliation report groups exclusions by their primary reason, preserves unknown totals, and saves a bounded evidence packet with each publication. Historical reports survive source correction. AI integration and the workbench screen remain planned.
 
-**Current local checks: 110 tests passed; 33 SQL tests skipped.** P03's [CI run](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36572081104) passed database setup and runtime checks but found an identifier constraint rejecting valid hyphenated IDs (62 tests passed, 8 failed). Migration 004 addresses that defect; the next CI run must verify it together with P04. See [P03 findings](docs/p03-validation.md) and [P04 validation](docs/p04-validation.md). The last fully successful baseline is [P02](docs/p02-validation.md).
+**Verified SQL baseline: [143 tests passed](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36575474984), including all 33 SQL cases.** This validates P03's correction and P04's ingestion/publication behavior. **Current P05 local checks: 126 passed; 38 SQL tests skipped.** See [P04 verification](docs/p04-validation.md) and [P05 validation](docs/p05-validation.md).
 
 ## Run the foundation with Docker Compose
 
@@ -47,13 +51,13 @@ The database uses a named volume and stays inside the Compose network. `down` st
 
 The registry serves `http://127.0.0.1:8001/projects` with stable pagination. For the container version, use `docker compose --env-file .env.workbench --profile sources up -d --build --wait mock-registry`.
 
-The [source-contract guide](docs/source-contracts.md) documents field ownership, manifests, fixture regeneration, the SQL seed, and S01-S12 scenario inputs. [Independent golden expectations](fixtures/expected/golden.json) specify the six excluded rows and expected totals. Local validation produces 94 accepted golden rows; SQL publication and correction assertions await CI. The reconciliation engine is P05 work.
+The [source-contract guide](docs/source-contracts.md) documents field ownership, manifests, fixture regeneration, the SQL seed, and S01-S12 scenario inputs. [Independent golden expectations](fixtures/expected/golden.json) specify the six excluded rows and expected totals. P04's SQL tests verified 94 accepted rows/189 units, then 98 rows/197 units after correction. P05 adds persisted reconciliation and the [read-only report/evidence commands](docs/reconciliation.md).
 
 ## Engineering evidence
 
 - **Docker:** separate runtime/test image targets, a non-root Python process, a pinned SQL Server image, readiness checks, private database networking, and persistent storage.
-- **SQL engineering:** ten tables, source-row lineage, saved validation findings, atomic publication, an applied-version ledger, and a restricted runtime role. Integration tests cover migration rollback, permissions, reruns, and correction; live verification is pending.
-- **Automation:** GitHub Actions builds the images and runs the same Compose checks on pushes and pull requests. The latest SQL failure and its pending correction are documented above.
+- **SQL engineering:** eleven tables and two reporting views, source-row lineage, saved findings/reconciliation, atomic publication, an applied-version ledger, and a restricted runtime role. P05's new schema and rollback checks await CI.
+- **Automation:** GitHub Actions builds the images, tests real SQL Server, and captures the guided SQL demo with its evidence packets and media.
 - **Reproducibility:** uv lockfile, explicit configuration, synthetic-data scope, and a Docker build context that excludes credentials.
 
 See the [implementation plan](docs/implementation-plan.md) for the remaining work, [development setup](docs/development.md) for tooling and troubleshooting, and [demonstration guide](docs/demo-guide.md) for the README/screenshot/recording sequence.

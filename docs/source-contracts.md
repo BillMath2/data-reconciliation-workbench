@@ -4,7 +4,7 @@ Contract and rule-set version: **1.0.0**. All names, IDs, and events are fiction
 
 ## What is implemented
 
-The three source contracts, field ownership, rule metadata, deterministic source generator, read-only mock registry API, SQL department bootstrap, and independent expected outcomes are checked in. P04 now implements their adapters, validation, quarantine, and publication path; see the [ingestion guide](ingestion.md) and its pending SQL acceptance gate.
+The three source contracts, field ownership, rule metadata, deterministic source generator, read-only mock registry API, SQL department bootstrap, and independent expected outcomes are checked in. P04 now implements their adapters, validation, quarantine, and publication path; see the [ingestion guide](ingestion.md) and its [verified SQL acceptance](p04-validation.md).
 
 | Source | Contract | Authoritative fields | Transport |
 |---|---|---|---|
@@ -53,7 +53,7 @@ The unknown-department scenario has a separate reference hash and requires a fre
 
 In the golden file, ordinals 95-97 reference `PRJ-UNKNOWN`, ordinal 98 has a blank project ID, and ordinals 99/100 are exact copies of ordinals 1/2. These exclude four invalid rows (8 units) and two duplicate extras (5 units): `202 - 189 = 8 + 5`.
 
-The correction removes the duplicate extras and repairs the four project assignments while retaining activity IDs. Only the repaired records receive the correction timestamp. P04's integration tests use the independent expected file to verify publication and replay; those live checks are pending.
+The correction removes the duplicate extras and repairs the four project assignments while retaining activity IDs. Only the repaired records receive the correction timestamp. P04's integration tests use the independent expected file to verify publication and replay; those live checks passed in P04 CI.
 
 ## Reproduce and inspect the sources
 
@@ -95,4 +95,4 @@ The opt-in integration suite creates a uniquely named `workbench_fixture_test_<u
 
 [scenarios.json](../fixtures/scenarios.json) maps S01-S12 to source files or procedural steps. P04 tests cover replay, replacement, and injected publication failure for S09/S10/S11. S12 has separate manifest-count, header, date, and pagination faults. An additional empty-day fixture distinguishes zero activity from a missing feed. P05 adds saved reconciliation results and the guided demonstration.
 
-P02 local verification covers fixture reproducibility/hashes, reference relationships, field ownership/rule references, exact golden inputs and independently specified outcomes, correction changes, mock API behavior, and a real HTTP pagination smoke test. [GitHub Actions run 36508588521](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36508588521) subsequently passed all 33 tests, including four live SQL checks, and verified the rebuilt mock registry container. See [P02 validation](p02-validation.md). P03 schema verification is a separate pending gate.
+P02 local verification covers fixture reproducibility/hashes, reference relationships, field ownership/rule references, exact golden inputs and independently specified outcomes, correction changes, mock API behavior, and a real HTTP pagination smoke test. [GitHub Actions run 36508588521](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36508588521) subsequently passed all 33 tests, including four live SQL checks, and verified the rebuilt mock registry container. See [P02 validation](p02-validation.md). P03/P04 subsequently passed all 143 tests; see [P04 verification](p04-validation.md). P05 reconciliation is the current pending SQL gate.

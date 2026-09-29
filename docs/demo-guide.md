@@ -1,6 +1,8 @@
 # Demonstration and README guide
 
-Status: storyboard only. Capture real output as each milestone becomes runnable.
+Status: verified P04 baseline captures/replay are linked in the README. P05's expanded SQL walkthrough and automatic capture tooling are implemented; their CI run is pending. The complete 5-7 minute narrated screen/AI recording remains a later deliverable.
+
+The [33-second baseline replay](images/p04-baseline/walkthrough.gif) renders actual P04 CI output. PNGs are terminal-style renders, not desktop screenshots; the GIF changes reading pace, not the results. P05's `workbench demo` produces a real-time terminal `.cast`, transcript, reports, evidence JSON, and a recording manifest. CI renders three PNGs plus a paced GIF and uploads everything as `sql-demo`. Follow the [reconciliation guide](reconciliation.md#record-the-sql-walkthrough), verify the run, then promote its media to the README.
 
 ## Review without installation
 

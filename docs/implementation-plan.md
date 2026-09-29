@@ -1,7 +1,7 @@
 # Data Reconciliation Workbench: implementation plan
 
 Date: 2026-09-28  
-Status: P01 and P02 complete. P03's CI found an identifier-constraint defect; migration 004 addresses it without changing applied scripts, with verification pending. P04 ingestion, validation, quarantine, atomic publication, and freshness checks are available for integration testing; neither P03 nor P04 is accepted until the next SQL CI run passes. See [P03 findings](p03-validation.md), [P04 validation](p04-validation.md), and [ingestion guide](ingestion.md). Estimates remain planning defaults; review integration rework after that run before P05.
+Status: P01-P04 complete; [P04 CI](p04-validation.md) passed 143 tests including the P03 correction. P05 reconciliation, saved evidence, report/demo commands, and CI recording are implemented locally; new SQL acceptance and promotion of its recorded media remain pending. The README now includes verified P04 baseline images/replay. See [P05 validation](p05-validation.md) and [reconciliation guide](reconciliation.md). Retain the 120-160-hour planning budget and reassess remaining work after P05's SQL/demo replay; P05A is next after acceptance.
 
 ### How to read the plan
 

@@ -1,6 +1,6 @@
 # Database schema and migrations
 
-P03 introduced eight tables through three numbered migrations. P04 adds an identifier-check correction (004), findings/audit tables and attempt ordering (005), bringing the current schema to ten tables and five migrations. The [ingestion guide](ingestion.md) explains the implemented publication path. Reconciliation, investigation storage, and reporting views remain later work. SQL verification of the P03 correction and P04 changes is pending; see [P03 findings](p03-validation.md) and [P04 validation](p04-validation.md).
+The current schema has eleven tables, six migrations, and two reporting views. P03/P04 are verified in CI. P05 adds `ops.ReconciliationResult`, `report.vw_LoadReconciliation`, and `report.vw_ProjectActivity` in migration 006; these changes await their SQL run. See [reconciliation semantics](reconciliation.md), [P04 verification](p04-validation.md), and [P05 validation](p05-validation.md). Investigation storage and the open-exception view remain later work.
 
 ## Initial tables
 
@@ -16,6 +16,7 @@ P03 introduced eight tables through three numbered migrations. P04 adds an ident
 | `core.Activity` | `(activity_date, activity_id)` PK; project FK, status/units, UTC source update, originating load/ordinal | Current activity partition per business date |
 | `ops.Exception` | UUID PK; load/optional staged-row FKs, rule/version, field, evidence JSON, UTC created time | All row and load findings; lifecycle fields arrive in P06 |
 | `ops.AuditEvent` | UUID PK; load FK, actor, action, details JSON, UTC event time | Append-only application event history |
+| `ops.ReconciliationResult` | Load PK/FK; calculation version, BIGINT counts/units, summary and bounded evidence JSON | Immutable publication-time reconciliation; unknown source units are NULL |
 
 The typed definitions begin in [001_capture.sql](../sql/migrations/001_capture.sql) and [002_curated.sql](../sql/migrations/002_curated.sql), with corrections in [004](../sql/migrations/004_identifier_checks.sql) and evidence additions in [005](../sql/migrations/005_ingestion_evidence.sql). Field ownership and normalization are specified in the [source contracts](source-contracts.md). Curated IDs are uppercase ASCII, at most 16 characters; names are Unicode and at most 100 UTF-16 code units. Curated source timestamps use `DATETIME2(0)` and must be supplied in UTC. Operational timestamps use UTC `DATETIME2(3)`. `ops.Load.attempt_number` is an identity used to order attempts without timestamp ties.
 
@@ -31,9 +32,10 @@ erDiagram
     Load ||--o{ Exception : findings
     SourceRow o|--o{ Exception : row_evidence
     Load ||--o{ AuditEvent : events
+    Load ||--o| ReconciliationResult : saved_accounting
 ```
 
-The diagram shows the eight pipeline/evidence tables. `source.Department` is the simulated input, not the curated department table; `meta.SchemaMigration` is independent deployment metadata. A load may exist without an artifact when capture fails. Findings can apply to a whole load or a staged row.
+The diagram shows the nine pipeline/evidence tables. `source.Department` is the simulated input, not the curated department table; `meta.SchemaMigration` is independent deployment metadata. A load may exist without an artifact when capture fails. Findings can apply to a whole load or a staged row.
 
 ## Constraints and publication boundary
 
@@ -60,7 +62,7 @@ docker compose --env-file .env.workbench --profile tools run --rm migrate
 docker compose --env-file .env.workbench run --build --rm workbench health
 ```
 
-The first setup reports `applied: [1, 2, 3, 4, 5]` for an empty database. A P03 database applies `[4, 5]`; an unchanged rerun reports `applied: []` and `current_version: 5`. These are expected outputs; CI must verify them against SQL Server. Setup does not seed reference data or load curated records; use the separate commands in the ingestion guide.
+The first setup reports `applied: [1, 2, 3, 4, 5, 6]` for an empty database. A P04 database applies `[6]`; an unchanged rerun reports `applied: []` and `current_version: 6`. These are expected outputs; CI must verify them against SQL Server. Setup does not seed reference data or load curated records; use the separate commands in the ingestion guide.
 
 The underlying CLI commands are:
 
@@ -87,6 +89,6 @@ On failure, inspect the safe CLI diagnostic and failed migration filename, resol
 
 [003_runtime_role.sql](../sql/migrations/003_runtime_role.sql) grants `workbench_runtime` only the initial application permissions: read source and migration history; read/insert artifacts; read/insert/update loads and staging; read/write/delete curated rows; read the reserved report schema. It grants no DDL, source writes, ledger writes, or artifact/history deletion. Later migrations extend permissions as operational tables are introduced.
 
-Migration 005 grants read/insert access to findings and audit events, with no update/delete grant. Application services preserve them across no-op, correction, and failure paths.
+Migration 005 grants read/insert access to findings and audit events; migration 006 grants read/insert access to saved reconciliation. Neither grants update/delete permission on those tables. Application services preserve them across no-op, correction, and failure paths.
 
 Compose setup uses `sa`; the application uses the separate `workbench_app` SQL login/user. Setup rejects unexpected principal types, mismatched login/user identities, server-role membership, and unrelated database-role membership. This is a fresh development-instance provisioning path, not a general audit/remediation tool for existing SQL permissions. Successful setup also verifies the runtime password with a real connection. Existing passwords are not silently reset. Keep both credentials for the persistent volume; changing an env-file value does not rotate a stored SQL password.

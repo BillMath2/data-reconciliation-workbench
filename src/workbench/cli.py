@@ -7,7 +7,7 @@ from contextlib import closing
 from datetime import UTC, datetime
 from pathlib import Path
 
-from workbench import bootstrap, db, freshness, migrations, pipeline
+from workbench import bootstrap, db, demo, freshness, migrations, pipeline, reports
 from workbench.config import ConfigurationError, load_settings
 from workbench.validation import LoadError, parse_date, parse_timestamp
 
@@ -22,6 +22,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--reference-hash")
     parser.add_argument("--actor", default="cli")
     parser.add_argument("--business-date", type=parse_date)
+    parser.add_argument("--load-id")
+    parser.add_argument("--output-dir", type=Path, default=Path("runs/demo"))
+    parser.add_argument("--format", choices=("json", "text"), default="json")
+    parser.add_argument(
+        "--output", type=Path, help="New evidence JSON file; existing files are preserved"
+    )
     parser.add_argument(
         "--now", type=parse_timestamp, help="Injected UTC clock: YYYY-MM-DDTHH:MM:SSZ"
     )
@@ -39,6 +45,9 @@ def main(argv: list[str] | None = None) -> int:
             "load-projects",
             "load-activities",
             "freshness",
+            "reconcile",
+            "evidence",
+            "demo",
         ),
     )
     args = parser.parse_args(argv)
@@ -48,6 +57,10 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("load-departments requires --reference-hash")
     if args.command == "freshness" and args.business_date is None:
         parser.error("freshness requires --business-date")
+    if args.command in {"reconcile", "evidence"} and (
+        (args.load_id is None) == (args.business_date is None)
+    ):
+        parser.error("reconcile/evidence requires exactly one of --load-id or --business-date")
     try:
         settings = load_settings(args.env_file)
     except ConfigurationError as error:
@@ -82,15 +95,47 @@ def main(argv: list[str] | None = None) -> int:
                 result = pipeline.load_departments(settings, args.reference_hash, actor=args.actor)
             elif args.command == "load-projects":
                 result = pipeline.load_projects(settings, args.registry_url, actor=args.actor)
+            elif args.command == "demo":
+                result = demo.run(settings, args.output_dir, args.registry_url)
             elif args.command == "freshness":
                 now = args.now.replace(tzinfo=UTC) if args.now else datetime.now(UTC)
                 result = freshness.inspect(settings, args.business_date, now)
+            elif args.command in {"reconcile", "evidence"}:
+                result = reports.read(
+                    settings, load_id=args.load_id, business_date=args.business_date
+                )
+                if args.command == "evidence":
+                    result = result["packet"]
+                    if args.output:
+                        with args.output.open("x", encoding="utf-8") as stream:
+                            json.dump(result, stream, indent=2, ensure_ascii=False)
+                            stream.write("\n")
+                        result = {
+                            "status": "ok",
+                            "check": "evidence-export",
+                            "load_id": result["load_id"],
+                        }
+                elif args.format == "text":
+                    print(reports.render(result))
+                    return 0
             else:
                 result = pipeline.load_activities(
                     settings, args.csv, args.manifest, actor=args.actor
                 )
         except (migrations.MigrationError, bootstrap.BootstrapError, LoadError) as error:
             print(json.dumps({"status": "error", "message": str(error)}), file=sys.stderr)
+            return 4
+        except OSError:
+            print(
+                json.dumps(
+                    {
+                        "status": "error",
+                        "message": "File operation failed. "
+                        "Use an available output directory and a new filename.",
+                    }
+                ),
+                file=sys.stderr,
+            )
             return 4
         except ImportError:
             print(
