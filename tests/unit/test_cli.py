@@ -30,16 +30,30 @@ def test_config_check_does_not_connect(configured, monkeypatch, capsys):
     assert "private-password" not in output.out + output.err
 
 
-def test_database_failure_never_prints_driver_message(configured, monkeypatch, capsys):
+@pytest.mark.parametrize("command", ["health", "db-create", "migrate", "db-setup"])
+def test_database_failure_never_prints_driver_message(configured, monkeypatch, capsys, command):
     def failed_connection(_):
         raise RuntimeError("PWD=private-password; private server details")
 
     monkeypatch.setattr(cli.db, "connect", failed_connection)
-    assert cli.main(["health"]) == 3
+    monkeypatch.setattr(cli.bootstrap, "connect", failed_connection)
+    monkeypatch.setattr(cli.migrations, "connect", failed_connection)
+    monkeypatch.setenv("WB_SQL_DATABASE", "workbench")
+    monkeypatch.setenv("WB_SQL_RUNTIME_PASSWORD", "Wb1!test-runtime-secret")
+    assert cli.main([command]) == 3
     output = capsys.readouterr()
     assert json.loads(output.err)["status"] == "error"
     assert "private-password" not in output.out + output.err
     assert "private server details" not in output.out + output.err
+
+
+def test_migration_refuses_system_database_before_connection(configured, monkeypatch, capsys):
+    def unexpected_connection(_):
+        raise AssertionError("System databases must be rejected before connecting")
+
+    monkeypatch.setattr(cli.migrations, "connect", unexpected_connection)
+    assert cli.main(["migrate"]) == 4
+    assert "system databases" in json.loads(capsys.readouterr().err)["message"]
 
 
 def test_missing_settings_exit_code(monkeypatch, capsys):

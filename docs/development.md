@@ -10,7 +10,9 @@ P01 verification on Windows: Python 3.12.14, uv 0.12.20, mssql-python 1.15.0 imp
 
 The container execution was verified on GitHub's Ubuntu runner. Docker Desktop and native SQL Server have not been installed as part of this work; local container execution is not claimed. A Docker host is needed to repeat the Compose demonstration locally.
 
-P02 adds source contracts/fixtures and the mock registry. The current local suite has 29 passing tests and four SQL tests skipped. New department seed tests and updated container builds await a new CI run; the P01 results above apply only to their recorded revision. See [source contracts and fixture commands](source-contracts.md). The local API tests pass with one upstream Starlette TestClient deprecation warning about its HTTPX backend; the separate real HTTP smoke test also passes.
+**P02 is complete:** [run 36508588521](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36508588521) passed all 33 tests, including four live SQL checks, and verified the mock registry container. See [P02 validation](p02-validation.md) and [source contracts and fixture commands](source-contracts.md).
+
+P03 adds the application schema, migration runner, and restricted runtime credentials. The current local suite has **53 passing tests and 17 SQL tests skipped**. P03's SQL/container acceptance awaits a new CI run. See [P03 validation](p03-validation.md) and the [database schema guide](database-schema.md). One upstream Starlette TestClient deprecation warning remains; it does not fail the suite.
 
 ## Container setup
 
@@ -22,15 +24,16 @@ Configuration:
 
 | Setting | Meaning |
 |---|---|
-| `WB_SQL_PASSWORD` | Generated local demo password; required by Compose; never commit it |
+| `WB_SQL_PASSWORD` | Administrator password in the Compose env file; password of the configured login for direct Python use |
+| `WB_SQL_RUNTIME_PASSWORD` | Separate runtime password, 16-128 characters; required by Compose and `db-setup`; never commit either password |
 | `WB_SQL_SERVER` | Host/port for direct Python use; Compose explicitly sets `sqlserver,1433` |
-| `WB_SQL_DATABASE` | Existing target database; Compose uses `master` for the P01 temporary-table probe |
-| `WB_SQL_USERNAME` | SQL login; P01 Compose uses `sa` for bootstrap checks |
+| `WB_SQL_DATABASE` | Target database for direct Python; Compose pins setup/runtime to `workbench` and tests to `master` |
+| `WB_SQL_USERNAME` | Login for direct Python; Compose uses `sa` for setup/tests and `workbench_app` for runtime |
 | `WB_SQL_DRIVER` | `mssql-python`, or explicitly selected `pyodbc` fallback |
 | `WB_SQL_TRUST_CERTIFICATE` | `true` for this self-signed development container; encryption remains enabled |
 | `WB_SQL_CONNECT_TIMEOUT` | Connection/query timeout in seconds, from 1 to 30 |
 
-The Compose environment intentionally overrides non-password connection settings to target its own database. P03 will introduce the application database and restricted runtime credentials; the eventual web application must not use the P01 bootstrap login.
+The Compose environment overrides connection settings to target its own database. The `migrate` service receives administrator credentials and the runtime password for provisioning; the `workbench` service receives only the runtime password as its `WB_SQL_PASSWORD`. Test containers use administrator access to create isolated databases. Run the setup service before runtime checks, as shown in the README.
 
 For routine shutdown, use `docker compose --env-file .env.workbench down`. The database remains in `sql-data`. Changing the environment password does not change an existing database's password; retain the original credential or follow an explicit database reset procedure. Avoid deleting volumes merely to stop the demo.
 
@@ -51,7 +54,7 @@ Install [uv](https://docs.astral.sh/uv/getting-started/installation/) if it is n
 
 On Linux/macOS use the corresponding `uv` commands directly. Unit tests run without a database. `config-check` checks configuration only; it does not prove SQL connectivity. The Compose server name is resolvable inside Compose, so run SQL checks inside the container unless using a separately configured database endpoint.
 
-Commands return JSON and exit with 0 for success, 2 for invalid configuration, and 3 for unavailable drivers or failed SQL checks. No environment file is loaded implicitly. `--env-file` explicitly opts into a file; process variables override its values. The existing root `.env` is left untouched.
+Commands return JSON and exit with 0 for success, 2 for invalid configuration, 3 for unavailable drivers or failed SQL operations, and 4 for safe migration/bootstrap diagnostics. No environment file is loaded implicitly. `--env-file` explicitly opts into a file; process variables override its values. The existing root `.env` is left untouched.
 
 ## Live SQL checks and driver fallback
 
@@ -61,10 +64,12 @@ The Compose test service passes `--run-sql`, so missing or failing SQL access fa
 
 P02's additional integration tests create and later remove a uniquely named disposable user database for the department seed. They test repeatability, rejection of changed reference data, and refusal to seed system databases. Run them only with credentials authorized to create a test database; they do not seed the configured application's database.
 
+P03's tests also create and remove isolated `workbench_schema_test_<uuid>` databases. They verify migration reapplication is a no-op, a failed migration rolls back its DDL and ledger row, older migration sets are rejected, source seed data survives migration, business keys and lineage FKs hold, publication uniqueness holds, and the runtime role permits pipeline writes while rejecting DDL/source/ledger changes. These tests must pass on real SQL Server before P03 is complete.
+
 If `mssql-python` blocks progress, install the optional Python fallback with `uv sync --locked --extra odbc`, install Microsoft ODBC Driver 18 on the execution host, and explicitly set `WB_SQL_DRIVER=pyodbc` for direct Python checks. Repeat the same live smoke tests before choosing the fallback. The default Docker image currently contains the primary driver only; adopting the fallback there also requires updating its OS packages and Compose configuration. See the [Microsoft Python driver guide](https://learn.microsoft.com/en-us/sql/connect/python/mssql-python/python-sql-driver-mssql-python-quickstart?view=sql-server-ver17) and [pyodbc connection documentation](https://github.com/mkleehammer/pyodbc/wiki/Connecting-to-SQL-Server-from-Windows).
 
 ## CI and demonstrations
 
-The Actions workflow has a Python lint/unit-test job and a separate Compose build/SQL-test job. Each SQL job generates a disposable masked credential, starts the database, checks the runtime image, runs integration tests, saves test output, and removes its database volume afterward. No real-data or LLM credentials are needed.
+The Actions workflow has a Python lint/unit-test job and a separate Compose build/SQL-test job. Each SQL job generates two disposable masked credentials, starts the database, runs `db-setup` twice to verify repeatability, checks the runtime image with its restricted login, runs integration tests, saves test output, and removes its database volume afterward. No real-data or LLM credentials are needed.
 
 Actions is verification, not website hosting: its service containers last for the job. See [GitHub's service-container documentation](https://docs.github.com/en/actions/tutorials/use-containerized-services/use-docker-service-containers). A Codespaces launch path can be added later for remote live sessions. The primary portfolio deliverables remain the README, actual screenshots, and a recording described in the [demo guide](demo-guide.md).

@@ -26,6 +26,7 @@ class Settings:
     driver: str = "mssql-python"
     trust_certificate: bool = False
     connect_timeout: int = 5
+    runtime_password: str | None = field(default=None, repr=False)
 
     def connection_string(self) -> str:
         parts = [
@@ -82,4 +83,5 @@ def load_settings(
         driver=driver,
         trust_certificate=trust == "true",
         connect_timeout=timeout,
+        runtime_password=values.get("WB_SQL_RUNTIME_PASSWORD") or None,
     )

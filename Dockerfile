@@ -16,6 +16,7 @@ COPY pyproject.toml uv.lock README.md ./
 COPY src ./src
 COPY config ./config
 COPY fixtures ./fixtures
+COPY sql ./sql
 
 FROM base AS test
 RUN uv sync --locked --no-editable

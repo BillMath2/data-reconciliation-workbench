@@ -1,2 +1,3 @@
 # Fixture byte hashes must remain stable on Windows and Linux checkouts.
 fixtures/generated/** text eol=lf
+sql/migrations/** text eol=lf

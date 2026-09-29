@@ -1,27 +1,35 @@
-# Create a dedicated Compose environment without reading or replacing the existing .env.
+# Create/upgrade dedicated demo configuration; preserve existing nonempty credentials.
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 $target = Join-Path $projectRoot '.env.workbench'
-if (Test-Path -LiteralPath $target) {
-    Write-Output '.env.workbench already exists; left unchanged.'
-    exit 0
+$exists = Test-Path -LiteralPath $target
+$content = if ($exists) {
+    [System.IO.File]::ReadAllText($target)
+} else {
+    [System.IO.File]::ReadAllText((Join-Path $projectRoot '.env.example'))
 }
-$bytes = New-Object byte[] 24
-$random = [System.Security.Cryptography.RandomNumberGenerator]::Create()
-try {
-    $random.GetBytes($bytes)
-} finally {
-    $random.Dispose()
+$originalContent = $content
+foreach ($key in @('WB_SQL_PASSWORD', 'WB_SQL_RUNTIME_PASSWORD')) {
+    $emptyPattern = '(?m)^' + $key + '=[ \t]*\r?$'
+    if ($content -match ('(?m)^' + $key + '=') -and $content -notmatch $emptyPattern) {
+        continue
+    }
+    $bytes = New-Object byte[] 24
+    $random = [System.Security.Cryptography.RandomNumberGenerator]::Create()
+    try { $random.GetBytes($bytes) } finally { $random.Dispose() }
+    $line = $key + '=Wb1!' + [Convert]::ToBase64String($bytes)
+    if ($content -match $emptyPattern) {
+        $content = [regex]::Replace($content, $emptyPattern, $line)
+    } else {
+        $content = $content.TrimEnd() + "`n" + $line + "`n"
+    }
 }
-$demoPassword = 'Wb1!' + [Convert]::ToBase64String($bytes)
-$template = [System.IO.File]::ReadAllText((Join-Path $projectRoot '.env.example'))
-$content = $template.Replace('WB_SQL_PASSWORD=', ('WB_SQL_PASSWORD=' + $demoPassword))
-# CreateNew prevents an accidental overwrite if another process creates the file.
-$stream = [System.IO.File]::Open($target, [System.IO.FileMode]::CreateNew)
-$writer = New-Object System.IO.StreamWriter($stream, (New-Object System.Text.UTF8Encoding($false)))
-try {
-    $writer.Write($content)
-} finally {
-    $writer.Dispose()
+# Upgrade only the exact P01 default; preserve a deliberately customized database name.
+$content = [regex]::Replace($content, '(?m)^WB_SQL_DATABASE=master\r?$', 'WB_SQL_DATABASE=workbench')
+if (-not $exists -or $content -ne $originalContent) {
+    $mode = if ($exists) { [System.IO.FileMode]::Create } else { [System.IO.FileMode]::CreateNew }
+    $stream = [System.IO.File]::Open($target, $mode)
+    $writer = New-Object System.IO.StreamWriter($stream, (New-Object System.Text.UTF8Encoding($false)))
+    try { $writer.Write($content) } finally { $writer.Dispose() }
 }
-Write-Output 'Created .env.workbench with a generated demo credential. Its contents are not printed.'
+Write-Output 'Demo configuration is ready; existing nonempty credentials were preserved. Values are not printed.'

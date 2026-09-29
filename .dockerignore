@@ -12,5 +12,7 @@
 !config/**
 !fixtures/
 !fixtures/**
+!sql/
+!sql/**
 **/__pycache__/
 **/*.pyc

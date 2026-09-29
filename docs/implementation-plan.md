@@ -1,7 +1,7 @@
 # Data Reconciliation Workbench: implementation plan
 
 Date: 2026-09-28  
-Status: P01 complete (see [validation record](p01-validation.md)). P02 contracts, fixtures, and mock registry are implemented and locally tested; new SQL seed/container verification awaits CI. See [source contracts](source-contracts.md). P03 is next after that verification. Estimates are planning defaults.
+Status: P01 and P02 complete (see [P01 validation](p01-validation.md) and [P02 validation](p02-validation.md)). P03 schema, migrations, runtime role, and CI extensions are implemented locally; live SQL acceptance awaits the next CI run. See [schema guide](database-schema.md) and [P03 validation](p03-validation.md). P04 follows that gate. Estimates remain planning defaults; confirm the P03 estimate review after SQL verification.
 
 ### How to read the plan
 
@@ -121,6 +121,8 @@ Contract defaults:
 Quarantine is a durable disposition of a staged row plus its validation findings; it need not duplicate the raw payload in another table. An invalid row may have multiple findings but contributes to excluded counts only once.
 
 This is a 12-table target plus three views, created incrementally. P03 establishes the migration ledger, load/input/staging objects, and typed curated tables; later packages add findings, reconciliation, audit, and investigation objects as needed. Shared staging holds raw payloads; curated entities retain typed columns, relational keys, and constraints.
+
+P03's initial eight tables and three migrations are documented in the [database schema guide](database-schema.md). The Compose `migrate` service uses administrator access for setup; the regular application service uses the separate `workbench_app` login. The report schema is reserved but has no views yet.
 
 Keep infrastructure names generic (`SourceRow`, `Load`, `Exception`, evidence services). Keep research-domain tables explicit (`Project`, `Activity`) rather than creating a generic entity framework. A later access-reconciliation variant can reuse ingestion, evidence, UI, and assistant components, but requires its own domain contracts, curated schema, and rules; it is not assumed to be only a fixture swap.
 

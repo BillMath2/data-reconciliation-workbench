@@ -5,14 +5,18 @@ import json
 import sys
 from pathlib import Path
 
-from workbench import db
+from workbench import bootstrap, db, migrations
 from workbench.config import ConfigurationError, load_settings
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="workbench")
     parser.add_argument("--env-file", type=Path, help="Explicit configuration file (optional)")
-    parser.add_argument("command", choices=("config-check", "health", "db-smoke"))
+    parser.add_argument("--migration-dir", type=Path, default=migrations.DEFAULT_MIGRATIONS)
+    parser.add_argument(
+        "command",
+        choices=("config-check", "health", "db-smoke", "db-create", "migrate", "db-setup"),
+    )
     args = parser.parse_args(argv)
     try:
         settings = load_settings(args.env_file)
@@ -24,7 +28,19 @@ def main(argv: list[str] | None = None) -> int:
         result = {"status": "ok", "check": "configuration", "driver": settings.driver}
     else:
         try:
-            result = db.health(settings) if args.command == "health" else db.smoke(settings)
+            if args.command == "health":
+                result = db.health(settings)
+            elif args.command == "db-smoke":
+                result = db.smoke(settings)
+            elif args.command == "db-create":
+                result = bootstrap.create_database(settings)
+            elif args.command == "migrate":
+                result = migrations.migrate(settings, args.migration_dir)
+            else:
+                result = bootstrap.setup_database(settings, args.migration_dir)
+        except (migrations.MigrationError, bootstrap.BootstrapError) as error:
+            print(json.dumps({"status": "error", "message": str(error)}), file=sys.stderr)
+            return 4
         except ImportError:
             print(
                 json.dumps(

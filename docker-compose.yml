@@ -38,12 +38,32 @@ services:
       context: .
       target: runtime
     platform: linux/amd64
-    environment: *workbench-environment
+    environment:
+      <<: *workbench-environment
+      WB_SQL_DATABASE: workbench
+      WB_SQL_USERNAME: workbench_app
+      WB_SQL_PASSWORD: ${WB_SQL_RUNTIME_PASSWORD:?Run scripts/initialize-demo.ps1 to create runtime credentials}
     depends_on:
       sqlserver:
         condition: service_healthy
     # P01 is a one-shot CLI; a web process will be added in P07.
     command: ["health"]
+
+  migrate:
+    profiles: ["tools"]
+    build:
+      context: .
+      target: runtime
+    platform: linux/amd64
+    environment:
+      <<: *workbench-environment
+      WB_SQL_DATABASE: workbench
+      WB_SQL_CONNECT_TIMEOUT: "30"
+      WB_SQL_RUNTIME_PASSWORD: ${WB_SQL_RUNTIME_PASSWORD:?Run scripts/initialize-demo.ps1 to create runtime credentials}
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    command: ["db-setup"]
 
   mock-registry:
     profiles: ["sources"]

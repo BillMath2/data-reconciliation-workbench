@@ -10,9 +10,9 @@ Screenshots and a short recording will be the primary way to review this project
 
 ## Project status
 
-**P01 is complete; P02 is implemented locally.** Versioned source contracts, fixed validation-rule metadata, synthetic fixtures, a paginated mock registry API, and a department SQL seed script are now available. The ingestion pipeline, reconciliation workflow, AI integration, and workbench screen remain planned. Next is P03: application schema and migrations, after P02's new SQL/container checks pass in CI.
+**P01 and P02 are complete; P03 is implemented locally and awaits SQL CI verification.** The foundation now includes source contracts and fixtures, a mock registry API, eight SQL tables, transactional migrations, and separate setup/runtime database credentials. The ingestion pipeline, reconciliation workflow, AI integration, and workbench screen remain planned.
 
-**P01 verification in GitHub Actions: 15 tests passed**, including both live SQL Server driver tests. See the [successful foundation run](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36504051164) and [P01 validation record](docs/p01-validation.md). **P02 local verification: 29 tests passed**, fixture reproduction matched all 29 generated files, and a real HTTP smoke test retrieved 25 unique projects. Four SQL tests are skipped locally; the new seed checks and container build changes await a new CI run.
+**P02 verification in GitHub Actions: 33 tests passed**, including all four SQL checks, plus the mock registry container check. See the [successful P02 run](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36508588521) and [validation record](docs/p02-validation.md). **P03 local verification: 53 tests passed; 17 SQL tests skipped.** Lint, formatting, fixture reproduction, and Compose configuration validation passed. New migrations, permissions, and container execution require the next CI run; see [P03 validation](docs/p03-validation.md).
 
 ## Run the foundation with Docker Compose
 
@@ -24,15 +24,18 @@ From PowerShell in the repository:
 .\scripts\initialize-demo.ps1
 docker compose --env-file .env.workbench up -d --wait --wait-timeout 240 sqlserver
 docker compose --env-file .env.workbench build workbench
+docker compose --env-file .env.workbench --profile tools run --build --rm migrate
 docker compose --env-file .env.workbench run --rm workbench health
 docker compose --env-file .env.workbench run --rm workbench db-smoke
 docker compose --env-file .env.workbench --profile test run --build --rm tests
 docker compose --env-file .env.workbench down
 ```
 
-The setup script creates `.env.workbench` with a generated demo password and preserves existing configuration. On other platforms, copy `.env.example` to `.env.workbench` and set a strong unique password before running the same Docker commands.
+The setup script creates or upgrades `.env.workbench` with distinct generated administrator and runtime passwords, preserving existing nonempty credentials. On other platforms, copy `.env.example` to `.env.workbench` and set both passwords to different strong values (16-128 characters for the runtime password) before running the same Docker commands.
 
-The database uses a named volume and stays inside the Compose network. `down` stops the containers and preserves that volume. The P01 CLI uses temporary tables only. With `--run-sql`, the P02 tests also create and remove a uniquely named disposable user database to test the source seed. Application tables and the workbench screen are not implemented. The Compose file accepts Microsoft's SQL Server Developer EULA for development use.
+The `migrate` service creates the `workbench` database, applies pending migrations, and provisions the restricted `workbench_app` login. Rerunning it leaves applied migrations unchanged. The regular `workbench` service uses that runtime login. See the [schema and migration guide](docs/database-schema.md).
+
+The database uses a named volume and stays inside the Compose network. `down` stops containers and preserves that volume. SQL tests create and remove their own uniquely named disposable databases; the application tables remain empty until ingestion is implemented in P04. There is no workbench screen yet. The Compose file accepts Microsoft's SQL Server Developer EULA for development use.
 
 ## Inspect the synthetic sources
 
@@ -49,7 +52,7 @@ The [source-contract guide](docs/source-contracts.md) documents field ownership,
 ## Engineering evidence
 
 - **Docker:** separate runtime/test image targets, a non-root Python process, a pinned SQL Server image, readiness checks, private database networking, and persistent storage.
-- **SQL verification:** health, parameter binding, Unicode, commit, and rollback checks against real SQL Server when enabled.
+- **SQL engineering:** eight-table schema, source-row lineage, relational constraints, transactional migration ledger, and a restricted runtime role. New integration tests cover migration rollback and permissions; live P03 verification is pending.
 - **Automation:** GitHub Actions builds the images and runs the same Compose checks on pushes and pull requests; the foundation workflow has passed against real SQL Server.
 - **Reproducibility:** uv lockfile, explicit configuration, synthetic-data scope, and a Docker build context that excludes credentials.
 
