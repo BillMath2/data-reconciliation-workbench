@@ -1,0 +1,61 @@
+name: data-reconciliation-workbench
+
+x-workbench-environment: &workbench-environment
+  WB_SQL_SERVER: sqlserver,1433
+  WB_SQL_DATABASE: master
+  WB_SQL_USERNAME: sa
+  WB_SQL_PASSWORD: ${WB_SQL_PASSWORD:?Set WB_SQL_PASSWORD in .env.workbench}
+  WB_SQL_DRIVER: mssql-python
+  WB_SQL_CONNECT_TIMEOUT: "5"
+  WB_SQL_TRUST_CERTIFICATE: "true"
+
+services:
+  sqlserver:
+    # Official 2022-latest digest resolved on 2026-09-28; updates are explicit.
+    image: mcr.microsoft.com/mssql/server:2022-latest@sha256:4402d880dd4c34bfa7d8705e56a86cd6c88da80a1f6bbbe741f999e76264a090
+    platform: linux/amd64
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: Developer
+      MSSQL_SA_PASSWORD: ${WB_SQL_PASSWORD:?Set WB_SQL_PASSWORD in .env.workbench}
+    volumes:
+      - sql-data:/var/opt/mssql
+    # SQL stays on the Compose network; no database port is published to the host.
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          SQLCMDPASSWORD="$${MSSQL_SA_PASSWORD}"
+          /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -C -l 5 -b
+          -Q "SET NOCOUNT ON; SELECT 1" > /dev/null
+      interval: 5s
+      timeout: 10s
+      retries: 30
+      start_period: 30s
+
+  workbench:
+    build:
+      context: .
+      target: runtime
+    platform: linux/amd64
+    environment: *workbench-environment
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    # P01 is a one-shot CLI; a web process will be added in P07.
+    command: ["health"]
+
+  tests:
+    profiles: ["test"]
+    build:
+      context: .
+      target: test
+    platform: linux/amd64
+    environment: *workbench-environment
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    command: ["-q", "-p", "no:cacheprovider", "--run-sql"]
+
+volumes:
+  sql-data:

@@ -1,0 +1,12 @@
+# Use an allowlist so local credentials, tools, and unrelated files cannot enter the build.
+**
+!Dockerfile
+!pyproject.toml
+!uv.lock
+!README.md
+!src/
+!src/**
+!tests/
+!tests/**
+**/__pycache__/
+**/*.pyc

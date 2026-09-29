@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "data-reconciliation-workbench"
+version = "0.1.0"
+description = "Traceable data ingestion and evidence-based reconciliation"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "mssql-python>=1.0,<2",
+    "python-dotenv>=1.0,<2",
+]
+
+[project.optional-dependencies]
+odbc = ["pyodbc>=5.2,<6"]
+
+[project.scripts]
+workbench = "workbench.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "ruff>=0.9,<1"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/workbench"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+markers = ["integration: requires a running SQL Server (opt in with --run-sql)"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

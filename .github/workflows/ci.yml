@@ -1,0 +1,59 @@
+name: Foundation checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.12.20"
+      - run: uv sync --locked --python 3.12
+      - run: uv run --locked ruff check .
+      - run: uv run --locked ruff format --check .
+      - run: uv run --locked pytest -q
+
+  sql-server:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create disposable database credential
+        shell: bash
+        run: |
+          password="Wb1!$(openssl rand -hex 24)"
+          echo "::add-mask::$password"
+          echo "WB_SQL_PASSWORD=$password" >> "$GITHUB_ENV"
+      - name: Validate Compose configuration
+        run: docker compose config --quiet
+      - name: Start SQL Server and wait for readiness
+        run: docker compose up -d --wait --wait-timeout 240 sqlserver
+      - name: Build and check the runtime image
+        run: |
+          docker compose build workbench
+          docker compose run --rm workbench config-check
+          docker compose run --rm workbench health
+          docker compose run --rm workbench db-smoke
+      - name: Run tests including real SQL Server transactions
+        run: |
+          mkdir -p runs
+          set -o pipefail
+          docker compose --profile test run --build --rm tests 2>&1 | tee runs/sql-checks.txt
+      - name: Save test output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sql-checks
+          path: runs/sql-checks.txt
+          if-no-files-found: ignore
+      - name: Remove disposable containers and test database
+        if: always()
+        run: docker compose --profile test down --volumes --remove-orphans
