@@ -12,7 +12,7 @@ The container execution was verified on GitHub's Ubuntu runner. Docker Desktop a
 
 **P02 is complete:** [run 36508588521](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36508588521) passed all 33 tests, including four live SQL checks, and verified the mock registry container. See [P02 validation](p02-validation.md) and [source contracts and fixture commands](source-contracts.md).
 
-**P01-P05 are complete:** P05 run 36637726571 passed **164 tests, including all 38 SQL cases with no skips**. Its downloaded demo and test artifacts were inspected, and the README links the verified golden/correction/no-op replay and saved evidence. P05A now adds the CLI assistant and a reviewed live example: 158 local tests pass, with 38 SQL tests skipped; the expanded CI run is pending. See [assistant setup](assistant.md) and [P05A validation](p05a-validation.md). See [P04 verification](p04-validation.md), [P05 validation](p05-validation.md), and [reconciliation commands](reconciliation.md). One upstream Starlette TestClient deprecation warning remains.
+**P01-P05 are complete:** P05 run 36637726571 passed **164 tests, including all 38 SQL cases with no skips**. Its downloaded demo and test artifacts were inspected, and the README links the verified golden/correction/no-op replay and saved evidence. P05A now adds the CLI assistant and a reviewed live example: 158 local tests pass, with 38 SQL tests skipped; the user confirmed the expanded CI run green for commit `59091f3`. See [assistant setup](assistant.md) and [P05A validation](p05a-validation.md). See [P04 verification](p04-validation.md), [P05 validation](p05-validation.md), and [reconciliation commands](reconciliation.md). One upstream Starlette TestClient deprecation warning remains.
 
 ## Container setup
 
@@ -75,3 +75,7 @@ If `mssql-python` blocks progress, install the optional Python fallback with `uv
 The Actions workflow has a Python lint/unit-test job and a separate Compose build/SQL-test job. Each SQL job generates two disposable masked credentials, starts the database, runs `db-setup` twice, checks the restricted runtime login, starts the registry, seeds the department source, loads all three sources through the CLI, verifies an identical rerun, and runs integration tests. It saves test output and removes its disposable volume afterward. No real-data or LLM credentials are needed.
 
 Actions is verification, not website hosting: its service containers last for the job. See [GitHub's service-container documentation](https://docs.github.com/en/actions/tutorials/use-containerized-services/use-docker-service-containers). A Codespaces launch path can be added later for remote live sessions. The primary portfolio deliverables remain the README, actual screenshots, and a recording described in the [demo guide](demo-guide.md).
+
+## P06 local evidence API
+
+See [API setup](evidence-api.md). `initialize-demo.ps1` now also adds distinct local analyst/operator tokens without replacing existing credentials. The Compose `web` profile publishes the API only on localhost. Current P06 local checks: 195 passed, 44 SQL tests skipped. The updated CI must accept migration 007, the live API smoke check, and SQL lifecycle tests; see [P06 validation](p06-validation.md).

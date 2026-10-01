@@ -38,6 +38,11 @@ jobs:
           runtime_password="Wb1!$(openssl rand -hex 24)"
           echo "::add-mask::$runtime_password"
           echo "WB_SQL_RUNTIME_PASSWORD=$runtime_password" >> "$GITHUB_ENV"
+          for role in ANALYST OPERATOR; do
+            token="$(openssl rand -hex 24)"
+            echo "::add-mask::$token"
+            echo "WB_DEMO_${role}_TOKEN=$token" >> "$GITHUB_ENV"
+          done
       - name: Validate Compose configuration
         run: docker compose config --quiet
       - name: Start SQL Server and wait for readiness
@@ -57,6 +62,10 @@ jobs:
           docker compose --profile tools run --rm migrate seed-departments
           mkdir -p runs
           docker compose run --rm --user "$(id -u):$(id -g)" --volume "$PWD/runs:/app/runs" -e WB_BUILD_REVISION="$GITHUB_SHA" workbench demo --output-dir /app/runs/demo
+      - name: Verify the running evidence API and historical lifecycle
+        run: |
+          docker compose --profile web up -d --build --wait --wait-timeout 120 api
+          python3 scripts/check-api.py
       - name: Run tests including real SQL Server transactions
         run: |
           mkdir -p runs
@@ -83,4 +92,4 @@ jobs:
           if-no-files-found: ignore
       - name: Remove disposable containers and test database
         if: always()
-        run: docker compose --profile test --profile sources --profile tools down --volumes --remove-orphans
+        run: docker compose --profile test --profile sources --profile tools --profile web down --volumes --remove-orphans

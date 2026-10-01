@@ -9,7 +9,7 @@ $content = if ($exists) {
     [System.IO.File]::ReadAllText((Join-Path $projectRoot '.env.example'))
 }
 $originalContent = $content
-foreach ($key in @('WB_SQL_PASSWORD', 'WB_SQL_RUNTIME_PASSWORD')) {
+foreach ($key in @('WB_SQL_PASSWORD', 'WB_SQL_RUNTIME_PASSWORD', 'WB_DEMO_ANALYST_TOKEN', 'WB_DEMO_OPERATOR_TOKEN')) {
     $emptyPattern = '(?m)^' + $key + '=[ \t]*\r?$'
     if ($content -match ('(?m)^' + $key + '=') -and $content -notmatch $emptyPattern) {
         continue

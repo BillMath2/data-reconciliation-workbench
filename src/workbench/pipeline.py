@@ -5,7 +5,7 @@ from contextlib import closing, suppress
 from pathlib import Path
 from uuid import uuid4
 
-from workbench import reconciliation
+from workbench import lifecycle, reconciliation
 from workbench.config import Settings
 from workbench.db import connect
 from workbench.migrations import execute_batch, validate_database_name
@@ -193,7 +193,7 @@ def stage_rows(cursor, load_id, capture, rows):
             )
 
 
-def publish(cursor, load_id, capture, rows, fault=None):
+def publish(cursor, load_id, capture, rows, fault=None, *, actor="cli"):
     previous = current(cursor, capture.source, capture.business_date)
     if previous is not None:
         cursor.execute(
@@ -223,6 +223,7 @@ def publish(cursor, load_id, capture, rows, fault=None):
     )
     if capture.source == "daily-activity":
         reconciliation.save(cursor, load_id, capture, rows)
+        lifecycle.resolve(cursor, load_id, capture, rows, actor)
     if fault is not None:
         fault("before_commit")
     return status
@@ -292,7 +293,7 @@ def ingest(settings: Settings, source: str, capture_source, *, actor="cli", faul
                 stage_rows(cursor, load_id, capture, rows)
                 cursor.execute("UPDATE ops.Load SET status='validated' WHERE load_id=?", (load_id,))
                 connection.commit()
-                status = publish(cursor, load_id, capture, rows, fault)
+                status = publish(cursor, load_id, capture, rows, fault, actor=actor)
                 counts = {
                     name: sum(row.disposition == name for row in rows)
                     for name in ("accepted", "excluded_duplicate", "excluded_invalid")

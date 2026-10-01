@@ -20,7 +20,7 @@ Inspect the [saved evidence and terminal recording](docs/evidence/p05/README.md)
 
 ## Project status
 
-**P01-P05 and P05A are complete; P06 (evidence API and exception lifecycle) is next.** The reconciliation report groups exclusions by their primary reason, preserves unknown totals, and saves a bounded evidence packet with each publication. Historical reports survive source correction. The first CLI AI explanation is available; screen integration remains planned.
+**P01-P05 and P05A are complete; P06 is implemented locally and awaits SQL/API acceptance.** The reconciliation report groups exclusions by their primary reason, preserves unknown totals, and saves a bounded evidence packet with each publication. Historical reports survive source correction. The first CLI AI explanation and local evidence API are available; the workbench screen remains P07. See [P06 validation](docs/p06-validation.md).
 
 **Verified P05 SQL suite: [164 tests passed](docs/evidence/p05/sql-checks.txt), including all 38 SQL cases, with no skips.** Both CI jobs were confirmed green; the downloaded artifacts were reviewed on October 1, 2026. See [P05 validation](docs/p05-validation.md) for provenance and checks, and [P04 verification](docs/p04-validation.md) for the earlier baseline.
 
@@ -32,7 +32,11 @@ Inspect the [saved evidence and terminal recording](docs/evidence/p05/README.md)
 .\scripts\uv.ps1 run --locked workbench explain --packet docs/evidence/p05/golden-evidence.json --provider stub --format text
 ```
 
-Code checks the answer's structured counts and citations. The assistant has no database credentials, tools, or repair path; when AI is unavailable, deterministic evidence and guidance remain visible. Live prose still requires review. See the [assistant guide](docs/assistant.md) for setup and limits, and [P05A validation](docs/p05a-validation.md) for the single accepted example and tests. Current local suite: **158 passed, 38 SQL tests skipped**; the expanded CI run is still pending. The verified P05 SQL baseline above remains distinct.
+Code checks the answer's structured counts and citations. The assistant has no database credentials, tools, or repair path; when AI is unavailable, deterministic evidence and guidance remain visible. Live prose still requires review. See the [assistant guide](docs/assistant.md) for setup and limits, and [P05A validation](docs/p05a-validation.md) for the single accepted example and tests. Current local suite: **158 passed, 38 SQL tests skipped**; the user confirmed the expanded P05A CI run green for commit `59091f3`. The verified P05 SQL baseline above remains distinct.
+
+## Inspect evidence through the API
+
+P06 adds authenticated report/evidence inspection and operator acknowledgement, with resolution linked to successful source correction. The API exposes the original saved packets and keeps lifecycle state separate. It includes local demo identities and CSRF protection; the web screen comes next. See the [API setup and endpoint guide](docs/evidence-api.md). Local verification: **195 passed, 44 SQL tests skipped**; migration 007 and the live API checks still need CI acceptance.
 
 ## Run the foundation with Docker Compose
 
@@ -72,7 +76,7 @@ The [source-contract guide](docs/source-contracts.md) documents field ownership,
 ## Engineering evidence
 
 - **Docker:** separate runtime/test image targets, a non-root Python process, a pinned SQL Server image, readiness checks, private database networking, and persistent storage.
-- **SQL engineering:** eleven tables and two reporting views, source-row lineage, saved findings/reconciliation, atomic publication, an applied-version ledger, and a restricted runtime role. P05's schema and rollback checks passed in the SQL suite.
+- **SQL engineering:** eleven tables and three reporting views, source-row lineage, saved findings/reconciliation, atomic publication, an applied-version ledger, and a restricted runtime role. P05's schema and rollback checks passed in the SQL suite; P06 lifecycle migration 007 and its new checks await CI.
 - **Automation:** GitHub Actions builds the images, tests real SQL Server, and captures the guided SQL demo with its evidence packets and media.
 - **Reproducibility:** uv lockfile, explicit configuration, synthetic-data scope, and a Docker build context that excludes credentials.
 

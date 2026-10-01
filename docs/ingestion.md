@@ -81,3 +81,7 @@ docker compose --env-file .env.workbench --profile test run --build --rm tests
 ```
 
 The tests use administrator credentials only for isolated database setup and source seeding, then provision and use `workbench_app` for ingestion. They require both configured passwords. `WB_TEST_REGISTRY_URL` defaults to the mock Compose service; direct tests can point it at a separately running registry. No test writes fixture expected results or the configured application's curated tables.
+
+## P06 successor resolution
+
+Migration 007 adds lifecycle state alongside immutable findings. Successful activity publication now records eligible historical resolutions and their audit events in the same transaction as curated replacement and reconciliation; rollback preserves the earlier state. No-op/failed attempts do not close findings. See [lifecycle semantics](evidence-api.md#lifecycle-semantics) for key matching, removal, and conservative unresolved cases. These additions await [P06 SQL acceptance](p06-validation.md).

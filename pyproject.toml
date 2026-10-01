@@ -25,6 +25,7 @@ odbc = ["pyodbc>=5.2,<6"]
 workbench = "workbench.cli:main"
 workbench-fixtures = "workbench.fixtures:main"
 workbench-registry = "workbench.mock_registry:main"
+workbench-api = "workbench.api:main"
 
 [dependency-groups]
 dev = [

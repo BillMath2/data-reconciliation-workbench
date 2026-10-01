@@ -1,6 +1,6 @@
 # P05A validation record
 
-Status: complete for the bounded first AI slice, accepted locally on October 1, 2026. The offline stub and a real provider answer use the verified P05 golden evidence. P06 is next. The updated CI workflow has not yet been run for this revision.
+Status: complete for the bounded first AI slice, accepted locally on October 1, 2026. The offline stub and a real provider answer use the verified P05 golden evidence. P06 is next. The user confirmed the P05A CI run green for commit `59091f3` (`adding p05a`). The run URL and artifacts have not been supplied, so no new exact CI test total is asserted.
 
 ## Acceptance evidence
 
@@ -23,7 +23,7 @@ Status: complete for the bounded first AI slice, accepted locally on October 1, 
 - HTTP failure, disconnect, refusal, incomplete output, malformed/oversized response, HTTP timeout, and total deadline cancellation.
 - Preserved deterministic fallback, usage on rejected answers, exit status, and export protection before a billable request.
 
-Ruff lint and format checks pass; the dependency lock synchronizes offline. The CI Python job now runs an explicit offline explanation command, and the test image includes the verified packet. No SQL or schema behavior changed. The last live SQL acceptance remains P05's 164 passing tests; a new CI run is needed to verify the updated image and expanded suite together.
+Ruff lint and format checks pass; the dependency lock synchronizes offline. The CI Python job now runs an explicit offline explanation command, and the test image includes the verified packet. No SQL or schema behavior changed. The user subsequently confirmed P05A CI green for commit `59091f3`, clearing the updated image/suite verification checkpoint. P05's 164-test artifact remains the latest downloaded SQL log; P05A's exact CI totals have not been independently inspected.
 
 ## Scope
 
