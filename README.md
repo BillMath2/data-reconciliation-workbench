@@ -1,6 +1,6 @@
 # Data Reconciliation Workbench
 
-An operational workbench for investigating why a source export and a report disagree. Python and SQL Server perform validation and reconciliation. An optional AI explanation layer is planned next.
+An operational workbench for investigating why a source export and a report disagree. Python and SQL Server perform validation and reconciliation. An optional CLI assistant explains saved evidence, with an offline stub and a reviewed live example.
 
 The verified SQL demonstration follows **100 source rows → 94 accepted activities → 98/98 after source correction**. Every exclusion has a recorded reason, and repeating a successful load leaves counts unchanged.
 
@@ -20,9 +20,19 @@ Inspect the [saved evidence and terminal recording](docs/evidence/p05/README.md)
 
 ## Project status
 
-**P01-P05 are complete; P05A (the first AI explanation) is next.** The reconciliation report groups exclusions by their primary reason, preserves unknown totals, and saves a bounded evidence packet with each publication. Historical reports survive source correction. AI integration and the workbench screen remain planned.
+**P01-P05 and P05A are complete; P06 (evidence API and exception lifecycle) is next.** The reconciliation report groups exclusions by their primary reason, preserves unknown totals, and saves a bounded evidence packet with each publication. Historical reports survive source correction. The first CLI AI explanation is available; screen integration remains planned.
 
 **Verified P05 SQL suite: [164 tests passed](docs/evidence/p05/sql-checks.txt), including all 38 SQL cases, with no skips.** Both CI jobs were confirmed green; the downloaded artifacts were reviewed on October 1, 2026. See [P05 validation](docs/p05-validation.md) for provenance and checks, and [P04 verification](docs/p04-validation.md) for the earlier baseline.
+
+## Explain the discrepancy
+
+[Read the reviewed live AI explanation](docs/evidence/p05a/live.txt) alongside its [saved SQL evidence](docs/evidence/p05/golden-evidence.json), or try the explicitly labeled offline stub without SQL or an API key:
+
+```powershell
+.\scripts\uv.ps1 run --locked workbench explain --packet docs/evidence/p05/golden-evidence.json --provider stub --format text
+```
+
+Code checks the answer's structured counts and citations. The assistant has no database credentials, tools, or repair path; when AI is unavailable, deterministic evidence and guidance remain visible. Live prose still requires review. See the [assistant guide](docs/assistant.md) for setup and limits, and [P05A validation](docs/p05a-validation.md) for the single accepted example and tests. Current local suite: **158 passed, 38 SQL tests skipped**; the expanded CI run is still pending. The verified P05 SQL baseline above remains distinct.
 
 ## Run the foundation with Docker Compose
 

@@ -1,0 +1,36 @@
+{
+  "reviewed_at": "2026-10-01T16:19:32.787313+00:00",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt_version": "p05a-2",
+  "source_packet": "../p05/golden-evidence.json",
+  "packet_sha256": "f2315756aed28c74b25dad94208164a8d8d40ec26e0031301cb381cfca304c60",
+  "source_sql_run": "https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36637726571",
+  "live_usage": {
+    "input_tokens": 3370,
+    "output_tokens": 852,
+    "total_tokens": 4222
+  },
+  "estimated_live_cost_usd": 0.002711,
+  "cost_note": "Uncached estimate at $0.40 input / $1.60 output per million tokens; not a billing statement. Earlier rejected v1 call usage was not retained.",
+  "manual_review": {
+    "all_six_exclusions_accounted_for": true,
+    "completed_unit_difference_13": true,
+    "all_citations_resolve": true,
+    "no_unsupported_repair_claim": true,
+    "limitations": "Possible-causes prose restates observed exclusion rules; upstream root causes are not proven. Apply proposed reference checks to the captured fixed reference set, not live reference data. This is one accepted example, not the P10 evaluation."
+  },
+  "source_files_sha256": {
+    "src/workbench/assistant.py": "87f0ba606409c46cd30ab95bf201e77ddd7f9bf15e8701a7ecb465b176e74b8a",
+    "src/workbench/cli.py": "7429833d58dc3ae535e2c3a8b4cb5a063eca8402c64534bc2bcf6ad834ccf61c",
+    "tests/unit/test_assistant.py": "8ec53c4d2d732628651ee2fadc400a009a9aa91f1d236f5dd1fdeb8928f240a9"
+  },
+  "evidence_files_sha256": {
+    "live.json": "a30fa360060b19e2782a2fdea43b1cced191af2a803c29cc5fcd4fb1d4e5d467",
+    "live.txt": "35d1548c52feb4408e1556ab6f22e0e080eded0bfb0f8745c5f69e74e8433df8",
+    "rejected-v1.json": "d50d32053df5de80d0033477bb45b2ef53a1acccb66ce47e727a667bc680fe99",
+    "stub.json": "07c2bf687af02890768b86f96a3a51602337d54cbe184eac4b3e47151a8dba5b",
+    "stub.txt": "7724493e782595d20f57bef048ff104ac3cf5eb4b9825aed3cfc9866e0a47f9a",
+    "unavailable.json": "6c5e9a6f426fe9cec8dfa6a07014bd665daea14df1bd2c6b11792920115e60a9"
+  }
+}

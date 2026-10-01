@@ -21,6 +21,8 @@ jobs:
       - run: uv run --locked ruff format --check .
       - run: uv run --locked workbench-fixtures --check fixtures/generated
       - run: uv run --locked pytest -q
+      - name: Explain saved SQL evidence offline (no API key or SQL connection)
+        run: uv run --locked workbench explain --packet docs/evidence/p05/golden-evidence.json --provider stub --format text
 
   sql-server:
     runs-on: ubuntu-24.04

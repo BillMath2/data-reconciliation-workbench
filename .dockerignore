@@ -14,5 +14,10 @@
 !fixtures/**
 !sql/
 !sql/**
+# Only the verified synthetic packet is needed by the assistant tests.
+!docs/
+!docs/evidence/
+!docs/evidence/p05/
+!docs/evidence/p05/golden-evidence.json
 **/__pycache__/
 **/*.pyc

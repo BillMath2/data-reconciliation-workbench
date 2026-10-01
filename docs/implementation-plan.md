@@ -2,7 +2,7 @@
 
 Date: 2026-09-28; status reviewed: 2026-10-01
 
-Status: P01-P05 complete. [P05 validation](p05-validation.md) records 164 passing tests, including all 38 SQL cases without skips, and the verified 100/94 -> 98/98 -> no-op walkthrough from CI run 36637726571. The README now includes the inspected P05 captures/replay and saved evidence. P05A (first AI explanation) is next; provider/model selection and a small call budget remain open. At this checkpoint, remaining package estimates total 56-76 focused hours; retain the original 120-160-hour whole-project planning budget. See the [reconciliation guide](reconciliation.md).
+Status: P01-P05 and P05A complete. [P05 validation](p05-validation.md) records the verified SQL walkthrough and 164 passing tests. [P05A validation](p05a-validation.md) records the offline stub, reviewed live OpenAI explanation, and 158 passing local tests (38 SQL cases skipped locally). The README links both examples. The updated CI image/suite still needs a run; the last verified SQL run remains P05. P06 (evidence API and exception lifecycle) is next. Remaining P06-P12 estimates total 52-70 focused hours; retain the original 120-160-hour whole-project planning budget.
 
 ### How to read the plan
 
@@ -206,7 +206,9 @@ Estimates assume one developer familiar with Python/SQL, synthetic data, and loc
 
 Work-package subtotal: **108-148 focused hours**. Reserve **12 additional hours** for setup/integration rework, giving a planning budget of **120-160 hours**, approximately **8-11 weeks at 15 hours/week**. These are estimates for the trimmed release, not a fixed-price commitment; re-estimate after P03 and P05. No external deadline or staffing commitment is assumed.
 
-**P05 checkpoint (October 1, 2026):** SQL acceptance and demonstration evidence are complete. The unchanged estimates for P05A and P06-P12 sum to **56-76 focused hours**, excluding any unused contingency. No elapsed-effort record is available, so this is a remaining-scope estimate rather than measured budget consumption. The saved evidence packet is ready for the first AI slice; provider access, screen integration, and recovery/performance work remain the main uncertainties. Reassess after P05A.
+**P05 checkpoint (October 1, 2026; superseded by the P05A checkpoint below):** SQL acceptance and demonstration evidence are complete. The unchanged estimates for P05A and P06-P12 sum to **56-76 focused hours**, excluding any unused contingency. No elapsed-effort record is available, so this is a remaining-scope estimate rather than measured budget consumption. The saved evidence packet is ready for the first AI slice; provider access, screen integration, and recovery/performance work remain the main uncertainties. Reassess after P05A.
+
+**P05A checkpoint (October 1, 2026):** The first live explanation passed count/citation checks and manual review; the offline stub and failure paths are tested. See [P05A validation](p05a-validation.md). Remaining P06-P12 estimates total **52-70 focused hours**, excluding unused contingency. The next package is P06; current CI must still verify the updated image and expanded test suite.
 
 ### Milestones: groups of completed work packages
 
@@ -276,7 +278,7 @@ docs/                 # Plan, architecture, dictionary, runbooks, demo
 scripts/              # Setup, database lifecycle, and demo helpers
 ```
 
-The foundation, contracts, fixtures, mock source API, ingestion pipeline, reconciliation, saved evidence, and CLI demonstration are implemented and verified. The assistant, workbench API, and screen remain planned. The mock API lives in `src/workbench/mock_registry.py`, and the generator in `src/workbench/fixtures.py`. Keep credentials, generated runs, and local environments out of version control and Docker build context. Commit only synthetic fixtures and sanitized configuration templates. Add demonstration screenshots and recording links as the corresponding features become available.
+The foundation, contracts, fixtures, mock source API, ingestion pipeline, reconciliation, saved evidence, and CLI demonstration are implemented and verified. The P05A CLI assistant is implemented with stub/live provider modes and checked evidence; the workbench API and screen remain planned. The mock API lives in `src/workbench/mock_registry.py`, and the generator in `src/workbench/fixtures.py`. Keep credentials, generated runs, and local environments out of version control and Docker build context. Commit only synthetic fixtures and sanitized configuration templates. Add demonstration screenshots and recording links as the corresponding features become available.
 
 ## 9. Risks and decision checkpoints
 

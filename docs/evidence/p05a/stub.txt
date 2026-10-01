@@ -1,0 +1,28 @@
+OFFLINE STUB - no model was called
+Provider: stub | Model: deterministic-stub
+
+Confirmed facts
+- raw_rows: 100 [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- accepted_rows: 94 [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- excluded_duplicate_rows: 2 [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- excluded_invalid_rows: 4 [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- source_completed_count: 100 [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- curated_completed_count: 94 [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- completed_count_difference: 6 [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- source_completed_units: 202 [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- curated_completed_units: 189 [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- completed_unit_difference: 13 [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- ACTIVITY_DUPLICATE: 2 rows / 5 units. Inspect the repeated source rows before removing duplicate extras. [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- ACTIVITY_UNKNOWN_PROJECT: 3 rows / 6 units. Compare the source project identifier with the captured registry. [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- ROW_REQUIRED: 1 rows / 2 units. Ask the source owner to supply the missing project identifier. [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+
+Possible causes
+- No additional causes established by this packet.
+
+Missing evidence
+- Upstream root causes, repairs, subsequent reruns and exception resolution are not established by this saved packet. [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+
+Suggested next checks
+- Inspect the repeated source rows before removing duplicate extras. [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- Compare the source project identifier with the captured registry. [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- Ask the source owner to supply the missing project identifier. [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]

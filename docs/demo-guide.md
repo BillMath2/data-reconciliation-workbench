@@ -1,6 +1,6 @@
 # Demonstration and README guide
 
-Status: P05 complete. Verified SQL captures/replay are linked in the README; the original reports, evidence packets, transcript, and terminal recording are retained. The complete 5-7 minute narrated screen/AI recording remains a later deliverable.
+Status: P05 and P05A complete. The README links the [reviewed live explanation](evidence/p05a/live.txt) and labeled [offline stub](evidence/p05a/stub.txt). Verified SQL captures/replay are linked in the README; the original reports, evidence packets, transcript, and terminal recording are retained. The complete 5-7 minute narrated screen/AI recording remains a later deliverable.
 
 The [33-second P05 replay](images/p05/walkthrough.gif) renders actual SQL output from [CI run 36637726571](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36637726571): golden discrepancy, corrected source, and no-op rerun. All three PNGs were visually inspected. PNGs are terminal-style renders, not desktop screenshots; the GIF changes reading pace, not the results. The [evidence bundle](evidence/p05/README.md) retains the real-time terminal `.cast`, transcript, reports, evidence JSON, recording manifest, test output, and provenance. The earlier [P04 replay](images/p04-baseline/walkthrough.gif) remains available as historical evidence. Follow the [reconciliation guide](reconciliation.md#record-the-sql-walkthrough) to reproduce the P05 recording.
 

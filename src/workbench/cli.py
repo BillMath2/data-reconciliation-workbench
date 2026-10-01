@@ -3,7 +3,7 @@
 import argparse
 import json
 import sys
-from contextlib import closing
+from contextlib import closing, nullcontext
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -25,6 +25,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--load-id")
     parser.add_argument("--output-dir", type=Path, default=Path("runs/demo"))
     parser.add_argument("--format", choices=("json", "text"), default="json")
+    parser.add_argument("--packet", type=Path, help="Saved P05 golden evidence JSON")
+    parser.add_argument("--provider", choices=("stub", "openai"), default="stub")
     parser.add_argument(
         "--output", type=Path, help="New evidence JSON file; existing files are preserved"
     )
@@ -48,9 +50,43 @@ def main(argv: list[str] | None = None) -> int:
             "reconcile",
             "evidence",
             "demo",
+            "explain",
         ),
     )
     args = parser.parse_args(argv)
+    if args.command == "explain":
+        if args.packet is None:
+            parser.error("explain requires --packet")
+        from workbench import assistant
+
+        try:
+            packet, digest = assistant.read_packet(args.packet)
+            # Reserve export before any billable request; never overwrite an earlier run.
+            with (
+                args.output.open("x", encoding="utf-8") if args.output else nullcontext() as output
+            ):
+                result = assistant.explain(
+                    packet,
+                    digest,
+                    provider=args.provider,
+                    key=assistant.api_key(args.env_file) if args.provider == "openai" else None,
+                )
+                if output:
+                    json.dump(result, output, indent=2)
+                    output.write("\n")
+            print(assistant.render(result) if args.format == "text" else json.dumps(result))
+            return 6 if result["status"] == "unavailable" else 0
+        except (assistant.ExplanationError, OSError, UnicodeError) as error:
+            message = (
+                str(error)
+                if isinstance(error, assistant.ExplanationError)
+                else (
+                    "Evidence/configuration file operation failed; "
+                    "use a readable packet and a new output filename."
+                )
+            )
+            print(json.dumps({"status": "error", "message": message}), file=sys.stderr)
+            return 4
     if args.command == "load-activities" and (args.csv is None or args.manifest is None):
         parser.error("load-activities requires --csv and --manifest")
     if args.command == "load-departments" and not args.reference_hash:

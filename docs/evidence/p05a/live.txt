@@ -1,0 +1,27 @@
+LIVE AI EXPLANATION - review prose against evidence
+Provider: openai | Model: gpt-4.1-mini-2025-04-14
+
+Confirmed facts
+- raw_rows: 100 [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- accepted_rows: 94 [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- excluded_duplicate_rows: 2 [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- excluded_invalid_rows: 4 [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- source_completed_count: 100 [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- curated_completed_count: 94 [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- completed_count_difference: 6 [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- source_completed_units: 202 [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- curated_completed_units: 189 [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- completed_unit_difference: 13 [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- ACTIVITY_DUPLICATE: 2 rows / 5 units. Rows identified as duplicates were excluded from the curated count and units [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- ACTIVITY_UNKNOWN_PROJECT: 3 rows / 6 units. Rows with unknown projects were quarantined and excluded from the curated count and units [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- ROW_REQUIRED: 1 rows / 2 units. A required row was missing data and therefore excluded from the curated count and units [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+
+Possible causes
+- The differences may be due to rules that exclude duplicate rows, unknown project references, or missing required data. [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+
+Missing evidence
+- No assessment of exception resolution actions that could clarify if any corrections were applied after this saved count. [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+
+Suggested next checks
+- Check if the excluded rows are correctly classified as duplicates, unknown projects, or missing required fields. [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]
+- Validate if the filtering rules are up to date with current project references and data completeness requirements. [reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a]

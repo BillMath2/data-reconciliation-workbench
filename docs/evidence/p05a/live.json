@@ -1,0 +1,148 @@
+{
+  "status": "ok",
+  "label": "LIVE AI EXPLANATION - review prose against evidence",
+  "provider": "openai",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "prompt_version": "p05a-2",
+  "packet_sha256": "f2315756aed28c74b25dad94208164a8d8d40ec26e0031301cb381cfca304c60",
+  "evidence_ids": [
+    "load:c4efb766-80fb-4b03-8fa6-9238da90fa5a",
+    "artifact:f3b69f9a-e1ab-4c0b-b50e-d7369bad65ff",
+    "reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a",
+    "exception:8c66433e-f36b-1410-8a1b-00b03ab1fa80",
+    "exception:9066433e-f36b-1410-8a1b-00b03ab1fa80",
+    "exception:9466433e-f36b-1410-8a1b-00b03ab1fa80",
+    "exception:9866433e-f36b-1410-8a1b-00b03ab1fa80",
+    "exception:9c66433e-f36b-1410-8a1b-00b03ab1fa80",
+    "exception:a066433e-f36b-1410-8a1b-00b03ab1fa80",
+    "row:c4efb766-80fb-4b03-8fa6-9238da90fa5a:95",
+    "row:c4efb766-80fb-4b03-8fa6-9238da90fa5a:96",
+    "row:c4efb766-80fb-4b03-8fa6-9238da90fa5a:97",
+    "row:c4efb766-80fb-4b03-8fa6-9238da90fa5a:98",
+    "row:c4efb766-80fb-4b03-8fa6-9238da90fa5a:99",
+    "row:c4efb766-80fb-4b03-8fa6-9238da90fa5a:100"
+  ],
+  "load_id": "c4efb766-80fb-4b03-8fa6-9238da90fa5a",
+  "answer": {
+    "confirmed_facts": [
+      {
+        "metric": "raw_rows",
+        "value": 100,
+        "evidence_id": "reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a"
+      },
+      {
+        "metric": "accepted_rows",
+        "value": 94,
+        "evidence_id": "reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a"
+      },
+      {
+        "metric": "excluded_duplicate_rows",
+        "value": 2,
+        "evidence_id": "reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a"
+      },
+      {
+        "metric": "excluded_invalid_rows",
+        "value": 4,
+        "evidence_id": "reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a"
+      },
+      {
+        "metric": "source_completed_count",
+        "value": 100,
+        "evidence_id": "reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a"
+      },
+      {
+        "metric": "curated_completed_count",
+        "value": 94,
+        "evidence_id": "reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a"
+      },
+      {
+        "metric": "completed_count_difference",
+        "value": 6,
+        "evidence_id": "reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a"
+      },
+      {
+        "metric": "source_completed_units",
+        "value": 202,
+        "evidence_id": "reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a"
+      },
+      {
+        "metric": "curated_completed_units",
+        "value": 189,
+        "evidence_id": "reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a"
+      },
+      {
+        "metric": "completed_unit_difference",
+        "value": 13,
+        "evidence_id": "reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a"
+      }
+    ],
+    "reasons": [
+      {
+        "rule_id": "ACTIVITY_DUPLICATE",
+        "rows": 2,
+        "completed_units": 5,
+        "explanation": "Rows identified as duplicates were excluded from the curated count and units",
+        "evidence_id": "reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a"
+      },
+      {
+        "rule_id": "ACTIVITY_UNKNOWN_PROJECT",
+        "rows": 3,
+        "completed_units": 6,
+        "explanation": "Rows with unknown projects were quarantined and excluded from the curated count and units",
+        "evidence_id": "reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a"
+      },
+      {
+        "rule_id": "ROW_REQUIRED",
+        "rows": 1,
+        "completed_units": 2,
+        "explanation": "A required row was missing data and therefore excluded from the curated count and units",
+        "evidence_id": "reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a"
+      }
+    ],
+    "possible_causes": [
+      {
+        "text": "The differences may be due to rules that exclude duplicate rows, unknown project references, or missing required data.",
+        "evidence_ids": [
+          "reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a"
+        ]
+      }
+    ],
+    "missing_evidence": [
+      {
+        "text": "No assessment of exception resolution actions that could clarify if any corrections were applied after this saved count.",
+        "evidence_ids": [
+          "reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a"
+        ]
+      }
+    ],
+    "suggested_next_checks": [
+      {
+        "text": "Check if the excluded rows are correctly classified as duplicates, unknown projects, or missing required fields.",
+        "evidence_ids": [
+          "reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a"
+        ]
+      },
+      {
+        "text": "Validate if the filtering rules are up to date with current project references and data completeness requirements.",
+        "evidence_ids": [
+          "reconciliation:c4efb766-80fb-4b03-8fa6-9238da90fa5a"
+        ]
+      }
+    ]
+  },
+  "usage": {
+    "input_tokens": 3370,
+    "output_tokens": 852,
+    "total_tokens": 4222
+  },
+  "attempts": 1,
+  "limits": {
+    "timeout_seconds": 30,
+    "max_output_tokens": 1800,
+    "max_request_usd": 0.05,
+    "retries": 0
+  },
+  "review_note": "Structured counts and citation membership are checked. Live prose requires human review; broad evaluation remains P10.",
+  "estimated_cost_ceiling_usd": 0.009076,
+  "latency_ms": 8703
+}
