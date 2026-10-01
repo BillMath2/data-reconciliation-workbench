@@ -1,8 +1,8 @@
 # Demonstration and README guide
 
-Status: verified P04 baseline captures/replay are linked in the README. P05's expanded SQL walkthrough and automatic capture tooling are implemented; their CI run is pending. The complete 5-7 minute narrated screen/AI recording remains a later deliverable.
+Status: P05 complete. Verified SQL captures/replay are linked in the README; the original reports, evidence packets, transcript, and terminal recording are retained. The complete 5-7 minute narrated screen/AI recording remains a later deliverable.
 
-The [33-second baseline replay](images/p04-baseline/walkthrough.gif) renders actual P04 CI output. PNGs are terminal-style renders, not desktop screenshots; the GIF changes reading pace, not the results. P05's `workbench demo` produces a real-time terminal `.cast`, transcript, reports, evidence JSON, and a recording manifest. CI renders three PNGs plus a paced GIF and uploads everything as `sql-demo`. Follow the [reconciliation guide](reconciliation.md#record-the-sql-walkthrough), verify the run, then promote its media to the README.
+The [33-second P05 replay](images/p05/walkthrough.gif) renders actual SQL output from [CI run 36637726571](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36637726571): golden discrepancy, corrected source, and no-op rerun. All three PNGs were visually inspected. PNGs are terminal-style renders, not desktop screenshots; the GIF changes reading pace, not the results. The [evidence bundle](evidence/p05/README.md) retains the real-time terminal `.cast`, transcript, reports, evidence JSON, recording manifest, test output, and provenance. The earlier [P04 replay](images/p04-baseline/walkthrough.gif) remains available as historical evidence. Follow the [reconciliation guide](reconciliation.md#record-the-sql-walkthrough) to reproduce the P05 recording.
 
 ## Review without installation
 

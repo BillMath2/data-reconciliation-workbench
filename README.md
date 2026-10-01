@@ -2,21 +2,27 @@
 
 An operational workbench for investigating why a source export and a report disagree. Python and SQL Server perform validation and reconciliation. An optional AI explanation layer is planned next.
 
-The planned demonstration follows **100 source rows → 94 accepted activities → 98/98 after source correction**. Every exclusion has a recorded reason, and repeating a successful load leaves counts unchanged.
+The verified SQL demonstration follows **100 source rows → 94 accepted activities → 98/98 after source correction**. Every exclusion has a recorded reason, and repeating a successful load leaves counts unchanged.
 
 ## Watch the demonstration
 
-[![Recorded SQL ingestion: 100 source rows, 94 accepted, two duplicate extras and four invalid rows](docs/images/p04-baseline/step-1.png)](docs/images/p04-baseline/walkthrough.gif)
+[![Recorded SQL reconciliation: 100 source rows, 94 accepted, two duplicate extras and four invalid rows](docs/images/p05/step-1.png)](docs/images/p05/walkthrough.gif)
 
-**[Watch the 33-second SQL baseline replay](docs/images/p04-baseline/walkthrough.gif)** — actual CLI output from the successful P04 CI run, rendered as terminal captures with reading pauses. It shows the discrepancy, an unchanged rerun, and the passing SQL test suite. [Recording provenance](docs/images/p04-baseline/recording.json) identifies the run and commit. This is a paced output replay, not desktop video.
+**[Watch the 33-second SQL walkthrough](docs/images/p05/walkthrough.gif)** — actual CLI output from [successful P05 CI run 36637726571](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36637726571), rendered as terminal captures with reading pauses. It shows the discrepancy, corrected source, and unchanged rerun. [Recording provenance](docs/evidence/p05/provenance.json) records the commit, supplied artifact links, and file hashes. This is a paced output replay, not desktop video.
 
-P05's expanded walkthrough records **100/94 → corrected 98/98 → no-op**, including unit totals and saved evidence. Its new SQL run is pending; CI will upload the complete recording and images as `sql-demo`. See the [demo commands](docs/reconciliation.md#record-the-sql-walkthrough) and [demonstration guide](docs/demo-guide.md).
+| Recorded stage | Verified result |
+|---|---|
+| [Discrepancy](docs/images/p05/step-1.png) | 100 source rows, 94 accepted; two duplicates, three unknown projects, and one missing project ID explain all six exclusions |
+| [Source correction](docs/images/p05/step-2.png) | Source and report agree: 98 completed activities and 197 units |
+| [Identical rerun](docs/images/p05/step-3.png) | No-op; the same publication and totals are reused |
+
+Inspect the [saved evidence and terminal recording](docs/evidence/p05/README.md), reproduce the [demo commands](docs/reconciliation.md#record-the-sql-walkthrough), or follow the [demonstration guide](docs/demo-guide.md).
 
 ## Project status
 
-**P01-P04 are complete; P05 is implemented locally and awaits SQL verification.** The new reconciliation report groups exclusions by their primary reason, preserves unknown totals, and saves a bounded evidence packet with each publication. Historical reports survive source correction. AI integration and the workbench screen remain planned.
+**P01-P05 are complete; P05A (the first AI explanation) is next.** The reconciliation report groups exclusions by their primary reason, preserves unknown totals, and saves a bounded evidence packet with each publication. Historical reports survive source correction. AI integration and the workbench screen remain planned.
 
-**Verified SQL baseline: [143 tests passed](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36575474984), including all 33 SQL cases.** This validates P03's correction and P04's ingestion/publication behavior. **Current P05 local checks: 126 passed; 38 SQL tests skipped.** See [P04 verification](docs/p04-validation.md) and [P05 validation](docs/p05-validation.md).
+**Verified P05 SQL suite: [164 tests passed](docs/evidence/p05/sql-checks.txt), including all 38 SQL cases, with no skips.** Both CI jobs were confirmed green; the downloaded artifacts were reviewed on October 1, 2026. See [P05 validation](docs/p05-validation.md) for provenance and checks, and [P04 verification](docs/p04-validation.md) for the earlier baseline.
 
 ## Run the foundation with Docker Compose
 
@@ -56,7 +62,7 @@ The [source-contract guide](docs/source-contracts.md) documents field ownership,
 ## Engineering evidence
 
 - **Docker:** separate runtime/test image targets, a non-root Python process, a pinned SQL Server image, readiness checks, private database networking, and persistent storage.
-- **SQL engineering:** eleven tables and two reporting views, source-row lineage, saved findings/reconciliation, atomic publication, an applied-version ledger, and a restricted runtime role. P05's new schema and rollback checks await CI.
+- **SQL engineering:** eleven tables and two reporting views, source-row lineage, saved findings/reconciliation, atomic publication, an applied-version ledger, and a restricted runtime role. P05's schema and rollback checks passed in the SQL suite.
 - **Automation:** GitHub Actions builds the images, tests real SQL Server, and captures the guided SQL demo with its evidence packets and media.
 - **Reproducibility:** uv lockfile, explicit configuration, synthetic-data scope, and a Docker build context that excludes credentials.
 

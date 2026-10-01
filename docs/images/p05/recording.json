@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "mode": "sql-server",
+  "status": "verified",
+  "recorded_at": "2026-09-29T22:08:56.597736+00:00",
+  "sql_server_version": "16.0.4295.3",
+  "source_commit": "3bf61d91fa19e19eb5f6d1955c37e8c2dd243b37",
+  "frames": [
+    {
+      "title": "workbench demo | stage: golden",
+      "text": "DATA RECONCILIATION WORKBENCH\nBusiness date: 2026-09-25\nPublication: c4efb766-80fb-4b03-8fa6-9238da90fa5a\nState: published_with_exceptions | current: true\n\nSource rows 100 = accepted 94 + duplicate extras 2 + invalid 4\nDeclared completed activities: source 100 | report 94 | difference 6\nCompleted units: source 202 | report 189 | difference 13\n\nPrimary exclusion reason                Rows  Completed  Units\nACTIVITY_DUPLICATE                        2          2  5\nACTIVITY_UNKNOWN_PROJECT                  3          3  6\nROW_REQUIRED                              1          1  2\n\nAccounting verified against SQL publication. Findings retain their history."
+    },
+    {
+      "title": "workbench demo | stage: corrected",
+      "text": "DATA RECONCILIATION WORKBENCH\nBusiness date: 2026-09-25\nPublication: 27f2d269-8b09-4610-9ce5-6f1cefffae68\nState: published | current: true\n\nSource rows 98 = accepted 98 + duplicate extras 0 + invalid 0\nDeclared completed activities: source 98 | report 98 | difference 0\nCompleted units: source 197 | report 197 | difference 0\n\nPrimary exclusion reason                Rows  Completed  Units\nNo excluded rows.\n\nAccounting verified against SQL publication. Findings retain their history."
+    },
+    {
+      "title": "workbench demo | stage: repeat",
+      "text": "DATA RECONCILIATION WORKBENCH\nBusiness date: 2026-09-25\nPublication: 27f2d269-8b09-4610-9ce5-6f1cefffae68\nState: published | current: true\n\nSource rows 98 = accepted 98 + duplicate extras 0 + invalid 0\nDeclared completed activities: source 98 | report 98 | difference 0\nCompleted units: source 197 | report 197 | difference 0\n\nPrimary exclusion reason                Rows  Completed  Units\nNo excluded rows.\nIdentical rerun: no_op. Showing the reused publication; no data was replaced.\n\nAccounting verified against SQL publication. Findings retain their history."
+    }
+  ],
+  "checks": [
+    "golden expectations",
+    "corrected expectations",
+    "no-op rerun",
+    "immutable historical evidence"
+  ]
+}

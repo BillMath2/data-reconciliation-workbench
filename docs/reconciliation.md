@@ -2,7 +2,7 @@
 
 P05 saves one reconciliation result and one bounded evidence packet per successfully published activity load. The result is inserted in the same transaction as curated replacement and publication state. No-op attempts reuse a prior result; failed publications cannot leave a successful result behind.
 
-P03/P04 are verified in [CI run 36575474984](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36575474984). P05's migration, publication extension, and complete recording await their own SQL run. See [P05 validation](p05-validation.md).
+P01-P05 are verified. [P05 CI run 36637726571](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36637726571) produced the complete SQL walkthrough and 164 passing tests, including all 38 SQL cases. See [P05 validation](p05-validation.md) and the [retained evidence](evidence/p05/README.md).
 
 ## Read a report or export evidence
 
@@ -75,4 +75,4 @@ Render recorded output with development dependencies:
 .\scripts\uv.ps1 run --locked python scripts/render-demo.py runs/demo/recording.json runs/demo/media
 ```
 
-The renderer produces three PNG terminal captures and a 33-second paced GIF. They render the actual recorded text; they are not desktop screenshots or a narrated video. The `.cast` preserves real timing. CI uploads the raw recording, reports, packets, and rendered media as the `sql-demo` artifact. After a successful P05 run, review and promote those assets to the README. The initial checked-in [baseline replay](images/p04-baseline/walkthrough.gif) is accurately labeled P04 footage, not a substitute for P05's pending SQL acceptance.
+The renderer produces three PNG terminal captures and a 33-second paced GIF. They render the actual recorded text; they are not desktop screenshots or a narrated video. The `.cast` preserves real timing. CI uploads the raw recording, reports, packets, and rendered media as the `sql-demo` artifact. The accepted [P05 replay](images/p05/walkthrough.gif) and three captures are now linked from the README, with [original evidence and provenance](evidence/p05/README.md) retained. The earlier [P04 baseline replay](images/p04-baseline/walkthrough.gif) remains historical evidence.

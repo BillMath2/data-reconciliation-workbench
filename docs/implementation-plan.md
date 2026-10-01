@@ -1,7 +1,8 @@
 # Data Reconciliation Workbench: implementation plan
 
-Date: 2026-09-28  
-Status: P01-P04 complete; [P04 CI](p04-validation.md) passed 143 tests including the P03 correction. P05 reconciliation, saved evidence, report/demo commands, and CI recording are implemented locally; new SQL acceptance and promotion of its recorded media remain pending. The README now includes verified P04 baseline images/replay. See [P05 validation](p05-validation.md) and [reconciliation guide](reconciliation.md). Retain the 120-160-hour planning budget and reassess remaining work after P05's SQL/demo replay; P05A is next after acceptance.
+Date: 2026-09-28; status reviewed: 2026-10-01
+
+Status: P01-P05 complete. [P05 validation](p05-validation.md) records 164 passing tests, including all 38 SQL cases without skips, and the verified 100/94 -> 98/98 -> no-op walkthrough from CI run 36637726571. The README now includes the inspected P05 captures/replay and saved evidence. P05A (first AI explanation) is next; provider/model selection and a small call budget remain open. At this checkpoint, remaining package estimates total 56-76 focused hours; retain the original 120-160-hour whole-project planning budget. See the [reconciliation guide](reconciliation.md).
 
 ### How to read the plan
 
@@ -122,9 +123,9 @@ Quarantine is a durable disposition of a staged row plus its validation findings
 
 This is a 12-table target plus three views, created incrementally. P03 establishes the migration ledger, load/input/staging objects, and typed curated tables; later packages add findings, reconciliation, audit, and investigation objects as needed. Shared staging holds raw payloads; curated entities retain typed columns, relational keys, and constraints.
 
-P03's initial eight tables and three migrations are documented in the [database schema guide](database-schema.md). The Compose `migrate` service uses administrator access for setup; the regular application service uses the separate `workbench_app` login. The report schema is reserved but has no views yet.
+P03's initial eight tables and three migrations are documented in the [database schema guide](database-schema.md). The Compose `migrate` service uses administrator access for setup; the regular application service uses the separate `workbench_app` login. P05 now populates the report schema with two views.
 
-P04 adds migration 004's identifier correction and migration 005's `Exception` and `AuditEvent` tables, bringing the implementation to ten tables. Its adapters, row rules, publication transactions, and CLI commands are described in the [ingestion guide](ingestion.md). Reconciliation result persistence remains P05; exception lifecycle and UI permissions remain P06/P08.
+P04 adds migration 004's identifier correction and migration 005's `Exception` and `AuditEvent` tables, bringing the implementation to ten tables. Its adapters, row rules, publication transactions, and CLI commands are described in the [ingestion guide](ingestion.md). P05 adds migration 006 with persisted reconciliation, saved evidence, and two reporting views, bringing the implementation to eleven tables. These changes passed SQL CI; exception lifecycle and UI permissions remain P06/P08.
 
 Keep infrastructure names generic (`SourceRow`, `Load`, `Exception`, evidence services). Keep research-domain tables explicit (`Project`, `Activity`) rather than creating a generic entity framework. A later access-reconciliation variant can reuse ingestion, evidence, UI, and assistant components, but requires its own domain contracts, curated schema, and rules; it is not assumed to be only a fixture swap.
 
@@ -205,6 +206,8 @@ Estimates assume one developer familiar with Python/SQL, synthetic data, and loc
 
 Work-package subtotal: **108-148 focused hours**. Reserve **12 additional hours** for setup/integration rework, giving a planning budget of **120-160 hours**, approximately **8-11 weeks at 15 hours/week**. These are estimates for the trimmed release, not a fixed-price commitment; re-estimate after P03 and P05. No external deadline or staffing commitment is assumed.
 
+**P05 checkpoint (October 1, 2026):** SQL acceptance and demonstration evidence are complete. The unchanged estimates for P05A and P06-P12 sum to **56-76 focused hours**, excluding any unused contingency. No elapsed-effort record is available, so this is a remaining-scope estimate rather than measured budget consumption. The saved evidence packet is ready for the first AI slice; provider access, screen integration, and recovery/performance work remain the main uncertainties. Reassess after P05A.
+
 ### Milestones: groups of completed work packages
 
 1. **Foundation (P01-P03, 24-32 h):** reproducible sources, migrated database, Compose setup, and SQL Server CI.
@@ -273,7 +276,7 @@ docs/                 # Plan, architecture, dictionary, runbooks, demo
 scripts/              # Setup, database lifecycle, and demo helpers
 ```
 
-The foundation, contracts, fixtures, and mock source API are implemented. The domain pipeline, workbench API, and screen remain planned. The mock API lives in `src/workbench/mock_registry.py`, and the generator in `src/workbench/fixtures.py`. Keep credentials, generated runs, and local environments out of version control and Docker build context. Commit only synthetic fixtures and sanitized configuration templates. Add demonstration screenshots and recording links as the corresponding features become available.
+The foundation, contracts, fixtures, mock source API, ingestion pipeline, reconciliation, saved evidence, and CLI demonstration are implemented and verified. The assistant, workbench API, and screen remain planned. The mock API lives in `src/workbench/mock_registry.py`, and the generator in `src/workbench/fixtures.py`. Keep credentials, generated runs, and local environments out of version control and Docker build context. Commit only synthetic fixtures and sanitized configuration templates. Add demonstration screenshots and recording links as the corresponding features become available.
 
 ## 9. Risks and decision checkpoints
 

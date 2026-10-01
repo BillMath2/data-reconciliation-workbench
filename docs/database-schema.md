@@ -1,6 +1,6 @@
 # Database schema and migrations
 
-The current schema has eleven tables, six migrations, and two reporting views. P03/P04 are verified in CI. P05 adds `ops.ReconciliationResult`, `report.vw_LoadReconciliation`, and `report.vw_ProjectActivity` in migration 006; these changes await their SQL run. See [reconciliation semantics](reconciliation.md), [P04 verification](p04-validation.md), and [P05 validation](p05-validation.md). Investigation storage and the open-exception view remain later work.
+The current schema has eleven tables, six migrations, and two reporting views. P03-P05 are verified in CI. P05 adds `ops.ReconciliationResult`, `report.vw_LoadReconciliation`, and `report.vw_ProjectActivity` in migration 006; these changes passed the P05 SQL run (164 tests, including all 38 SQL cases). See [reconciliation semantics](reconciliation.md), [P04 verification](p04-validation.md), and [P05 validation](p05-validation.md). Investigation storage and the open-exception view remain later work.
 
 ## Initial tables
 

@@ -1,0 +1,236 @@
+#1 [internal] load local bake definitions
+#1 reading from stdin 579B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 931B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for ghcr.io/astral-sh/uv:0.12.20
+#3 DONE 0.1s
+
+#4 [internal] load metadata for docker.io/library/python:3.12.14-slim-bookworm
+#4 DONE 0.1s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 300B done
+#5 DONE 0.0s
+
+#6 [uv 1/1] FROM ghcr.io/astral-sh/uv:0.12.20@sha256:100047e74f30778ab704942321a09750d6158739573ff58bf3924085cc6cd2d8
+#6 DONE 0.0s
+
+#7 [base 1/9] FROM docker.io/library/python:3.12.14-slim-bookworm@sha256:392307d22300de8b5986851a12d9176dfc0fc073e65bf6523ebd7dcbeb23564e
+#7 DONE 0.0s
+
+#8 [internal] load build context
+#8 transferring context: 3.81kB done
+#8 DONE 0.0s
+
+#9 [base 7/9] COPY config ./config
+#9 CACHED
+
+#10 [base 8/9] COPY fixtures ./fixtures
+#10 CACHED
+
+#11 [base 3/9] RUN apt-get update     && apt-get install -y --no-install-recommends libltdl7 libkrb5-3 libgssapi-krb5-2 ca-certificates     && rm -rf /var/lib/apt/lists/*     && useradd --create-home --uid 10001 workbench
+#11 CACHED
+
+#12 [base 9/9] COPY sql ./sql
+#12 CACHED
+
+#13 [base 5/9] COPY pyproject.toml uv.lock README.md ./
+#13 CACHED
+
+#14 [base 2/9] COPY --from=uv /uv /usr/local/bin/uv
+#14 CACHED
+
+#15 [base 4/9] WORKDIR /app
+#15 CACHED
+
+#16 [base 6/9] COPY src ./src
+#16 CACHED
+
+#17 [runtime 1/1] RUN uv sync --locked --no-dev --no-editable
+#17 CACHED
+
+#18 exporting to image
+#18 exporting layers done
+#18 writing image sha256:8336852189b57db8e841cbbcfea6e190539d2853544b69153d6889eab85ba3aa done
+#18 naming to docker.io/library/data-reconciliation-workbench-mock-registry done
+#18 DONE 0.0s
+
+#19 resolving provenance for metadata file
+#19 DONE 0.0s
+ mock-registry  Built
+ Container data-reconciliation-workbench-sqlserver-1  Running
+ Container data-reconciliation-workbench-mock-registry-1  Recreate
+ Container data-reconciliation-workbench-mock-registry-1  Recreated
+ Container data-reconciliation-workbench-mock-registry-1  Starting
+ Container data-reconciliation-workbench-mock-registry-1  Started
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.04kB done
+#1 DONE 0.0s
+
+#2 [tests internal] load build definition from Dockerfile
+#2 transferring dockerfile: 931B done
+#2 DONE 0.0s
+
+#3 [mock-registry internal] load metadata for ghcr.io/astral-sh/uv:0.12.20
+#3 DONE 0.1s
+
+#4 [mock-registry internal] load metadata for docker.io/library/python:3.12.14-slim-bookworm
+#4 DONE 0.1s
+
+#5 [tests internal] load .dockerignore
+#5 transferring context: 300B done
+#5 DONE 0.0s
+
+#6 [tests uv 1/1] FROM ghcr.io/astral-sh/uv:0.12.20@sha256:100047e74f30778ab704942321a09750d6158739573ff58bf3924085cc6cd2d8
+#6 DONE 0.0s
+
+#7 [tests base 1/9] FROM docker.io/library/python:3.12.14-slim-bookworm@sha256:392307d22300de8b5986851a12d9176dfc0fc073e65bf6523ebd7dcbeb23564e
+#7 DONE 0.0s
+
+#8 [tests internal] load build context
+#8 transferring context: 72.55kB 0.0s done
+#8 DONE 0.0s
+
+#9 [tests base 8/9] COPY fixtures ./fixtures
+#9 CACHED
+
+#10 [tests base 6/9] COPY src ./src
+#10 CACHED
+
+#11 [tests base 5/9] COPY pyproject.toml uv.lock README.md ./
+#11 CACHED
+
+#12 [tests base 7/9] COPY config ./config
+#12 CACHED
+
+#13 [mock-registry base 9/9] COPY sql ./sql
+#13 CACHED
+
+#14 [mock-registry internal] load build context
+#14 transferring context: 289.63kB 0.0s done
+#14 DONE 0.0s
+
+#15 [mock-registry base 6/9] COPY src ./src
+#15 CACHED
+
+#16 [mock-registry base 9/9] COPY sql ./sql
+#16 CACHED
+
+#17 [mock-registry base 4/9] WORKDIR /app
+#17 CACHED
+
+#18 [mock-registry base 2/9] COPY --from=uv /uv /usr/local/bin/uv
+#18 CACHED
+
+#19 [mock-registry base 5/9] COPY pyproject.toml uv.lock README.md ./
+#19 CACHED
+
+#20 [mock-registry base 7/9] COPY config ./config
+#20 CACHED
+
+#21 [mock-registry base 3/9] RUN apt-get update     && apt-get install -y --no-install-recommends libltdl7 libkrb5-3 libgssapi-krb5-2 ca-certificates     && rm -rf /var/lib/apt/lists/*     && useradd --create-home --uid 10001 workbench
+#21 CACHED
+
+#22 [mock-registry base 8/9] COPY fixtures ./fixtures
+#22 CACHED
+
+#23 [mock-registry runtime 1/1] RUN uv sync --locked --no-dev --no-editable
+#23 CACHED
+
+#24 [mock-registry] exporting to image
+#24 exporting layers done
+#24 writing image sha256:8336852189b57db8e841cbbcfea6e190539d2853544b69153d6889eab85ba3aa done
+#24 naming to docker.io/library/data-reconciliation-workbench-mock-registry done
+#24 DONE 0.0s
+
+#25 [mock-registry] resolving provenance for metadata file
+#25 DONE 0.0s
+
+#26 [tests test 1/2] RUN uv sync --locked --no-editable
+#26 0.292 Using CPython 3.12.14 interpreter at: /usr/local/bin/python3
+#26 0.292 Creating virtual environment at: .venv
+#26 0.296 Resolved 41 packages in 1ms
+#26 0.316    Building data-reconciliation-workbench @ file:///app
+#26 0.407 Downloading pygments (1.2MiB)
+#26 0.408 Downloading cryptography (4.5MiB)
+#26 0.408 Downloading pydantic-core (2.0MiB)
+#26 0.409 Downloading pillow (6.6MiB)
+#26 0.410 Downloading mssql-python (6.9MiB)
+#26 0.410 Downloading ruff (9.9MiB)
+#26 0.410 Downloading mssql-python-odbc (3.7MiB)
+#26 0.581  Downloaded pydantic-core
+#26 0.583  Downloaded pygments
+#26 0.630  Downloaded mssql-python-odbc
+#26 0.667  Downloaded cryptography
+#26 0.703  Downloaded pillow
+#26 0.710  Downloaded mssql-python
+#26 0.724  Downloaded ruff
+#26 1.444       Built data-reconciliation-workbench @ file:///app
+#26 1.446 Prepared 39 packages in 1.14s
+#26 1.667 Installed 39 packages in 221ms
+#26 1.667  + annotated-doc==0.0.5
+#26 1.667  + annotated-types==0.8.0
+#26 1.667  + anyio==4.15.1
+#26 1.667  + azure-core==1.41.0
+#26 1.667  + azure-identity==1.25.3
+#26 1.667  + certifi==2026.7.22
+#26 1.667  + cffi==2.1.1
+#26 1.667  + charset-normalizer==3.5.1
+#26 1.667  + click==8.5.0
+#26 1.667  + cryptography==50.0.1
+#26 1.667  + data-reconciliation-workbench==0.1.0 (from file:///app)
+#26 1.668  + fastapi==0.141.1
+#26 1.668  + h11==0.16.0
+#26 1.668  + httpcore==1.0.9
+#26 1.668  + httpx==0.28.1
+#26 1.668  + idna==3.20
+#26 1.668  + iniconfig==2.3.0
+#26 1.668  + msal==1.39.0
+#26 1.668  + msal-extensions==1.3.1
+#26 1.668  + mssql-python==1.15.0
+#26 1.668  + mssql-python-odbc==18.6.2.1
+#26 1.668  + packaging==26.3
+#26 1.668  + pillow==12.3.0
+#26 1.668  + pluggy==1.6.0
+#26 1.668  + pycparser==3.0
+#26 1.668  + pydantic==2.13.5
+#26 1.668  + pydantic-core==2.46.5
+#26 1.668  + pygments==2.21.0
+#26 1.668  + pyjwt==2.15.1
+#26 1.668  + pytest==9.1.1
+#26 1.668  + python-dotenv==1.2.3
+#26 1.668  + requests==2.34.2
+#26 1.668  + ruff==0.16.9
+#26 1.668  + starlette==1.7.0
+#26 1.668  + typing-extensions==4.16.0
+#26 1.668  + typing-inspection==0.4.4
+#26 1.668  + tzdata==2026.4
+#26 1.669  + urllib3==2.8.0
+#26 1.669  + uvicorn==0.54.0
+#26 DONE 1.8s
+
+#27 [tests test 2/2] COPY tests ./tests
+#27 DONE 0.0s
+
+#28 [tests] exporting to image
+#28 exporting layers 1.0s done
+#28 writing image sha256:a2dfb33a965b324ff860b5d6ea49a33b82fcc0d7d2ac0c9a028342664d3790ab done
+#28 naming to docker.io/library/data-reconciliation-workbench-tests done
+#28 DONE 1.0s
+
+#29 [tests] resolving provenance for metadata file
+#29 DONE 0.0s
+........................................................................ [ 43%]
+........................................................................ [ 87%]
+....................                                                     [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /app/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+164 passed, 1 warning in 123.84s (0:02:03)

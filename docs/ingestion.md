@@ -2,7 +2,7 @@
 
 The pipeline reads the department SQL table, follows the registry's REST pagination, and parses an activity CSV plus its manifest. It retains captured input, applies the fixed v1 rules, saves every finding, and publishes valid rows. Counts and decisions are deterministic Python/SQL operations. No AI participates in ingestion.
 
-**Verification:** P04 passed 143 tests including all 33 SQL cases, publication rollback, permissions, and the P03 correction. See [P04 verification](p04-validation.md). P05 now extends publication with saved reconciliation/evidence; those new checks await CI.
+**Verification:** P04 passed 143 tests including all 33 SQL cases, publication rollback, permissions, and the P03 correction. See [P04 verification](p04-validation.md). P05 extends publication with saved reconciliation/evidence; all 38 SQL cases passed in its 164-test suite. See [P05 validation](p05-validation.md) for the accepted walkthrough and retained evidence.
 
 ## Run the sources and load a date
 

@@ -1,0 +1,47 @@
+workbench demo | stage: golden
+DATA RECONCILIATION WORKBENCH
+Business date: 2026-09-25
+Publication: c4efb766-80fb-4b03-8fa6-9238da90fa5a
+State: published_with_exceptions | current: true
+
+Source rows 100 = accepted 94 + duplicate extras 2 + invalid 4
+Declared completed activities: source 100 | report 94 | difference 6
+Completed units: source 202 | report 189 | difference 13
+
+Primary exclusion reason                Rows  Completed  Units
+ACTIVITY_DUPLICATE                        2          2  5
+ACTIVITY_UNKNOWN_PROJECT                  3          3  6
+ROW_REQUIRED                              1          1  2
+
+Accounting verified against SQL publication. Findings retain their history.
+
+workbench demo | stage: corrected
+DATA RECONCILIATION WORKBENCH
+Business date: 2026-09-25
+Publication: 27f2d269-8b09-4610-9ce5-6f1cefffae68
+State: published | current: true
+
+Source rows 98 = accepted 98 + duplicate extras 0 + invalid 0
+Declared completed activities: source 98 | report 98 | difference 0
+Completed units: source 197 | report 197 | difference 0
+
+Primary exclusion reason                Rows  Completed  Units
+No excluded rows.
+
+Accounting verified against SQL publication. Findings retain their history.
+
+workbench demo | stage: repeat
+DATA RECONCILIATION WORKBENCH
+Business date: 2026-09-25
+Publication: 27f2d269-8b09-4610-9ce5-6f1cefffae68
+State: published | current: true
+
+Source rows 98 = accepted 98 + duplicate extras 0 + invalid 0
+Declared completed activities: source 98 | report 98 | difference 0
+Completed units: source 197 | report 197 | difference 0
+
+Primary exclusion reason                Rows  Completed  Units
+No excluded rows.
+Identical rerun: no_op. Showing the reused publication; no data was replaced.
+
+Accounting verified against SQL publication. Findings retain their history.

@@ -1,0 +1,40 @@
+{
+  "source_commit": "3bf61d91fa19e19eb5f6d1955c37e8c2dd243b37",
+  "recorded_at": "2026-09-29T22:08:56.597736+00:00",
+  "sql_server_version": "16.0.4295.3",
+  "reviewed_on": "2026-10-01",
+  "source": "User-supplied GitHub Actions artifacts; user confirmed both jobs green.",
+  "run_url": "https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36637726571",
+  "artifact_ids": [
+    "11065247717",
+    "11065112970"
+  ],
+  "provenance_note": "Run and artifact URLs supplied by the user, who confirmed both jobs green. Artifact ID-to-name mapping has not been independently verified. Downloaded files were inspected locally; the remote run was not retrieved.",
+  "artifact_names": [
+    "sql-demo",
+    "sql-checks"
+  ],
+  "sql_demo_zip_sha256": "205ee48a5a4d7f87e462e0141efd3b877bf37b70f2d4afa39ff3afb1fe3e05e3",
+  "files_sha256": {
+    "corrected-evidence.json": "972427b5bfe3d0dc0a04f1a0b3bee6f05944d7a408af880c540e3c2a419c12d8",
+    "corrected.json": "5b4dbe4eaac6125527e9f7f6d6335b383e5565679278a11ffbe8a06d9eda1e49",
+    "demo.cast": "efeadc1b172f2c94a0aac25b7405046e57f35dd5da87c735e15909d9ddd78510",
+    "golden-evidence.json": "f2315756aed28c74b25dad94208164a8d8d40ec26e0031301cb381cfca304c60",
+    "golden.json": "d172f36a4b9654391495858bf571e50dd82ada894e13587aea35b1da72747615",
+    "recording.json": "fca3324bdb11c76cfb9b0a7952a766b042cf84e349482b2761c8374bbc6a60ce",
+    "repeat-evidence.json": "972427b5bfe3d0dc0a04f1a0b3bee6f05944d7a408af880c540e3c2a419c12d8",
+    "repeat.json": "077752473dd60269c7f6255423777f8f5afdf923d821040b1add27a31357f93f",
+    "sql-checks.txt": "cd5fa579ccf053895680216ee9f8a4341a0fb225a6b487fab49bdbd41d7d77d5",
+    "transcript.txt": "78520dc7ce021e7e344d82a3454e84fc50229969aaf85ae8108a085a69046e9b"
+  },
+  "media_sha256": {
+    "step-1.png": "c2a8b1357dc28b21bf82e76f4d3aae5d8df61a71b1b81f09a40cbc91ac955fc2",
+    "step-2.png": "304252153043d11f309772a0fa70ae11c916a3918e773908f62fe49017863683",
+    "step-3.png": "f74542a026393a38679e085d8f4d5179dac7595603d9f75a30551ff855946d59",
+    "walkthrough.gif": "277881496c888fb06ca16f84fc393773ae4f7744bbe5acf1c2a2876c38832c45"
+  },
+  "artifact_urls": [
+    "https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36637726571/artifacts/11065247717",
+    "https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36637726571/artifacts/11065112970"
+  ]
+}
