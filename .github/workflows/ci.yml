@@ -23,10 +23,14 @@ jobs:
       - run: uv run --locked pytest -q
       - name: Explain saved SQL evidence offline (no API key or SQL connection)
         run: uv run --locked workbench explain --packet docs/evidence/p05/golden-evidence.json --provider stub --format text
+      - name: Install browser for isolated UI checks
+        run: uv run --locked python -m playwright install --with-deps chromium
+      - name: Verify screen against explicit in-memory fixtures
+        run: uv run --locked python scripts/check-ui.py --fixture --origin http://127.0.0.1:8017 --output runs/ui-fixture
 
   sql-server:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - name: Create disposable database credential
@@ -74,8 +78,28 @@ jobs:
       - uses: astral-sh/setup-uv@v6
         with:
           version: "0.12.20"
+      - name: Install browser for the SQL-backed UI walkthrough
+        run: uv run --locked --python 3.12 python -m playwright install --with-deps chromium
+      - name: Verify and record operator workflow in a separate demo database
+        env:
+          WB_SQL_DATABASE: workbench_ui
+        run: |
+          docker compose --profile tools run --rm migrate
+          docker compose --profile tools run --rm migrate seed-departments
+          reference_hash="$(python3 -c 'import json; print(json.load(open("fixtures/generated/index.json"))["reference_sets"]["default"])')"
+          docker compose run --rm workbench load-departments --reference-hash "$reference_hash"
+          docker compose run --rm workbench load-projects
+          docker compose --profile web up -d --no-deps --force-recreate --wait --wait-timeout 120 api
+          uv run --locked python scripts/check-ui.py --output runs/ui-sql
       - name: Render captured demo output
         run: uv run --locked --python 3.12 python scripts/render-demo.py runs/demo/recording.json runs/demo/media
+      - name: Save actual SQL-backed UI captures and browser verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-demo
+          path: runs/ui-sql/
+          if-no-files-found: ignore
       - name: Save SQL walkthrough and evidence
         if: always()
         uses: actions/upload-artifact@v4

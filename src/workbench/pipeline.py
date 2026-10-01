@@ -229,11 +229,23 @@ def publish(cursor, load_id, capture, rows, fault=None, *, actor="cli"):
     return status
 
 
-def ingest(settings: Settings, source: str, capture_source, *, actor="cli", fault=None) -> dict:
+def ingest(
+    settings: Settings, source: str, capture_source, *, actor="cli", fault=None, reason=None
+) -> dict:
     """Capture callback receives a SQL cursor. Fault callback is test-only, never a CLI option."""
     validate_database_name(settings.database)
     if source not in TABLES or not isinstance(actor, str) or not actor.strip() or len(actor) > 128:
         raise LoadError("INVALID_REQUEST", "A supported source and a nonempty actor are required.")
+    if reason is not None:
+        if (
+            not isinstance(reason, str)
+            or not reason.strip()
+            or len(reason.encode("utf-16-le")) > 1000
+        ):
+            raise LoadError(
+                "INVALID_REQUEST", "A nonempty reason of at most 500 units is required."
+            )
+        reason = reason.strip()
     load_id = str(uuid4())
     with closing(connect(settings)) as connection, closing(connection.cursor()) as cursor:
         # Fail fast if another ingestion command is active; there is no worker queue.
@@ -252,7 +264,7 @@ def ingest(settings: Settings, source: str, capture_source, *, actor="cli", faul
                 "INSERT INTO ops.Load (load_id, source_id, started_by) VALUES (?, ?, ?)",
                 (load_id, source, actor),
             )
-            audit(cursor, load_id, actor, "load_started", {})
+            audit(cursor, load_id, actor, "load_started", {"reason": reason} if reason else {})
             connection.commit()
             try:
                 capture = capture_source(cursor)

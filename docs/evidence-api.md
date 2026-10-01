@@ -1,6 +1,6 @@
 # Evidence API and exception lifecycle (P06)
 
-Status: implemented locally; live SQL/API acceptance is pending. See [P06 validation](p06-validation.md). This is a local demo API, not a production identity service. The workbench screen remains P07.
+Status: P06 accepted on user-confirmed green CI; see [P06 validation](p06-validation.md). P07 adds the [operator screen](workbench-ui.md) and the endpoints below, pending its own live SQL/browser gate. This is a local demo API, not a production identity service.
 
 ## Start the API
 
@@ -15,7 +15,7 @@ The API uses migration 007 and the restricted `workbench_app` login. From PowerS
 
 Use `docker compose` instead of the portable `.tools/docker-compose.exe` when Docker Desktop provides the CLI. Docker's engine must be running. Setup adds distinct analyst/operator tokens to `.env.workbench`, preserves nonempty credentials, and never prints them. The API publishes only `127.0.0.1:8000`; SQL remains on the Compose network. Visit `/health` to check the process. It explicitly does not claim to check database/schema readiness.
 
-Load data using the existing [ingestion commands](ingestion.md) or the [fresh-database walkthrough](reconciliation.md#record-the-sql-walkthrough). The API never starts a load in P06. A new empty database has no reports or exceptions until data is loaded.
+Load data using the existing [ingestion commands](ingestion.md) or the [fresh-database walkthrough](reconciliation.md#record-the-sql-walkthrough). After seeding/publishing the reference sources, P07 can run the supplied activity snapshots from the screen. A new empty database has no reports or exceptions until data is loaded.
 
 For direct Python operation, `workbench-api --env-file PATH` binds to `127.0.0.1:8000`. Supply reachable SQL settings with `WB_SQL_USERNAME=workbench_app`, its runtime password, and both demo tokens. The server refuses an administrator login. `--container` binds inside the container; keep the published host port restricted to localhost. Run a single process: sessions are in memory and are invalidated on restart.
 
@@ -50,6 +50,10 @@ All evidence endpoints require a session. Responses are JSON with `Cache-Control
 | Method and path | Behavior |
 |---|---|
 | `GET /health` | Public process health, labeled local demo |
+| `GET /` and `GET /static/*` | Public screen shell/assets; all evidence requires a session |
+| `GET /api/snapshots` | Supplied snapshot names, labels, and manifest dates; no paths or source editing |
+| `GET /api/freshness?business_date=YYYY-MM-DD` | Date-specific availability, deadline, failed-refresh state; server UTC clock |
+| `POST /api/activity-runs` | Operator-only `snapshot` (`golden` or `corrected`), matching `business_date`, and required `reason`; session actor and reason recorded with the admitted attempt |
 | `POST /api/session` | JSON token login; creates opaque HttpOnly, SameSite=Strict cookie and returns a session-bound CSRF token |
 | `GET /api/session` | Current actor, role, and CSRF token |
 | `POST /api/session/logout` | Invalidates the session; requires origin, JSON, and CSRF token |
@@ -84,6 +88,6 @@ Only daily-activity findings have automatic successor resolution in this slice; 
 
 Every write requires the exact configured Origin and a bounded JSON body. Authenticated writes additionally require the session's CSRF token; acknowledgement also requires the operator role. Cookies expire after an hour, are rotated at login, and are revoked on logout. The session store is bounded. The localhost HTTP cookie is intentionally not marked Secure; production TLS/SSO is outside this demo. Host validation rejects DNS-rebinding hosts; CORS is not enabled. Use the exact `http://127.0.0.1:8000` origin for the Compose setup.
 
-Validation errors omit request bodies, and SQL errors are redacted. Raw source values are returned only as untrusted JSON; the P07 UI must render them as text, not HTML. P08 extends permission and audit verification across the remaining UI/operator actions. The optional AI explanation still has no write path.
+Validation errors omit request bodies, and SQL errors are redacted. Raw source values are returned only as untrusted JSON; the P07 screen renders them with text nodes and applies a restrictive Content Security Policy. Snapshot runs use the same operator/Origin/CSRF boundary as acknowledgement; no path, URL, SQL, actor, or role can be supplied. Worker contention returns 409. An admitted pipeline failure returns its recorded `status: failed` and load ID so the screen can inspect it; invalid selection returns 422. P08 completes broader permission/audit verification. The optional AI explanation still has no write path.
 
 The implementation uses FastAPI's documented [dependencies](https://fastapi.tiangolo.com/tutorial/dependencies/) and [response cookies](https://fastapi.tiangolo.com/advanced/response-cookies/).

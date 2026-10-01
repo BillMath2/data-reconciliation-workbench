@@ -16,11 +16,13 @@ import uvicorn
 from dotenv import dotenv_values
 from fastapi import Depends, FastAPI, HTTPException, Query, Request, Response
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 
 from workbench.config import ConfigurationError, load_settings
 from workbench.evidence import EvidenceService
+from workbench.operations import OperationsService
 from workbench.validation import LoadError
 
 COOKIE = "workbench_session"
@@ -95,6 +97,11 @@ class Acknowledgement(BaseModel):
     reason: str = Field(min_length=1, max_length=500)
 
 
+class ActivityRun(Acknowledgement):
+    snapshot: Literal["golden", "corrected"]
+    business_date: str = Field(pattern=r"^\d{4}-\d{2}-\d{2}$")
+
+
 def identity(request: Request):
     return request.app.state.sessions.get(request.cookies.get(COOKIE))
 
@@ -116,13 +123,20 @@ def service(request: Request):
     return request.app.state.evidence
 
 
+def operations(request: Request):
+    return request.app.state.operations
+
+
 def invoke(method, *args, **kwargs):
     try:
         return method(*args, **kwargs)
     except LoadError as error:
-        status = {"NOT_FOUND": 404, "REPORT_UNAVAILABLE": 404, "ALREADY_RESOLVED": 409}.get(
-            error.code, 422
-        )
+        status = {
+            "NOT_FOUND": 404,
+            "REPORT_UNAVAILABLE": 404,
+            "ALREADY_RESOLVED": 409,
+            "WORKER_BUSY": 409,
+        }.get(error.code, 422)
         raise HTTPException(status, str(error)) from None
     except Exception:
         # Do not pass driver messages or connection values into HTTP output or server traces.
@@ -142,6 +156,13 @@ def create_app(settings, *, analyst_token, operator_token, origin="http://127.0.
     )
     app.state.sessions = Sessions(analyst_token, operator_token)
     app.state.evidence = EvidenceService(settings)
+    app.state.operations = OperationsService(settings)
+    assets = Path(__file__).with_name("static")
+    app.mount("/static", StaticFiles(directory=assets), name="static")
+
+    @app.get("/", include_in_schema=False)
+    def screen():
+        return FileResponse(assets / "index.html")
 
     @app.middleware("http")
     async def boundary(request, call_next):
@@ -166,6 +187,11 @@ def create_app(settings, *, analyst_token, operator_token, origin="http://127.0.
         response.headers["Cache-Control"] = "no-store"
         response.headers["X-Content-Type-Options"] = "nosniff"
         response.headers["X-Frame-Options"] = "DENY"
+        response.headers["Content-Security-Policy"] = (
+            "default-src 'self'; script-src 'self'; style-src 'self'; "
+            "img-src 'self'; connect-src 'self'; object-src 'none'; "
+            "base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
+        )
         return response
 
     @app.exception_handler(RequestValidationError)
@@ -212,6 +238,26 @@ def create_app(settings, *, analyst_token, operator_token, origin="http://127.0.
         return {"status": "signed_out"}
 
     reader = [Depends(identity)]
+
+    @app.get("/api/snapshots", dependencies=reader)
+    def snapshots(svc: Annotated[OperationsService, Depends(operations)]):
+        return invoke(svc.snapshots)
+
+    @app.get("/api/freshness", dependencies=reader)
+    def feed_state(business_date: date, svc: Annotated[OperationsService, Depends(operations)]):
+        return invoke(svc.freshness, business_date)
+
+    @app.post("/api/activity-runs")
+    def activity_run(
+        body: ActivityRun,
+        user: Annotated[Identity, Depends(operator)],
+        svc: Annotated[OperationsService, Depends(operations)],
+    ):
+        try:
+            date.fromisoformat(body.business_date)
+        except ValueError:
+            raise HTTPException(422, "Invalid business date.") from None
+        return invoke(svc.run, body.snapshot, body.business_date, user.actor, body.reason)
 
     @app.get("/api/loads", dependencies=reader)
     def loads(

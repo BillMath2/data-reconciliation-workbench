@@ -27,7 +27,7 @@ Configuration:
 | `WB_SQL_PASSWORD` | Administrator password in the Compose env file; password of the configured login for direct Python use |
 | `WB_SQL_RUNTIME_PASSWORD` | Separate runtime password, 16-128 characters; required by Compose and `db-setup`; never commit either password |
 | `WB_SQL_SERVER` | Host/port for direct Python use; Compose explicitly sets `sqlserver,1433` |
-| `WB_SQL_DATABASE` | Target database for direct Python; Compose pins setup/runtime to `workbench` and tests to `master` |
+| `WB_SQL_DATABASE` | Target database for direct Python and Compose setup/runtime/API; Compose defaults to `workbench`, with tests starting from `master` |
 | `WB_SQL_USERNAME` | Login for direct Python; Compose uses `sa` for setup/tests and `workbench_app` for runtime |
 | `WB_SQL_DRIVER` | `mssql-python`, or explicitly selected `pyodbc` fallback |
 | `WB_SQL_TRUST_CERTIFICATE` | `true` for this self-signed development container; encryption remains enabled |
@@ -78,4 +78,10 @@ Actions is verification, not website hosting: its service containers last for th
 
 ## P06 local evidence API
 
-See [API setup](evidence-api.md). `initialize-demo.ps1` now also adds distinct local analyst/operator tokens without replacing existing credentials. The Compose `web` profile publishes the API only on localhost. Current P06 local checks: 195 passed, 44 SQL tests skipped. The updated CI must accept migration 007, the live API smoke check, and SQL lifecycle tests; see [P06 validation](p06-validation.md).
+See [API setup](evidence-api.md). `initialize-demo.ps1` also adds distinct local analyst/operator tokens without replacing existing credentials. The Compose `web` profile publishes the API and screen only on localhost. P06 CI is user-confirmed green; see [P06 validation](p06-validation.md).
+
+## P07 screen and browser checks
+
+See the [screen guide](workbench-ui.md) for startup and the explicit fixture browser command. Python serves packaged static HTML/CSS/JavaScript; no Node runtime, frontend build, or template dependency is required. Playwright is a locked development dependency, excluded from the runtime image. Browser binaries are installed separately; they do not enter the Docker context.
+
+Both CI jobs now run browser checks: the Python job uses the explicit fixture service, and the SQL job runs the full operator journey against its separate `workbench_ui` database. The live browser script requires an empty activity history, supplied references, and both demo tokens in its environment. It uploads screenshots, a paced GIF, and a verification manifest as `ui-demo`. See [P07 validation](p07-validation.md) for acceptance status.

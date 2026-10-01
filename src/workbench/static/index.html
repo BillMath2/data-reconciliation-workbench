@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Data Reconciliation Workbench</title>
+    <link rel="icon" href="/static/icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/static/workbench.css" />
+    <script src="/static/workbench.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a href="/" class="brand"
+        ><span class="brandmark" aria-hidden="true">≋</span> RECONCILIATION
+        <span class="brandlight">/ WORKBENCH</span></a
+      ><span class="demo">SYNTHETIC DATA · LOCAL DEMO</span>
+    </header>
+    <main>
+      <div class="heading">
+        <div>
+          <p class="eyebrow">OPERATIONS / DAILY ACTIVITY</p>
+          <h1>Follow the evidence.</h1>
+          <p class="subtitle">
+            Trace the difference from source to report, then verify the
+            correction.
+          </p>
+        </div>
+        <div id="identity" hidden>
+          <span id="actor"></span
+          ><button id="logout" class="quiet">Sign out</button>
+        </div>
+      </div>
+      <p id="notice" role="status" aria-live="polite"></p>
+      <section id="login-panel" class="card login">
+        <p class="eyebrow">LOCAL DEMO ACCESS</p>
+        <h2>Open your workbench</h2>
+        <p>
+          Use the analyst or operator access token from your local demo
+          configuration.
+        </p>
+        <form id="login">
+          <label for="token">Demo access token</label
+          ><input
+            id="token"
+            type="password"
+            required
+            minlength="32"
+            maxlength="128"
+            autocomplete="off"
+          /><button type="submit">Sign in</button>
+        </form>
+        <p class="muted">
+          Analysts inspect evidence. Operators can acknowledge findings and run
+          the supplied source snapshots.
+        </p>
+      </section>
+      <div id="workbench" hidden>
+        <section class="card filters" aria-label="Load selection">
+          <form id="selection">
+            <div>
+              <label for="business-date">Business date</label
+              ><input id="business-date" type="date" required />
+            </div>
+            <div class="grow">
+              <label for="load">Recorded load</label
+              ><select id="load" aria-label="Recorded load"></select>
+            </div>
+            <button type="submit" class="secondary">Refresh</button>
+          </form>
+          <div class="contextline">
+            <span id="load-page"></span>
+            <div>
+              <button id="loads-prev" class="quiet">Newer loads</button
+              ><button id="loads-next" class="quiet">Older loads</button>
+            </div>
+          </div>
+          <div class="feed">
+            <span id="freshness" class="badge"></span
+            ><span id="freshness-detail" class="muted"></span>
+          </div>
+        </section>
+        <section class="card summary" aria-labelledby="summary-title">
+          <div class="sectionhead">
+            <h2 id="summary-title">Source → curated</h2>
+            <span id="publication" class="badge"></span>
+          </div>
+          <p id="report-state" class="muted"></p>
+          <div id="metrics" class="metrics"></div>
+          <div id="accounting" class="accounting"></div>
+          <details>
+            <summary>Load lineage and saved evidence</summary>
+            <p id="lineage" class="mono"></p>
+            <a id="packet" target="_blank" rel="noopener"
+              >Open saved evidence packet ↗</a
+            >
+          </details>
+        </section>
+        <div class="investigation">
+          <section class="card exceptions" aria-labelledby="exceptions-title">
+            <div class="sectionhead">
+              <h2 id="exceptions-title">Exception ledger</h2>
+              <span id="exception-count" class="muted"></span>
+            </div>
+            <div class="exceptionfilters">
+              <div>
+                <label for="scope">Scope</label
+                ><select id="scope">
+                  <option value="load">Selected load</option>
+                  <option value="date">All loads for date</option>
+                </select>
+              </div>
+              <div>
+                <label for="status">Lifecycle</label
+                ><select id="status">
+                  <option value="unresolved">Unresolved</option>
+                  <option value="all">All findings</option>
+                  <option value="open">Open</option>
+                  <option value="acknowledged">Acknowledged</option>
+                  <option value="resolved">Resolved</option>
+                </select>
+              </div>
+            </div>
+            <div class="tablewrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Row</th>
+                    <th>Rule / field</th>
+                    <th>State</th>
+                    <th><span class="sr-only">Action</span></th>
+                  </tr>
+                </thead>
+                <tbody id="exceptions"></tbody>
+              </table>
+            </div>
+            <p id="exceptions-empty" class="muted"></p>
+            <div class="contextline">
+              <span id="exception-page" class="muted"></span>
+              <div>
+                <button id="exceptions-prev" class="quiet">
+                  Previous findings</button
+                ><button id="exceptions-next" class="quiet">
+                  Next findings
+                </button>
+              </div>
+            </div>
+          </section>
+          <aside class="card detail" aria-labelledby="detail-title">
+            <p class="eyebrow">EVIDENCE INSPECTOR</p>
+            <h2 id="detail-title">Inspect a finding</h2>
+            <p id="detail-empty" class="muted">
+              Select a row to see its captured source, rule, and lifecycle
+              history.
+            </p>
+            <div id="detail-content" hidden>
+              <p id="detail-state"></p>
+              <p id="resolution" class="muted"></p>
+              <details open>
+                <summary>Captured source row</summary>
+                <pre id="source"></pre>
+              </details>
+              <details>
+                <summary>Finding and reference evidence</summary>
+                <pre id="evidence"></pre>
+              </details>
+              <details>
+                <summary>Versioned rule</summary>
+                <pre id="rule"></pre>
+              </details>
+              <details>
+                <summary>Audit history</summary>
+                <pre id="audit"></pre>
+              </details>
+              <p id="evidence-id" class="mono"></p>
+              <form id="acknowledge" hidden>
+                <label for="ack-reason">Acknowledgement reason</label
+                ><input
+                  id="ack-reason"
+                  required
+                  maxlength="500"
+                  placeholder="What did you review?"
+                /><button type="submit" class="secondary">
+                  Acknowledge finding
+                </button>
+                <p class="muted">
+                  Acknowledgement records review. Resolution requires a
+                  successful source correction.
+                </p>
+              </form>
+            </div>
+          </aside>
+        </div>
+        <section id="operations" class="card operations" hidden>
+          <div>
+            <p class="eyebrow">OPERATOR ACTION</p>
+            <h2>Run a source snapshot</h2>
+            <p class="muted">
+              Choose a supplied full-date snapshot. The corrected source
+              replaces accepted activities for its date. Repeating identical
+              input records a no-op; it never restores a superseded publication.
+            </p>
+          </div>
+          <form id="run">
+            <div>
+              <label for="snapshot">Source snapshot</label
+              ><select id="snapshot"></select>
+            </div>
+            <div class="grow">
+              <label for="run-reason">Reason for this run</label
+              ><input
+                id="run-reason"
+                required
+                maxlength="500"
+                placeholder="Describe the source correction or rerun"
+              />
+            </div>
+            <button type="submit">Run snapshot</button>
+          </form>
+          <p id="run-result" role="status"></p>
+        </section>
+        <footer>
+          Evidence stays available without AI.
+          <span>Captured findings are retained after resolution.</span>
+        </footer>
+      </div>
+    </main>
+  </body>
+</html>

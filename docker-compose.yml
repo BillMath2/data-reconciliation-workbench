@@ -40,7 +40,7 @@ services:
     platform: linux/amd64
     environment:
       <<: *workbench-environment
-      WB_SQL_DATABASE: workbench
+      WB_SQL_DATABASE: ${WB_SQL_DATABASE:-workbench}
       WB_SQL_USERNAME: workbench_app
       WB_SQL_PASSWORD: ${WB_SQL_RUNTIME_PASSWORD:?Run scripts/initialize-demo.ps1 to create runtime credentials}
     depends_on:
@@ -59,7 +59,7 @@ services:
     command: ["--container"]
     environment:
       <<: *workbench-environment
-      WB_SQL_DATABASE: workbench
+      WB_SQL_DATABASE: ${WB_SQL_DATABASE:-workbench}
       WB_SQL_USERNAME: workbench_app
       WB_SQL_PASSWORD: ${WB_SQL_RUNTIME_PASSWORD:?Run scripts/initialize-demo.ps1}
       WB_DEMO_ANALYST_TOKEN: ${WB_DEMO_ANALYST_TOKEN:-}
@@ -83,7 +83,7 @@ services:
     platform: linux/amd64
     environment:
       <<: *workbench-environment
-      WB_SQL_DATABASE: workbench
+      WB_SQL_DATABASE: ${WB_SQL_DATABASE:-workbench}
       WB_SQL_CONNECT_TIMEOUT: "30"
       WB_SQL_RUNTIME_PASSWORD: ${WB_SQL_RUNTIME_PASSWORD:?Run scripts/initialize-demo.ps1 to create runtime credentials}
     depends_on:

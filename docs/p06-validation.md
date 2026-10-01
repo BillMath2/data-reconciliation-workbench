@@ -1,6 +1,6 @@
 # P06 validation record
 
-Status: implemented locally; live SQL/API acceptance pending. P05A CI was confirmed green by the user for `59091f3`; that result does not verify migration 007 or P06.
+Status: complete on the user's confirmation that P06 CI is green, associated with P06 commit `5b99939` in the local history. The run URL and test artifacts have not been supplied or independently inspected in this session. This confirmation clears the P07 dependency; the expected counts below remain distinct from a reviewed CI log.
 
 ## Implemented
 
@@ -19,9 +19,9 @@ Status: implemented locally; live SQL/API acceptance pending. P05A CI was confir
 - Ruff lint/format, dependency lock synchronization, and Compose configuration validation pass.
 - Docker's engine is unavailable locally (`docker_engine` named pipe absent). No new SQL execution or successful live API/database test is claimed.
 
-## Pending acceptance gate
+## CI acceptance
 
-Run the updated Foundation checks workflow on the P06 commit. Require both jobs green and retain its run URL/test log. Expected suite for this revision: **239 passed**, including all **44 SQL tests without skips**.
+The user reported the P06 workflow green on October 1, 2026. The gate requires both Foundation checks jobs green. Expected suite for that revision: **239 passed**, including all **44 SQL tests without skips**. Retain the run URL/test log when available; no exact observed count is claimed here.
 
 The six new SQL cases verify:
 
@@ -34,4 +34,4 @@ The six new SQL cases verify:
 
 CI also starts the real Compose API after the golden/corrected/no-op demo and runs `scripts/check-api.py`: anonymous reads denied, analyst login, historical 100/94 report, current 98/98 report, no-op packet reuse, and six findings linked to the correcting load. Migration setup/repeat and the full existing SQL suite remain mandatory.
 
-P06 remains incomplete until this gate passes. P07 adds the workbench screen after acceptance. Existing production, multi-worker, reference-history, and P10 AI evaluation deferrals remain unchanged.
+P06 is accepted on that confirmation. P07 adds the workbench screen and its own live browser/SQL gate. Existing production, multi-worker, reference-history, and P10 AI evaluation deferrals remain unchanged.

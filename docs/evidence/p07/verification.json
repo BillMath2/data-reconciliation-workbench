@@ -1,0 +1,32 @@
+{
+  "mode": "browser fixture; simulated lifecycle, no SQL",
+  "revision": "local working tree",
+  "captures": [
+    "01-golden.png",
+    "02-reviewed.png",
+    "03-corrected.png",
+    "04-resolved.png",
+    "05-rerun.png",
+    "06-missing-date.png",
+    "07-mobile.png"
+  ],
+  "passed": true,
+  "checks": [
+    "inspect",
+    "acknowledge",
+    "correct",
+    "resolve",
+    "no-op",
+    "historical replay",
+    "analyst denial",
+    "missing date",
+    "escaping",
+    "mobile",
+    "service error",
+    "partial totals",
+    "failed refresh",
+    "unavailable report",
+    "exception pagination",
+    "expiry"
+  ]
+}

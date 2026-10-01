@@ -2,7 +2,7 @@
 
 Date: 2026-09-28; status reviewed: 2026-10-01
 
-Status: P01-P05 and P05A complete; P05A CI was confirmed green for `59091f3`. P06 is implemented locally: evidence API, protected operator acknowledgement, and atomic successor resolution. [P06 validation](p06-validation.md) records 195 local passing tests and 44 SQL tests skipped; migration 007, the running API smoke check, and the new SQL lifecycle checks require CI acceptance before P07. See the [API guide](evidence-api.md). Retain the original 120-160-hour planning budget; do not count P06 complete until its live gate passes.
+Status: P01-P06, including P05A, are complete. The user confirmed P06 CI green for the P06 change in `5b99939`; its exact run artifacts have not been inspected here. P07 is implemented locally: the operator screen, protected snapshot runs, browser checks, and actual UI preview captures. Local verification is 212 passing tests and 45 SQL tests skipped, plus a passing browser walkthrough against an explicit simulated service. Live P07 SQL/browser acceptance remains pending. See [P06 validation](p06-validation.md), [P07 validation](p07-validation.md), and the [screen guide](workbench-ui.md). Retain the original 120-160-hour planning budget.
 
 ### How to read the plan
 
@@ -212,6 +212,8 @@ Work-package subtotal: **108-148 focused hours**. Reserve **12 additional hours*
 
 ### Milestones: groups of completed work packages
 
+**P06 checkpoint (October 1, 2026):** user-confirmed green CI clears P07. Remaining P07-P12 estimates total **44-60 focused hours**, excluding contingency and without a measured elapsed-effort claim. P07 now has local implementation and UI verification; do not count it complete until its live SQL browser gate passes.
+
 1. **Foundation (P01-P03, 24-32 h):** reproducible sources, migrated database, Compose setup, and SQL Server CI.
 2. **First demonstrable story (P04-P05A, 32-46 h):** CLI proof, initial README/screenshots/recording, and a real AI explanation of the golden discrepancy.
 3. **Usable workbench (P06-P08, 22-30 h):** screen-based investigation and correction workflow; the early CLI AI slice remains available.
@@ -278,7 +280,7 @@ docs/                 # Plan, architecture, dictionary, runbooks, demo
 scripts/              # Setup, database lifecycle, and demo helpers
 ```
 
-The foundation, contracts, fixtures, mock source API, ingestion pipeline, reconciliation, saved evidence, and CLI demonstration are implemented and verified. The P05A CLI assistant is implemented with stub/live provider modes and checked evidence; the P06 evidence API is implemented locally pending SQL acceptance; the screen remains P07. The mock API lives in `src/workbench/mock_registry.py`, and the generator in `src/workbench/fixtures.py`. Keep credentials, generated runs, and local environments out of version control and Docker build context. Commit only synthetic fixtures and sanitized configuration templates. Add demonstration screenshots and recording links as the corresponding features become available.
+The foundation, contracts, fixtures, mock source API, ingestion pipeline, reconciliation, saved evidence, and CLI demonstration are implemented and verified. P05A supplies the checked CLI assistant; P06's evidence API/lifecycle CI is user-confirmed green. P07's screen lives in `src/workbench/static/` and is served by `api.py`; it is locally verified pending live SQL browser acceptance. Static HTML and small JavaScript use the existing JSON API without adding a template runtime. The mock API lives in `src/workbench/mock_registry.py`, and the generator in `src/workbench/fixtures.py`. Keep credentials, generated runs, and local environments out of version control and Docker build context. Commit only synthetic fixtures and sanitized configuration templates.
 
 ## 9. Risks and decision checkpoints
 

@@ -21,6 +21,48 @@ FIXTURES = Path("fixtures/generated/activity")
 DAY = date(2026, 9, 25)
 
 
+def test_operator_snapshot_api_records_reason_and_resolves_with_real_pipeline(runtime):
+    references(runtime)
+    origin = "http://127.0.0.1:8000"
+    app = api.create_app(runtime, analyst_token="a" * 40, operator_token="o" * 40)
+    with TestClient(app, base_url=origin) as client:
+        login = client.post("/api/session", headers={"Origin": origin}, json={"token": "o" * 40})
+        headers = {"Origin": origin, "X-CSRF-Token": login.json()["csrf_token"]}
+
+        def run(snapshot, day="2026-09-25"):
+            return client.post(
+                "/api/activity-runs",
+                headers=headers,
+                json={"snapshot": snapshot, "business_date": day, "reason": "Source reviewed"},
+            )
+
+        assert run("golden", "2026-09-26").status_code == 422
+        first = run("golden").json()
+        assert first["status"] == "published_with_exceptions", first
+        assert client.get("/api/freshness?business_date=2026-09-25").json()["available"]
+        assert not client.get("/api/freshness?business_date=2026-09-24").json()["available"]
+        assert query(
+            runtime, "SELECT started_by FROM ops.Load WHERE load_id=?", (first["load_id"],)
+        ) == [("demo-operator",)]
+        assert query(
+            runtime,
+            "SELECT actor, JSON_VALUE(detail_json,'$.reason') FROM ops.AuditEvent "
+            "WHERE load_id=? AND action='load_started'",
+            (first["load_id"],),
+        ) == [("demo-operator", "Source reviewed")]
+        corrected = run("corrected").json()
+        assert corrected["status"] == "published", corrected
+        report = client.get(f"/api/loads/{corrected['load_id']}/reconciliation").json()
+        assert report["summary"]["accepted_rows"] == 98
+        assert report["summary"]["curated_completed_units"] == 197
+        resolved = client.get(f"/api/exceptions?load_id={first['load_id']}&status=resolved").json()
+        assert len(resolved["items"]) == 6
+        assert all(e["resolved_by_load_id"] == corrected["load_id"] for e in resolved["items"])
+        repeated = run("corrected").json()
+        assert repeated["status"] == "no_op"
+        assert repeated["reused_load_id"] == corrected["load_id"]
+
+
 def replacement(runtime, tmp_path, rows, name):
     target = tmp_path / f"{name}.csv"
     with target.open("w", newline="", encoding="utf-8") as stream:

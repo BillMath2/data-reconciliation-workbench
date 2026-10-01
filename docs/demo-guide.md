@@ -6,6 +6,8 @@ The [33-second P05 replay](images/p05/walkthrough.gif) renders actual SQL output
 
 ## Review without installation
 
+P07 adds an [actual browser preview](images/p07-preview/walkthrough.gif): 100/94 inspection, acknowledgement, corrected totals, retained resolved findings, and unchanged rerun. Its saved P05 facts and **simulated service/lifecycle** are explicitly documented in [capture provenance](evidence/p07/README.md). These are genuine screen captures but not new SQL execution evidence. CI now records the same journey against real SQL in the `ui-demo` artifact; that live acceptance remains pending. See the [screen guide](workbench-ui.md).
+
 The README is the entry point. Lead with the business problem, a linked recording thumbnail, and three screenshots showing the discrepancy, supporting evidence, and successful correction. Follow with a small architecture diagram, measured validation results, and the optional Compose quickstart.
 
 Use synthetic data and keep configuration files, passwords, API keys, and unrelated desktop windows out of every capture. Add descriptive captions and alt text. Store screenshots under `docs/images/` when captured; link the recording once it exists. Do not add broken placeholder images or imply that a storyboard is a finished recording.

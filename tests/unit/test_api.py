@@ -51,10 +51,26 @@ class FakeEvidence:
         return {"exception_id": args[0], "changed": True}
 
 
+class FakeOperations:
+    def __init__(self):
+        self.calls = []
+
+    def snapshots(self):
+        return {"items": [{"id": "golden", "business_date": "2026-09-25"}]}
+
+    def freshness(self, business_date):
+        return {"business_date": str(business_date), "status": "stale"}
+
+    def run(self, *args):
+        self.calls.append(args)
+        return {"status": "published", "load_id": LOAD}
+
+
 @pytest.fixture
 def client():
     app = api.create_app(None, analyst_token=ANALYST, operator_token=OPERATOR)
     app.state.evidence = FakeEvidence()
+    app.state.operations = FakeOperations()
     with TestClient(app, base_url=ORIGIN) as client:
         yield client
 
@@ -73,6 +89,8 @@ def login(client, role="analyst"):
     "path",
     [
         "/api/loads",
+        "/api/snapshots",
+        "/api/freshness?business_date=2026-09-25",
         "/api/exceptions",
         f"/api/exceptions/{EXCEPTION}",
         f"/api/loads/{LOAD}/reconciliation",
@@ -224,3 +242,52 @@ def test_untrusted_source_is_json_not_html(client):
 def test_api_refuses_missing_or_shared_demo_credentials(tokens):
     with pytest.raises(ConfigurationError):
         api.create_app(None, analyst_token=tokens[0], operator_token=tokens[1])
+
+
+def test_screen_and_assets_are_public_but_contain_no_credential(client):
+    for path in ("/", "/static/workbench.js", "/static/workbench.css"):
+        response = client.get(path)
+        assert response.status_code == 200
+        assert "script-src 'self'" in response.headers["content-security-policy"]
+        assert OPERATOR not in response.text and ANALYST not in response.text
+    assert client.get("/static/../api.py").status_code == 404
+
+
+def test_operator_run_uses_session_actor(client):
+    headers = login(client, "operator")
+    result = client.post(
+        "/api/activity-runs",
+        headers=headers,
+        json={"snapshot": "corrected", "business_date": "2026-09-25", "reason": "Correct source"},
+    )
+    assert result.status_code == 200
+    assert client.app.state.operations.calls == [
+        ("corrected", "2026-09-25", "demo-operator", "Correct source")
+    ]
+
+
+@pytest.mark.parametrize(
+    "fault", ["anonymous", "analyst", "csrf", "origin", "actor", "path", "date"]
+)
+def test_snapshot_write_boundary(client, fault):
+    headers = (
+        {}
+        if fault == "anonymous"
+        else login(client, "analyst" if fault == "analyst" else "operator")
+    )
+    body = {"snapshot": "golden", "business_date": "2026-09-25", "reason": "Reviewed source"}
+    if fault == "anonymous":
+        headers = {"Origin": ORIGIN}
+    elif fault == "csrf":
+        headers.pop("X-CSRF-Token")
+    elif fault == "origin":
+        headers["Origin"] = "https://other.example"
+    elif fault == "actor":
+        body["actor"] = "administrator"
+    elif fault == "path":
+        body["snapshot"] = "../../private.csv"
+    elif fault == "date":
+        body["business_date"] = "2026-13-99"
+    result = client.post("/api/activity-runs", headers=headers, json=body)
+    assert result.status_code in {401, 403, 422}
+    assert not client.app.state.operations.calls
