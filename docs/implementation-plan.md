@@ -222,6 +222,8 @@ Work-package subtotal: **108-148 focused hours**. Reserve **12 additional hours*
 
 **P09 local SQL checkpoint (October 2, 2026):** Docker Desktop was installed and started. The `workbench` database was created with migrations 001–008; repeated setup applied nothing. All **338 tests passed**, including **52 SQL cases with no skips**. The live SQL CLI demonstration, API inspection, and browser journey also passed. The API was restored to the populated main database and left healthy. This clears the local environment blocker; GitHub CI and P10's expanded live-model evaluation remain separate gates.
 
+**P09 acceptance / P10 start (October 2, 2026):** user-confirmed green CI for `67f7f78` clears P09. P10 now implements versioned scenario evaluation, SQL-derived synthetic contexts, provider failure tests, and explicit live/human-review release gates. See [P10 validation](p10-validation.md). P10 is not yet accepted; green offline checks alone do not clear its gate. P11 remains independently eligible. P10-P12 estimates remain **22-30 focused hours**, not a measured effort claim.
+
 1. **Foundation (P01-P03, 24-32 h):** reproducible sources, migrated database, Compose setup, and SQL Server CI.
 2. **First demonstrable story (P04-P05A, 32-46 h):** CLI proof, initial README/screenshots/recording, and a real AI explanation of the golden discrepancy.
 3. **Usable workbench (P06-P08, 22-30 h):** screen-based investigation and correction workflow; the early CLI AI slice remains available.

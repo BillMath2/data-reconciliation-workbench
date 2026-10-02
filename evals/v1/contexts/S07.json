@@ -1,0 +1,361 @@
+{
+  "version": "1.0.0",
+  "publication_load_id": "3d3635b1-dd79-41bc-9c28-ea4271cef1f6",
+  "packet": {
+    "boundaries": {
+      "exception_resolution": "not assessed; findings are historical",
+      "findings_included": 4,
+      "findings_total": 4,
+      "rows_included": 4,
+      "rows_total": 4,
+      "source_content_is_untrusted": true,
+      "source_correction_actions": "not recorded"
+    },
+    "business_date": "2026-09-25",
+    "calculation_version": "1.0.0",
+    "citation_ids": [
+      "load:3d3635b1-dd79-41bc-9c28-ea4271cef1f6",
+      "artifact:e58b7e9c-1528-4bbc-9d88-b9db3da3ac8c",
+      "reconciliation:3d3635b1-dd79-41bc-9c28-ea4271cef1f6",
+      "exception:7f26433e-f36b-1410-8658-00d68f93629d",
+      "exception:8026433e-f36b-1410-8658-00d68f93629d",
+      "exception:8126433e-f36b-1410-8658-00d68f93629d",
+      "exception:8226433e-f36b-1410-8658-00d68f93629d",
+      "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:1",
+      "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:26",
+      "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:51",
+      "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:76"
+    ],
+    "contract_version": "1.0.0",
+    "evidence": [
+      {
+        "business_date": "2026-09-25",
+        "id": "load:3d3635b1-dd79-41bc-9c28-ea4271cef1f6",
+        "kind": "load",
+        "reference_set_sha256": "53dcc5b90150f2a8b37650f321a8f486ff94ff8ea38f50062bb424b43faf96b2",
+        "source_id": "daily-activity"
+      },
+      {
+        "content_sha256": "f538370c58798f86b3802a4ccae54453878b4f5dbe6b4264baef75f2322a26e7",
+        "id": "artifact:e58b7e9c-1528-4bbc-9d88-b9db3da3ac8c",
+        "kind": "artifact",
+        "load_id": "3d3635b1-dd79-41bc-9c28-ea4271cef1f6",
+        "source_exported_at": "2026-09-26T09:00:00Z"
+      },
+      {
+        "id": "reconciliation:3d3635b1-dd79-41bc-9c28-ea4271cef1f6",
+        "kind": "reconciliation",
+        "summary": {
+          "accepted_rows": 96,
+          "accounting_verified": true,
+          "calculation_version": "1.0.0",
+          "completed_count_difference": 4,
+          "completed_unit_difference": 9,
+          "curated_completed_count": 96,
+          "curated_completed_units": 192,
+          "excluded_duplicate_rows": 0,
+          "excluded_invalid_rows": 4,
+          "primary_reasons": [
+            {
+              "completed_count": 4,
+              "completed_units": 9,
+              "rows": 4,
+              "rule_id": "ACTIVITY_UNKNOWN_PROJECT",
+              "unknown_unit_rows": 0
+            }
+          ],
+          "raw_rows": 100,
+          "scope": "one full activity date; completed metrics use declared completed status",
+          "source_completed_count": 100,
+          "source_completed_units": 201,
+          "source_status_complete": true,
+          "source_units_complete": true,
+          "unknown_status_rows": 0,
+          "unknown_unit_rows": 0
+        }
+      },
+      {
+        "field": "project_id",
+        "id": "exception:7f26433e-f36b-1410-8658-00d68f93629d",
+        "kind": "finding",
+        "row_ordinal": 1,
+        "rule_id": "ACTIVITY_UNKNOWN_PROJECT",
+        "untrusted_evidence": {
+          "normalized_value": "PRJ-001",
+          "reference_found": false,
+          "reference_set_sha256": "53dcc5b90150f2a8b37650f321a8f486ff94ff8ea38f50062bb424b43faf96b2",
+          "value": "PRJ-001"
+        }
+      },
+      {
+        "field": "project_id",
+        "id": "exception:8026433e-f36b-1410-8658-00d68f93629d",
+        "kind": "finding",
+        "row_ordinal": 26,
+        "rule_id": "ACTIVITY_UNKNOWN_PROJECT",
+        "untrusted_evidence": {
+          "normalized_value": "PRJ-001",
+          "reference_found": false,
+          "reference_set_sha256": "53dcc5b90150f2a8b37650f321a8f486ff94ff8ea38f50062bb424b43faf96b2",
+          "value": "PRJ-001"
+        }
+      },
+      {
+        "field": "project_id",
+        "id": "exception:8126433e-f36b-1410-8658-00d68f93629d",
+        "kind": "finding",
+        "row_ordinal": 51,
+        "rule_id": "ACTIVITY_UNKNOWN_PROJECT",
+        "untrusted_evidence": {
+          "normalized_value": "PRJ-001",
+          "reference_found": false,
+          "reference_set_sha256": "53dcc5b90150f2a8b37650f321a8f486ff94ff8ea38f50062bb424b43faf96b2",
+          "value": "PRJ-001"
+        }
+      },
+      {
+        "field": "project_id",
+        "id": "exception:8226433e-f36b-1410-8658-00d68f93629d",
+        "kind": "finding",
+        "row_ordinal": 76,
+        "rule_id": "ACTIVITY_UNKNOWN_PROJECT",
+        "untrusted_evidence": {
+          "normalized_value": "PRJ-001",
+          "reference_found": false,
+          "reference_set_sha256": "53dcc5b90150f2a8b37650f321a8f486ff94ff8ea38f50062bb424b43faf96b2",
+          "value": "PRJ-001"
+        }
+      },
+      {
+        "id": "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:1",
+        "kind": "source_row",
+        "ordinal": 1,
+        "untrusted_source": {
+          "activity_date": "2026-09-25",
+          "activity_id": "ACT-0001",
+          "activity_status": "completed",
+          "completed_units": "3",
+          "project_id": "PRJ-001",
+          "source_updated_at": "2026-09-25T23:00:00Z"
+        }
+      },
+      {
+        "id": "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:26",
+        "kind": "source_row",
+        "ordinal": 26,
+        "untrusted_source": {
+          "activity_date": "2026-09-25",
+          "activity_id": "ACT-0026",
+          "activity_status": "completed",
+          "completed_units": "2",
+          "project_id": "PRJ-001",
+          "source_updated_at": "2026-09-25T23:00:00Z"
+        }
+      },
+      {
+        "id": "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:51",
+        "kind": "source_row",
+        "ordinal": 51,
+        "untrusted_source": {
+          "activity_date": "2026-09-25",
+          "activity_id": "ACT-0051",
+          "activity_status": "completed",
+          "completed_units": "2",
+          "project_id": "PRJ-001",
+          "source_updated_at": "2026-09-25T23:00:00Z"
+        }
+      },
+      {
+        "id": "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:76",
+        "kind": "source_row",
+        "ordinal": 76,
+        "untrusted_source": {
+          "activity_date": "2026-09-25",
+          "activity_id": "ACT-0076",
+          "activity_status": "completed",
+          "completed_units": "2",
+          "project_id": "PRJ-001",
+          "source_updated_at": "2026-09-25T23:00:00Z"
+        }
+      }
+    ],
+    "load_id": "3d3635b1-dd79-41bc-9c28-ea4271cef1f6",
+    "packet_version": "1.0.0",
+    "rule_set_version": "1.0.0",
+    "rules": [
+      {
+        "action": "quarantine",
+        "id": "ACTIVITY_UNKNOWN_PROJECT",
+        "parameters": {
+          "reference": "valid curated project from fixed reference set"
+        },
+        "scope": "row"
+      }
+    ]
+  },
+  "observation": {
+    "id": "observation:abb0f558-2cd5-463d-8c50-c5a1182085fb",
+    "kind": "observation",
+    "captured_at": "2026-10-02T21:12:21.907499+00:00",
+    "report_state": {
+      "requested_load_id": "3d3635b1-dd79-41bc-9c28-ea4271cef1f6",
+      "requested_status": "published_with_exceptions",
+      "publication_load_id": "3d3635b1-dd79-41bc-9c28-ea4271cef1f6",
+      "publication_status": "published_with_exceptions",
+      "is_current": true,
+      "business_date": "2026-09-25",
+      "summary": {
+        "accepted_rows": 96,
+        "accounting_verified": true,
+        "calculation_version": "1.0.0",
+        "completed_count_difference": 4,
+        "completed_unit_difference": 9,
+        "curated_completed_count": 96,
+        "curated_completed_units": 192,
+        "excluded_duplicate_rows": 0,
+        "excluded_invalid_rows": 4,
+        "primary_reasons": [
+          {
+            "completed_count": 4,
+            "completed_units": 9,
+            "rows": 4,
+            "rule_id": "ACTIVITY_UNKNOWN_PROJECT",
+            "unknown_unit_rows": 0
+          }
+        ],
+        "raw_rows": 100,
+        "scope": "one full activity date; completed metrics use declared completed status",
+        "source_completed_count": 100,
+        "source_completed_units": 201,
+        "source_status_complete": true,
+        "source_units_complete": true,
+        "unknown_status_rows": 0,
+        "unknown_unit_rows": 0
+      }
+    },
+    "freshness": {
+      "business_date": "2026-09-25",
+      "deadline_utc": "2026-09-26T13:00:00+00:00",
+      "observed_at": "2026-10-02T14:00:00+00:00",
+      "available": true,
+      "status": "available",
+      "rule_id": null,
+      "last_attempt_status": "published_with_exceptions",
+      "failed_refresh": false
+    },
+    "selected_finding": {
+      "exception_id": "7f26433e-f36b-1410-8658-00d68f93629d",
+      "load_id": "3d3635b1-dd79-41bc-9c28-ea4271cef1f6",
+      "row_ordinal": 1,
+      "rule_id": "ACTIVITY_UNKNOWN_PROJECT",
+      "rule_set_version": "1.0.0",
+      "field_name": "project_id",
+      "created_at": "2026-10-02T21:12:21.583000",
+      "acknowledged_at": null,
+      "acknowledged_by": null,
+      "acknowledgement_reason": null,
+      "resolved_at": null,
+      "resolved_by_load_id": null,
+      "resolution_reason": null,
+      "status": "open",
+      "evidence_id": "exception:7f26433e-f36b-1410-8658-00d68f93629d",
+      "untrusted_evidence": {
+        "normalized_value": "PRJ-001",
+        "reference_found": false,
+        "reference_set_sha256": "53dcc5b90150f2a8b37650f321a8f486ff94ff8ea38f50062bb424b43faf96b2",
+        "value": "PRJ-001"
+      },
+      "untrusted_source": {
+        "activity_date": "2026-09-25",
+        "activity_id": "ACT-0001",
+        "activity_status": "completed",
+        "completed_units": "3",
+        "project_id": "PRJ-001",
+        "source_updated_at": "2026-09-25T23:00:00Z"
+      },
+      "source_id": "daily-activity",
+      "business_date": "2026-09-25",
+      "reference_set_sha256": "53dcc5b90150f2a8b37650f321a8f486ff94ff8ea38f50062bb424b43faf96b2",
+      "rule_definition": {
+        "id": "ACTIVITY_UNKNOWN_PROJECT",
+        "scope": "row",
+        "action": "quarantine",
+        "parameters": {
+          "reference": "valid curated project from fixed reference set"
+        }
+      },
+      "events": [],
+      "related_records": [
+        {
+          "load_id": "033c81cf-89fd-465d-b10c-a25d76fd55e3",
+          "row_ordinal": 1,
+          "disposition": "excluded_invalid",
+          "untrusted_source": {
+            "department_id": "DEPT-UNKNOWN",
+            "project_id": "PRJ-001",
+            "project_name": "Synthetic Research Project 01",
+            "project_status": "active",
+            "updated_at": "2026-09-24T12:00:00Z"
+          },
+          "rule_id": "PROJECT_UNKNOWN_DEPARTMENT",
+          "untrusted_evidence": {
+            "normalized_value": "DEPT-UNKNOWN",
+            "reference_found": false,
+            "reference_set_sha256": "53dcc5b90150f2a8b37650f321a8f486ff94ff8ea38f50062bb424b43faf96b2",
+            "value": "DEPT-UNKNOWN"
+          }
+        }
+      ]
+    },
+    "boundary": "Sequential observations at capture time; not a transactionally consistent live-state guarantee. Selected finding text and event lists may be truncated."
+  },
+  "runbooks": [
+    {
+      "id": "runbook:reconcile:1.0.0",
+      "kind": "runbook",
+      "version": "1.0.0",
+      "title": "Review the saved reconciliation",
+      "owner": "Reporting owner",
+      "rule_ids": [],
+      "check": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison."
+    },
+    {
+      "id": "runbook:references:1.0.0",
+      "kind": "runbook",
+      "version": "1.0.0",
+      "title": "Check captured reference membership",
+      "owner": "Project registry owner",
+      "rule_ids": [
+        "ACTIVITY_UNKNOWN_PROJECT",
+        "PROJECT_UNKNOWN_DEPARTMENT"
+      ],
+      "check": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database."
+    },
+    {
+      "id": "runbook:review:1.0.0",
+      "kind": "runbook",
+      "version": "1.0.0",
+      "title": "Verify any proposed correction",
+      "owner": "Workbench operator",
+      "rule_ids": [],
+      "check": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions."
+    }
+  ],
+  "citation_ids": [
+    "load:3d3635b1-dd79-41bc-9c28-ea4271cef1f6",
+    "artifact:e58b7e9c-1528-4bbc-9d88-b9db3da3ac8c",
+    "reconciliation:3d3635b1-dd79-41bc-9c28-ea4271cef1f6",
+    "exception:7f26433e-f36b-1410-8658-00d68f93629d",
+    "exception:8026433e-f36b-1410-8658-00d68f93629d",
+    "exception:8126433e-f36b-1410-8658-00d68f93629d",
+    "exception:8226433e-f36b-1410-8658-00d68f93629d",
+    "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:1",
+    "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:26",
+    "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:51",
+    "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:76",
+    "observation:abb0f558-2cd5-463d-8c50-c5a1182085fb",
+    "runbook:reconcile:1.0.0",
+    "runbook:references:1.0.0",
+    "runbook:review:1.0.0"
+  ]
+}

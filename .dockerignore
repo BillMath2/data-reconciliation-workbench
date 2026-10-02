@@ -14,6 +14,9 @@
 !fixtures/**
 !sql/
 !sql/**
+!evals/
+!evals/v1/
+!evals/v1/**
 # Only the verified synthetic packet is needed by the assistant tests.
 !docs/
 !docs/evidence/

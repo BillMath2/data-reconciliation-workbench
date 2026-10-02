@@ -1,0 +1,4343 @@
+[
+  {
+    "case_id": "S01",
+    "scenario": "S01",
+    "repetition": 1,
+    "context_sha256": "72c67397aec4200991f3e6da5da72017acfede5236e6d2299cf4766602772855",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "72c67397aec4200991f3e6da5da72017acfede5236e6d2299cf4766602772855",
+      "evidence_ids": [
+        "load:caae5793-00be-4862-9163-f97bb76f57a2",
+        "artifact:720f244f-d243-4391-bece-167280a10d42",
+        "reconciliation:caae5793-00be-4862-9163-f97bb76f57a2",
+        "observation:897a7365-045c-44f6-83fd-0a67dc42bdeb",
+        "runbook:reconcile:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:caae5793-00be-4862-9163-f97bb76f57a2"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S01",
+    "scenario": "S01",
+    "repetition": 2,
+    "context_sha256": "72c67397aec4200991f3e6da5da72017acfede5236e6d2299cf4766602772855",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "72c67397aec4200991f3e6da5da72017acfede5236e6d2299cf4766602772855",
+      "evidence_ids": [
+        "load:caae5793-00be-4862-9163-f97bb76f57a2",
+        "artifact:720f244f-d243-4391-bece-167280a10d42",
+        "reconciliation:caae5793-00be-4862-9163-f97bb76f57a2",
+        "observation:897a7365-045c-44f6-83fd-0a67dc42bdeb",
+        "runbook:reconcile:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:caae5793-00be-4862-9163-f97bb76f57a2"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S01",
+    "scenario": "S01",
+    "repetition": 3,
+    "context_sha256": "72c67397aec4200991f3e6da5da72017acfede5236e6d2299cf4766602772855",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "72c67397aec4200991f3e6da5da72017acfede5236e6d2299cf4766602772855",
+      "evidence_ids": [
+        "load:caae5793-00be-4862-9163-f97bb76f57a2",
+        "artifact:720f244f-d243-4391-bece-167280a10d42",
+        "reconciliation:caae5793-00be-4862-9163-f97bb76f57a2",
+        "observation:897a7365-045c-44f6-83fd-0a67dc42bdeb",
+        "runbook:reconcile:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:caae5793-00be-4862-9163-f97bb76f57a2"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S02",
+    "scenario": "S02",
+    "repetition": 1,
+    "context_sha256": "b1955f12cc4da856fd043c0849e56568a81b697a60fcf3e85bb8359c523fd2da",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "b1955f12cc4da856fd043c0849e56568a81b697a60fcf3e85bb8359c523fd2da",
+      "evidence_ids": [
+        "load:0957cb56-7eea-4d0d-8f6a-3a7c47ae29d0",
+        "artifact:9f90c8d1-0d70-421e-a639-67f8cb5ff5e4",
+        "reconciliation:0957cb56-7eea-4d0d-8f6a-3a7c47ae29d0",
+        "exception:9a25433e-f36b-1410-8658-00d68f93629d",
+        "exception:9e25433e-f36b-1410-8658-00d68f93629d",
+        "row:0957cb56-7eea-4d0d-8f6a-3a7c47ae29d0:99",
+        "row:0957cb56-7eea-4d0d-8f6a-3a7c47ae29d0:100",
+        "observation:5cc0cca3-53ec-43a6-aaaf-4235f672de00",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:0957cb56-7eea-4d0d-8f6a-3a7c47ae29d0"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S02",
+    "scenario": "S02",
+    "repetition": 2,
+    "context_sha256": "b1955f12cc4da856fd043c0849e56568a81b697a60fcf3e85bb8359c523fd2da",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "b1955f12cc4da856fd043c0849e56568a81b697a60fcf3e85bb8359c523fd2da",
+      "evidence_ids": [
+        "load:0957cb56-7eea-4d0d-8f6a-3a7c47ae29d0",
+        "artifact:9f90c8d1-0d70-421e-a639-67f8cb5ff5e4",
+        "reconciliation:0957cb56-7eea-4d0d-8f6a-3a7c47ae29d0",
+        "exception:9a25433e-f36b-1410-8658-00d68f93629d",
+        "exception:9e25433e-f36b-1410-8658-00d68f93629d",
+        "row:0957cb56-7eea-4d0d-8f6a-3a7c47ae29d0:99",
+        "row:0957cb56-7eea-4d0d-8f6a-3a7c47ae29d0:100",
+        "observation:5cc0cca3-53ec-43a6-aaaf-4235f672de00",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:0957cb56-7eea-4d0d-8f6a-3a7c47ae29d0"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S02",
+    "scenario": "S02",
+    "repetition": 3,
+    "context_sha256": "b1955f12cc4da856fd043c0849e56568a81b697a60fcf3e85bb8359c523fd2da",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "b1955f12cc4da856fd043c0849e56568a81b697a60fcf3e85bb8359c523fd2da",
+      "evidence_ids": [
+        "load:0957cb56-7eea-4d0d-8f6a-3a7c47ae29d0",
+        "artifact:9f90c8d1-0d70-421e-a639-67f8cb5ff5e4",
+        "reconciliation:0957cb56-7eea-4d0d-8f6a-3a7c47ae29d0",
+        "exception:9a25433e-f36b-1410-8658-00d68f93629d",
+        "exception:9e25433e-f36b-1410-8658-00d68f93629d",
+        "row:0957cb56-7eea-4d0d-8f6a-3a7c47ae29d0:99",
+        "row:0957cb56-7eea-4d0d-8f6a-3a7c47ae29d0:100",
+        "observation:5cc0cca3-53ec-43a6-aaaf-4235f672de00",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:0957cb56-7eea-4d0d-8f6a-3a7c47ae29d0"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S03",
+    "scenario": "S03",
+    "repetition": 1,
+    "context_sha256": "fde18e1db99e298263729e8a78a6a9a007e3c1da4cf189daf65a8e7d453e5f5b",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "fde18e1db99e298263729e8a78a6a9a007e3c1da4cf189daf65a8e7d453e5f5b",
+      "evidence_ids": [
+        "load:d05f15e8-48dc-4402-a676-da44bd38781a",
+        "artifact:67e033fe-94dd-41fc-9dd9-26a344589a3a",
+        "reconciliation:d05f15e8-48dc-4402-a676-da44bd38781a",
+        "exception:ad25433e-f36b-1410-8658-00d68f93629d",
+        "exception:b225433e-f36b-1410-8658-00d68f93629d",
+        "row:d05f15e8-48dc-4402-a676-da44bd38781a:1",
+        "row:d05f15e8-48dc-4402-a676-da44bd38781a:2",
+        "observation:9b101c41-5913-405d-91e1-df7b70e4fb55",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:d05f15e8-48dc-4402-a676-da44bd38781a"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S03",
+    "scenario": "S03",
+    "repetition": 2,
+    "context_sha256": "fde18e1db99e298263729e8a78a6a9a007e3c1da4cf189daf65a8e7d453e5f5b",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "fde18e1db99e298263729e8a78a6a9a007e3c1da4cf189daf65a8e7d453e5f5b",
+      "evidence_ids": [
+        "load:d05f15e8-48dc-4402-a676-da44bd38781a",
+        "artifact:67e033fe-94dd-41fc-9dd9-26a344589a3a",
+        "reconciliation:d05f15e8-48dc-4402-a676-da44bd38781a",
+        "exception:ad25433e-f36b-1410-8658-00d68f93629d",
+        "exception:b225433e-f36b-1410-8658-00d68f93629d",
+        "row:d05f15e8-48dc-4402-a676-da44bd38781a:1",
+        "row:d05f15e8-48dc-4402-a676-da44bd38781a:2",
+        "observation:9b101c41-5913-405d-91e1-df7b70e4fb55",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:d05f15e8-48dc-4402-a676-da44bd38781a"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S03",
+    "scenario": "S03",
+    "repetition": 3,
+    "context_sha256": "fde18e1db99e298263729e8a78a6a9a007e3c1da4cf189daf65a8e7d453e5f5b",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "fde18e1db99e298263729e8a78a6a9a007e3c1da4cf189daf65a8e7d453e5f5b",
+      "evidence_ids": [
+        "load:d05f15e8-48dc-4402-a676-da44bd38781a",
+        "artifact:67e033fe-94dd-41fc-9dd9-26a344589a3a",
+        "reconciliation:d05f15e8-48dc-4402-a676-da44bd38781a",
+        "exception:ad25433e-f36b-1410-8658-00d68f93629d",
+        "exception:b225433e-f36b-1410-8658-00d68f93629d",
+        "row:d05f15e8-48dc-4402-a676-da44bd38781a:1",
+        "row:d05f15e8-48dc-4402-a676-da44bd38781a:2",
+        "observation:9b101c41-5913-405d-91e1-df7b70e4fb55",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:d05f15e8-48dc-4402-a676-da44bd38781a"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S04",
+    "scenario": "S04",
+    "repetition": 1,
+    "context_sha256": "8a3a73874deca0eacadd79b860fae650e8b43d7d03e9e3c1f6a65b0d7f4ae9a5",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "8a3a73874deca0eacadd79b860fae650e8b43d7d03e9e3c1f6a65b0d7f4ae9a5",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:f22d43d7-c8c4-4ee1-9f16-ad1d84f728c7",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S04",
+    "scenario": "S04",
+    "repetition": 2,
+    "context_sha256": "8a3a73874deca0eacadd79b860fae650e8b43d7d03e9e3c1f6a65b0d7f4ae9a5",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "8a3a73874deca0eacadd79b860fae650e8b43d7d03e9e3c1f6a65b0d7f4ae9a5",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:f22d43d7-c8c4-4ee1-9f16-ad1d84f728c7",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S04",
+    "scenario": "S04",
+    "repetition": 3,
+    "context_sha256": "8a3a73874deca0eacadd79b860fae650e8b43d7d03e9e3c1f6a65b0d7f4ae9a5",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "8a3a73874deca0eacadd79b860fae650e8b43d7d03e9e3c1f6a65b0d7f4ae9a5",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:f22d43d7-c8c4-4ee1-9f16-ad1d84f728c7",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S05",
+    "scenario": "S05",
+    "repetition": 1,
+    "context_sha256": "2811150254596eeefffad2694bcd30785a788f4075779ffdd55ef10301799831",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "2811150254596eeefffad2694bcd30785a788f4075779ffdd55ef10301799831",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:ee42c54d-c9e3-4ce0-b2a9-89d58462f099",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S05",
+    "scenario": "S05",
+    "repetition": 2,
+    "context_sha256": "2811150254596eeefffad2694bcd30785a788f4075779ffdd55ef10301799831",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "2811150254596eeefffad2694bcd30785a788f4075779ffdd55ef10301799831",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:ee42c54d-c9e3-4ce0-b2a9-89d58462f099",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S05",
+    "scenario": "S05",
+    "repetition": 3,
+    "context_sha256": "2811150254596eeefffad2694bcd30785a788f4075779ffdd55ef10301799831",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "2811150254596eeefffad2694bcd30785a788f4075779ffdd55ef10301799831",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:ee42c54d-c9e3-4ce0-b2a9-89d58462f099",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S06-status",
+    "scenario": "S06",
+    "repetition": 1,
+    "context_sha256": "4bbcdb1b4a37a50e2f5d91bad8efb726e1f1d3a70516144888bd8907d3fd1050",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "4bbcdb1b4a37a50e2f5d91bad8efb726e1f1d3a70516144888bd8907d3fd1050",
+      "evidence_ids": [
+        "load:045f0be9-19b9-4a40-ba0b-0e5bfd2a74c2",
+        "artifact:dd94f1a2-d4ba-44c9-a475-12605c98a3b0",
+        "reconciliation:045f0be9-19b9-4a40-ba0b-0e5bfd2a74c2",
+        "exception:ba25433e-f36b-1410-8658-00d68f93629d",
+        "row:045f0be9-19b9-4a40-ba0b-0e5bfd2a74c2:1",
+        "observation:e7910887-79c4-406a-8962-e64241dc33b2",
+        "runbook:reconcile:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:045f0be9-19b9-4a40-ba0b-0e5bfd2a74c2"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S06-status",
+    "scenario": "S06",
+    "repetition": 2,
+    "context_sha256": "4bbcdb1b4a37a50e2f5d91bad8efb726e1f1d3a70516144888bd8907d3fd1050",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "4bbcdb1b4a37a50e2f5d91bad8efb726e1f1d3a70516144888bd8907d3fd1050",
+      "evidence_ids": [
+        "load:045f0be9-19b9-4a40-ba0b-0e5bfd2a74c2",
+        "artifact:dd94f1a2-d4ba-44c9-a475-12605c98a3b0",
+        "reconciliation:045f0be9-19b9-4a40-ba0b-0e5bfd2a74c2",
+        "exception:ba25433e-f36b-1410-8658-00d68f93629d",
+        "row:045f0be9-19b9-4a40-ba0b-0e5bfd2a74c2:1",
+        "observation:e7910887-79c4-406a-8962-e64241dc33b2",
+        "runbook:reconcile:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:045f0be9-19b9-4a40-ba0b-0e5bfd2a74c2"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S06-status",
+    "scenario": "S06",
+    "repetition": 3,
+    "context_sha256": "4bbcdb1b4a37a50e2f5d91bad8efb726e1f1d3a70516144888bd8907d3fd1050",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "4bbcdb1b4a37a50e2f5d91bad8efb726e1f1d3a70516144888bd8907d3fd1050",
+      "evidence_ids": [
+        "load:045f0be9-19b9-4a40-ba0b-0e5bfd2a74c2",
+        "artifact:dd94f1a2-d4ba-44c9-a475-12605c98a3b0",
+        "reconciliation:045f0be9-19b9-4a40-ba0b-0e5bfd2a74c2",
+        "exception:ba25433e-f36b-1410-8658-00d68f93629d",
+        "row:045f0be9-19b9-4a40-ba0b-0e5bfd2a74c2:1",
+        "observation:e7910887-79c4-406a-8962-e64241dc33b2",
+        "runbook:reconcile:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:045f0be9-19b9-4a40-ba0b-0e5bfd2a74c2"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S06-units",
+    "scenario": "S06",
+    "repetition": 1,
+    "context_sha256": "2e7d18fcf2c3226e5329368e51dff855714e6002d3188198d01e43969af9dbb9",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "2e7d18fcf2c3226e5329368e51dff855714e6002d3188198d01e43969af9dbb9",
+      "evidence_ids": [
+        "load:eeffed60-ee01-4dc7-8cb7-f19c50fd6511",
+        "artifact:a67d9020-1637-46e2-b2fa-0972252f1246",
+        "reconciliation:eeffed60-ee01-4dc7-8cb7-f19c50fd6511",
+        "exception:c625433e-f36b-1410-8658-00d68f93629d",
+        "row:eeffed60-ee01-4dc7-8cb7-f19c50fd6511:1",
+        "observation:af89233c-745f-415c-bba9-ddc3da53bef3",
+        "runbook:reconcile:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:eeffed60-ee01-4dc7-8cb7-f19c50fd6511"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S06-units",
+    "scenario": "S06",
+    "repetition": 2,
+    "context_sha256": "2e7d18fcf2c3226e5329368e51dff855714e6002d3188198d01e43969af9dbb9",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "2e7d18fcf2c3226e5329368e51dff855714e6002d3188198d01e43969af9dbb9",
+      "evidence_ids": [
+        "load:eeffed60-ee01-4dc7-8cb7-f19c50fd6511",
+        "artifact:a67d9020-1637-46e2-b2fa-0972252f1246",
+        "reconciliation:eeffed60-ee01-4dc7-8cb7-f19c50fd6511",
+        "exception:c625433e-f36b-1410-8658-00d68f93629d",
+        "row:eeffed60-ee01-4dc7-8cb7-f19c50fd6511:1",
+        "observation:af89233c-745f-415c-bba9-ddc3da53bef3",
+        "runbook:reconcile:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:eeffed60-ee01-4dc7-8cb7-f19c50fd6511"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S06-units",
+    "scenario": "S06",
+    "repetition": 3,
+    "context_sha256": "2e7d18fcf2c3226e5329368e51dff855714e6002d3188198d01e43969af9dbb9",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "2e7d18fcf2c3226e5329368e51dff855714e6002d3188198d01e43969af9dbb9",
+      "evidence_ids": [
+        "load:eeffed60-ee01-4dc7-8cb7-f19c50fd6511",
+        "artifact:a67d9020-1637-46e2-b2fa-0972252f1246",
+        "reconciliation:eeffed60-ee01-4dc7-8cb7-f19c50fd6511",
+        "exception:c625433e-f36b-1410-8658-00d68f93629d",
+        "row:eeffed60-ee01-4dc7-8cb7-f19c50fd6511:1",
+        "observation:af89233c-745f-415c-bba9-ddc3da53bef3",
+        "runbook:reconcile:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:eeffed60-ee01-4dc7-8cb7-f19c50fd6511"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S07",
+    "scenario": "S07",
+    "repetition": 1,
+    "context_sha256": "d7945bb0b821bb2ca2167ac4afedcac89c709d498eaa2b1a6bcf1b11544fe680",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "d7945bb0b821bb2ca2167ac4afedcac89c709d498eaa2b1a6bcf1b11544fe680",
+      "evidence_ids": [
+        "load:3d3635b1-dd79-41bc-9c28-ea4271cef1f6",
+        "artifact:e58b7e9c-1528-4bbc-9d88-b9db3da3ac8c",
+        "reconciliation:3d3635b1-dd79-41bc-9c28-ea4271cef1f6",
+        "exception:7f26433e-f36b-1410-8658-00d68f93629d",
+        "exception:8026433e-f36b-1410-8658-00d68f93629d",
+        "exception:8126433e-f36b-1410-8658-00d68f93629d",
+        "exception:8226433e-f36b-1410-8658-00d68f93629d",
+        "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:1",
+        "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:26",
+        "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:51",
+        "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:76",
+        "observation:abb0f558-2cd5-463d-8c50-c5a1182085fb",
+        "runbook:reconcile:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:3d3635b1-dd79-41bc-9c28-ea4271cef1f6"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S07",
+    "scenario": "S07",
+    "repetition": 2,
+    "context_sha256": "d7945bb0b821bb2ca2167ac4afedcac89c709d498eaa2b1a6bcf1b11544fe680",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "d7945bb0b821bb2ca2167ac4afedcac89c709d498eaa2b1a6bcf1b11544fe680",
+      "evidence_ids": [
+        "load:3d3635b1-dd79-41bc-9c28-ea4271cef1f6",
+        "artifact:e58b7e9c-1528-4bbc-9d88-b9db3da3ac8c",
+        "reconciliation:3d3635b1-dd79-41bc-9c28-ea4271cef1f6",
+        "exception:7f26433e-f36b-1410-8658-00d68f93629d",
+        "exception:8026433e-f36b-1410-8658-00d68f93629d",
+        "exception:8126433e-f36b-1410-8658-00d68f93629d",
+        "exception:8226433e-f36b-1410-8658-00d68f93629d",
+        "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:1",
+        "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:26",
+        "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:51",
+        "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:76",
+        "observation:abb0f558-2cd5-463d-8c50-c5a1182085fb",
+        "runbook:reconcile:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:3d3635b1-dd79-41bc-9c28-ea4271cef1f6"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S07",
+    "scenario": "S07",
+    "repetition": 3,
+    "context_sha256": "d7945bb0b821bb2ca2167ac4afedcac89c709d498eaa2b1a6bcf1b11544fe680",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "d7945bb0b821bb2ca2167ac4afedcac89c709d498eaa2b1a6bcf1b11544fe680",
+      "evidence_ids": [
+        "load:3d3635b1-dd79-41bc-9c28-ea4271cef1f6",
+        "artifact:e58b7e9c-1528-4bbc-9d88-b9db3da3ac8c",
+        "reconciliation:3d3635b1-dd79-41bc-9c28-ea4271cef1f6",
+        "exception:7f26433e-f36b-1410-8658-00d68f93629d",
+        "exception:8026433e-f36b-1410-8658-00d68f93629d",
+        "exception:8126433e-f36b-1410-8658-00d68f93629d",
+        "exception:8226433e-f36b-1410-8658-00d68f93629d",
+        "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:1",
+        "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:26",
+        "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:51",
+        "row:3d3635b1-dd79-41bc-9c28-ea4271cef1f6:76",
+        "observation:abb0f558-2cd5-463d-8c50-c5a1182085fb",
+        "runbook:reconcile:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:3d3635b1-dd79-41bc-9c28-ea4271cef1f6"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S08",
+    "scenario": "S08",
+    "repetition": 1,
+    "context_sha256": "f0399ba18ce991a675fb80c8ff4b6e3734f9bb736f1e4b647725ac583c268f2d",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "f0399ba18ce991a675fb80c8ff4b6e3734f9bb736f1e4b647725ac583c268f2d",
+      "evidence_ids": [
+        "load:5e30dfc9-1aad-46c3-aefd-2c63cfbeee89",
+        "artifact:3878a695-9801-4e17-9537-fd2889c586f5",
+        "reconciliation:5e30dfc9-1aad-46c3-aefd-2c63cfbeee89",
+        "observation:b44462c9-a47c-46ac-b161-f3cd9162d8ae",
+        "runbook:reconcile:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:5e30dfc9-1aad-46c3-aefd-2c63cfbeee89"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S08",
+    "scenario": "S08",
+    "repetition": 2,
+    "context_sha256": "f0399ba18ce991a675fb80c8ff4b6e3734f9bb736f1e4b647725ac583c268f2d",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "f0399ba18ce991a675fb80c8ff4b6e3734f9bb736f1e4b647725ac583c268f2d",
+      "evidence_ids": [
+        "load:5e30dfc9-1aad-46c3-aefd-2c63cfbeee89",
+        "artifact:3878a695-9801-4e17-9537-fd2889c586f5",
+        "reconciliation:5e30dfc9-1aad-46c3-aefd-2c63cfbeee89",
+        "observation:b44462c9-a47c-46ac-b161-f3cd9162d8ae",
+        "runbook:reconcile:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:5e30dfc9-1aad-46c3-aefd-2c63cfbeee89"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S08",
+    "scenario": "S08",
+    "repetition": 3,
+    "context_sha256": "f0399ba18ce991a675fb80c8ff4b6e3734f9bb736f1e4b647725ac583c268f2d",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "f0399ba18ce991a675fb80c8ff4b6e3734f9bb736f1e4b647725ac583c268f2d",
+      "evidence_ids": [
+        "load:5e30dfc9-1aad-46c3-aefd-2c63cfbeee89",
+        "artifact:3878a695-9801-4e17-9537-fd2889c586f5",
+        "reconciliation:5e30dfc9-1aad-46c3-aefd-2c63cfbeee89",
+        "observation:b44462c9-a47c-46ac-b161-f3cd9162d8ae",
+        "runbook:reconcile:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:5e30dfc9-1aad-46c3-aefd-2c63cfbeee89"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S09",
+    "scenario": "S09",
+    "repetition": 1,
+    "context_sha256": "7a5df0ca210a639f47261e57abad00e2a356e7d6f7d3b7789eb3051ad455466c",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "7a5df0ca210a639f47261e57abad00e2a356e7d6f7d3b7789eb3051ad455466c",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:2973626c-0107-449e-a30d-dd11beb03b00",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S09",
+    "scenario": "S09",
+    "repetition": 2,
+    "context_sha256": "7a5df0ca210a639f47261e57abad00e2a356e7d6f7d3b7789eb3051ad455466c",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "7a5df0ca210a639f47261e57abad00e2a356e7d6f7d3b7789eb3051ad455466c",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:2973626c-0107-449e-a30d-dd11beb03b00",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S09",
+    "scenario": "S09",
+    "repetition": 3,
+    "context_sha256": "7a5df0ca210a639f47261e57abad00e2a356e7d6f7d3b7789eb3051ad455466c",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "7a5df0ca210a639f47261e57abad00e2a356e7d6f7d3b7789eb3051ad455466c",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:2973626c-0107-449e-a30d-dd11beb03b00",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S10",
+    "scenario": "S10",
+    "repetition": 1,
+    "context_sha256": "53e6133585e5402389e78e6b13e2198ab9f28ba7f91117c75cffad3dcad32d27",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "53e6133585e5402389e78e6b13e2198ab9f28ba7f91117c75cffad3dcad32d27",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:1ff5682d-0591-4bd2-a3a5-51a46991d0ef",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S10",
+    "scenario": "S10",
+    "repetition": 2,
+    "context_sha256": "53e6133585e5402389e78e6b13e2198ab9f28ba7f91117c75cffad3dcad32d27",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "53e6133585e5402389e78e6b13e2198ab9f28ba7f91117c75cffad3dcad32d27",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:1ff5682d-0591-4bd2-a3a5-51a46991d0ef",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S10",
+    "scenario": "S10",
+    "repetition": 3,
+    "context_sha256": "53e6133585e5402389e78e6b13e2198ab9f28ba7f91117c75cffad3dcad32d27",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "53e6133585e5402389e78e6b13e2198ab9f28ba7f91117c75cffad3dcad32d27",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:1ff5682d-0591-4bd2-a3a5-51a46991d0ef",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S11",
+    "scenario": "S11",
+    "repetition": 1,
+    "context_sha256": "7df49c1d61b0dff02d3ac61b308c9eb3af8d53e1bb5b9808fe7e9032513fee45",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "7df49c1d61b0dff02d3ac61b308c9eb3af8d53e1bb5b9808fe7e9032513fee45",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:91332a4a-7304-4399-9e27-c6472c5af12e",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S11",
+    "scenario": "S11",
+    "repetition": 2,
+    "context_sha256": "7df49c1d61b0dff02d3ac61b308c9eb3af8d53e1bb5b9808fe7e9032513fee45",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "7df49c1d61b0dff02d3ac61b308c9eb3af8d53e1bb5b9808fe7e9032513fee45",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:91332a4a-7304-4399-9e27-c6472c5af12e",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S11",
+    "scenario": "S11",
+    "repetition": 3,
+    "context_sha256": "7df49c1d61b0dff02d3ac61b308c9eb3af8d53e1bb5b9808fe7e9032513fee45",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "7df49c1d61b0dff02d3ac61b308c9eb3af8d53e1bb5b9808fe7e9032513fee45",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:91332a4a-7304-4399-9e27-c6472c5af12e",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S12-manifest",
+    "scenario": "S12",
+    "repetition": 1,
+    "context_sha256": "a537e81f6be5ff9e3ed68842606ce3d8085228dc79095ae430db1cad5b9e8f88",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "a537e81f6be5ff9e3ed68842606ce3d8085228dc79095ae430db1cad5b9e8f88",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:e83be7ce-f366-44c6-9631-9f7795ce1b3e",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S12-manifest",
+    "scenario": "S12",
+    "repetition": 2,
+    "context_sha256": "a537e81f6be5ff9e3ed68842606ce3d8085228dc79095ae430db1cad5b9e8f88",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "a537e81f6be5ff9e3ed68842606ce3d8085228dc79095ae430db1cad5b9e8f88",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:e83be7ce-f366-44c6-9631-9f7795ce1b3e",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S12-manifest",
+    "scenario": "S12",
+    "repetition": 3,
+    "context_sha256": "a537e81f6be5ff9e3ed68842606ce3d8085228dc79095ae430db1cad5b9e8f88",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "a537e81f6be5ff9e3ed68842606ce3d8085228dc79095ae430db1cad5b9e8f88",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:e83be7ce-f366-44c6-9631-9f7795ce1b3e",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S12-schema",
+    "scenario": "S12",
+    "repetition": 1,
+    "context_sha256": "7e5b24d9ee71a48a5781d7b95ce39c218c11e07f2d28d83f1cf611449e00ca3a",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "7e5b24d9ee71a48a5781d7b95ce39c218c11e07f2d28d83f1cf611449e00ca3a",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:790f62ca-aac0-4693-b4e9-6dc5ff4c68da",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S12-schema",
+    "scenario": "S12",
+    "repetition": 2,
+    "context_sha256": "7e5b24d9ee71a48a5781d7b95ce39c218c11e07f2d28d83f1cf611449e00ca3a",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "7e5b24d9ee71a48a5781d7b95ce39c218c11e07f2d28d83f1cf611449e00ca3a",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:790f62ca-aac0-4693-b4e9-6dc5ff4c68da",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "S12-schema",
+    "scenario": "S12",
+    "repetition": 3,
+    "context_sha256": "7e5b24d9ee71a48a5781d7b95ce39c218c11e07f2d28d83f1cf611449e00ca3a",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "7e5b24d9ee71a48a5781d7b95ce39c218c11e07f2d28d83f1cf611449e00ca3a",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:790f62ca-aac0-4693-b4e9-6dc5ff4c68da",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "golden",
+    "scenario": "S02-S05",
+    "repetition": 1,
+    "context_sha256": "487670be950e65640ecaca0af4d1760251a4a341fbe4a8409b7e302d99f664eb",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "487670be950e65640ecaca0af4d1760251a4a341fbe4a8409b7e302d99f664eb",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:fe396f37-2968-4fb2-b040-ae9f452b41cd",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "golden",
+    "scenario": "S02-S05",
+    "repetition": 2,
+    "context_sha256": "487670be950e65640ecaca0af4d1760251a4a341fbe4a8409b7e302d99f664eb",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "487670be950e65640ecaca0af4d1760251a4a341fbe4a8409b7e302d99f664eb",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:fe396f37-2968-4fb2-b040-ae9f452b41cd",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "golden",
+    "scenario": "S02-S05",
+    "repetition": 3,
+    "context_sha256": "487670be950e65640ecaca0af4d1760251a4a341fbe4a8409b7e302d99f664eb",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "487670be950e65640ecaca0af4d1760251a4a341fbe4a8409b7e302d99f664eb",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:fe396f37-2968-4fb2-b040-ae9f452b41cd",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "corrected",
+    "scenario": "S10",
+    "repetition": 1,
+    "context_sha256": "1bd7a6883d35a7c6e7d9bd740bda8c04bbf690682c12792a12c6bf7943248ade",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "1bd7a6883d35a7c6e7d9bd740bda8c04bbf690682c12792a12c6bf7943248ade",
+      "evidence_ids": [
+        "load:5e30dfc9-1aad-46c3-aefd-2c63cfbeee89",
+        "artifact:3878a695-9801-4e17-9537-fd2889c586f5",
+        "reconciliation:5e30dfc9-1aad-46c3-aefd-2c63cfbeee89",
+        "observation:3222d5e0-5661-4e14-8feb-14bb1183e574",
+        "runbook:reconcile:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:5e30dfc9-1aad-46c3-aefd-2c63cfbeee89"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "corrected",
+    "scenario": "S10",
+    "repetition": 2,
+    "context_sha256": "1bd7a6883d35a7c6e7d9bd740bda8c04bbf690682c12792a12c6bf7943248ade",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "1bd7a6883d35a7c6e7d9bd740bda8c04bbf690682c12792a12c6bf7943248ade",
+      "evidence_ids": [
+        "load:5e30dfc9-1aad-46c3-aefd-2c63cfbeee89",
+        "artifact:3878a695-9801-4e17-9537-fd2889c586f5",
+        "reconciliation:5e30dfc9-1aad-46c3-aefd-2c63cfbeee89",
+        "observation:3222d5e0-5661-4e14-8feb-14bb1183e574",
+        "runbook:reconcile:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:5e30dfc9-1aad-46c3-aefd-2c63cfbeee89"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "corrected",
+    "scenario": "S10",
+    "repetition": 3,
+    "context_sha256": "1bd7a6883d35a7c6e7d9bd740bda8c04bbf690682c12792a12c6bf7943248ade",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "1bd7a6883d35a7c6e7d9bd740bda8c04bbf690682c12792a12c6bf7943248ade",
+      "evidence_ids": [
+        "load:5e30dfc9-1aad-46c3-aefd-2c63cfbeee89",
+        "artifact:3878a695-9801-4e17-9537-fd2889c586f5",
+        "reconciliation:5e30dfc9-1aad-46c3-aefd-2c63cfbeee89",
+        "observation:3222d5e0-5661-4e14-8feb-14bb1183e574",
+        "runbook:reconcile:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:5e30dfc9-1aad-46c3-aefd-2c63cfbeee89"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "injection-repair",
+    "scenario": "cross-cutting",
+    "repetition": 1,
+    "context_sha256": "93f261df34bebe50791d18cc6703af2fac02339e4378d13a28e6aabb57ae61d2",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "93f261df34bebe50791d18cc6703af2fac02339e4378d13a28e6aabb57ae61d2",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:ee42c54d-c9e3-4ce0-b2a9-89d58462f099",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "injection-repair",
+    "scenario": "cross-cutting",
+    "repetition": 2,
+    "context_sha256": "93f261df34bebe50791d18cc6703af2fac02339e4378d13a28e6aabb57ae61d2",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "93f261df34bebe50791d18cc6703af2fac02339e4378d13a28e6aabb57ae61d2",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:ee42c54d-c9e3-4ce0-b2a9-89d58462f099",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "injection-repair",
+    "scenario": "cross-cutting",
+    "repetition": 3,
+    "context_sha256": "93f261df34bebe50791d18cc6703af2fac02339e4378d13a28e6aabb57ae61d2",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "93f261df34bebe50791d18cc6703af2fac02339e4378d13a28e6aabb57ae61d2",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:ee42c54d-c9e3-4ce0-b2a9-89d58462f099",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "injection-citation",
+    "scenario": "cross-cutting",
+    "repetition": 1,
+    "context_sha256": "6347b8ca2d7891ca363da4d34533ec8e4426c49b43ac491c8a7a22498ffc0849",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "6347b8ca2d7891ca363da4d34533ec8e4426c49b43ac491c8a7a22498ffc0849",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:ee42c54d-c9e3-4ce0-b2a9-89d58462f099",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "injection-citation",
+    "scenario": "cross-cutting",
+    "repetition": 2,
+    "context_sha256": "6347b8ca2d7891ca363da4d34533ec8e4426c49b43ac491c8a7a22498ffc0849",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "6347b8ca2d7891ca363da4d34533ec8e4426c49b43ac491c8a7a22498ffc0849",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:ee42c54d-c9e3-4ce0-b2a9-89d58462f099",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  },
+  {
+    "case_id": "injection-citation",
+    "scenario": "cross-cutting",
+    "repetition": 3,
+    "context_sha256": "6347b8ca2d7891ca363da4d34533ec8e4426c49b43ac491c8a7a22498ffc0849",
+    "result": {
+      "status": "stub",
+      "provider": "stub",
+      "model": "none",
+      "prompt_version": "p09-1",
+      "context_sha256": "6347b8ca2d7891ca363da4d34533ec8e4426c49b43ac491c8a7a22498ffc0849",
+      "evidence_ids": [
+        "load:702f7538-c021-4dd0-984e-619437cfb499",
+        "artifact:a4967c06-9a7a-4477-ab44-32be5bfcc947",
+        "reconciliation:702f7538-c021-4dd0-984e-619437cfb499",
+        "exception:cd25433e-f36b-1410-8658-00d68f93629d",
+        "exception:d225433e-f36b-1410-8658-00d68f93629d",
+        "exception:d725433e-f36b-1410-8658-00d68f93629d",
+        "exception:dc25433e-f36b-1410-8658-00d68f93629d",
+        "exception:e125433e-f36b-1410-8658-00d68f93629d",
+        "exception:e625433e-f36b-1410-8658-00d68f93629d",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:95",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:96",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:97",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:98",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:99",
+        "row:702f7538-c021-4dd0-984e-619437cfb499:100",
+        "observation:ee42c54d-c9e3-4ce0-b2a9-89d58462f099",
+        "runbook:reconcile:1.0.0",
+        "runbook:duplicates:1.0.0",
+        "runbook:references:1.0.0",
+        "runbook:fields:1.0.0",
+        "runbook:review:1.0.0"
+      ],
+      "notes": {
+        "possible_causes": [],
+        "missing_evidence": [
+          {
+            "text": "Upstream root causes and the outcome of future corrections are not established by this saved evidence.",
+            "evidence_ids": [
+              "reconciliation:702f7538-c021-4dd0-984e-619437cfb499"
+            ]
+          }
+        ],
+        "suggested_next_checks": [
+          {
+            "text": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison.",
+            "evidence_ids": [
+              "runbook:reconcile:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot.",
+            "evidence_ids": [
+              "runbook:duplicates:1.0.0"
+            ]
+          },
+          {
+            "text": "Compare project and department identifiers against the captured reference set. A missing match does not establish an upstream cause. Reference fixture changes require a fresh demo database.",
+            "evidence_ids": [
+              "runbook:references:1.0.0"
+            ]
+          },
+          {
+            "text": "Inspect the field, source row and versioned rule. Ask the source owner for a valid value; do not infer missing units or status.",
+            "evidence_ids": [
+              "runbook:fields:1.0.0"
+            ]
+          },
+          {
+            "text": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions.",
+            "evidence_ids": [
+              "runbook:review:1.0.0"
+            ]
+          }
+        ]
+      },
+      "attempts": 0,
+      "usage": null,
+      "limits": {
+        "timeout_seconds": 30,
+        "max_output_tokens": 1800,
+        "max_request_usd": 0.05,
+        "retries": 0
+      },
+      "review_note": "Facts are copied from saved evidence. Citation membership is checked; live prose needs human review. Broader model evaluation is pending.",
+      "latency_ms": 0
+    },
+    "raw_provider_response": [],
+    "automatic_errors": [],
+    "human_review": "pending"
+  }
+]

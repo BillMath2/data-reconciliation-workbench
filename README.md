@@ -26,9 +26,9 @@ Inspect the [saved evidence and terminal recording](docs/evidence/p05/README.md)
 
 ## Project status
 
-**P01-P08, including P05A, are complete; P09 is implemented locally with SQL CI acceptance pending.** On October 2, 2026, the user confirmed all runs after P03 green, including P08 commit `c7776e8`; exact P08 run artifacts have not been inspected here. P09 adds saved screen investigations, frozen citations, selected runbooks, and offline/live explanation modes. See [P09 validation](docs/p09-validation.md) for local results and the remaining gate; [P08 validation](docs/p08-validation.md) retains the earlier checkpoint.
+**P01-P09, including P05A, are complete on recorded evidence and user-confirmed green CI.** The user confirmed P09 green for commit `67f7f78` on October 2, 2026; its exact CI artifacts were not independently inspected here. P10 adds a versioned assistant evaluation suite and failure checks. See [P10 validation](docs/p10-validation.md) for current results and outstanding live/human-review gates; [P09 validation](docs/p09-validation.md) retains the preceding checkpoint.
 
-**P09 local SQL verification: [338 tests passed](docs/evidence/p09-local/sql-checks.txt), including all 52 SQL cases with no skips.** Migration 008, repeatable setup, the reconciliation demo, API checks, and the complete browser workflow passed against Docker-hosted SQL Server on October 2, 2026. [Local evidence and provenance](docs/evidence/p09-local/README.md) are retained separately from the pending GitHub CI result. No live AI call was made.
+**P09 local SQL verification: [338 tests passed](docs/evidence/p09-local/sql-checks.txt), including all 52 SQL cases with no skips.** Migration 008, repeatable setup, the reconciliation demo, API checks, and the complete browser workflow passed against Docker-hosted SQL Server on October 2, 2026. [Local evidence and provenance](docs/evidence/p09-local/README.md) are retained separately from the user-confirmed GitHub CI result. No live AI call was made for P09.
 
 **Verified P05 SQL suite: [164 tests passed](docs/evidence/p05/sql-checks.txt), including all 38 SQL cases, with no skips.** Both CI jobs were confirmed green; the downloaded artifacts were reviewed on October 1, 2026. See [P05 validation](docs/p05-validation.md) for provenance and checks, and [P04 verification](docs/p04-validation.md) for the earlier baseline.
 
@@ -88,7 +88,7 @@ The [source-contract guide](docs/source-contracts.md) documents field ownership,
 ## Engineering evidence
 
 - **Docker:** separate runtime/test image targets, a non-root Python process, a pinned SQL Server image, readiness checks, private database networking, and persistent storage.
-- **SQL engineering:** twelve tables and three reporting views, source-row lineage, saved findings/reconciliation/investigations, atomic publication, an applied-version ledger, and a restricted runtime role. P06-P08 are accepted on user-confirmed green CI; P09's investigation migration 008 awaits SQL CI acceptance.
+- **SQL engineering:** twelve tables and three reporting views, source-row lineage, saved findings/reconciliation/investigations, atomic publication, an applied-version ledger, and a restricted runtime role. P06-P09, including investigation migration 008, are accepted on user-confirmed green CI.
 - **Automation:** GitHub Actions builds the images, tests real SQL Server, and captures the guided SQL demo with its evidence packets and media. P07 adds browser verification and a separate `ui-demo` artifact.
 - **Reproducibility:** uv lockfile, explicit configuration, synthetic-data scope, and a Docker build context that excludes credentials.
 

@@ -1,6 +1,6 @@
 # P09 validation: saved screen investigations
 
-Status: implemented and verified against local SQL Server on October 2, 2026; GitHub CI acceptance pending. P01–P08, including P05A, remain accepted on the previously recorded evidence/user confirmations. No real provider call was made for P09; expanded live evaluation is P10.
+Status: implemented and verified against local SQL Server on October 2, 2026; GitHub CI accepted on user confirmation for commit `67f7f78`. P01–P08, including P05A, remain accepted on the previously recorded evidence/user confirmations. No real provider call was made for P09; expanded live evaluation is P10.
 
 ## Implemented
 
@@ -35,7 +35,7 @@ The subsequent live browser run used the real API and a separate SQL database, w
 
 ## CI acceptance gate
 
-Commit/push the P09 changes and require both existing GitHub Actions jobs to pass. CI already runs the full SQL suite and the expanded browser journey against an isolated real SQL database. The full suite is now observed locally as **338 passed, including 52 SQL cases with no skips**; it has not yet been observed in P09 CI. Retain the CI `sql-checks` and `ui-demo` artifacts and link the run URL before marking the CI gate accepted.
+The user confirmed P09 green on October 2, 2026, for commit `67f7f78`, clearing P10 to start. The exact CI URL/artifacts were not independently inspected in this session. The local SQL/browser evidence above remains independently verified.
 
 New SQL cases verify persisted/reloaded context after correction, unchanged publication evidence and totals, no-op attempt/publication separation, foreign-finding rejection, analyst attribution, append-only runtime permissions, and rollback when the required audit insert fails. Migration tests include the twelfth table and eight-script upgrade path.
 

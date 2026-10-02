@@ -90,7 +90,7 @@ def validate_notes(value, context):
     return answer.model_dump()
 
 
-def explain(context, *, provider="stub", key=None, transport=None):
+def explain(context, *, provider="stub", key=None, transport=None, response_observer=None):
     assistant.require(provider in {"off", "stub", "openai"}, "Unsupported provider.")
     assistant.require(len(canonical(context).encode()) <= MAX_CONTEXT, "context_too_large")
     started = time.monotonic()
@@ -140,6 +140,10 @@ def explain(context, *, provider="stub", key=None, transport=None):
             result["estimated_cost_ceiling_usd"] = round(ceiling, 6)
             result["attempts"] = 1
             response = asyncio.run(assistant.call_openai(body, key, transport=transport))
+            # Evaluation-only hook preserves rejected synthetic answers for human review.
+            # The web service never supplies this hook or persists raw provider output.
+            if response_observer is not None:
+                response_observer(response)
             assistant.require(response.get("status") == "completed", "incomplete_response")
             output = response.get("output", [])
             assistant.require(

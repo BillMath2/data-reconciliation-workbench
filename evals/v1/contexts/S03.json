@@ -1,0 +1,284 @@
+{
+  "version": "1.0.0",
+  "publication_load_id": "d05f15e8-48dc-4402-a676-da44bd38781a",
+  "packet": {
+    "boundaries": {
+      "exception_resolution": "not assessed; findings are historical",
+      "findings_included": 2,
+      "findings_total": 2,
+      "rows_included": 2,
+      "rows_total": 2,
+      "source_content_is_untrusted": true,
+      "source_correction_actions": "not recorded"
+    },
+    "business_date": "2026-09-25",
+    "calculation_version": "1.0.0",
+    "citation_ids": [
+      "load:d05f15e8-48dc-4402-a676-da44bd38781a",
+      "artifact:67e033fe-94dd-41fc-9dd9-26a344589a3a",
+      "reconciliation:d05f15e8-48dc-4402-a676-da44bd38781a",
+      "exception:ad25433e-f36b-1410-8658-00d68f93629d",
+      "exception:b225433e-f36b-1410-8658-00d68f93629d",
+      "row:d05f15e8-48dc-4402-a676-da44bd38781a:1",
+      "row:d05f15e8-48dc-4402-a676-da44bd38781a:2"
+    ],
+    "contract_version": "1.0.0",
+    "evidence": [
+      {
+        "business_date": "2026-09-25",
+        "id": "load:d05f15e8-48dc-4402-a676-da44bd38781a",
+        "kind": "load",
+        "reference_set_sha256": "bc71a537ea07ddde1303891fae681da3aabf452b51b5f82a1aed32c74b5e2b9f",
+        "source_id": "daily-activity"
+      },
+      {
+        "content_sha256": "b1d99a9182086d01e5456acf8e0d31d0917f4be2fb0a6cb9e5dc37df42afa2ec",
+        "id": "artifact:67e033fe-94dd-41fc-9dd9-26a344589a3a",
+        "kind": "artifact",
+        "load_id": "d05f15e8-48dc-4402-a676-da44bd38781a",
+        "source_exported_at": "2026-09-26T09:00:00Z"
+      },
+      {
+        "id": "reconciliation:d05f15e8-48dc-4402-a676-da44bd38781a",
+        "kind": "reconciliation",
+        "summary": {
+          "accepted_rows": 98,
+          "accounting_verified": true,
+          "calculation_version": "1.0.0",
+          "completed_count_difference": 2,
+          "completed_unit_difference": 5,
+          "curated_completed_count": 98,
+          "curated_completed_units": 196,
+          "excluded_duplicate_rows": 0,
+          "excluded_invalid_rows": 2,
+          "primary_reasons": [
+            {
+              "completed_count": 2,
+              "completed_units": 5,
+              "rows": 2,
+              "rule_id": "ACTIVITY_CONFLICT",
+              "unknown_unit_rows": 0
+            }
+          ],
+          "raw_rows": 100,
+          "scope": "one full activity date; completed metrics use declared completed status",
+          "source_completed_count": 100,
+          "source_completed_units": 201,
+          "source_status_complete": true,
+          "source_units_complete": true,
+          "unknown_status_rows": 0,
+          "unknown_unit_rows": 0
+        }
+      },
+      {
+        "field": null,
+        "id": "exception:ad25433e-f36b-1410-8658-00d68f93629d",
+        "kind": "finding",
+        "row_ordinal": 1,
+        "rule_id": "ACTIVITY_CONFLICT",
+        "untrusted_evidence": {
+          "group_ordinals": [
+            1,
+            2
+          ],
+          "reference_set_sha256": "bc71a537ea07ddde1303891fae681da3aabf452b51b5f82a1aed32c74b5e2b9f"
+        }
+      },
+      {
+        "field": null,
+        "id": "exception:b225433e-f36b-1410-8658-00d68f93629d",
+        "kind": "finding",
+        "row_ordinal": 2,
+        "rule_id": "ACTIVITY_CONFLICT",
+        "untrusted_evidence": {
+          "group_ordinals": [
+            1,
+            2
+          ],
+          "reference_set_sha256": "bc71a537ea07ddde1303891fae681da3aabf452b51b5f82a1aed32c74b5e2b9f"
+        }
+      },
+      {
+        "id": "row:d05f15e8-48dc-4402-a676-da44bd38781a:1",
+        "kind": "source_row",
+        "ordinal": 1,
+        "untrusted_source": {
+          "activity_date": "2026-09-25",
+          "activity_id": "ACT-0001",
+          "activity_status": "completed",
+          "completed_units": "3",
+          "project_id": "PRJ-001",
+          "source_updated_at": "2026-09-25T23:00:00Z"
+        }
+      },
+      {
+        "id": "row:d05f15e8-48dc-4402-a676-da44bd38781a:2",
+        "kind": "source_row",
+        "ordinal": 2,
+        "untrusted_source": {
+          "activity_date": "2026-09-25",
+          "activity_id": "ACT-0001",
+          "activity_status": "completed",
+          "completed_units": "2",
+          "project_id": "PRJ-001",
+          "source_updated_at": "2026-09-25T23:00:00Z"
+        }
+      }
+    ],
+    "load_id": "d05f15e8-48dc-4402-a676-da44bd38781a",
+    "packet_version": "1.0.0",
+    "rule_set_version": "1.0.0",
+    "rules": [
+      {
+        "action": "quarantine",
+        "id": "ACTIVITY_CONFLICT",
+        "parameters": {
+          "policy": "exclude every row for conflicting complete business key"
+        },
+        "scope": "key_group"
+      }
+    ]
+  },
+  "observation": {
+    "id": "observation:9b101c41-5913-405d-91e1-df7b70e4fb55",
+    "kind": "observation",
+    "captured_at": "2026-10-02T21:12:16.176087+00:00",
+    "report_state": {
+      "requested_load_id": "d05f15e8-48dc-4402-a676-da44bd38781a",
+      "requested_status": "published_with_exceptions",
+      "publication_load_id": "d05f15e8-48dc-4402-a676-da44bd38781a",
+      "publication_status": "published_with_exceptions",
+      "is_current": true,
+      "business_date": "2026-09-25",
+      "summary": {
+        "accepted_rows": 98,
+        "accounting_verified": true,
+        "calculation_version": "1.0.0",
+        "completed_count_difference": 2,
+        "completed_unit_difference": 5,
+        "curated_completed_count": 98,
+        "curated_completed_units": 196,
+        "excluded_duplicate_rows": 0,
+        "excluded_invalid_rows": 2,
+        "primary_reasons": [
+          {
+            "completed_count": 2,
+            "completed_units": 5,
+            "rows": 2,
+            "rule_id": "ACTIVITY_CONFLICT",
+            "unknown_unit_rows": 0
+          }
+        ],
+        "raw_rows": 100,
+        "scope": "one full activity date; completed metrics use declared completed status",
+        "source_completed_count": 100,
+        "source_completed_units": 201,
+        "source_status_complete": true,
+        "source_units_complete": true,
+        "unknown_status_rows": 0,
+        "unknown_unit_rows": 0
+      }
+    },
+    "freshness": {
+      "business_date": "2026-09-25",
+      "deadline_utc": "2026-09-26T13:00:00+00:00",
+      "observed_at": "2026-10-02T14:00:00+00:00",
+      "available": true,
+      "status": "available",
+      "rule_id": null,
+      "last_attempt_status": "published_with_exceptions",
+      "failed_refresh": false
+    },
+    "selected_finding": {
+      "exception_id": "ad25433e-f36b-1410-8658-00d68f93629d",
+      "load_id": "d05f15e8-48dc-4402-a676-da44bd38781a",
+      "row_ordinal": 1,
+      "rule_id": "ACTIVITY_CONFLICT",
+      "rule_set_version": "1.0.0",
+      "field_name": null,
+      "created_at": "2026-10-02T21:12:16.025000",
+      "acknowledged_at": null,
+      "acknowledged_by": null,
+      "acknowledgement_reason": null,
+      "resolved_at": null,
+      "resolved_by_load_id": null,
+      "resolution_reason": null,
+      "status": "open",
+      "evidence_id": "exception:ad25433e-f36b-1410-8658-00d68f93629d",
+      "untrusted_evidence": {
+        "group_ordinals": [
+          1,
+          2
+        ],
+        "reference_set_sha256": "bc71a537ea07ddde1303891fae681da3aabf452b51b5f82a1aed32c74b5e2b9f"
+      },
+      "untrusted_source": {
+        "activity_date": "2026-09-25",
+        "activity_id": "ACT-0001",
+        "activity_status": "completed",
+        "completed_units": "3",
+        "project_id": "PRJ-001",
+        "source_updated_at": "2026-09-25T23:00:00Z"
+      },
+      "source_id": "daily-activity",
+      "business_date": "2026-09-25",
+      "reference_set_sha256": "bc71a537ea07ddde1303891fae681da3aabf452b51b5f82a1aed32c74b5e2b9f",
+      "rule_definition": {
+        "id": "ACTIVITY_CONFLICT",
+        "scope": "key_group",
+        "action": "quarantine",
+        "parameters": {
+          "policy": "exclude every row for conflicting complete business key"
+        }
+      },
+      "events": [],
+      "related_records": []
+    },
+    "boundary": "Sequential observations at capture time; not a transactionally consistent live-state guarantee. Selected finding text and event lists may be truncated."
+  },
+  "runbooks": [
+    {
+      "id": "runbook:reconcile:1.0.0",
+      "kind": "runbook",
+      "version": "1.0.0",
+      "title": "Review the saved reconciliation",
+      "owner": "Reporting owner",
+      "rule_ids": [],
+      "check": "Compare the saved source and curated totals. Unknown totals need source evidence before comparison."
+    },
+    {
+      "id": "runbook:duplicates:1.0.0",
+      "kind": "runbook",
+      "version": "1.0.0",
+      "title": "Review repeated activity keys",
+      "owner": "Activity source owner",
+      "rule_ids": [
+        "ACTIVITY_DUPLICATE",
+        "ACTIVITY_CONFLICT"
+      ],
+      "check": "Compare every captured row for the key. Confirm the intended source record before preparing a corrected full-date snapshot."
+    },
+    {
+      "id": "runbook:review:1.0.0",
+      "kind": "runbook",
+      "version": "1.0.0",
+      "title": "Verify any proposed correction",
+      "owner": "Workbench operator",
+      "rule_ids": [],
+      "check": "Review source changes, explicitly run a supplied snapshot, then inspect the successor totals and recorded finding lifecycle. Investigation text never performs these actions."
+    }
+  ],
+  "citation_ids": [
+    "load:d05f15e8-48dc-4402-a676-da44bd38781a",
+    "artifact:67e033fe-94dd-41fc-9dd9-26a344589a3a",
+    "reconciliation:d05f15e8-48dc-4402-a676-da44bd38781a",
+    "exception:ad25433e-f36b-1410-8658-00d68f93629d",
+    "exception:b225433e-f36b-1410-8658-00d68f93629d",
+    "row:d05f15e8-48dc-4402-a676-da44bd38781a:1",
+    "row:d05f15e8-48dc-4402-a676-da44bd38781a:2",
+    "observation:9b101c41-5913-405d-91e1-df7b70e4fb55",
+    "runbook:reconcile:1.0.0",
+    "runbook:duplicates:1.0.0",
+    "runbook:review:1.0.0"
+  ]
+}

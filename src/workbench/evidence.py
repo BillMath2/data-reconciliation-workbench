@@ -223,6 +223,50 @@ class EvidenceService:
                 {"actor": r[0], "action": r[1], "occurred_at": r[2], "detail": json.loads(r[3])}
                 for r in cursor.fetchall()
             ]
+            # Capture related records from this load / fixed reference set, never current
+            # external data. The investigation freezes these under its observation ID.
+            result["related_records"] = []
+            original = result["untrusted_evidence"].get("duplicate_of_ordinal")
+            if result["rule_id"] == "ACTIVITY_DUPLICATE" and type(original) is int:
+                cursor.execute(
+                    "SELECT row_ordinal, disposition, raw_record_json FROM stg.SourceRow "
+                    "WHERE load_id=? AND row_ordinal=?",
+                    (result["load_id"], original),
+                )
+                result["related_records"] = [
+                    {
+                        "load_id": result["load_id"],
+                        "row_ordinal": r[0],
+                        "disposition": r[1],
+                        "untrusted_source": json.loads(r[2]),
+                    }
+                    for r in cursor.fetchall()
+                ]
+            if result["rule_id"] == "ACTIVITY_UNKNOWN_PROJECT":
+                project = result["untrusted_evidence"].get("normalized_value")
+                cursor.execute(
+                    "SELECT TOP (5) s.load_id, s.row_ordinal, s.disposition, "
+                    "s.raw_record_json, e.rule_id, e.evidence_json FROM stg.SourceRow s "
+                    "JOIN ops.Load l ON l.load_id=s.load_id "
+                    "LEFT JOIN ops.Exception e ON e.load_id=s.load_id "
+                    "AND e.row_ordinal=s.row_ordinal "
+                    "WHERE l.source_id='project-registry' AND l.published_at IS NOT NULL "
+                    "AND l.reference_set_sha256=? "
+                    "AND JSON_VALUE(s.raw_record_json,'$.project_id')=? "
+                    "ORDER BY l.attempt_number, s.row_ordinal, e.rule_id",
+                    (result["reference_set_sha256"], project),
+                )
+                result["related_records"] = [
+                    {
+                        "load_id": str(r[0]).lower(),
+                        "row_ordinal": r[1],
+                        "disposition": r[2],
+                        "untrusted_source": json.loads(r[3]),
+                        "rule_id": r[4],
+                        "untrusted_evidence": json.loads(r[5]) if r[5] else None,
+                    }
+                    for r in cursor.fetchall()
+                ]
             return result
 
     def acknowledge(self, exception_id, actor, reason):

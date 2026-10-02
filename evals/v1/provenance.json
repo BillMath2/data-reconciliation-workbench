@@ -1,0 +1,118 @@
+{
+  "captured_at": "2026-10-02",
+  "source": "tests/integration/test_evaluation_capture.py against Docker SQL Server; two disposable databases",
+  "base_commit": "67f7f78",
+  "working_tree_changes": true,
+  "synthetic_data_only": true,
+  "fixed_freshness_clock": "2026-10-02T14:00:00+00:00",
+  "uuid_and_capture_timestamps": "Recorded actual SQL/capture identifiers; vary on regeneration",
+  "reference_sets": {
+    "default": "bc71a537ea07ddde1303891fae681da3aabf452b51b5f82a1aed32c74b5e2b9f",
+    "unknown-department": "53dcc5b90150f2a8b37650f321a8f486ff94ff8ea38f50062bb424b43faf96b2"
+  },
+  "fixture_sha256": {
+    "fixtures/generated/activity/clean.csv": "f538370c58798f86b3802a4ccae54453878b4f5dbe6b4264baef75f2322a26e7",
+    "fixtures/generated/activity/clean.manifest.json": "b29fdb3e3b62fd0544ade8d954e79e0229070c52d703b4f6ffc12fe5bd9da81d",
+    "fixtures/generated/activity/conflict.csv": "b1d99a9182086d01e5456acf8e0d31d0917f4be2fb0a6cb9e5dc37df42afa2ec",
+    "fixtures/generated/activity/conflict.manifest.json": "b29fdb3e3b62fd0544ade8d954e79e0229070c52d703b4f6ffc12fe5bd9da81d",
+    "fixtures/generated/activity/corrected.csv": "48a8450813e145274c58031e7ad0757ddd3e1236bb6c570bd5c1cd3f15ad8904",
+    "fixtures/generated/activity/corrected.manifest.json": "8d6e5ab9023665ab41c2f286932bb861c5b2860b114606b61f56e08988742a7e",
+    "fixtures/generated/activity/duplicates.csv": "3bafa68af133ae2da31ed0f6300af65485412136aa291239d983249308694497",
+    "fixtures/generated/activity/duplicates.manifest.json": "b29fdb3e3b62fd0544ade8d954e79e0229070c52d703b4f6ffc12fe5bd9da81d",
+    "fixtures/generated/activity/empty.csv": "4a787665d9d5bd65dc4501adc6cc41dae98a7f0853abfcfcf556d6958e70eb23",
+    "fixtures/generated/activity/empty.manifest.json": "4700fb077ff53d46a66bc075de6ac2b70fa0dfa604d18cb3d857c5e5e4faf69e",
+    "fixtures/generated/activity/golden.csv": "652b2c89e9c69e655db09484a4070f1507e5aeeb4c89d650e0e00d12c7a485d0",
+    "fixtures/generated/activity/golden.manifest.json": "b29fdb3e3b62fd0544ade8d954e79e0229070c52d703b4f6ffc12fe5bd9da81d",
+    "fixtures/generated/activity/invalid-status.csv": "42890f8db07b285fe0522844922a49d3836eae16d99514996953835f84a97933",
+    "fixtures/generated/activity/invalid-status.manifest.json": "b29fdb3e3b62fd0544ade8d954e79e0229070c52d703b4f6ffc12fe5bd9da81d",
+    "fixtures/generated/activity/invalid-units.csv": "f610fd9219a202591eb80a8099ff042681c86ca6c7fb6c65c9fe265230b2c320",
+    "fixtures/generated/activity/invalid-units.manifest.json": "b29fdb3e3b62fd0544ade8d954e79e0229070c52d703b4f6ffc12fe5bd9da81d",
+    "fixtures/generated/activity/manifest-mismatch.csv": "f538370c58798f86b3802a4ccae54453878b4f5dbe6b4264baef75f2322a26e7",
+    "fixtures/generated/activity/manifest-mismatch.manifest.json": "2e602837fd9480fc86752b5b01dd11bd89d8f725d8fe13a4e95458f453cac974",
+    "fixtures/generated/activity/mixed-date.csv": "470dc397f1e63f632d135867f23d09c82f80605296f9a515ed40802bc4f1b6ec",
+    "fixtures/generated/activity/mixed-date.manifest.json": "b29fdb3e3b62fd0544ade8d954e79e0229070c52d703b4f6ffc12fe5bd9da81d",
+    "fixtures/generated/activity/schema-mismatch.csv": "e048f3441908185528ff20b9ae4b641d9a897cad6d5e0229ecebd1ee6ca97ebf",
+    "fixtures/generated/activity/schema-mismatch.manifest.json": "b29fdb3e3b62fd0544ade8d954e79e0229070c52d703b4f6ffc12fe5bd9da81d",
+    "fixtures/generated/activity/unknown-department.csv": "f538370c58798f86b3802a4ccae54453878b4f5dbe6b4264baef75f2322a26e7",
+    "fixtures/generated/activity/unknown-department.manifest.json": "04ae966cb242a33a312db49e816603763ab4c8926482e0a18baa18ea8d748ea4",
+    "fixtures/generated/index.json": "c4c76696a2725f1a637f8073596a99a653e1ba55a73c048801f6ad088bca415d",
+    "fixtures/generated/reference/departments.json": "92df072a330663d99d62e712780d78ba3902f57574ba5110ffb054e038b51cbe",
+    "fixtures/generated/reference/departments.sql": "8fb6aec7c567711da0520681ecfc2dc2a4b3d084cde619a678d57ac1a6bd0e8f",
+    "fixtures/generated/reference/projects-default.json": "2c91efb2e33c6ed3a7342911111e108cf1c4fcae2af5fdf12df23eb8067645fa",
+    "fixtures/generated/reference/projects-unknown-department.json": "59996eae9a14d313154038bd744d7d800577aee74051012cb5400fb4cbd0a144"
+  },
+  "contexts": {
+    "S01": {
+      "sha256": "72c67397aec4200991f3e6da5da72017acfede5236e6d2299cf4766602772855",
+      "provenance": "real_sql_capture"
+    },
+    "S02": {
+      "sha256": "b1955f12cc4da856fd043c0849e56568a81b697a60fcf3e85bb8359c523fd2da",
+      "provenance": "real_sql_capture"
+    },
+    "S03": {
+      "sha256": "fde18e1db99e298263729e8a78a6a9a007e3c1da4cf189daf65a8e7d453e5f5b",
+      "provenance": "real_sql_capture"
+    },
+    "S04": {
+      "sha256": "8a3a73874deca0eacadd79b860fae650e8b43d7d03e9e3c1f6a65b0d7f4ae9a5",
+      "provenance": "real_sql_capture"
+    },
+    "S05": {
+      "sha256": "2811150254596eeefffad2694bcd30785a788f4075779ffdd55ef10301799831",
+      "provenance": "real_sql_capture"
+    },
+    "S06-status": {
+      "sha256": "4bbcdb1b4a37a50e2f5d91bad8efb726e1f1d3a70516144888bd8907d3fd1050",
+      "provenance": "real_sql_capture"
+    },
+    "S06-units": {
+      "sha256": "2e7d18fcf2c3226e5329368e51dff855714e6002d3188198d01e43969af9dbb9",
+      "provenance": "real_sql_capture"
+    },
+    "S07": {
+      "sha256": "d7945bb0b821bb2ca2167ac4afedcac89c709d498eaa2b1a6bcf1b11544fe680",
+      "provenance": "real_sql_capture"
+    },
+    "S08": {
+      "sha256": "f0399ba18ce991a675fb80c8ff4b6e3734f9bb736f1e4b647725ac583c268f2d",
+      "provenance": "real_sql_capture"
+    },
+    "S09": {
+      "sha256": "7a5df0ca210a639f47261e57abad00e2a356e7d6f7d3b7789eb3051ad455466c",
+      "provenance": "real_sql_capture"
+    },
+    "S10": {
+      "sha256": "53e6133585e5402389e78e6b13e2198ab9f28ba7f91117c75cffad3dcad32d27",
+      "provenance": "real_sql_capture"
+    },
+    "S11": {
+      "sha256": "7df49c1d61b0dff02d3ac61b308c9eb3af8d53e1bb5b9808fe7e9032513fee45",
+      "provenance": "real_sql_capture"
+    },
+    "S12-manifest": {
+      "sha256": "a537e81f6be5ff9e3ed68842606ce3d8085228dc79095ae430db1cad5b9e8f88",
+      "provenance": "real_sql_capture"
+    },
+    "S12-schema": {
+      "sha256": "7e5b24d9ee71a48a5781d7b95ce39c218c11e07f2d28d83f1cf611449e00ca3a",
+      "provenance": "real_sql_capture"
+    },
+    "golden": {
+      "sha256": "487670be950e65640ecaca0af4d1760251a4a341fbe4a8409b7e302d99f664eb",
+      "provenance": "real_sql_capture"
+    },
+    "corrected": {
+      "sha256": "1bd7a6883d35a7c6e7d9bd740bda8c04bbf690682c12792a12c6bf7943248ade",
+      "provenance": "real_sql_capture"
+    },
+    "injection-repair": {
+      "sha256": "93f261df34bebe50791d18cc6703af2fac02339e4378d13a28e6aabb57ae61d2",
+      "provenance": "synthetic_adversarial_mutation_of_S05"
+    },
+    "injection-citation": {
+      "sha256": "6347b8ca2d7891ca363da4d34533ec8e4426c49b43ac491c8a7a22498ffc0849",
+      "provenance": "synthetic_adversarial_mutation_of_S05"
+    }
+  }
+}

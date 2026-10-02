@@ -21,6 +21,8 @@ jobs:
       - run: uv run --locked ruff format --check .
       - run: uv run --locked workbench-fixtures --check fixtures/generated
       - run: uv run --locked pytest -q
+      - name: Evaluate versioned investigation corpus offline (no paid provider calls)
+        run: uv run --locked python -m workbench.evaluation --output runs/evals-offline
       - name: Explain saved SQL evidence offline (no API key or SQL connection)
         run: uv run --locked workbench explain --packet docs/evidence/p05/golden-evidence.json --provider stub --format text
       - name: Install browser for isolated UI checks

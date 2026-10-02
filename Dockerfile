@@ -21,6 +21,7 @@ COPY sql ./sql
 FROM base AS test
 RUN uv sync --locked --no-editable
 COPY tests ./tests
+COPY evals/v1 ./evals/v1
 COPY docs/evidence/p05/golden-evidence.json ./docs/evidence/p05/golden-evidence.json
 USER workbench
 ENTRYPOINT ["python", "-m", "pytest"]
