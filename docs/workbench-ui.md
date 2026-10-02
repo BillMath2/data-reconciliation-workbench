@@ -19,7 +19,7 @@ docker compose --env-file .env.workbench run --rm workbench load-projects
 docker compose --env-file .env.workbench --profile web up -d --build --wait api
 ```
 
-Open the ignored `.env.workbench` locally and paste the value of `WB_DEMO_OPERATOR_TOKEN` into the sign-in field. Use `WB_DEMO_ANALYST_TOKEN` for read-only access. Never include either value in a screenshot or commit. Tokens select predefined server identities; no role is supplied by the browser. Sessions expire after an hour and on server restart. The browser does not save the token in local storage.
+Open the ignored `.env.workbench` locally and paste the value of `WB_DEMO_OPERATOR_TOKEN` into the sign-in field. Use `WB_DEMO_ANALYST_TOKEN` for inspection and saving investigations, without ingestion or acknowledgement rights. Never include either value in a screenshot or commit. Tokens select predefined server identities; no role is supplied by the browser. Sessions expire after an hour and on server restart. The browser does not save the token in local storage.
 
 ## Walk through a correction
 
@@ -50,4 +50,4 @@ The fixture exists only in the test tooling; it is not a production fallback and
 
 CI runs the same journey against the real SQL API in a dedicated `workbench_ui` database and uploads `ui-demo`. Live mode requires `WB_DEMO_ANALYST_TOKEN` and `WB_DEMO_OPERATOR_TOKEN` in the script's environment and a database with no activity attempts. `WB_SQL_DATABASE` now selects the Compose setup/runtime/API database, defaulting to `workbench`; use the same value when seeding, migrating, and starting the API. CI's disposal happens only inside its disposable volume. See [P07 validation](p07-validation.md) for its user-confirmed acceptance and pending artifact retention; [P08 validation](p08-validation.md) covers the new gate.
 
-The screen provides no arbitrary file uploads, direct SQL, manual exception resolution, or AI repair action. Screen-based AI investigation remains P09.
+P09 adds **Explain this evidence**, with load/finding scope, offline guidance, AI-off mode, explicitly enabled live AI, and saved history for each attempt. Both roles can save an investigation; the original facts, observed state, and runbook versions remain frozen after correction. See the [investigation walkthrough](investigations.md) and [P09 validation](p09-validation.md). The screen provides no arbitrary file uploads, direct SQL, manual exception resolution, or AI repair action.

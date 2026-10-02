@@ -358,6 +358,7 @@ def test_write_surface_has_no_unreviewed_or_assistant_mutation_route(client):
     assert writes == {
         ("/api/session", "POST"),
         ("/api/session/logout", "POST"),
+        ("/api/investigations", "POST"),
         ("/api/activity-runs", "POST"),
         ("/api/exceptions/{exception_id}/acknowledge", "POST"),
     }

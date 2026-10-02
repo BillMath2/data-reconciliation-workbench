@@ -1,6 +1,6 @@
 # Data Reconciliation Workbench
 
-An operational workbench for investigating why a source export and a report disagree. Python and SQL Server perform validation and reconciliation. An optional CLI assistant explains saved evidence, with an offline stub and a reviewed live example.
+An operational workbench for investigating why a source export and a report disagree. Python and SQL Server perform validation and reconciliation. The screen saves investigations with cited evidence and versioned runbooks; optional AI adds explanatory notes. Offline guidance works without a provider. The earlier CLI assistant also has a reviewed live example.
 
 The verified SQL demonstration follows **100 source rows → 94 accepted activities → 98/98 after source correction**. Every exclusion has a recorded reason, and repeating a successful load leaves counts unchanged.
 
@@ -26,7 +26,9 @@ Inspect the [saved evidence and terminal recording](docs/evidence/p05/README.md)
 
 ## Project status
 
-**P01-P07, including P05A, are complete; P08 is implemented locally and awaits its live SQL/browser gate.** The user confirmed P07 CI green for `9c98633`; its exact run artifacts have not been inspected here. P08 adds inspectable load audit history, actual request-byte enforcement, and expanded role, audit, and browser safety checks. Local checks: **245 passed, 48 SQL tests skipped**, plus the expanded Chromium fixture walkthrough. See [P07 validation](docs/p07-validation.md) and [P08 validation](docs/p08-validation.md).
+**P01-P08, including P05A, are complete; P09 is implemented locally with SQL CI acceptance pending.** On October 2, 2026, the user confirmed all runs after P03 green, including P08 commit `c7776e8`; exact P08 run artifacts have not been inspected here. P09 adds saved screen investigations, frozen citations, selected runbooks, and offline/live explanation modes. See [P09 validation](docs/p09-validation.md) for local results and the remaining gate; [P08 validation](docs/p08-validation.md) retains the earlier checkpoint.
+
+**P09 local SQL verification: [338 tests passed](docs/evidence/p09-local/sql-checks.txt), including all 52 SQL cases with no skips.** Migration 008, repeatable setup, the reconciliation demo, API checks, and the complete browser workflow passed against Docker-hosted SQL Server on October 2, 2026. [Local evidence and provenance](docs/evidence/p09-local/README.md) are retained separately from the pending GitHub CI result. No live AI call was made.
 
 **Verified P05 SQL suite: [164 tests passed](docs/evidence/p05/sql-checks.txt), including all 38 SQL cases, with no skips.** Both CI jobs were confirmed green; the downloaded artifacts were reviewed on October 1, 2026. See [P05 validation](docs/p05-validation.md) for provenance and checks, and [P04 verification](docs/p04-validation.md) for the earlier baseline.
 
@@ -44,7 +46,9 @@ Code checks the answer's structured counts and citations. The assistant has no d
 
 P06 adds authenticated report/evidence inspection and operator acknowledgement, with resolution linked to successful source correction. The API exposes the original saved packets and keeps lifecycle state separate. P07 adds the [operator screen at localhost:8000](docs/workbench-ui.md), server-clock freshness, and operator-only runs of the two supplied source snapshots. See the [API setup and endpoint guide](docs/evidence-api.md).
 
-P08's **Who ran this load?** panel shows the selected attempt's actor, reason, and audit events, including separate failed and no-op attempts. Both roles can inspect it; writes remain operator-only. See the [role and audit guide](docs/permissions-audit.md).
+P08's **Who ran this load?** panel shows the selected attempt's actor, reason, and audit events, including separate failed and no-op attempts. Both roles can inspect it. Ingestion and acknowledgement remain operator-only. See the [role and audit guide](docs/permissions-audit.md).
+
+P09's **Explain this evidence** panel lets both roles save an investigation of a selected publication or finding. Facts are deterministic; notes cite the frozen evidence and selected runbooks. Reopening an investigation after source correction preserves what it showed at capture time. Start with offline guidance; live AI requires explicit server configuration and user selection. Apply migration 008 and rebuild the API before using it. See the [investigation guide](docs/investigations.md).
 
 ## Run the foundation with Docker Compose
 
@@ -84,7 +88,7 @@ The [source-contract guide](docs/source-contracts.md) documents field ownership,
 ## Engineering evidence
 
 - **Docker:** separate runtime/test image targets, a non-root Python process, a pinned SQL Server image, readiness checks, private database networking, and persistent storage.
-- **SQL engineering:** eleven tables and three reporting views, source-row lineage, saved findings/reconciliation, atomic publication, an applied-version ledger, and a restricted runtime role. P06 lifecycle migration 007 and its checks are accepted on user-confirmed green CI; P07 is also user-confirmed green; P08 needs its new live gate.
+- **SQL engineering:** twelve tables and three reporting views, source-row lineage, saved findings/reconciliation/investigations, atomic publication, an applied-version ledger, and a restricted runtime role. P06-P08 are accepted on user-confirmed green CI; P09's investigation migration 008 awaits SQL CI acceptance.
 - **Automation:** GitHub Actions builds the images, tests real SQL Server, and captures the guided SQL demo with its evidence packets and media. P07 adds browser verification and a separate `ui-demo` artifact.
 - **Reproducibility:** uv lockfile, explicit configuration, synthetic-data scope, and a Docker build context that excludes credentials.
 

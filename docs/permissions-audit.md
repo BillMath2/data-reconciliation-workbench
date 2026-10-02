@@ -1,12 +1,14 @@
 # Demo roles and audit inspection (P08)
 
-The server derives the actor and role from a valid local demo session. Request bodies cannot choose either value. Both roles can read the same synthetic demo evidence; the operator can also run the two supplied snapshots and acknowledge findings. The assistant is a separate saved-packet CLI reader and has no database or mutation tools.
+The server derives the actor and role from a valid local demo session. Request bodies cannot choose either value. Both roles can read the same synthetic demo evidence and, from P09, save investigation artifacts. The operator can also run the two supplied snapshots and acknowledge findings. The explanation adapter receives frozen context and has no database or mutation tools; the application persists its final result and audit event.
 
 | Operation | Anonymous | Analyst | Operator |
 |---|---|---|---|
 | Screen shell, static assets, process health | Allowed | Allowed | Allowed |
 | Sign in with a configured demo token | Allowed with exact Origin and bounded JSON | Same | Same |
 | Inspect loads, freshness, reports, findings, citations, audit | Denied | Allowed | Allowed |
+| Save an investigation artifact | Denied | Allowed with session CSRF and exact Origin | Same |
+| Read saved investigations and their frozen citations | Denied | Allowed | Allowed |
 | Run golden/corrected snapshot | Denied | Denied | Allowed with session CSRF, exact Origin, matching date, and reason |
 | Acknowledge a finding | Denied | Denied | Allowed with session CSRF, exact Origin, and reason |
 | Sign out | No valid session | Allowed with session CSRF and exact Origin | Same |
@@ -28,4 +30,6 @@ Writes must have one matching Origin, a single `application/json` content type, 
 
 The UI inserts source, rule, evidence, and audit values as text. Its policy permits local scripts/styles and rejects inline script execution. Hidden controls improve the analyst experience; endpoint authorization is what prevents writes. The server never sends the configured demo access tokens to the screen, and the browser does not put tokens in local storage.
 
-See [P08 validation](p08-validation.md) for the tests, outstanding live acceptance, and the distinction between local demo identity and production security.
+See [P08 validation](p08-validation.md) for the tests, user-confirmed CI acceptance, and the distinction between local demo identity and production security.
+
+P09 adds one reviewed POST route, `/api/investigations`. It appends an investigation and required audit event atomically; it grants no authority to modify source/curated data or finding lifecycle. Runtime permissions on `ops.Investigation` are SELECT/INSERT only. The server fixes provider choices and constructs evidence/runbook context. There are no caller-supplied prompts, packets, keys, actor names, model names, or tool definitions. See [P09 boundaries and validation](p09-validation.md).

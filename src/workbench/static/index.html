@@ -206,6 +206,49 @@
             </div>
           </aside>
         </div>
+        <section class="card" aria-labelledby="investigation-title">
+          <p class="eyebrow">SAVED INVESTIGATION</p>
+          <h2 id="investigation-title">Explain this evidence</h2>
+          <p class="muted">
+            Save a dated explanation of the selected load or inspected finding.
+            Facts and runbooks remain available with AI off. Investigations do
+            not change source data or resolve findings.
+          </p>
+          <form id="investigate">
+            <label for="investigation-scope">Scope</label>
+            <select id="investigation-scope">
+              <option value="load">Selected load</option>
+              <option value="finding">
+                Inspected finding in selected publication
+              </option>
+            </select>
+            <label for="investigation-provider">Explanation mode</label>
+            <select id="investigation-provider">
+              <option value="stub">Offline guidance (no model call)</option>
+              <option value="off">AI off</option>
+              <option value="openai" id="live-ai" disabled>
+                Live AI (server must enable)
+              </option>
+            </select>
+            <button id="investigate-submit" type="submit" disabled>
+              Save investigation
+            </button>
+          </form>
+          <p id="investigation-state" role="status"></p>
+          <div id="investigation-answer"></div>
+          <details>
+            <summary>Cited evidence from this saved investigation</summary>
+            <pre id="investigation-evidence"></pre>
+          </details>
+          <h3>History for the selected attempt</h3>
+          <div id="investigation-history"></div>
+          <button id="investigations-prev" class="quiet" disabled>
+            Previous investigations
+          </button>
+          <button id="investigations-next" class="quiet" disabled>
+            Next investigations
+          </button>
+        </section>
         <section id="operations" class="card operations" hidden>
           <div>
             <p class="eyebrow">OPERATOR ACTION</p>

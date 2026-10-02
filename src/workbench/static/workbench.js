@@ -102,6 +102,7 @@ function clearDetail() {
   $("ack-reason").value = "";
 }
 function clearReport() {
+  clearInvestigation();
   $("metrics").replaceChildren();
   $("accounting").replaceChildren();
   text("publication", "");
@@ -149,6 +150,9 @@ async function enter() {
   $("workbench").hidden = false;
   text("actor", user.actor + " / " + user.role);
   $("operations").hidden = user.role !== "operator";
+  const capabilities = await api("/api/investigations/capabilities");
+  $("live-ai").disabled = !capabilities.live_enabled;
+  $("investigation-provider").value = "stub";
   const snapshots = await api("/api/snapshots");
   $("snapshot").replaceChildren();
   for (const item of snapshots.items) {
@@ -315,6 +319,7 @@ async function selection() {
       );
       $("packet").href = `/api/loads/${selected}/evidence`;
       $("packet").hidden = false;
+      $("investigate-submit").disabled = false;
     } catch (error) {
       if (error.status !== 404) throw error;
       text(
@@ -324,6 +329,8 @@ async function selection() {
     }
   }
   await findings();
+  investigationOffset = 0;
+  await investigationHistory();
 }
 async function findings() {
   clearDetail();
@@ -525,6 +532,219 @@ for (const [id, delta] of [
     action(async () => {
       auditOffset += delta;
       await loadAudit();
+    });
+}
+let investigationOffset = 0;
+function clearInvestigation() {
+  $("investigate-submit").disabled = true;
+  $("investigation-answer").replaceChildren();
+  $("investigation-history").replaceChildren();
+  text(
+    "investigation-state",
+    "Select a load with saved reconciliation to investigate.",
+  );
+  text("investigation-evidence", "");
+  $("investigations-prev").disabled = true;
+  $("investigations-next").disabled = true;
+}
+async function investigationHistory() {
+  $("investigation-history").replaceChildren();
+  if (!$("load").value) return;
+  const result = await api(
+    `/api/investigations?load_id=${$("load").value}&limit=${pageSize}&offset=${investigationOffset}`,
+  );
+  for (const item of result.items) {
+    const button = node(
+      "button",
+      `${item.created_at} UTC · ${item.created_by} · ${item.exception_id ? "finding" : "load"}`,
+      "secondary",
+    );
+    button.onclick = () =>
+      action(async () =>
+        showInvestigation(
+          await api(`/api/investigations/${item.investigation_id}`),
+        ),
+      );
+    $("investigation-history").append(button);
+  }
+  if (!result.items.length)
+    $("investigation-history").append(
+      node("p", "No saved investigations on this page.", "muted"),
+    );
+  $("investigations-prev").disabled = investigationOffset === 0;
+  $("investigations-next").disabled = result.items.length < pageSize;
+}
+function showInvestigation(saved) {
+  const context = saved.context,
+    result = saved.result,
+    target = $("investigation-answer");
+  target.replaceChildren();
+  text("investigation-evidence", "");
+  text(
+    "investigation-state",
+    `${{ stub: "OFFLINE GUIDANCE — no model called", off: "AI OFF — deterministic guidance", unavailable: "AI UNAVAILABLE — deterministic guidance", ok: "LIVE AI — review prose against evidence" }[result.status]} · saved ${saved.created_at} UTC by ${saved.created_by}`,
+  );
+  target.append(
+    node(
+      "p",
+      `Attempt ${saved.requested_load_id} · publication ${saved.publication_load_id}${saved.exception_id ? " · finding " + saved.exception_id : ""}`,
+      "mono",
+    ),
+  );
+  target.append(node("p", result.review_note, "muted"));
+  function citation(id) {
+    const button = node("button", id, "quiet mono");
+    button.onclick = () =>
+      action(async () => {
+        const evidence = await api(
+          `/api/investigations/${saved.investigation_id}/evidence/${encodeURIComponent(id)}`,
+        );
+        text("investigation-evidence", JSON.stringify(evidence, null, 2));
+        $("investigation-evidence").parentElement.open = true;
+      });
+    return button;
+  }
+  target.append(node("h3", "Confirmed facts"));
+  const summary = context.observation.report_state.summary;
+  const facts = node("table"),
+    header = node("tr");
+  header.append(node("th", "Saved measure"), node("th", "Value"));
+  facts.append(header);
+  for (const key of [
+    "raw_rows",
+    "accepted_rows",
+    "excluded_duplicate_rows",
+    "excluded_invalid_rows",
+    "source_completed_count",
+    "curated_completed_count",
+    "completed_count_difference",
+    "source_completed_units",
+    "curated_completed_units",
+    "completed_unit_difference",
+  ]) {
+    const row = node("tr");
+    row.append(
+      node("td", key.replaceAll("_", " ")),
+      node("td", summary[key] ?? "Unknown — incomplete source"),
+    );
+    facts.append(row);
+  }
+  target.append(facts);
+  if (!summary.source_status_complete)
+    target.append(
+      node(
+        "p",
+        "Source completed count is incomplete: some statuses are unknown.",
+        "error",
+      ),
+    );
+  if (!summary.source_units_complete)
+    target.append(
+      node("p", "Source units are incomplete; no total is inferred.", "error"),
+    );
+  target.append(
+    node(
+      "p",
+      summary.accounting_verified
+        ? "All captured rows are accounted for."
+        : "Accounting is unverified.",
+    ),
+  );
+  for (const reason of summary.primary_reasons)
+    target.append(
+      node(
+        "p",
+        `${reason.rule_id}: ${reason.rows} excluded rows; ${reason.completed_units ?? "unknown"} completed units.`,
+      ),
+    );
+  if (!summary.primary_reasons.length)
+    target.append(node("p", "No excluded rows."));
+  target.append(citation(`reconciliation:${saved.publication_load_id}`));
+  const observation = context.observation;
+  target.append(
+    node("h3", "State observed at capture time"),
+    node(
+      "p",
+      `${observation.captured_at} · attempt ${observation.report_state.requested_status} · publication ${observation.report_state.publication_status} · ${observation.report_state.is_current ? "current at capture" : "historical at capture"}`,
+    ),
+    node(
+      "p",
+      `Selected date: ${observation.freshness.business_date ?? observation.report_state.business_date} · availability ${observation.freshness.status}${observation.freshness.failed_refresh ? " · failed refresh recorded" : ""}`,
+    ),
+    node(
+      "p",
+      observation.selected_finding
+        ? `Finding state at capture: ${observation.selected_finding.status}${observation.selected_finding.resolved_by_load_id ? " · successor " + observation.selected_finding.resolved_by_load_id : ""}`
+        : "Scope: entire saved publication.",
+    ),
+    node("p", context.observation.boundary, "muted"),
+    citation(context.observation.id),
+  );
+  for (const [key, title] of [
+    ["possible_causes", "Possible causes"],
+    ["missing_evidence", "Missing evidence"],
+    ["suggested_next_checks", "Suggested next checks"],
+  ]) {
+    target.append(node("h3", title));
+    if (!result.notes[key].length)
+      target.append(node("p", "No additional causes established."));
+    for (const note of result.notes[key]) {
+      target.append(node("p", note.text));
+      for (const id of note.evidence_ids) target.append(citation(id));
+    }
+  }
+  target.append(node("h3", "Selected runbooks and owners"));
+  for (const book of context.runbooks)
+    target.append(
+      node("p", `${book.title} · ${book.owner} · version ${book.version}`),
+      citation(book.id),
+    );
+  target.append(
+    node(
+      "p",
+      `${result.model} · prompt ${result.prompt_version} · ${result.latency_ms} ms · ${result.attempts} provider attempts${result.reason ? " · " + result.reason : ""}`,
+      "muted",
+    ),
+  );
+}
+$("investigate").onsubmit = (event) => {
+  event.preventDefault();
+  action(async () => {
+    const finding = $("investigation-scope").value === "finding";
+    if (finding && !detailId) throw new Error("Inspect a finding first.");
+    text(
+      "investigation-state",
+      "Creating investigation. A live call can take up to thirty seconds.",
+    );
+    let saved;
+    try {
+      saved = await api("/api/investigations", {
+        load_id: $("load").value,
+        exception_id: finding ? detailId : null,
+        provider: $("investigation-provider").value,
+      });
+    } catch (error) {
+      text(
+        "investigation-state",
+        "No saved result received. Refresh history before retrying; a provider call may already have occurred.",
+      );
+      throw error;
+    }
+    showInvestigation(saved);
+    investigationOffset = 0;
+    await investigationHistory();
+    await loadAudit();
+    announce("Investigation saved with its evidence snapshot.");
+  });
+};
+for (const [id, delta] of [
+  ["investigations-prev", -pageSize],
+  ["investigations-next", pageSize],
+]) {
+  $(id).onclick = () =>
+    action(async () => {
+      investigationOffset += delta;
+      await investigationHistory();
     });
 }
 action(async () => {

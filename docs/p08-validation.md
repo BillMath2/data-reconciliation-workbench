@@ -1,6 +1,6 @@
 # P08 validation record
 
-Status: implemented and verified locally; live SQL/browser acceptance pending. P07 was accepted on the user's green-CI confirmation for `9c98633`. No P07 artifact download or independent run-log inspection is claimed.
+Status: complete on the user's October 2, 2026 confirmation that all runs after P03 are green, including the P08 change in `c7776e8`. The exact P08 run URL and artifacts have not been supplied or independently inspected in this session. This clears the P09 dependency.
 
 ## Changes
 
@@ -27,13 +27,15 @@ Status: implemented and verified locally; live SQL/browser acceptance pending. P
 - Ruff lint/format, JavaScript syntax, locked dependency consistency, fixture consistency, Compose configuration, and wheel asset checks pass.
 - Docker's engine is unavailable locally. No new SQL execution is claimed.
 
-## CI gate
+## CI acceptance
 
-Commit/push and require both Foundation checks jobs green. Expected full suite at this revision: **293 passed**, including **48 SQL tests without skips**. Three new SQL cases in `tests/integration/test_permissions_audit.py` check denied-request state preservation, attributable/append-only history, and required-audit rollback. Existing SQL, API, and browser checks remain mandatory.
+The user confirmed the subsequent CI runs green on October 2, 2026. The gate requires both Foundation checks jobs green. Expected full suite at this revision (not an independently inspected count): **293 passed**, including **48 SQL tests without skips**. Three new SQL cases in `tests/integration/test_permissions_audit.py` check denied-request state preservation, attributable/append-only history, and required-audit rollback. Existing SQL, API, and browser checks remain mandatory.
 
-Retain `sql-checks` and the `ui-demo` verification manifest/captures with the run URL. P08 remains pending until this new live gate passes. Then the planned next package is P09 (AI investigation in the screen); P11 recovery/performance can also proceed after P08.
+Retain `sql-checks` and the `ui-demo` verification manifest/captures with the run URL. P08 is accepted on that confirmation; artifact retention and independent log review remain outstanding. The next planned package is P09 (AI investigation in the screen); P11 recovery/performance can also proceed independently.
 
 ## Scope limits
+
+P09 subsequently adds the reviewed investigation-artifact POST route and SELECT/INSERT permission on its new table. Both roles can save those artifacts; ingestion and acknowledgement remain operator-only. The P08 counts and route inventory above describe the P08 checkpoint. See [P09 validation](p09-validation.md) for the expanded current surface.
 
 Analyst/operator are predefined local demo identities, not individual enterprise accounts. CLI actor labels are caller-provided and are not authenticated identities. Both HTTP roles use the restricted runtime SQL login behind server-side authorization; the database does not identify individual browser roles. Direct SQL compromise of that login is outside the HTTP role boundary.
 

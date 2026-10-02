@@ -74,6 +74,21 @@ def journey(origin, analyst, operator, output, fixture):
         ready()
         finding = page.locator("#evidence-id").inner_text().split(":")[1]
         original_source = page.locator("#source").inner_text()
+        page.locator("#investigation-scope").select_option("finding")
+        page.locator("#investigate-submit").click()
+        expect(page.locator("#investigation-state")).to_contain_text("OFFLINE GUIDANCE")
+        ready()
+        expect(page.locator("#investigation-answer")).to_contain_text("Confirmed facts")
+        expect(page.locator("#investigation-answer")).to_contain_text("Suggested next checks")
+        saved_id = page.request.get(origin + f"/api/investigations?load_id={golden}").json()[
+            "items"
+        ][0]["investigation_id"]
+        frozen = page.request.get(origin + f"/api/investigations/{saved_id}").json()
+        assert frozen["context"]["observation"]["selected_finding"]["status"] == "open"
+        page.locator("#investigation-answer button").first.click()
+        ready()
+        expect(page.locator("#investigation-evidence")).to_contain_text("reconciliation")
+        page.locator("#investigation-scope").select_option("load")
         capture("01-golden")
         page.locator("#ack-reason").fill("Reviewed captured source with source owner")
         page.get_by_role("button", name="Acknowledge finding", exact=True).click()
@@ -89,6 +104,12 @@ def journey(origin, analyst, operator, output, fixture):
         expect(page.locator("#metrics")).to_contain_text("197 → 197")
         expect(page.locator("#exceptions tr")).to_have_count(0)
         corrected = page.locator("#load").input_value()
+        assert page.request.get(origin + f"/api/investigations/{saved_id}").json() == frozen
+        page.locator("#investigation-provider").select_option("off")
+        page.locator("#investigate-submit").click()
+        expect(page.locator("#investigation-state")).to_contain_text("AI OFF")
+        ready()
+        expect(page.locator("#investigation-answer")).to_contain_text("No excluded rows.")
         capture("03-corrected")
         page.locator("#scope").select_option("date")
         ready()
@@ -121,6 +142,36 @@ def journey(origin, analyst, operator, output, fixture):
         expect(page.locator("#login-panel")).to_be_visible()
         sign_in(analyst)
         expect(page.locator("#operations")).to_be_hidden()
+        page.locator("#load").select_option(golden)
+        ready()
+        page.locator("#investigation-history button").first.click()
+        ready()
+        expect(page.locator("#investigation-answer")).to_contain_text(
+            "Finding state at capture: open"
+        )
+        page.locator("#investigate-submit").click()
+        expect(page.locator("#investigation-state")).to_contain_text("OFFLINE GUIDANCE")
+        ready()
+        expect(page.locator("#investigation-state")).to_contain_text("demo-analyst")
+        capture("09-investigation")
+        page.set_viewport_size({"width": 390, "height": 844})
+        assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
+        page.set_viewport_size({"width": 1440, "height": 1200})
+        # Model prose is untrusted, including a tampered stored response.
+        injection = '<img src=x onerror="window.investigationInjected=true">'
+
+        def injected_investigation(route):
+            stored = route.fetch().json()
+            stored["result"]["notes"]["missing_evidence"][0]["text"] = injection
+            route.fulfill(json=stored)
+
+        page.route(origin + f"/api/investigations/{saved_id}", injected_investigation)
+        page.locator("#investigation-history button").last.click()
+        ready()
+        expect(page.locator("#investigation-answer")).to_contain_text(injection)
+        assert page.locator("#investigation-answer img").count() == 0
+        assert page.evaluate("window.investigationInjected || false") is False
+        page.unroute(origin + f"/api/investigations/{saved_id}")
         session = page.request.get(origin + "/api/session").json()
         denied = page.request.post(
             origin + "/api/activity-runs",
@@ -350,6 +401,11 @@ def journey(origin, analyst, operator, output, fixture):
                     "analyst acknowledgement denial",
                     "cross-origin browser form",
                     "expiry",
+                    "operator and analyst saved investigations",
+                    "AI-off clean report",
+                    "frozen finding after correction",
+                    "saved citation resolution",
+                    "investigation prose escaping and mobile layout",
                 ],
             },
             indent=2,
@@ -373,11 +429,12 @@ def main():
     )
     if args.fixture:
         sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tests/e2e"))
-        from fixture_service import FixtureService
+        from fixture_service import FixtureInvestigations, FixtureService
 
         analyst, operator = secrets.token_hex(24), secrets.token_hex(24)
         app = create_app(None, analyst_token=analyst, operator_token=operator, origin=args.origin)
         app.state.evidence = app.state.operations = FixtureService()
+        app.state.investigations = FixtureInvestigations()
         server = uvicorn.Server(
             uvicorn.Config(
                 app,

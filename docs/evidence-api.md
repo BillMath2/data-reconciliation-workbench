@@ -1,10 +1,10 @@
 # Evidence API and exception lifecycle (P06)
 
-Status: P06 and P07 accepted on user-confirmed green CI; see [P06 validation](p06-validation.md) and [P07 validation](p07-validation.md). P08 adds attempt-audit inspection and expands the HTTP boundary and verification, pending its own live gate. This is a local demo API, not a production identity service.
+Status: P06 and P07 accepted on user-confirmed green CI; see [P06 validation](p06-validation.md) and [P07 validation](p07-validation.md). P08 adds attempt-audit inspection and expands the HTTP boundary and verification; its CI is also user-confirmed green. See [P08 validation](p08-validation.md). This is a local demo API, not a production identity service.
 
 ## Start the API
 
-The API uses migration 007 and the restricted `workbench_app` login. From PowerShell at the repository root:
+The API now requires migration 008 for P09 investigations and the restricted `workbench_app` login. From PowerShell at the repository root:
 
 ```powershell
 .\scripts\initialize-demo.ps1
@@ -33,7 +33,7 @@ $findings = Invoke-RestMethod -Uri "$base/api/exceptions?business_date=2026-09-2
 $findings.items | Select-Object exception_id, rule_id, status, resolved_by_load_id
 ```
 
-Use `WB_DEMO_ANALYST_TOKEN` instead for read-only access. Both identities can inspect all synthetic demo data. They are not institutional accounts or tenant boundaries.
+Use `WB_DEMO_ANALYST_TOKEN` for evidence inspection and saving investigation artifacts, without ingestion or acknowledgement rights. Both identities can inspect all synthetic demo data. They are not institutional accounts or tenant boundaries.
 
 To acknowledge an unresolved finding, replace `EXCEPTION_UUID` with an ID from the response:
 
@@ -65,6 +65,10 @@ All evidence endpoints require a session. Responses are JSON with `Cache-Control
 | `GET /api/exceptions` | Filter by `load_id`, `business_date`, `status`, `limit`, `offset` |
 | `GET /api/exceptions/{exception_id}` | Original finding, untrusted source/reference evidence, matching versioned rule definition, lifecycle, and audit events |
 | `POST /api/exceptions/{exception_id}/acknowledge` | Operator-only acknowledgement with required reason; actor comes from the session |
+| `POST /api/investigations` | Both roles can save a publication/finding explanation with session Origin/CSRF; see [P09 API and limits](investigations.md#api) |
+| `GET /api/investigations` and `/api/investigations/{id}` | Per-attempt history and frozen saved result |
+| `GET /api/investigations/{id}/evidence/{evidence_id}` | Citation resolution within that saved investigation only |
+| `GET /api/investigations/capabilities` | Whether the server has enabled live AI; no secrets |
 
 List limits default to 50 and cap at 100; offsets are bounded to 100,000. Exception status defaults to `unresolved`, including acknowledged findings; other values are `open`, `acknowledged`, `resolved`, and `all`. Ordering is stable for an unchanged dataset, not a snapshot across simultaneous updates. A no-op load resolves to its reused publication for report/packet/finding inspection. Failed loads expose findings but return 404 for unavailable reconciliation. Unknown IDs return 404; malformed arguments return 422; unavailable SQL returns a redacted 503.
 
@@ -89,7 +93,7 @@ Only daily-activity findings have automatic successor resolution in this slice; 
 
 Every write requires the exact configured Origin and a bounded JSON body. Authenticated writes additionally require the session's CSRF token; acknowledgement also requires the operator role. Cookies expire after an hour, are rotated at login, and are revoked on logout. The session store is bounded. The localhost HTTP cookie is intentionally not marked Secure; production TLS/SSO is outside this demo. Host validation rejects DNS-rebinding hosts; CORS is not enabled. Use the exact `http://127.0.0.1:8000` origin for the Compose setup.
 
-Validation errors omit request bodies, and SQL errors are redacted. Raw source values are returned only as untrusted JSON; the P07 screen renders them with text nodes and applies a restrictive Content Security Policy. Snapshot runs use the same operator/Origin/CSRF boundary as acknowledgement; no path, URL, SQL, actor, or role can be supplied. Worker contention returns 409. An admitted pipeline failure returns its recorded `status: failed` and load ID so the screen can inspect it; invalid selection returns 422. P08 implements broader permission/audit verification; its live CI gate remains pending. The optional AI explanation still has no write path.
+Validation errors omit request bodies, and SQL errors are redacted. Raw source values are returned only as untrusted JSON; the P07 screen renders them with text nodes and applies a restrictive Content Security Policy. Snapshot runs use the same operator/Origin/CSRF boundary as acknowledgement; no path, URL, SQL, actor, or role can be supplied. Worker contention returns 409. An admitted pipeline failure returns its recorded `status: failed` and load ID so the screen can inspect it; invalid selection returns 422. P08 implements broader permission/audit verification; its CI gate is user-confirmed green. The optional AI explanation still has no write path.
 
 P08 also verifies the actual received body against the 8 KiB limit and its declared length before JSON parsing. Duplicate boundary headers and transfer encoding are rejected. See [roles, audit inspection, and HTTP protections](permissions-audit.md), including the limits of this local demo's attribution.
 

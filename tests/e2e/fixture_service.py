@@ -7,8 +7,49 @@ from pathlib import Path
 from uuid import uuid4
 
 from workbench.freshness import assess
+from workbench.investigations import InvestigationService
 from workbench.operations import OperationsService
 from workbench.validation import LoadError
+
+
+class FixtureInvestigations(InvestigationService):
+    """Exercise real capture/explanation; only persistence is simulated for browser preview."""
+
+    def __init__(self):
+        super().__init__(None)
+        self.records = {}
+
+    def save(self, identifier, load_id, exception_id, actor, context, result):
+        self.records[identifier] = copy.deepcopy(
+            {
+                "investigation_id": identifier,
+                "requested_load_id": load_id,
+                "publication_load_id": context["publication_load_id"],
+                "exception_id": exception_id,
+                "created_by": actor,
+                "created_at": datetime.now(UTC).isoformat(),
+                "context": context,
+                "result": result,
+            }
+        )
+
+    def get(self, identifier):
+        if identifier not in self.records:
+            raise LoadError("NOT_FOUND", "Saved investigation not found.")
+        return copy.deepcopy(self.records[identifier])
+
+    def list(self, load_id, limit=25, offset=0):
+        records = [
+            r for r in reversed(list(self.records.values())) if r["requested_load_id"] == load_id
+        ]
+        return {
+            "items": [
+                {k: r[k] for k in ("investigation_id", "created_by", "created_at", "exception_id")}
+                for r in records[offset : offset + limit]
+            ],
+            "limit": limit,
+            "offset": offset,
+        }
 
 
 class FixtureService:

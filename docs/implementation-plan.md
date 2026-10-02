@@ -1,8 +1,8 @@
 # Data Reconciliation Workbench: implementation plan
 
-Date: 2026-09-28; status reviewed: 2026-10-01
+Date: 2026-09-28; status reviewed: 2026-10-02
 
-Status: P01-P07, including P05A, are complete. The user confirmed P07 CI green for `9c98633`; exact run artifacts have not been inspected here and the checked-in screenshots remain labeled previews. P08 is implemented locally: load-audit inspection, actual request-byte enforcement, and expanded permission/audit/escaping/assistant-boundary tests. Local verification is 245 passing tests and 48 SQL tests skipped, plus the expanded browser walkthrough against an explicit simulated service. P08 live SQL/browser acceptance remains pending. See [P07 validation](p07-validation.md), [P08 validation](p08-validation.md), and the [role/audit guide](permissions-audit.md). Retain the original 120-160-hour planning budget.
+Status: P01-P08, including P05A, are complete. On October 2, 2026, the user confirmed all runs after P03 green, including P08 commit `c7776e8`. Exact P08 run artifacts have not been inspected here and the checked-in screenshots remain labeled previews. P09 is implemented and locally SQL-verified: migration 008 applied, all 338 tests passed (52 SQL cases, no skips), and the real SQL/browser walkthrough passed. GitHub CI acceptance remains pending. P09 provides screen investigations, frozen context/citations, selected runbooks, structured sections, and bounded optional AI with offline fallback. See [P09 validation](p09-validation.md), [local SQL evidence](evidence/p09-local/README.md), and the [investigation guide](investigations.md). Retain the original 120-160-hour planning budget.
 
 ### How to read the plan
 
@@ -214,7 +214,13 @@ Work-package subtotal: **108-148 focused hours**. Reserve **12 additional hours*
 
 **P06 checkpoint (October 1, 2026; superseded below):** user-confirmed green CI cleared P07. Remaining P07-P12 estimates totaled **44-60 focused hours**, excluding contingency and without a measured elapsed-effort claim.
 
-**P07 checkpoint (October 1, 2026):** user-confirmed green CI for `9c98633` clears P08. Remaining P08-P12 estimates total **36-48 focused hours**, excluding contingency; no elapsed-effort measurement is implied. P08 has local implementation and verification, pending its new SQL/browser gate. Once P08 passes, P09 is the next package in sequence; P11 can also proceed independently.
+**P07 checkpoint (October 1, 2026):** user-confirmed green CI for `9c98633` clears P08. Remaining P08-P12 estimates total **36-48 focused hours**, excluding contingency; no elapsed-effort measurement is implied. P08 was locally implemented at this checkpoint; its gate was subsequently cleared as recorded below.
+
+**P08 checkpoint (October 2, 2026):** user-confirmed green CI for the runs after P03, including P08 commit `c7776e8`, completes the usable-workbench milestone. P09 is next; P11 can also proceed independently. Remaining P09-P12 estimates total **30-40 focused hours**, excluding contingency and without a measured elapsed-effort claim.
+
+**P09 local implementation (October 2, 2026):** the screen now saves immutable investigation artifacts with the original packet, dated observations, selected runbooks, exact report facts, and optional model notes. Both roles may create investigation artifacts; ingestion and acknowledgement remain operator-only. P09 supports saved publications, including clean/incomplete reports and no-op reuse; failed attempts without saved reconciliation retain the existing inspector. Full acceptance awaits green SQL/browser CI. P10-P12 retain their original **22-30 focused hours** of estimates after this gate; no actual-effort measurement or P10 model-evaluation completion is implied.
+
+**P09 local SQL checkpoint (October 2, 2026):** Docker Desktop was installed and started. The `workbench` database was created with migrations 001–008; repeated setup applied nothing. All **338 tests passed**, including **52 SQL cases with no skips**. The live SQL CLI demonstration, API inspection, and browser journey also passed. The API was restored to the populated main database and left healthy. This clears the local environment blocker; GitHub CI and P10's expanded live-model evaluation remain separate gates.
 
 1. **Foundation (P01-P03, 24-32 h):** reproducible sources, migrated database, Compose setup, and SQL Server CI.
 2. **First demonstrable story (P04-P05A, 32-46 h):** CLI proof, initial README/screenshots/recording, and a real AI explanation of the golden discrepancy.
@@ -282,7 +288,7 @@ docs/                 # Plan, architecture, dictionary, runbooks, demo
 scripts/              # Setup, database lifecycle, and demo helpers
 ```
 
-The foundation, contracts, fixtures, mock source API, ingestion pipeline, reconciliation, saved evidence, and CLI demonstration are implemented and verified. P05A supplies the checked CLI assistant; P06's evidence API/lifecycle CI is user-confirmed green. P07's screen lives in `src/workbench/static/` and is served by `api.py`; P07 CI is user-confirmed green. P08 adds the audit panel and verification, pending its own live gate. Static HTML and small JavaScript use the existing JSON API without adding a template runtime. The mock API lives in `src/workbench/mock_registry.py`, and the generator in `src/workbench/fixtures.py`. Keep credentials, generated runs, and local environments out of version control and Docker build context. Commit only synthetic fixtures and sanitized configuration templates.
+The foundation, contracts, fixtures, mock source API, ingestion pipeline, reconciliation, saved evidence, and CLI demonstration are implemented and verified. P05A supplies the checked CLI assistant; P06's evidence API/lifecycle CI is user-confirmed green. P07's screen lives in `src/workbench/static/` and is served by `api.py`; P07 CI is user-confirmed green. P08 adds the audit panel and verification, accepted on user-confirmed green CI. Static HTML and small JavaScript use the existing JSON API without adding a template runtime. The mock API lives in `src/workbench/mock_registry.py`, and the generator in `src/workbench/fixtures.py`. Keep credentials, generated runs, and local environments out of version control and Docker build context. Commit only synthetic fixtures and sanitized configuration templates.
 
 ## 9. Risks and decision checkpoints
 

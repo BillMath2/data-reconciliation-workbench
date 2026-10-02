@@ -64,6 +64,8 @@ services:
       WB_SQL_PASSWORD: ${WB_SQL_RUNTIME_PASSWORD:?Run scripts/initialize-demo.ps1}
       WB_DEMO_ANALYST_TOKEN: ${WB_DEMO_ANALYST_TOKEN:-}
       WB_DEMO_OPERATOR_TOKEN: ${WB_DEMO_OPERATOR_TOKEN:-}
+      WB_AI_LIVE_ENABLED: ${WB_AI_LIVE_ENABLED:-false}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
     ports:
       - "127.0.0.1:8000:8000"
     depends_on:

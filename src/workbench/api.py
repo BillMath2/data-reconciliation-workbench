@@ -23,6 +23,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from workbench.config import ConfigurationError, load_settings
 from workbench.evidence import EvidenceService
 from workbench.http_boundary import DemoBoundary
+from workbench.investigations import InvestigationService
 from workbench.operations import OperationsService
 from workbench.validation import LoadError
 
@@ -103,6 +104,13 @@ class ActivityRun(Acknowledgement):
     business_date: str = Field(pattern=r"^\d{4}-\d{2}-\d{2}$")
 
 
+class InvestigationRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    load_id: UUID
+    exception_id: UUID | None = None
+    provider: Literal["off", "stub", "openai"] = "stub"
+
+
 def identity(request: Request):
     return request.app.state.sessions.get(request.cookies.get(COOKIE))
 
@@ -146,7 +154,15 @@ def invoke(method, *args, **kwargs):
         ) from None
 
 
-def create_app(settings, *, analyst_token, operator_token, origin="http://127.0.0.1:8000"):
+def create_app(
+    settings,
+    *,
+    analyst_token,
+    operator_token,
+    origin="http://127.0.0.1:8000",
+    ai_key=None,
+    ai_live_enabled=False,
+):
     if not re.fullmatch(r"http://(127\.0\.0\.1|localhost):[0-9]{1,5}", origin):
         raise ConfigurationError("The demo origin must be an explicit localhost HTTP port.")
     app = FastAPI(
@@ -158,6 +174,9 @@ def create_app(settings, *, analyst_token, operator_token, origin="http://127.0.
     app.state.sessions = Sessions(analyst_token, operator_token)
     app.state.evidence = EvidenceService(settings)
     app.state.operations = OperationsService(settings)
+    app.state.investigations = InvestigationService(
+        settings, key=ai_key, live_enabled=ai_live_enabled
+    )
     assets = Path(__file__).with_name("static")
     app.mount("/static", StaticFiles(directory=assets), name="static")
 
@@ -211,6 +230,36 @@ def create_app(settings, *, analyst_token, operator_token, origin="http://127.0.
         return {"status": "signed_out"}
 
     reader = [Depends(identity)]
+
+    @app.get("/api/investigations/capabilities", dependencies=reader)
+    def investigation_capabilities():
+        return app.state.investigations.capabilities()
+
+    @app.post("/api/investigations")
+    def investigate(body: InvestigationRequest, user: Annotated[Identity, Depends(writer)]):
+        return invoke(
+            app.state.investigations.create,
+            app.state.evidence,
+            app.state.operations,
+            str(body.load_id),
+            str(body.exception_id) if body.exception_id else None,
+            body.provider,
+            user.actor,
+        )
+
+    @app.get("/api/investigations", dependencies=reader)
+    def investigation_history(
+        load_id: UUID, limit: int = Query(25, ge=1, le=100), offset: int = Query(0, ge=0, le=100000)
+    ):
+        return invoke(app.state.investigations.list, str(load_id), limit, offset)
+
+    @app.get("/api/investigations/{investigation_id}", dependencies=reader)
+    def saved_investigation(investigation_id: UUID):
+        return invoke(app.state.investigations.get, str(investigation_id))
+
+    @app.get("/api/investigations/{investigation_id}/evidence/{evidence_id}", dependencies=reader)
+    def investigation_citation(investigation_id: UUID, evidence_id: str):
+        return invoke(app.state.investigations.citation, str(investigation_id), evidence_id)
 
     @app.get("/api/snapshots", dependencies=reader)
     def snapshots(svc: Annotated[OperationsService, Depends(operations)]):
@@ -316,6 +365,8 @@ def main(argv=None):
             analyst_token=values.get("WB_DEMO_ANALYST_TOKEN"),
             operator_token=values.get("WB_DEMO_OPERATOR_TOKEN"),
             origin=f"http://127.0.0.1:{args.port}",
+            ai_key=values.get("OPENAI_API_KEY"),
+            ai_live_enabled=values.get("WB_AI_LIVE_ENABLED", "false").lower() == "true",
         )
     except (ConfigurationError, OSError, UnicodeError) as error:
         message = (

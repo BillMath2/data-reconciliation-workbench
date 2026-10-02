@@ -10,6 +10,30 @@
   --muted: #586d74;
   --line: #dce4e2;
 }
+#investigate select {
+  max-width: 100%;
+  margin-bottom: 12px;
+}
+#investigation-answer,
+#investigation-history,
+#investigation-state {
+  overflow-wrap: anywhere;
+}
+#investigation-answer button,
+#investigation-history button {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+  margin: 3px 4px 3px 0;
+}
+#investigation-answer {
+  max-height: 700px;
+  overflow: auto;
+}
+#investigation-answer table {
+  width: 100%;
+  table-layout: fixed;
+}
 .audit-events {
   list-style: none;
   padding: 0;
