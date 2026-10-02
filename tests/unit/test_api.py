@@ -31,6 +31,9 @@ class FakeEvidence:
     def packet(self, load_id):
         return copy.deepcopy(PACKET)
 
+    def audit(self, load_id, limit, offset):
+        return {"load": {"load_id": load_id}, "items": [], "limit": limit, "offset": offset}
+
     def citation(self, load_id, evidence_id):
         match = next((e for e in PACKET["evidence"] if e["id"] == evidence_id), None)
         if match is None:
@@ -95,6 +98,7 @@ def login(client, role="analyst"):
         f"/api/exceptions/{EXCEPTION}",
         f"/api/loads/{LOAD}/reconciliation",
         f"/api/loads/{LOAD}/evidence",
+        f"/api/loads/{LOAD}/audit",
         f"/api/loads/{LOAD}/evidence/reconciliation:{LOAD}",
     ],
 )
@@ -291,3 +295,85 @@ def test_snapshot_write_boundary(client, fault):
     result = client.post("/api/activity-runs", headers=headers, json=body)
     assert result.status_code in {401, 403, 422}
     assert not client.app.state.operations.calls
+
+
+@pytest.mark.parametrize(
+    "path,body",
+    [
+        (
+            "/api/activity-runs",
+            {"snapshot": "golden", "business_date": "2026-09-25", "reason": "review"},
+        ),
+        (f"/api/exceptions/{EXCEPTION}/acknowledge", {"reason": "review"}),
+    ],
+)
+@pytest.mark.parametrize(
+    "fault",
+    [
+        "analyst",
+        "forged_cookie",
+        "expired",
+        "logged_out",
+        "rotated_csrf",
+        "null_origin",
+        "missing_origin",
+        "wrong_origin",
+        "missing_csrf",
+    ],
+)
+def test_all_operator_writes_reject_invalid_authority(client, path, body, fault, monkeypatch):
+    headers = login(client, "analyst" if fault == "analyst" else "operator")
+    if fault == "forged_cookie":
+        client.cookies.clear()
+        client.cookies.set(api.COOKIE, "demo-operator")
+    elif fault == "expired":
+        now = api.time.monotonic()
+        monkeypatch.setattr(api.time, "monotonic", lambda: now + api.SESSION_SECONDS + 1)
+    elif fault == "logged_out":
+        old = client.cookies[api.COOKIE]
+        assert client.post("/api/session/logout", headers=headers, json={}).status_code == 200
+        client.cookies.set(api.COOKIE, old)
+    elif fault == "rotated_csrf":
+        login(client, "operator")
+    elif fault == "missing_origin":
+        headers.pop("Origin")
+    elif fault == "missing_csrf":
+        headers.pop("X-CSRF-Token")
+    elif fault in {"null_origin", "wrong_origin"}:
+        headers["Origin"] = "null" if fault == "null_origin" else "http://localhost:8000"
+    response = client.post(path, headers=headers, json=body)
+    assert response.status_code in {401, 403}
+    assert not client.app.state.evidence.calls
+    assert not client.app.state.operations.calls
+    assert response.headers["cache-control"] == "no-store"
+
+
+def test_write_surface_has_no_unreviewed_or_assistant_mutation_route(client):
+    writes = {
+        (route.path, method)
+        for route in client.app.routes
+        for method in getattr(route, "methods", [])
+        if method not in {"GET", "HEAD", "OPTIONS"}
+    }
+    assert writes == {
+        ("/api/session", "POST"),
+        ("/api/session/logout", "POST"),
+        ("/api/activity-runs", "POST"),
+        ("/api/exceptions/{exception_id}/acknowledge", "POST"),
+    }
+    headers = login(client, "operator")
+    for path in ("/api/activity-runs", f"/api/exceptions/{EXCEPTION}/acknowledge"):
+        assert client.get(path).status_code == 405
+        assert client.request("DELETE", path, headers=headers, json={}).status_code == 405
+    assert not client.app.state.evidence.calls and not client.app.state.operations.calls
+
+
+def test_logout_requires_csrf_even_for_analyst_and_audit_has_bounded_read_filters(client):
+    headers = login(client)
+    assert (
+        client.post("/api/session/logout", headers={"Origin": ORIGIN}, json={}).status_code == 403
+    )
+    assert client.get("/api/session").status_code == 200
+    for query in ("limit=101", "offset=-1"):
+        assert client.get(f"/api/loads/{LOAD}/audit?{query}").status_code == 422
+    assert client.post("/api/session/logout", headers=headers, json={}).status_code == 200

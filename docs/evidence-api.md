@@ -1,6 +1,6 @@
 # Evidence API and exception lifecycle (P06)
 
-Status: P06 accepted on user-confirmed green CI; see [P06 validation](p06-validation.md). P07 adds the [operator screen](workbench-ui.md) and the endpoints below, pending its own live SQL/browser gate. This is a local demo API, not a production identity service.
+Status: P06 and P07 accepted on user-confirmed green CI; see [P06 validation](p06-validation.md) and [P07 validation](p07-validation.md). P08 adds attempt-audit inspection and expands the HTTP boundary and verification, pending its own live gate. This is a local demo API, not a production identity service.
 
 ## Start the API
 
@@ -59,6 +59,7 @@ All evidence endpoints require a session. Responses are JSON with `Cache-Control
 | `POST /api/session/logout` | Invalidates the session; requires origin, JSON, and CSRF token |
 | `GET /api/loads` | Activity attempts, newest first; optional `business_date`, `limit`, `offset` |
 | `GET /api/loads/{load_id}/reconciliation` | Stored report with original/current publication metadata |
+| `GET /api/loads/{load_id}/audit` | Selected attempt's actor and paginated events; retains separate no-op/failed history; both roles can read |
 | `GET /api/loads/{load_id}/evidence` | Exact saved P05/P05A packet; no historical recomputation |
 | `GET /api/loads/{load_id}/evidence/{evidence_id}` | Resolve a citation only within the selected packet |
 | `GET /api/exceptions` | Filter by `load_id`, `business_date`, `status`, `limit`, `offset` |
@@ -88,6 +89,8 @@ Only daily-activity findings have automatic successor resolution in this slice; 
 
 Every write requires the exact configured Origin and a bounded JSON body. Authenticated writes additionally require the session's CSRF token; acknowledgement also requires the operator role. Cookies expire after an hour, are rotated at login, and are revoked on logout. The session store is bounded. The localhost HTTP cookie is intentionally not marked Secure; production TLS/SSO is outside this demo. Host validation rejects DNS-rebinding hosts; CORS is not enabled. Use the exact `http://127.0.0.1:8000` origin for the Compose setup.
 
-Validation errors omit request bodies, and SQL errors are redacted. Raw source values are returned only as untrusted JSON; the P07 screen renders them with text nodes and applies a restrictive Content Security Policy. Snapshot runs use the same operator/Origin/CSRF boundary as acknowledgement; no path, URL, SQL, actor, or role can be supplied. Worker contention returns 409. An admitted pipeline failure returns its recorded `status: failed` and load ID so the screen can inspect it; invalid selection returns 422. P08 completes broader permission/audit verification. The optional AI explanation still has no write path.
+Validation errors omit request bodies, and SQL errors are redacted. Raw source values are returned only as untrusted JSON; the P07 screen renders them with text nodes and applies a restrictive Content Security Policy. Snapshot runs use the same operator/Origin/CSRF boundary as acknowledgement; no path, URL, SQL, actor, or role can be supplied. Worker contention returns 409. An admitted pipeline failure returns its recorded `status: failed` and load ID so the screen can inspect it; invalid selection returns 422. P08 implements broader permission/audit verification; its live CI gate remains pending. The optional AI explanation still has no write path.
+
+P08 also verifies the actual received body against the 8 KiB limit and its declared length before JSON parsing. Duplicate boundary headers and transfer encoding are rejected. See [roles, audit inspection, and HTTP protections](permissions-audit.md), including the limits of this local demo's attribution.
 
 The implementation uses FastAPI's documented [dependencies](https://fastapi.tiangolo.com/tutorial/dependencies/) and [response cookies](https://fastapi.tiangolo.com/advanced/response-cookies/).

@@ -16,4 +16,4 @@ The [verification manifest](verification.json) records the mode and passing brow
 
 The [25-second walkthrough](../../images/p07-preview/walkthrough.gif) is a paced replay of the first five actual screenshots, with no narration; it is not continuous screen video. P12's final 5-7 minute narrated recording remains outstanding.
 
-CI is configured to upload a separate `ui-demo` artifact from the real SQL-backed journey. After it passes, retain its run URL, inspected test output, verification manifest, and screenshots; replace these explicitly labeled previews in the README with that accepted evidence.
+CI is configured to upload a separate `ui-demo` artifact from the real SQL-backed journey. The user confirmed P07 green for `9c98633`, but those artifacts have not been inspected here. Retain its run URL, inspected test output, verification manifest, and screenshots; replace these explicitly labeled previews in the README with that accepted evidence.

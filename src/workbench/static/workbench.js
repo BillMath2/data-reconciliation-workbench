@@ -4,6 +4,7 @@ let user = null,
   busy = false,
   loadOffset = 0,
   exceptionOffset = 0,
+  auditOffset = 0,
   detailId = null;
 const pageSize = 25;
 function text(id, value) {
@@ -25,7 +26,7 @@ function signedOut() {
   $("identity").hidden = true;
   $("login-panel").hidden = false;
   $("token").value = "";
-  $("metrics").replaceChildren();
+  clearReport();
   $("exceptions").replaceChildren();
   clearDetail();
   $("run-reason").value = "";
@@ -108,6 +109,39 @@ function clearReport() {
   $("packet").hidden = true;
   $("packet").removeAttribute("href");
   text("report-state", "No saved reconciliation for this selection.");
+  $("load-events").replaceChildren();
+  text("load-actor", "Select a recorded load to inspect its audit history.");
+  text("audit-page", "");
+  $("audit-prev").disabled = true;
+  $("audit-next").disabled = true;
+}
+
+async function loadAudit() {
+  $("load-events").replaceChildren();
+  const result = await api(
+    `/api/loads/${$("load").value}/audit?limit=${pageSize}&offset=${auditOffset}`,
+  );
+  text(
+    "load-actor",
+    `${result.load.started_by} · ${result.load.started_at} UTC · ${result.load.status.replaceAll("_", " ")}. This attempt's events; oldest first.`,
+  );
+  for (const event of result.items) {
+    const entry = node("li");
+    entry.append(
+      node("strong", event.action.replaceAll("_", " ")),
+      node("p", `${event.actor} · ${event.occurred_at} UTC`, "muted"),
+      node("pre", JSON.stringify(event.detail, null, 2)),
+    );
+    $("load-events").append(entry);
+  }
+  text(
+    "audit-page",
+    result.items.length
+      ? `Events ${auditOffset + 1}–${auditOffset + result.items.length}`
+      : "No events on this page.",
+  );
+  $("audit-prev").disabled = auditOffset === 0;
+  $("audit-next").disabled = result.items.length < pageSize;
 }
 async function enter() {
   $("login-panel").hidden = true;
@@ -206,6 +240,8 @@ async function selection() {
   $("exceptions-next").disabled = true;
   const selected = $("load").value;
   if (selected) {
+    auditOffset = 0;
+    await loadAudit();
     try {
       const report = await api(`/api/loads/${selected}/reconciliation`),
         summary = report.summary;
@@ -444,6 +480,8 @@ $("acknowledge").onsubmit = (event) => {
     });
     await findings();
     await inspect(id);
+    auditOffset = 0;
+    await loadAudit();
     announce("Review recorded. Acknowledgement does not resolve the finding.");
   });
 };
@@ -479,6 +517,16 @@ $("run").onsubmit = (event) => {
     );
   });
 };
+for (const [id, delta] of [
+  ["audit-prev", -pageSize],
+  ["audit-next", pageSize],
+]) {
+  $(id).onclick = () =>
+    action(async () => {
+      auditOffset += delta;
+      await loadAudit();
+    });
+}
 action(async () => {
   try {
     user = await api("/api/session");

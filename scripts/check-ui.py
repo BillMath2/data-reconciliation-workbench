@@ -64,6 +64,11 @@ def journey(origin, analyst, operator, output, fixture):
         expect(page.locator("#metrics")).to_contain_text("202 → 189")
         expect(page.locator("#exceptions tr")).to_have_count(6)
         golden = page.locator("#load").input_value()
+        page.locator("#load-audit summary").click()
+        expect(page.locator("#load-actor")).to_contain_text("demo-operator")
+        expect(page.locator("#load-events")).to_contain_text("Reviewed supplied source snapshot")
+        expect(page.locator("#load-events")).to_contain_text("load published")
+        page.locator("#load-audit summary").click()
         page.locator("#exceptions button").first.click()
         expect(page.locator("#detail-state")).to_contain_text("OPEN")
         ready()
@@ -75,6 +80,9 @@ def journey(origin, analyst, operator, output, fixture):
         expect(page.locator("#detail-state")).to_contain_text("ACKNOWLEDGED")
         ready()
         expect(page.locator("#resolution")).to_contain_text("Still unresolved")
+        # Persisted operator prose is untrusted too, not just source rows.
+        reviewed = page.request.get(origin + f"/api/exceptions/{finding}").json()
+        assert reviewed["acknowledged_by"] == "demo-operator"
         capture("02-reviewed")
         run("corrected", "published ·")
         expect(page.locator("#metrics")).to_contain_text("98 → 98")
@@ -95,6 +103,10 @@ def journey(origin, analyst, operator, output, fixture):
         run("corrected", "no op")
         expect(page.locator("#report-state")).to_contain_text("no op")
         expect(page.locator("#metrics")).to_contain_text("98 → 98")
+        attempt = page.locator("#load").input_value()
+        audit = page.request.get(origin + f"/api/loads/{attempt}/audit").json()
+        assert audit["load"]["load_id"] == attempt
+        assert [e["action"] for e in audit["items"]] == ["load_started", "load_no_op"]
         capture("05-rerun")
         # Replaying superseded input is not undo: report shows historical evidence.
         run("golden", "no op")
@@ -116,6 +128,30 @@ def journey(origin, analyst, operator, output, fixture):
             data={"snapshot": "corrected", "business_date": "2026-09-25", "reason": "Denied test"},
         )
         assert denied.status == 403
+        denied_ack = page.request.post(
+            origin + f"/api/exceptions/{finding}/acknowledge",
+            headers={"Origin": origin, "X-CSRF-Token": session["csrf_token"]},
+            data={"reason": "Analyst cannot write"},
+        )
+        assert denied_ack.status == 403
+        # A real browser form from another origin cannot initiate a write.
+        attacker = context.new_page()
+        attacker.route(
+            "http://localhost:8018/",
+            lambda route: route.fulfill(
+                content_type="text/html",
+                body='<form method="post" action="'
+                + origin
+                + '/api/activity-runs"><input name="snapshot" value="corrected">'
+                '<button type="submit">Submit cross-origin form</button></form>',
+            ),
+        )
+        attacker.goto("http://localhost:8018/")
+        with attacker.expect_response(origin + "/api/activity-runs") as rejected:
+            attacker.get_by_role("button", name="Submit cross-origin form").click()
+        assert rejected.value.status == 403
+        attacker.close()
+        assert page.request.get(origin + "/api/session").json()["role"] == "analyst"
         page.locator("#business-date").fill("2026-09-24")
         page.locator("#business-date").dispatch_event("change")
         expect(page.locator("#freshness")).to_have_text("Feed overdue")
@@ -135,10 +171,18 @@ def journey(origin, analyst, operator, output, fixture):
         detail_url = origin + f"/api/exceptions/{finding}"
         detail = page.request.get(detail_url).json()
         detail["untrusted_source"] = {"notes": '<img src=x onerror="window.pwned=true">'}
+        payload = '<svg onload="window.pwned=true"></svg>'
+        detail["untrusted_evidence"] = {"value": payload}
+        detail["rule_definition"] = {"description": payload}
+        detail["events"] = [{"actor": payload, "detail": {"reason": payload}}]
+        detail["resolution_reason"] = payload
         page.route(detail_url, lambda route: route.fulfill(json=detail))
         page.locator(f'#exceptions tr[data-id="{finding}"] button').click()
         expect(page.locator("#source")).to_contain_text("<img")
         assert page.locator("#source img").count() == 0
+        for field in ("evidence", "rule", "audit", "resolution"):
+            assert "<svg" in page.locator("#" + field).text_content()
+            assert page.locator("#" + field + " svg").count() == 0
         assert page.evaluate("window.pwned === undefined")
         page.unroute(detail_url)
         ready()
@@ -152,6 +196,35 @@ def journey(origin, analyst, operator, output, fixture):
             "e.getBoundingClientRect().right > innerWidth).map(e => e.tagName + '#' + e.id)"
         )
         page.set_viewport_size({"width": 1440, "height": 1200})
+        page.locator("#load-audit summary").click()
+        capture("08-load-audit")
+        page.locator("#load-audit summary").click()
+        # Audit display escapes operator-authored reasons and supports bounded pages.
+        selected = page.locator("#load").input_value()
+        audit_url = origin + f"/api/loads/{selected}/audit?limit=25&offset=0"
+        audit = page.request.get(audit_url).json()
+        audit["items"] = [audit["items"][0]] * 25
+        audit["items"][0]["detail"] = {"reason": payload}
+        page.route(
+            "**/audit?*",
+            lambda route: route.fulfill(
+                json={**audit, "items": [] if "offset=25" in route.request.url else audit["items"]}
+            ),
+        )
+        page.get_by_role("button", name="Refresh", exact=True).click()
+        ready()
+        page.locator("#load-audit summary").click()
+        expect(page.locator("#load-events")).to_contain_text("<svg")
+        assert page.locator("#load-events svg").count() == 0
+        page.get_by_role("button", name="Next events", exact=True).click()
+        ready()
+        expect(page.locator("#load-events")).to_be_empty()
+        page.get_by_role("button", name="Previous events", exact=True).click()
+        ready()
+        expect(page.locator("#load-events li")).to_have_count(25)
+        assert page.evaluate("window.pwned === undefined")
+        page.unroute("**/audit?*")
+        page.locator("#load-audit summary").click()
         # Exercise states not present in the successful correction scenario.
         selected = page.locator("#load").input_value()
         report_url = origin + f"/api/loads/{selected}/reconciliation"
@@ -271,6 +344,11 @@ def journey(origin, analyst, operator, output, fixture):
                     "failed refresh",
                     "unavailable report",
                     "exception pagination",
+                    "load audit",
+                    "audit pagination",
+                    "audit escaping",
+                    "analyst acknowledgement denial",
+                    "cross-origin browser form",
                     "expiry",
                 ],
             },

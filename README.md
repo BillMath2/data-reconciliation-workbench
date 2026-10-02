@@ -8,7 +8,7 @@ The verified SQL demonstration follows **100 source rows → 94 accepted activit
 
 [![Operator workbench preview showing the 100-to-94 discrepancy and captured source evidence](docs/images/p07-preview/01-golden.png)](docs/images/p07-preview/walkthrough.gif)
 
-**[Watch the 25-second workbench preview](docs/images/p07-preview/walkthrough.gif)** — actual Chromium screenshots of the P07 screen, using saved P05 facts and an explicit in-memory service with simulated lifecycle states. This preview is a paced screenshot replay, not live SQL proof. [Capture provenance](docs/evidence/p07/README.md) and the [screen setup guide](docs/workbench-ui.md) explain how to reproduce it. Live SQL browser acceptance remains pending.
+**[Watch the 25-second workbench preview](docs/images/p07-preview/walkthrough.gif)** — actual Chromium screenshots of the P07 screen, using saved P05 facts and an explicit in-memory service with simulated lifecycle states. This preview is a paced screenshot replay, not live SQL proof. [Capture provenance](docs/evidence/p07/README.md) and the [screen setup guide](docs/workbench-ui.md) explain how to reproduce it. P07 CI is user-confirmed green; its live capture artifacts have not yet been retained or inspected here.
 
 Inspect the [corrected result](docs/images/p07-preview/03-corrected.png) and [retained exception history](docs/images/p07-preview/04-resolved.png). The accepted SQL CLI demonstration follows below.
 
@@ -26,7 +26,7 @@ Inspect the [saved evidence and terminal recording](docs/evidence/p05/README.md)
 
 ## Project status
 
-**P01-P06, including P05A, are complete; P07 is implemented locally and awaits live SQL/browser acceptance.** The user confirmed P06 CI green for the P06 change in `5b99939`; its exact run artifacts have not been inspected here. The screen supports date/load selection, evidence inspection, acknowledgement, and protected snapshot reruns. Local checks: **212 passed, 45 SQL tests skipped**, plus the Chromium fixture walkthrough. See [P06 validation](docs/p06-validation.md) and [P07 validation](docs/p07-validation.md).
+**P01-P07, including P05A, are complete; P08 is implemented locally and awaits its live SQL/browser gate.** The user confirmed P07 CI green for `9c98633`; its exact run artifacts have not been inspected here. P08 adds inspectable load audit history, actual request-byte enforcement, and expanded role, audit, and browser safety checks. Local checks: **245 passed, 48 SQL tests skipped**, plus the expanded Chromium fixture walkthrough. See [P07 validation](docs/p07-validation.md) and [P08 validation](docs/p08-validation.md).
 
 **Verified P05 SQL suite: [164 tests passed](docs/evidence/p05/sql-checks.txt), including all 38 SQL cases, with no skips.** Both CI jobs were confirmed green; the downloaded artifacts were reviewed on October 1, 2026. See [P05 validation](docs/p05-validation.md) for provenance and checks, and [P04 verification](docs/p04-validation.md) for the earlier baseline.
 
@@ -43,6 +43,8 @@ Code checks the answer's structured counts and citations. The assistant has no d
 ## Inspect evidence through the API
 
 P06 adds authenticated report/evidence inspection and operator acknowledgement, with resolution linked to successful source correction. The API exposes the original saved packets and keeps lifecycle state separate. P07 adds the [operator screen at localhost:8000](docs/workbench-ui.md), server-clock freshness, and operator-only runs of the two supplied source snapshots. See the [API setup and endpoint guide](docs/evidence-api.md).
+
+P08's **Who ran this load?** panel shows the selected attempt's actor, reason, and audit events, including separate failed and no-op attempts. Both roles can inspect it; writes remain operator-only. See the [role and audit guide](docs/permissions-audit.md).
 
 ## Run the foundation with Docker Compose
 
@@ -82,7 +84,7 @@ The [source-contract guide](docs/source-contracts.md) documents field ownership,
 ## Engineering evidence
 
 - **Docker:** separate runtime/test image targets, a non-root Python process, a pinned SQL Server image, readiness checks, private database networking, and persistent storage.
-- **SQL engineering:** eleven tables and three reporting views, source-row lineage, saved findings/reconciliation, atomic publication, an applied-version ledger, and a restricted runtime role. P06 lifecycle migration 007 and its checks are accepted on user-confirmed green CI; P07 needs its new live gate.
+- **SQL engineering:** eleven tables and three reporting views, source-row lineage, saved findings/reconciliation, atomic publication, an applied-version ledger, and a restricted runtime role. P06 lifecycle migration 007 and its checks are accepted on user-confirmed green CI; P07 is also user-confirmed green; P08 needs its new live gate.
 - **Automation:** GitHub Actions builds the images, tests real SQL Server, and captures the guided SQL demo with its evidence packets and media. P07 adds browser verification and a separate `ui-demo` artifact.
 - **Reproducibility:** uv lockfile, explicit configuration, synthetic-data scope, and a Docker build context that excludes credentials.
 

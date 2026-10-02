@@ -1,3 +1,4 @@
+import ast
 import asyncio
 import copy
 import json
@@ -9,6 +10,65 @@ import pytest
 from workbench import assistant, cli
 
 PACKET = Path("docs/evidence/p05/golden-evidence.json")
+
+
+def test_assistant_dependency_boundary_and_tool_output_cannot_execute(packet, monkeypatch):
+    # Explicit dependency allowlist makes new IO/tool capabilities a reviewed change.
+    tree = ast.parse(Path(assistant.__file__).read_text(encoding="utf-8"))
+    modules = set()
+    for item in ast.walk(tree):
+        if isinstance(item, ast.Import):
+            modules.update(alias.name.split(".")[0] for alias in item.names)
+        elif isinstance(item, ast.ImportFrom):
+            modules.add((item.module or "").split(".")[0])
+    assert modules <= {
+        "asyncio",
+        "hashlib",
+        "json",
+        "os",
+        "re",
+        "time",
+        "pathlib",
+        "typing",
+        "uuid",
+        "httpx",
+        "dotenv",
+        "pydantic",
+    }
+    from workbench import db, evidence, pipeline
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError("Assistant must not reach database or mutation services")
+
+    monkeypatch.setattr(db, "connect", forbidden)
+    monkeypatch.setattr(pipeline, "connect", forbidden)
+    monkeypatch.setattr(evidence, "connect", forbidden)
+    monkeypatch.setattr(evidence.EvidenceService, "acknowledge", forbidden)
+    seen = []
+
+    def handler(request):
+        body = json.loads(request.content)
+        assert "tools" not in body and "tool_choice" not in body
+        seen.append(request.url)
+        return httpx.Response(
+            200,
+            json={
+                "status": "completed",
+                "output": [
+                    {
+                        "type": "function_call",
+                        "name": "load_activities",
+                        "arguments": "{}",
+                    }
+                ],
+            },
+        )
+
+    result = assistant.explain(
+        packet, "hash", provider="openai", key="test-secret", transport=httpx.MockTransport(handler)
+    )
+    assert result["status"] == "unavailable"
+    assert len(seen) == 1
 
 
 @pytest.fixture

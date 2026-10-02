@@ -94,6 +94,22 @@
               >Open saved evidence packet ↗</a
             >
           </details>
+          <details id="load-audit">
+            <summary>Who ran this load?</summary>
+            <p id="load-actor" class="muted"></p>
+            <ol id="load-events" class="audit-events"></ol>
+            <div class="contextline">
+              <span id="audit-page" class="muted"></span>
+              <div>
+                <button id="audit-prev" class="quiet" disabled>
+                  Previous events
+                </button>
+                <button id="audit-next" class="quiet" disabled>
+                  Next events
+                </button>
+              </div>
+            </div>
+          </details>
         </section>
         <div class="investigation">
           <section class="card exceptions" aria-labelledby="exceptions-title">

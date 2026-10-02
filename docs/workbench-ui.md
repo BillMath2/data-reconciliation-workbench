@@ -35,6 +35,8 @@ Date availability is evaluated against that date's next-day 09:00 America/New_Yo
 
 ## Browser verification and captures
 
+P08 adds **Who ran this load?** below the summary. Expand it to inspect the selected attempt's initiating actor and paginated audit events, including run reasons and terminal results. A no-op's audit belongs to that attempt, while its reconciliation still refers to the reused publication. The panel also works when a failed load has no report. See the [role and audit guide](permissions-audit.md).
+
 For local browser checks without Docker, using an explicit in-memory service:
 
 ```powershell
@@ -46,6 +48,6 @@ $env:PLAYWRIGHT_BROWSERS_PATH = Join-Path (Get-Location) '.tools\playwright'
 
 The fixture exists only in the test tooling; it is not a production fallback and does not prove SQL behavior. It uses accepted P05 report facts with simulated later lifecycle states. Screenshots are real browser captures; the GIF is a paced replay of five captures. No login token is captured, and no credential-bearing browser trace is retained. See [Playwright screenshots](https://playwright.dev/python/docs/screenshots).
 
-CI runs the same journey against the real SQL API in a dedicated `workbench_ui` database and uploads `ui-demo`. Live mode requires `WB_DEMO_ANALYST_TOKEN` and `WB_DEMO_OPERATOR_TOKEN` in the script's environment and a database with no activity attempts. `WB_SQL_DATABASE` now selects the Compose setup/runtime/API database, defaulting to `workbench`; use the same value when seeding, migrating, and starting the API. CI's disposal happens only inside its disposable volume. See [P07 validation](p07-validation.md) for the outstanding acceptance gate.
+CI runs the same journey against the real SQL API in a dedicated `workbench_ui` database and uploads `ui-demo`. Live mode requires `WB_DEMO_ANALYST_TOKEN` and `WB_DEMO_OPERATOR_TOKEN` in the script's environment and a database with no activity attempts. `WB_SQL_DATABASE` now selects the Compose setup/runtime/API database, defaulting to `workbench`; use the same value when seeding, migrating, and starting the API. CI's disposal happens only inside its disposable volume. See [P07 validation](p07-validation.md) for its user-confirmed acceptance and pending artifact retention; [P08 validation](p08-validation.md) covers the new gate.
 
 The screen provides no arbitrary file uploads, direct SQL, manual exception resolution, or AI repair action. Screen-based AI investigation remains P09.

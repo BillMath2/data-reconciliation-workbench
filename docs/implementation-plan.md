@@ -2,7 +2,7 @@
 
 Date: 2026-09-28; status reviewed: 2026-10-01
 
-Status: P01-P06, including P05A, are complete. The user confirmed P06 CI green for the P06 change in `5b99939`; its exact run artifacts have not been inspected here. P07 is implemented locally: the operator screen, protected snapshot runs, browser checks, and actual UI preview captures. Local verification is 212 passing tests and 45 SQL tests skipped, plus a passing browser walkthrough against an explicit simulated service. Live P07 SQL/browser acceptance remains pending. See [P06 validation](p06-validation.md), [P07 validation](p07-validation.md), and the [screen guide](workbench-ui.md). Retain the original 120-160-hour planning budget.
+Status: P01-P07, including P05A, are complete. The user confirmed P07 CI green for `9c98633`; exact run artifacts have not been inspected here and the checked-in screenshots remain labeled previews. P08 is implemented locally: load-audit inspection, actual request-byte enforcement, and expanded permission/audit/escaping/assistant-boundary tests. Local verification is 245 passing tests and 48 SQL tests skipped, plus the expanded browser walkthrough against an explicit simulated service. P08 live SQL/browser acceptance remains pending. See [P07 validation](p07-validation.md), [P08 validation](p08-validation.md), and the [role/audit guide](permissions-audit.md). Retain the original 120-160-hour planning budget.
 
 ### How to read the plan
 
@@ -125,7 +125,7 @@ This is a 12-table target plus three views, created incrementally. P03 establish
 
 P03's initial eight tables and three migrations are documented in the [database schema guide](database-schema.md). The Compose `migrate` service uses administrator access for setup; the regular application service uses the separate `workbench_app` login. P05 populates the report schema with two views; P06 adds the third, `vw_OpenExceptions`.
 
-P04 adds migration 004's identifier correction and migration 005's `Exception` and `AuditEvent` tables, bringing the implementation to ten tables. Its adapters, row rules, publication transactions, and CLI commands are described in the [ingestion guide](ingestion.md). P05 adds migration 006 with persisted reconciliation, saved evidence, and two reporting views, bringing the implementation to eleven tables. These changes passed SQL CI. P06 migration 007 adds lifecycle columns and the open-exceptions view, with SQL acceptance pending; P08 completes permissions/audit coverage for later UI actions.
+P04 adds migration 004's identifier correction and migration 005's `Exception` and `AuditEvent` tables, bringing the implementation to ten tables. Its adapters, row rules, publication transactions, and CLI commands are described in the [ingestion guide](ingestion.md). P05 adds migration 006 with persisted reconciliation, saved evidence, and two reporting views, bringing the implementation to eleven tables. These changes passed SQL CI. P06 migration 007 adds lifecycle columns and the open-exceptions view, accepted on user-confirmed green CI; P08 verifies permissions/audit coverage across the UI actions.
 
 Keep infrastructure names generic (`SourceRow`, `Load`, `Exception`, evidence services). Keep research-domain tables explicit (`Project`, `Activity`) rather than creating a generic entity framework. A later access-reconciliation variant can reuse ingestion, evidence, UI, and assistant components, but requires its own domain contracts, curated schema, and rules; it is not assumed to be only a fixture swap.
 
@@ -212,7 +212,9 @@ Work-package subtotal: **108-148 focused hours**. Reserve **12 additional hours*
 
 ### Milestones: groups of completed work packages
 
-**P06 checkpoint (October 1, 2026):** user-confirmed green CI clears P07. Remaining P07-P12 estimates total **44-60 focused hours**, excluding contingency and without a measured elapsed-effort claim. P07 now has local implementation and UI verification; do not count it complete until its live SQL browser gate passes.
+**P06 checkpoint (October 1, 2026; superseded below):** user-confirmed green CI cleared P07. Remaining P07-P12 estimates totaled **44-60 focused hours**, excluding contingency and without a measured elapsed-effort claim.
+
+**P07 checkpoint (October 1, 2026):** user-confirmed green CI for `9c98633` clears P08. Remaining P08-P12 estimates total **36-48 focused hours**, excluding contingency; no elapsed-effort measurement is implied. P08 has local implementation and verification, pending its new SQL/browser gate. Once P08 passes, P09 is the next package in sequence; P11 can also proceed independently.
 
 1. **Foundation (P01-P03, 24-32 h):** reproducible sources, migrated database, Compose setup, and SQL Server CI.
 2. **First demonstrable story (P04-P05A, 32-46 h):** CLI proof, initial README/screenshots/recording, and a real AI explanation of the golden discrepancy.
@@ -280,7 +282,7 @@ docs/                 # Plan, architecture, dictionary, runbooks, demo
 scripts/              # Setup, database lifecycle, and demo helpers
 ```
 
-The foundation, contracts, fixtures, mock source API, ingestion pipeline, reconciliation, saved evidence, and CLI demonstration are implemented and verified. P05A supplies the checked CLI assistant; P06's evidence API/lifecycle CI is user-confirmed green. P07's screen lives in `src/workbench/static/` and is served by `api.py`; it is locally verified pending live SQL browser acceptance. Static HTML and small JavaScript use the existing JSON API without adding a template runtime. The mock API lives in `src/workbench/mock_registry.py`, and the generator in `src/workbench/fixtures.py`. Keep credentials, generated runs, and local environments out of version control and Docker build context. Commit only synthetic fixtures and sanitized configuration templates.
+The foundation, contracts, fixtures, mock source API, ingestion pipeline, reconciliation, saved evidence, and CLI demonstration are implemented and verified. P05A supplies the checked CLI assistant; P06's evidence API/lifecycle CI is user-confirmed green. P07's screen lives in `src/workbench/static/` and is served by `api.py`; P07 CI is user-confirmed green. P08 adds the audit panel and verification, pending its own live gate. Static HTML and small JavaScript use the existing JSON API without adding a template runtime. The mock API lives in `src/workbench/mock_registry.py`, and the generator in `src/workbench/fixtures.py`. Keep credentials, generated runs, and local environments out of version control and Docker build context. Commit only synthetic fixtures and sanitized configuration templates.
 
 ## 9. Risks and decision checkpoints
 

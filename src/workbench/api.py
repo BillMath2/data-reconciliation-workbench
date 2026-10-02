@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from workbench.config import ConfigurationError, load_settings
 from workbench.evidence import EvidenceService
+from workbench.http_boundary import DemoBoundary
 from workbench.operations import OperationsService
 from workbench.validation import LoadError
 
@@ -164,35 +165,7 @@ def create_app(settings, *, analyst_token, operator_token, origin="http://127.0.
     def screen():
         return FileResponse(assets / "index.html")
 
-    @app.middleware("http")
-    async def boundary(request, call_next):
-        if request.headers.get("host") != origin.split("//", 1)[1]:
-            return JSONResponse({"detail": "Invalid demo host."}, status_code=400)
-        if request.method not in {"GET", "HEAD", "OPTIONS"}:
-            if request.headers.get("origin") != origin:
-                return JSONResponse({"detail": "Same-origin writes are required."}, status_code=403)
-            if request.headers.get("content-type", "").split(";", 1)[0] != "application/json":
-                return JSONResponse({"detail": "JSON writes are required."}, status_code=415)
-            length = request.headers.get("content-length", "")
-            if (
-                not length.isascii()
-                or not length.isdecimal()
-                or len(length) > 4
-                or int(length) > 8192
-            ):
-                return JSONResponse(
-                    {"detail": "A bounded request body is required."}, status_code=413
-                )
-        response = await call_next(request)
-        response.headers["Cache-Control"] = "no-store"
-        response.headers["X-Content-Type-Options"] = "nosniff"
-        response.headers["X-Frame-Options"] = "DENY"
-        response.headers["Content-Security-Policy"] = (
-            "default-src 'self'; script-src 'self'; style-src 'self'; "
-            "img-src 'self'; connect-src 'self'; object-src 'none'; "
-            "base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
-        )
-        return response
+    app.add_middleware(DemoBoundary, origin=origin)
 
     @app.exception_handler(RequestValidationError)
     async def invalid_request(request, error):
@@ -271,6 +244,15 @@ def create_app(settings, *, analyst_token, operator_token, origin="http://127.0.
     @app.get("/api/loads/{load_id}/reconciliation", dependencies=reader)
     def report(load_id: UUID, svc: Annotated[EvidenceService, Depends(service)]):
         return invoke(svc.report, str(load_id))
+
+    @app.get("/api/loads/{load_id}/audit", dependencies=reader)
+    def load_audit(
+        load_id: UUID,
+        svc: Annotated[EvidenceService, Depends(service)],
+        limit: int = Query(50, ge=1, le=100),
+        offset: int = Query(0, ge=0, le=100000),
+    ):
+        return invoke(svc.audit, str(load_id), limit, offset)
 
     @app.get("/api/loads/{load_id}/evidence", dependencies=reader)
     def packet(load_id: UUID, svc: Annotated[EvidenceService, Depends(service)]):

@@ -68,6 +68,53 @@ class EvidenceService:
                 return item
         raise LoadError("NOT_FOUND", "Evidence ID is not in this saved packet.")
 
+    def audit(self, load_id, limit=50, offset=0):
+        """Return this attempt's history, never a no-op's reused publication history."""
+        load_id = identifier(load_id)
+        with closing(connect(self.settings)) as connection, closing(connection.cursor()) as cursor:
+            cursor.execute(
+                "SELECT source_id, business_date, status, started_by, started_at, "
+                "reused_load_id FROM ops.Load WHERE load_id=?",
+                (load_id,),
+            )
+            row = cursor.fetchone()
+            if row is None:
+                raise LoadError("NOT_FOUND", "Load not found.")
+            load = dict(
+                zip(
+                    (
+                        "source_id",
+                        "business_date",
+                        "status",
+                        "started_by",
+                        "started_at",
+                        "reused_load_id",
+                    ),
+                    row,
+                    strict=True,
+                )
+            )
+            load["load_id"] = load_id
+            if load["reused_load_id"] is not None:
+                load["reused_load_id"] = str(load["reused_load_id"]).lower()
+            cursor.execute(
+                "SELECT event_id, actor, action, occurred_at, detail_json FROM ops.AuditEvent "
+                "WHERE load_id=? ORDER BY occurred_at, event_id "
+                "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY",
+                (load_id, offset, limit),
+            )
+            items = [
+                {
+                    "event_id": str(r[0]).lower(),
+                    "actor": r[1],
+                    "action": r[2],
+                    "occurred_at": r[3],
+                    "detail": json.loads(r[4]),
+                }
+                for r in cursor.fetchall()
+            ]
+        return {"load": load, "items": items, "limit": limit, "offset": offset}
+
     def loads(self, business_date=None, limit=50, offset=0):
         with closing(connect(self.settings)) as connection, closing(connection.cursor()) as cursor:
             clause = "WHERE source_id='daily-activity'"

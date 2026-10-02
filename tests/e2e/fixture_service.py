@@ -20,6 +20,7 @@ class FixtureService:
         self.attempts = []
         self.current = None
         self.ack = {}
+        self.events = {}
 
     def snapshots(self):
         return OperationsService(None).snapshots()
@@ -49,9 +50,35 @@ class FixtureService:
             "business_date": "2026-09-25",
             "started_at": "2026-10-01T16:00:00",
             "reused_load_id": packet["load_id"] if reused else None,
+            "started_by": actor,
         }
         self.attempts.insert(0, item)
+        self.events[item["load_id"]] = [
+            {
+                "event_id": str(uuid4()),
+                "actor": actor,
+                "action": action,
+                "occurred_at": item["started_at"],
+                "detail": detail,
+            }
+            for action, detail in [
+                ("load_started", {"reason": reason}),
+                (
+                    "load_no_op" if reused else "load_published",
+                    {"reused_load_id": packet["load_id"]} if reused else {},
+                ),
+            ]
+        ]
         return copy.deepcopy(item)
+
+    def audit(self, load_id, limit=50, offset=0):
+        load = next(a for a in self.loads()["items"] if a["load_id"] == load_id)
+        return {
+            "load": load,
+            "items": self.events[load_id][offset : offset + limit],
+            "limit": limit,
+            "offset": offset,
+        }
 
     def loads(self, business_date=None, limit=50, offset=0):
         items = []
@@ -143,4 +170,14 @@ class FixtureService:
             raise LoadError("ALREADY_RESOLVED", "Already resolved")
         changed = exception_id not in self.ack
         self.ack.setdefault(exception_id, reason)
+        if changed:
+            self.events[self.packets["golden"]["load_id"]].append(
+                {
+                    "event_id": str(uuid4()),
+                    "actor": actor,
+                    "action": "exception_acknowledged",
+                    "occurred_at": "2026-10-01T16:00:01",
+                    "detail": {"reason": reason},
+                }
+            )
         return {"changed": changed, "exception_id": exception_id}

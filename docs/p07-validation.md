@@ -1,6 +1,6 @@
 # P07 validation record
 
-Status: implemented and checked locally; live SQL browser acceptance pending. P06 was accepted on the user's green-CI confirmation for the P06 change in `5b99939`.
+Status: complete on the user's confirmation that P07 CI is green, associated with commit `9c98633` in the local history. The exact run URL, logs, and `ui-demo` artifact have not been supplied or independently inspected in this session. That confirmation clears P08; the checked-in images remain explicitly labeled previews until live captures are retained.
 
 ## Implemented
 
@@ -18,10 +18,10 @@ Status: implemented and checked locally; live SQL browser acceptance pending. P0
 - Error/edge presentation checks intercept selected browser responses and do not claim to exercise SQL failures. The core journey uses the real page, JavaScript, HTTP API, sessions, and simulated service. Static assets are included in the runtime wheel.
 - Ruff lint/format, JavaScript syntax, locked dependencies, generated-fixture consistency, and Compose configuration checks pass. Docker's engine is unavailable locally; no local live SQL execution is claimed.
 
-## Remaining acceptance gate
+## CI acceptance and remaining artifact retention
 
-Commit/push this package and require both Foundation checks jobs green. The SQL test suite is expected to report **257 passed**, including **45 SQL cases without skips**, for this revision. The added SQL case checks the snapshot endpoint through the real pipeline, rejected date selection, attributable run reasons, corrected totals, six successor resolutions, and no-op reuse.
+The user confirmed P07 green on October 1, 2026. The gate requires both Foundation checks jobs green. Expected suite for this revision: **257 passed**, including **45 SQL cases without skips**; this is not an independently inspected count. The added SQL case checks the snapshot endpoint through the real pipeline, rejected date selection, attributable run reasons, corrected totals, six successor resolutions, and no-op reuse.
 
 The SQL job also creates a separate `workbench_ui` database, seeds only its reference sources, starts the real API against it, then runs the browser journey from an empty activity history. It preserves the earlier CLI demo in `workbench` and uploads a new **`ui-demo`** artifact alongside `sql-demo` and `sql-checks`. Browser failure fails CI; the script refuses to run over an existing activity history. The Python job separately runs the fixture browser check.
 
-Review and retain the `ui-demo` screenshots, GIF, verification manifest, run URL, and `sql-checks` output. Replace the explicitly labeled preview captures with the accepted live SQL captures, recording their provenance. P07 remains pending until this live gate passes. P08 completes the broader role/audit coverage; P09 adds AI to the screen; the final narrated recording remains P12.
+P07 is accepted on that confirmation. Retaining and independently reviewing the `ui-demo` screenshots, GIF, verification manifest, run URL, and `sql-checks` output remains outstanding. Replace the explicitly labeled preview captures only when that evidence is available, recording its provenance. P08 completes the broader role/audit coverage; P09 adds AI to the screen; the final narrated recording remains P12.
