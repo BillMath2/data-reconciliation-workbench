@@ -1,0 +1,5 @@
+{
+  "status": "ok",
+  "check": "sql-health",
+  "driver": "mssql-python"
+}

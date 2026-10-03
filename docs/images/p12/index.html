@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data Reconciliation Workbench · SQL walkthrough</title>
+<style>
+body{margin:0;background:#0d1929;color:#edf4ff;font:17px/1.6 system-ui,sans-serif}
+main{max-width:1100px;margin:auto;padding:36px 24px}h1{font-size:34px;line-height:1.2}
+.eyebrow{color:#69debf;letter-spacing:2px;font-size:13px}video{width:100%;background:#000;border-radius:8px}
+a{color:#82d9ef}nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:9px}
+button{padding:12px;background:#172b41;color:#edf4ff;border:1px solid #36536d;border-radius:6px;text-align:left;cursor:pointer;font:inherit;font-size:14px}
+button:hover,button:focus{border-color:#69debf}small{color:#b8cbd9}.note{border-left:3px solid #69debf;padding-left:16px}
+</style><main>
+<p class="eyebrow">SYNTHETIC DATA · REAL SQL SERVER · P12</p>
+<h1>Follow the evidence. Verify the correction.</h1>
+<p>100 source rows → 94 accepted activities → 98 after correction. Original evidence stays inspectable.</p>
+<video controls preload="metadata" poster="01-golden.png"><source src="walkthrough.mp4" type="video/mp4">
+<track src="captions.vtt" kind="captions" srclang="en" label="English" default>
+<a href="walkthrough.mp4">Download the 6:18 MP4</a></video>
+<p><small>6:18 · Actual Chromium recording against isolated SQL Server. Synthetic Microsoft David Desktop narration; not Bill's voice.</small></p>
+<nav aria-label="Video chapters"><button data-start="0.281">0:00 &nbsp; Why does the report disagree?</button>
+<button data-start="32.062">0:32 &nbsp; Fresh database, reproducible setup</button>
+<button data-start="64.344">1:04 &nbsp; 100 source rows → 94 accepted</button>
+<button data-start="95.297">1:35 &nbsp; Inspect the captured source and rule</button>
+<button data-start="125.64">2:05 &nbsp; Saved investigation · offline guidance</button>
+<button data-start="157.14">2:37 &nbsp; Correct the source, then publish</button>
+<button data-start="188.875">3:08 &nbsp; Resolution has a recorded successor</button>
+<button data-start="219.281">3:39 &nbsp; An identical retry is a no-op</button>
+<button data-start="249.609">4:09 &nbsp; Inspect as an analyst</button>
+<button data-start="280.734">4:40 &nbsp; Archived live AI example · P05A</button>
+<button data-start="313.437">5:13 &nbsp; Recovery and performance: measured evidence</button>
+<button data-start="345.156">5:45 &nbsp; What is ready—and what remains</button></nav>
+<p class="note">The screen uses offline guidance. A separate chapter shows the archived, reviewed P05A live response. Broader P10 live evaluation and human review remain open.</p>
+<p><a href="walkthrough.mp4" download>Download video</a> · <a href="captions.vtt">Captions</a> · <a href="../../release-narration.json">Narration transcript</a></p>
+<p><small>Serve the public media locally to load caption tracks: <code>python scripts/serve-release.py</code>, then open <code>http://127.0.0.1:8020/</code>. No login, external font, analytics, or model call.</small></p>
+</main><script>
+const video=document.querySelector('video');
+document.querySelectorAll('button[data-start]').forEach(button=>button.addEventListener('click',()=>{video.currentTime=Number(button.dataset.start);video.play().catch(()=>{});}));
+</script></html>

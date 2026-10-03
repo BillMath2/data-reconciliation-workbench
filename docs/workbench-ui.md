@@ -1,4 +1,4 @@
-# Operator workbench (P07)
+# Operator workbench
 
 Open **http://127.0.0.1:8000/** after starting the Compose API. This is a local, synthetic-data demonstration with separate analyst and operator access tokens. The single page works without an AI provider.
 
@@ -51,3 +51,5 @@ The fixture exists only in the test tooling; it is not a production fallback and
 CI runs the same journey against the real SQL API in a dedicated `workbench_ui` database and uploads `ui-demo`. Live mode requires `WB_DEMO_ANALYST_TOKEN` and `WB_DEMO_OPERATOR_TOKEN` in the script's environment and a database with no activity attempts. `WB_SQL_DATABASE` now selects the Compose setup/runtime/API database, defaulting to `workbench`; use the same value when seeding, migrating, and starting the API. CI's disposal happens only inside its disposable volume. See [P07 validation](p07-validation.md) for its user-confirmed acceptance and pending artifact retention; [P08 validation](p08-validation.md) covers the new gate.
 
 P09 adds **Explain this evidence**, with load/finding scope, offline guidance, AI-off mode, explicitly enabled live AI, and saved history for each attempt. Both roles can save an investigation; the original facts, observed state, and runbook versions remain frozen after correction. See the [investigation walkthrough](investigations.md) and [P09 validation](p09-validation.md). The screen provides no arbitrary file uploads, direct SQL, manual exception resolution, or AI repair action.
+
+The current [P12 recording and captures](evidence/p12/README.md) retain the complete real-SQL journey, including audit and saved investigations. The earlier P07 fixture preview remains historical material.

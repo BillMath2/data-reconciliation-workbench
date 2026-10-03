@@ -1,39 +1,103 @@
-# Demonstration and README guide
+# Demonstration, recording, and replay
 
-Status: P05 and P05A complete. The README links the [reviewed live explanation](evidence/p05a/live.txt) and labeled [offline stub](evidence/p05a/stub.txt). Verified SQL captures/replay are linked in the README; the original reports, evidence packets, transcript, and terminal recording are retained. The complete 5-7 minute narrated screen/AI recording remains a later deliverable.
+The P12 demonstration is a **6:18 real-SQL browser recording** with synthetic
+Microsoft David Desktop narration, English captions, and seven current screenshots.
+Download [the MP4](images/p12/walkthrough.mp4), read the [transcript](release-narration.json),
+or serve the local chapter player:
 
-The [33-second P05 replay](images/p05/walkthrough.gif) renders actual SQL output from [CI run 36637726571](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36637726571): golden discrepancy, corrected source, and no-op rerun. All three PNGs were visually inspected. PNGs are terminal-style renders, not desktop screenshots; the GIF changes reading pace, not the results. The [evidence bundle](evidence/p05/README.md) retains the real-time terminal `.cast`, transcript, reports, evidence JSON, recording manifest, test output, and provenance. The earlier [P04 replay](images/p04-baseline/walkthrough.gif) remains available as historical evidence. Follow the [reconciliation guide](reconciliation.md#record-the-sql-walkthrough) to reproduce the P05 recording.
+```powershell
+.\scripts\uv.ps1 run --locked python scripts/serve-release.py
+```
 
-## Review without installation
+Open `http://127.0.0.1:8020/`. GitHub displays the HTML source;
+serve it locally for playback and caption tracks. Stop the temporary server with
+Ctrl+C. It is not the application and needs no credentials.
 
-P07 adds an [actual browser preview](images/p07-preview/walkthrough.gif): 100/94 inspection, acknowledgement, corrected totals, retained resolved findings, and unchanged rerun. Its saved P05 facts and **simulated service/lifecycle** are explicitly documented in [capture provenance](evidence/p07/README.md). These are genuine screen captures but not new SQL execution evidence. CI now records the same journey against real SQL in the `ui-demo` artifact; P07 CI is user-confirmed green, with artifact retention still outstanding. See the [screen guide](workbench-ui.md).
+## Story and provenance
 
-The README is the entry point. Lead with the business problem, a linked recording thumbnail, and three screenshots showing the discrepancy, supporting evidence, and successful correction. Follow with a small architecture diagram, measured validation results, and the optional Compose quickstart.
+| Approximate time | What is shown |
+|---|---|
+| 0:00 | Architecture and the 100-to-94 business discrepancy |
+| 0:32 | Captured fresh setup, migration repeat, and driver results |
+| 1:04 | Operator runs golden input: 100/94 activities, 202/189 units |
+| 1:35 | Original unknown-project row, rule, and acknowledgement |
+| 2:05 | Saved investigation using labeled offline guidance |
+| 2:37 | Corrected source: 98/98 activities and 197/197 units |
+| 3:09 | Six resolved findings retain evidence and successor identity |
+| 3:39 | Identical corrected retry produces an audited no-op |
+| 4:10 | Analyst view and permission boundary |
+| 4:41 | Archived reviewed P05A live response, separate from this run |
+| 5:13 | Retained P11 restore/recovery and measured query evidence |
+| 5:45 | Scope and outstanding expanded-AI release gates |
 
-Use synthetic data and keep configuration files, passwords, API keys, and unrelated desktop windows out of every capture. Add descriptive captions and alt text. Store screenshots under `docs/images/` when captured; link the recording once it exists. Do not add broken placeholder images or imply that a storyboard is a finished recording.
+Exact chapter times are in [recording.json](evidence/p12/recording.json) and drive
+the player. Actual actions use a fresh SQL database. Setup, archived AI, and P11
+measurement chapters are browser-rendered exhibits of retained evidence. Narration
+is synthetic, not Bill's voice. No new paid model request is made. The
+[evidence record](evidence/p12/README.md) separates the recording, browser checks,
+final helper replay, and historical test baselines.
 
-## Recording: 5-7 minutes
+## Repeat the isolated verification
 
-| Time | Show | Explain |
-|---|---|---|
-| 0:00-0:40 | Problem and three synthetic sources | Why a source count can disagree with a report |
-| 0:40-1:20 | Compose services and database readiness | Separate application/database containers, a private network, persistent database volume, and a repeatable startup |
-| 1:20-2:30 | Load the golden fixture; 100 source rows and 94 accepted activities | Two duplicate extras, three unknown projects, and one missing project ID account for all six exclusions |
-| 2:30-3:30 | Exception detail and AI explanation | Calculations come from code; the assistant cites saved evidence and does not repair data |
-| 3:30-4:40 | Correct the source and rerun | The corrected source and report both contain 98; historical findings remain available |
-| 4:40-5:20 | Repeat the same load | A no-op rerun leaves totals unchanged |
-| 5:20-6:30 | Actual CI results and recovery/tuning evidence | Real SQL Server tests, rollback, restore, and measured query improvement |
+Start Docker's Linux engine and initialize the ignored demo configuration. The
+replay requires Compose support for `!override` (tested with Compose 5.5.1). The
+host needs Python/uv and Playwright for browser checks. From the repository root:
 
-Show only implemented behavior. The initial P05 recording is a shorter CLI walkthrough; add the P05A explanation and P07 screen when ready. The final recording uses the complete flow above.
+```powershell
+.\scripts\initialize-demo.ps1
+.\scripts\uv.ps1 sync --locked --python 3.12
+$env:PLAYWRIGHT_BROWSERS_PATH = Join-Path (Get-Location) '.tools\playwright'
+.\scripts\uv.ps1 run --locked python -m playwright install chromium
+.\scripts\uv.ps1 run --locked python scripts/release-rehearsal.py --output runs/release-check
+```
 
-## Screenshot checklist
+Use a new output directory each time. The helper creates `wb-p12-<random>` with
+a fresh SQL volume/network and host ports 8012/8013, applies nine migrations,
+exports the catalog, checks runtime/driver behavior, then replays CLI and complete
+browser verification in separate databases. Normal port 8000/8001 containers and
+history remain separate. Live AI is disabled in child services.
 
-- **P05:** terminal output with 100/94, exclusion accounting, corrected 98/98, and no-op rerun.
-- **P05A:** one actual provider explanation next to the evidence it cites; label offline stub output explicitly if shown separately.
-- **P07:** workbench overview, one exception detail, and the corrected result.
-- **P11:** measured query-plan improvement and successful recovery evidence.
-- **P12:** select the clearest three product screenshots for the top of the README; link deeper engineering evidence below.
+Logs and `rehearsal.json` go into the output directory. Success requires every
+step and cleanup to pass. The helper removes only its generated project's
+containers/network/volume in `finally`. If the host kills the helper before cleanup,
+inspect that manifest's exact project name and override path, then use those same
+Compose arguments to shut down that owned project. Never substitute the normal
+project name. This replay is not a rerun of the full 386-test SQL suite; use the
+[operator verification command](operations-runbook.md#verify-the-installation) for that.
 
-## Run it yourself
+## Produce a narrated recording
 
-Docker Compose is the reproducibility path and part of the engineering demonstration. GitHub Actions runs the same container configuration for verification; it is not the demo website. A Codespaces walkthrough can be added later for remote interactive sessions, without making it necessary to view the README or recording. No hosted environment is required for the first portfolio release.
+Optional production tools are separate from application dependencies. On Windows,
+the PowerShell helper uses installed Microsoft David Desktop speech. Install
+portable FFmpeg only for media encoding:
+
+```powershell
+.\scripts\uv.ps1 pip install --python .venv\Scripts\python.exe --target .tools/media imageio-ffmpeg==0.6.0
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/narrate-release.ps1 -Output runs/release-narration
+.\scripts\uv.ps1 run --locked python scripts/release-rehearsal.py --output runs/release-recording --record --audio runs/release-narration --ffmpeg .tools/media/imageio_ffmpeg/binaries/ffmpeg-win-x86_64-v7.1.exe
+```
+
+Run the preceding Playwright setup first. The pinned wheel supplies the Windows
+FFmpeg executable; other platforms can supply their own FFmpeg path and local WAV
+narration. Each sentence in `release-narration.json` maps to `<chapter>-<index>.wav`
+(24 kHz, 16-bit mono PCM). Keep narration within each recorded chapter.
+
+The recorder checks its actions in a separate preview database, then repeats them
+with 30-second-or-longer chapter holds in another fresh database. It signs in
+through the API before creating the recorded page so tokens are never on screen.
+It saves original WebM, screenshots, MP4, captions, and timestamp metadata.
+Narration/captions can be rebuilt over that same raw video with
+`scripts/release_media.py --output <recording-folder> --audio <wav-folder> --ffmpeg <binary>`.
+
+Retain only synthetic, credential-free review assets in `docs/images/p12` and
+`docs/evidence/p12`. Raw local WAV/WebM and build logs stay ignored under `runs/`.
+`scripts/check-docs.py` checks links, dictionary coverage, and retained asset hashes
+in ordinary CI; CI does not synthesize voice or repeat the six-minute recording.
+
+## Acceptance
+
+P11 CI was user-confirmed green for `901db40`. P12 local replay/media are delivered
+for review; the new CI result is pending. The reduced demonstration uses the
+accepted P05A example and offline screen guidance. P10's expanded live-model
+evaluation and human semantic review remain outstanding. See
+[P12 validation](p12-validation.md) and [release limits](release-scope.md).

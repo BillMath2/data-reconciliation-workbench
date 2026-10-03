@@ -1,0 +1,323 @@
+{
+  "requested_load_id": "85d18d26-8ca3-426f-a3fe-28ed9f3a1587",
+  "requested_status": "published_with_exceptions",
+  "publication_load_id": "85d18d26-8ca3-426f-a3fe-28ed9f3a1587",
+  "publication_status": "published_with_exceptions",
+  "is_current": true,
+  "business_date": "2026-09-25",
+  "summary": {
+    "accepted_rows": 94,
+    "accounting_verified": true,
+    "calculation_version": "1.0.0",
+    "completed_count_difference": 6,
+    "completed_unit_difference": 13,
+    "curated_completed_count": 94,
+    "curated_completed_units": 189,
+    "excluded_duplicate_rows": 2,
+    "excluded_invalid_rows": 4,
+    "primary_reasons": [
+      {
+        "completed_count": 2,
+        "completed_units": 5,
+        "rows": 2,
+        "rule_id": "ACTIVITY_DUPLICATE",
+        "unknown_unit_rows": 0
+      },
+      {
+        "completed_count": 3,
+        "completed_units": 6,
+        "rows": 3,
+        "rule_id": "ACTIVITY_UNKNOWN_PROJECT",
+        "unknown_unit_rows": 0
+      },
+      {
+        "completed_count": 1,
+        "completed_units": 2,
+        "rows": 1,
+        "rule_id": "ROW_REQUIRED",
+        "unknown_unit_rows": 0
+      }
+    ],
+    "raw_rows": 100,
+    "scope": "one full activity date; completed metrics use declared completed status",
+    "source_completed_count": 100,
+    "source_completed_units": 202,
+    "source_status_complete": true,
+    "source_units_complete": true,
+    "unknown_status_rows": 0,
+    "unknown_unit_rows": 0
+  },
+  "packet": {
+    "boundaries": {
+      "exception_resolution": "not assessed; findings are historical",
+      "findings_included": 6,
+      "findings_total": 6,
+      "rows_included": 6,
+      "rows_total": 6,
+      "source_content_is_untrusted": true,
+      "source_correction_actions": "not recorded"
+    },
+    "business_date": "2026-09-25",
+    "calculation_version": "1.0.0",
+    "citation_ids": [
+      "load:85d18d26-8ca3-426f-a3fe-28ed9f3a1587",
+      "artifact:aa75ddf5-fcb6-49b4-9f26-0e06bcc712e5",
+      "reconciliation:85d18d26-8ca3-426f-a3fe-28ed9f3a1587",
+      "exception:eb7f433e-f36b-1410-83e9-0067520d47d6",
+      "exception:ef7f433e-f36b-1410-83e9-0067520d47d6",
+      "exception:f37f433e-f36b-1410-83e9-0067520d47d6",
+      "exception:f77f433e-f36b-1410-83e9-0067520d47d6",
+      "exception:fb7f433e-f36b-1410-83e9-0067520d47d6",
+      "exception:ff7f433e-f36b-1410-83e9-0067520d47d6",
+      "row:85d18d26-8ca3-426f-a3fe-28ed9f3a1587:95",
+      "row:85d18d26-8ca3-426f-a3fe-28ed9f3a1587:96",
+      "row:85d18d26-8ca3-426f-a3fe-28ed9f3a1587:97",
+      "row:85d18d26-8ca3-426f-a3fe-28ed9f3a1587:98",
+      "row:85d18d26-8ca3-426f-a3fe-28ed9f3a1587:99",
+      "row:85d18d26-8ca3-426f-a3fe-28ed9f3a1587:100"
+    ],
+    "contract_version": "1.0.0",
+    "evidence": [
+      {
+        "business_date": "2026-09-25",
+        "id": "load:85d18d26-8ca3-426f-a3fe-28ed9f3a1587",
+        "kind": "load",
+        "reference_set_sha256": "bc71a537ea07ddde1303891fae681da3aabf452b51b5f82a1aed32c74b5e2b9f",
+        "source_id": "daily-activity"
+      },
+      {
+        "content_sha256": "652b2c89e9c69e655db09484a4070f1507e5aeeb4c89d650e0e00d12c7a485d0",
+        "id": "artifact:aa75ddf5-fcb6-49b4-9f26-0e06bcc712e5",
+        "kind": "artifact",
+        "load_id": "85d18d26-8ca3-426f-a3fe-28ed9f3a1587",
+        "source_exported_at": "2026-09-26T09:00:00Z"
+      },
+      {
+        "id": "reconciliation:85d18d26-8ca3-426f-a3fe-28ed9f3a1587",
+        "kind": "reconciliation",
+        "summary": {
+          "accepted_rows": 94,
+          "accounting_verified": true,
+          "calculation_version": "1.0.0",
+          "completed_count_difference": 6,
+          "completed_unit_difference": 13,
+          "curated_completed_count": 94,
+          "curated_completed_units": 189,
+          "excluded_duplicate_rows": 2,
+          "excluded_invalid_rows": 4,
+          "primary_reasons": [
+            {
+              "completed_count": 2,
+              "completed_units": 5,
+              "rows": 2,
+              "rule_id": "ACTIVITY_DUPLICATE",
+              "unknown_unit_rows": 0
+            },
+            {
+              "completed_count": 3,
+              "completed_units": 6,
+              "rows": 3,
+              "rule_id": "ACTIVITY_UNKNOWN_PROJECT",
+              "unknown_unit_rows": 0
+            },
+            {
+              "completed_count": 1,
+              "completed_units": 2,
+              "rows": 1,
+              "rule_id": "ROW_REQUIRED",
+              "unknown_unit_rows": 0
+            }
+          ],
+          "raw_rows": 100,
+          "scope": "one full activity date; completed metrics use declared completed status",
+          "source_completed_count": 100,
+          "source_completed_units": 202,
+          "source_status_complete": true,
+          "source_units_complete": true,
+          "unknown_status_rows": 0,
+          "unknown_unit_rows": 0
+        }
+      },
+      {
+        "field": "project_id",
+        "id": "exception:eb7f433e-f36b-1410-83e9-0067520d47d6",
+        "kind": "finding",
+        "row_ordinal": 95,
+        "rule_id": "ACTIVITY_UNKNOWN_PROJECT",
+        "untrusted_evidence": {
+          "normalized_value": "PRJ-UNKNOWN",
+          "reference_found": false,
+          "reference_set_sha256": "bc71a537ea07ddde1303891fae681da3aabf452b51b5f82a1aed32c74b5e2b9f",
+          "value": "PRJ-UNKNOWN"
+        }
+      },
+      {
+        "field": "project_id",
+        "id": "exception:ef7f433e-f36b-1410-83e9-0067520d47d6",
+        "kind": "finding",
+        "row_ordinal": 96,
+        "rule_id": "ACTIVITY_UNKNOWN_PROJECT",
+        "untrusted_evidence": {
+          "normalized_value": "PRJ-UNKNOWN",
+          "reference_found": false,
+          "reference_set_sha256": "bc71a537ea07ddde1303891fae681da3aabf452b51b5f82a1aed32c74b5e2b9f",
+          "value": "PRJ-UNKNOWN"
+        }
+      },
+      {
+        "field": "project_id",
+        "id": "exception:f37f433e-f36b-1410-83e9-0067520d47d6",
+        "kind": "finding",
+        "row_ordinal": 97,
+        "rule_id": "ACTIVITY_UNKNOWN_PROJECT",
+        "untrusted_evidence": {
+          "normalized_value": "PRJ-UNKNOWN",
+          "reference_found": false,
+          "reference_set_sha256": "bc71a537ea07ddde1303891fae681da3aabf452b51b5f82a1aed32c74b5e2b9f",
+          "value": "PRJ-UNKNOWN"
+        }
+      },
+      {
+        "field": "project_id",
+        "id": "exception:f77f433e-f36b-1410-83e9-0067520d47d6",
+        "kind": "finding",
+        "row_ordinal": 98,
+        "rule_id": "ROW_REQUIRED",
+        "untrusted_evidence": {
+          "reference_set_sha256": "bc71a537ea07ddde1303891fae681da3aabf452b51b5f82a1aed32c74b5e2b9f",
+          "value": ""
+        }
+      },
+      {
+        "field": null,
+        "id": "exception:fb7f433e-f36b-1410-83e9-0067520d47d6",
+        "kind": "finding",
+        "row_ordinal": 99,
+        "rule_id": "ACTIVITY_DUPLICATE",
+        "untrusted_evidence": {
+          "duplicate_of_ordinal": 1,
+          "reference_set_sha256": "bc71a537ea07ddde1303891fae681da3aabf452b51b5f82a1aed32c74b5e2b9f"
+        }
+      },
+      {
+        "field": null,
+        "id": "exception:ff7f433e-f36b-1410-83e9-0067520d47d6",
+        "kind": "finding",
+        "row_ordinal": 100,
+        "rule_id": "ACTIVITY_DUPLICATE",
+        "untrusted_evidence": {
+          "duplicate_of_ordinal": 2,
+          "reference_set_sha256": "bc71a537ea07ddde1303891fae681da3aabf452b51b5f82a1aed32c74b5e2b9f"
+        }
+      },
+      {
+        "id": "row:85d18d26-8ca3-426f-a3fe-28ed9f3a1587:95",
+        "kind": "source_row",
+        "ordinal": 95,
+        "untrusted_source": {
+          "activity_date": "2026-09-25",
+          "activity_id": "ACT-0095",
+          "activity_status": "completed",
+          "completed_units": "2",
+          "project_id": "PRJ-UNKNOWN",
+          "source_updated_at": "2026-09-25T23:00:00Z"
+        }
+      },
+      {
+        "id": "row:85d18d26-8ca3-426f-a3fe-28ed9f3a1587:96",
+        "kind": "source_row",
+        "ordinal": 96,
+        "untrusted_source": {
+          "activity_date": "2026-09-25",
+          "activity_id": "ACT-0096",
+          "activity_status": "completed",
+          "completed_units": "2",
+          "project_id": "PRJ-UNKNOWN",
+          "source_updated_at": "2026-09-25T23:00:00Z"
+        }
+      },
+      {
+        "id": "row:85d18d26-8ca3-426f-a3fe-28ed9f3a1587:97",
+        "kind": "source_row",
+        "ordinal": 97,
+        "untrusted_source": {
+          "activity_date": "2026-09-25",
+          "activity_id": "ACT-0097",
+          "activity_status": "completed",
+          "completed_units": "2",
+          "project_id": "PRJ-UNKNOWN",
+          "source_updated_at": "2026-09-25T23:00:00Z"
+        }
+      },
+      {
+        "id": "row:85d18d26-8ca3-426f-a3fe-28ed9f3a1587:98",
+        "kind": "source_row",
+        "ordinal": 98,
+        "untrusted_source": {
+          "activity_date": "2026-09-25",
+          "activity_id": "ACT-0098",
+          "activity_status": "completed",
+          "completed_units": "2",
+          "project_id": "",
+          "source_updated_at": "2026-09-25T23:00:00Z"
+        }
+      },
+      {
+        "id": "row:85d18d26-8ca3-426f-a3fe-28ed9f3a1587:99",
+        "kind": "source_row",
+        "ordinal": 99,
+        "untrusted_source": {
+          "activity_date": "2026-09-25",
+          "activity_id": "ACT-0001",
+          "activity_status": "completed",
+          "completed_units": "3",
+          "project_id": "PRJ-001",
+          "source_updated_at": "2026-09-25T23:00:00Z"
+        }
+      },
+      {
+        "id": "row:85d18d26-8ca3-426f-a3fe-28ed9f3a1587:100",
+        "kind": "source_row",
+        "ordinal": 100,
+        "untrusted_source": {
+          "activity_date": "2026-09-25",
+          "activity_id": "ACT-0002",
+          "activity_status": "completed",
+          "completed_units": "2",
+          "project_id": "PRJ-002",
+          "source_updated_at": "2026-09-25T23:00:00Z"
+        }
+      }
+    ],
+    "load_id": "85d18d26-8ca3-426f-a3fe-28ed9f3a1587",
+    "packet_version": "1.0.0",
+    "rule_set_version": "1.0.0",
+    "rules": [
+      {
+        "action": "quarantine",
+        "id": "ROW_REQUIRED",
+        "parameters": {
+          "blank_after_trim_is_missing": true,
+          "null_is_missing": true
+        },
+        "scope": "row"
+      },
+      {
+        "action": "exclude_duplicate",
+        "id": "ACTIVITY_DUPLICATE",
+        "parameters": {
+          "keep": "first captured ordinal"
+        },
+        "scope": "row"
+      },
+      {
+        "action": "quarantine",
+        "id": "ACTIVITY_UNKNOWN_PROJECT",
+        "parameters": {
+          "reference": "valid curated project from fixed reference set"
+        },
+        "scope": "row"
+      }
+    ]
+  }
+}

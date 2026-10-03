@@ -1,0 +1,82 @@
+{
+  "project": "wb-p12-727fe883105d",
+  "started_at": "2026-10-03T01:17:57.020450+00:00",
+  "mode": "fresh Compose project, network and SQL volume",
+  "steps": [
+    {
+      "name": "config",
+      "exit_code": 0
+    },
+    {
+      "name": "sql-ready",
+      "exit_code": 0
+    },
+    {
+      "name": "build",
+      "exit_code": 0
+    },
+    {
+      "name": "setup",
+      "exit_code": 0
+    },
+    {
+      "name": "setup-repeat",
+      "exit_code": 0
+    },
+    {
+      "name": "schema-export",
+      "exit_code": 0
+    },
+    {
+      "name": "health",
+      "exit_code": 0
+    },
+    {
+      "name": "driver",
+      "exit_code": 0
+    },
+    {
+      "name": "registry",
+      "exit_code": 0
+    },
+    {
+      "name": "source-seed",
+      "exit_code": 0
+    },
+    {
+      "name": "cli-demo",
+      "exit_code": 0
+    },
+    {
+      "name": "workbench_ui-setup",
+      "exit_code": 0
+    },
+    {
+      "name": "workbench_ui-seed",
+      "exit_code": 0
+    },
+    {
+      "name": "workbench_ui-departments",
+      "exit_code": 0
+    },
+    {
+      "name": "workbench_ui-projects",
+      "exit_code": 0
+    },
+    {
+      "name": "workbench_ui-api",
+      "exit_code": 0
+    },
+    {
+      "name": "browser-checks",
+      "exit_code": 0
+    },
+    {
+      "name": "owned-stack-cleanup",
+      "exit_code": 0
+    }
+  ],
+  "live_ai_enabled": false,
+  "passed": true,
+  "completed_at": "2026-10-03T01:19:18.971884+00:00"
+}

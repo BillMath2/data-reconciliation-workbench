@@ -1,0 +1,63 @@
+{
+  "boundaries": {
+    "exception_resolution": "not assessed; findings are historical",
+    "findings_included": 0,
+    "findings_total": 0,
+    "rows_included": 0,
+    "rows_total": 0,
+    "source_content_is_untrusted": true,
+    "source_correction_actions": "not recorded"
+  },
+  "business_date": "2026-09-25",
+  "calculation_version": "1.0.0",
+  "citation_ids": [
+    "load:2e8540b7-6e40-430b-9a38-10067964403f",
+    "artifact:60594f44-dc92-4649-ad17-d11787cd8c07",
+    "reconciliation:2e8540b7-6e40-430b-9a38-10067964403f"
+  ],
+  "contract_version": "1.0.0",
+  "evidence": [
+    {
+      "business_date": "2026-09-25",
+      "id": "load:2e8540b7-6e40-430b-9a38-10067964403f",
+      "kind": "load",
+      "reference_set_sha256": "bc71a537ea07ddde1303891fae681da3aabf452b51b5f82a1aed32c74b5e2b9f",
+      "source_id": "daily-activity"
+    },
+    {
+      "content_sha256": "48a8450813e145274c58031e7ad0757ddd3e1236bb6c570bd5c1cd3f15ad8904",
+      "id": "artifact:60594f44-dc92-4649-ad17-d11787cd8c07",
+      "kind": "artifact",
+      "load_id": "2e8540b7-6e40-430b-9a38-10067964403f",
+      "source_exported_at": "2026-09-26T10:00:00Z"
+    },
+    {
+      "id": "reconciliation:2e8540b7-6e40-430b-9a38-10067964403f",
+      "kind": "reconciliation",
+      "summary": {
+        "accepted_rows": 98,
+        "accounting_verified": true,
+        "calculation_version": "1.0.0",
+        "completed_count_difference": 0,
+        "completed_unit_difference": 0,
+        "curated_completed_count": 98,
+        "curated_completed_units": 197,
+        "excluded_duplicate_rows": 0,
+        "excluded_invalid_rows": 0,
+        "primary_reasons": [],
+        "raw_rows": 98,
+        "scope": "one full activity date; completed metrics use declared completed status",
+        "source_completed_count": 98,
+        "source_completed_units": 197,
+        "source_status_complete": true,
+        "source_units_complete": true,
+        "unknown_status_rows": 0,
+        "unknown_unit_rows": 0
+      }
+    }
+  ],
+  "load_id": "2e8540b7-6e40-430b-9a38-10067964403f",
+  "packet_version": "1.0.0",
+  "rule_set_version": "1.0.0",
+  "rules": []
+}

@@ -1,0 +1,193 @@
+WEBVTT
+
+00:00:00.781 --> 00:00:05.694
+A source export says one hundred activities were completed, but the report shows ninety four.
+
+00:00:05.944 --> 00:00:08.498
+This workbench makes that difference inspectable.
+
+00:00:08.748 --> 00:00:16.447
+Department records come from SQL, projects come from a paginated registry API, and daily activities arrive as a CSV with a manifest.
+
+00:00:16.697 --> 00:00:22.318
+Python validates those inputs, and SQL Server preserves the evidence and publishes the accepted rows.
+
+00:00:22.568 --> 00:00:26.314
+This demonstration uses fictional data and an isolated local stack.
+
+00:00:26.564 --> 00:00:30.134
+The browser actions you will see use the real SQL backed application.
+
+00:00:32.562 --> 00:00:38.756
+Before recording, the release rehearsal created a separate Docker Compose project, network, and empty SQL volume.
+
+00:00:39.006 --> 00:00:45.085
+It applied all nine migrations, repeated setup without reapplying them, and checked the restricted runtime connection.
+
+00:00:45.335 --> 00:00:50.430
+It also replayed the command line demonstration and the full browser verification in separate databases.
+
+00:00:50.680 --> 00:00:52.954
+These are the captured setup results.
+
+00:00:53.204 --> 00:00:55.758
+The normal workbench stays running separately.
+
+00:00:56.008 --> 00:01:01.249
+At the end, the rehearsal removes only the containers and volume belonging to its own generated project.
+
+00:01:04.844 --> 00:01:07.705
+Here is the golden snapshot in the operator screen.
+
+00:01:07.955 --> 00:01:12.193
+The source has one hundred completed activities and two hundred two completed units.
+
+00:01:12.443 --> 00:01:16.595
+The curated report has ninety four activities and one hundred eighty nine units.
+
+00:01:16.845 --> 00:01:19.351
+The difference is not an unexplained adjustment.
+
+00:01:19.601 --> 00:01:26.251
+Two duplicate copies, three unknown project references, and one missing project value account for all six excluded rows.
+
+00:01:26.501 --> 00:01:30.258
+Counts and totals come from deterministic code and saved SQL evidence.
+
+00:01:30.508 --> 00:01:33.100
+No language model calculates these numbers.
+
+00:01:35.797 --> 00:01:41.521
+Selecting a finding shows the original source row, the validation rule, and the evidence captured for that load.
+
+00:01:41.771 --> 00:01:45.674
+This project reference was absent from the fixed valid registry snapshot.
+
+00:01:45.924 --> 00:01:51.220
+That proves a validation failure, but it does not establish why the upstream source used that value.
+
+00:01:51.470 --> 00:01:54.627
+The operator can acknowledge that somebody reviewed the finding.
+
+00:01:54.877 --> 00:02:01.112
+Acknowledgement is separate from resolution: reviewing a problem does not repair the source or make the row eligible for publication.
+
+00:02:06.140 --> 00:02:14.098
+The investigation panel saves the exact report facts, selected finding, dated observations, citations, and applicable runbooks.
+
+00:02:14.348 --> 00:02:19.078
+This demonstration selects offline guidance, which works without a model or provider key.
+
+00:02:19.328 --> 00:02:23.465
+The saved artifact records who created it and what evidence was available at that moment.
+
+00:02:23.715 --> 00:02:29.108
+Optional live notes have their own bounded provider path, but the assistant has no database action tools.
+
+00:02:29.358 --> 00:02:34.820
+Suggestions are proposed checks, not executed corrections, and missing evidence remains visible.
+
+00:02:37.640 --> 00:02:42.340
+Now the operator chooses the supplied corrected source snapshot and records a reason for running it.
+
+00:02:42.590 --> 00:02:47.289
+The workbench validates that source and atomically replaces the business date's curated partition.
+
+00:02:47.539 --> 00:02:53.434
+The corrected export contains ninety eight rows: the duplicate copies are removed and the project assignments are corrected.
+
+00:02:53.684 --> 00:02:58.686
+Source and report now agree on ninety eight completed activities and one hundred ninety seven units.
+
+00:02:58.936 --> 00:03:01.998
+The original snapshot and its findings remain in history.
+
+00:03:02.248 --> 00:03:06.743
+This is a source correction followed by a verified publication, not an AI repair.
+
+00:03:09.375 --> 00:03:12.931
+Switching the ledger to resolved findings reveals the earlier problems.
+
+00:03:13.181 --> 00:03:16.277
+The selected finding still shows its original source record.
+
+00:03:16.527 --> 00:03:21.610
+Its resolution points to the actual successor load that supplied valid evidence for the same activity key.
+
+00:03:21.860 --> 00:03:26.496
+The application distinguishes this recorded outcome from an acknowledgement or an optimistic claim.
+
+00:03:26.746 --> 00:03:34.426
+Investigation artifacts are also frozen: a saved investigation created before the correction retains that earlier state after the source has been corrected.
+
+00:03:39.781 --> 00:03:42.932
+Run the corrected snapshot again and the result is a no op.
+
+00:03:43.182 --> 00:03:46.978
+The new attempt is recorded and linked to the existing successful publication.
+
+00:03:47.228 --> 00:03:51.408
+It does not duplicate activities, findings, or reconciliation results.
+
+00:03:51.658 --> 00:03:58.093
+The evaluation identity includes captured input and manifest semantics, reference identity, and the contract and rule versions.
+
+00:03:58.343 --> 00:04:06.070
+This also handles a client that loses its acknowledgement after commit: the retry recognizes the durable publication instead of publishing the same input twice.
+
+00:04:10.109 --> 00:04:15.384
+The analyst can inspect reports, audit events, historical findings, and saved investigations.
+
+00:04:15.634 --> 00:04:21.270
+The operator run controls are hidden for this role, and server checks also reject unauthorized mutations.
+
+00:04:21.520 --> 00:04:24.862
+Both roles can create an attributed investigation artifact.
+
+00:04:25.112 --> 00:04:29.098
+These are demonstration identities, not enterprise single sign on.
+
+00:04:29.348 --> 00:04:38.826
+The release retains the permission and cross origin tests, while production identity federation, tenant isolation, deployment monitoring, and retention policies remain explicit future work.
+
+00:04:41.234 --> 00:04:46.076
+This is the previously retained and reviewed live provider explanation from the first AI milestone.
+
+00:04:46.326 --> 00:04:51.187
+It is an archived response to the golden evidence, not a new provider call during this recording.
+
+00:04:51.437 --> 00:04:56.303
+It separates confirmed facts, possible causes, missing evidence, and suggested checks.
+
+00:04:56.553 --> 00:05:02.034
+The broader investigation evaluation suite has eighteen synthetic cases and three offline repetitions per case.
+
+00:05:02.284 --> 00:05:07.640
+Its GitHub checks are green, but repeated live model evaluation and human semantic review remain open.
+
+00:05:07.890 --> 00:05:11.526
+This recording does not declare that expanded AI release gate complete.
+
+00:05:13.937 --> 00:05:22.206
+The engineering evidence includes six abrupt worker exits, an actual checksummed backup and isolated restore, and comparison of all twelve application tables.
+
+00:05:22.456 --> 00:05:27.191
+Explicit recovery preserves the prior publication and records an auditable interrupted attempt.
+
+00:05:27.441 --> 00:05:38.506
+In a separate query fixture with one hundred thousand activities and one hundred thousand historical findings, the new unresolved finding index reduced logical reads from two thousand seven hundred eighteen to six with identical results.
+
+00:05:38.756 --> 00:05:43.256
+This measures a selected query, not whole browser latency or ingestion throughput.
+
+00:05:45.656 --> 00:05:53.840
+The deterministic workbench, permissions, audit history, recovery checks, and query tuning have passed their recorded local tests and user confirmed CI checkpoints.
+
+00:05:54.090 --> 00:06:02.471
+This clean release replay adds current SQL backed screenshots, a narrated recording, a schema diagram, a data dictionary, and operator runbooks.
+
+00:06:02.721 --> 00:06:08.275
+The repository is designed to be understandable without installing it, and reproducible with Compose when you do.
+
+00:06:08.525 --> 00:06:14.516
+The broader live AI evaluation and human review still need completion before the full expanded assistant release can be accepted.

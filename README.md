@@ -1,97 +1,135 @@
 # Data Reconciliation Workbench
 
-An operational workbench for investigating why a source export and a report disagree. Python and SQL Server perform validation and reconciliation. The screen saves investigations with cited evidence and versioned runbooks; optional AI adds explanatory notes. Offline guidance works without a provider. The earlier CLI assistant also has a reviewed live example.
+**Why does the source say 100 completed activities while the report shows 94?**
+This workbench traces the difference to captured rows and validation rules, then
+verifies a source correction without erasing original evidence. Python and SQL
+Server perform the accounting; an analyst/operator screen exposes findings,
+audit history, and frozen investigations. Optional AI explains supplied evidence.
 
-The verified SQL demonstration follows **100 source rows → 94 accepted activities → 98/98 after source correction**. Every exclusion has a recorded reason, and repeating a successful load leaves counts unchanged.
+## Watch the SQL-backed walkthrough
 
-## Watch the demonstration
+[![Actual SQL-backed screen: 100 source rows, 94 accepted, six explained exclusions](docs/images/p12/01-golden.png)](docs/images/p12/walkthrough.mp4)
 
-[![Operator workbench preview showing the 100-to-94 discrepancy and captured source evidence](docs/images/p07-preview/01-golden.png)](docs/images/p07-preview/walkthrough.gif)
+**[Watch or download the 6:18 narrated walkthrough](docs/images/p12/walkthrough.mp4)**
+([chapter player](docs/images/p12/index.html), [captions](docs/images/p12/captions.vtt),
+[transcript](docs/release-narration.json)). GitHub may offer a download rather than
+inline playback. The [demo guide](docs/demo-guide.md) explains local playback and replay.
 
-**[Watch the 25-second workbench preview](docs/images/p07-preview/walkthrough.gif)** — actual Chromium screenshots of the P07 screen, using saved P05 facts and an explicit in-memory service with simulated lifecycle states. This preview is a paced screenshot replay, not live SQL proof. [Capture provenance](docs/evidence/p07/README.md) and the [screen setup guide](docs/workbench-ui.md) explain how to reproduce it. P07 CI is user-confirmed green; its live capture artifacts have not yet been retained or inspected here.
+Actual Chromium actions run against a fresh, isolated SQL Server stack. Narration
+is the synthetic Microsoft David Desktop voice, not Bill's voice. The screen uses
+labeled offline guidance; a separate chapter shows the reviewed, archived P05A
+live AI response. No new model call occurs. [Capture provenance](docs/evidence/p12/README.md)
+distinguishes the browser journey from historical AI/recovery exhibits.
 
-Inspect the [corrected result](docs/images/p07-preview/03-corrected.png) and [retained exception history](docs/images/p07-preview/04-resolved.png). The accepted SQL CLI demonstration follows below.
-
-[![Recorded SQL reconciliation: 100 source rows, 94 accepted, two duplicate extras and four invalid rows](docs/images/p05/step-1.png)](docs/images/p05/walkthrough.gif)
-
-**[Watch the 33-second SQL walkthrough](docs/images/p05/walkthrough.gif)** — actual CLI output from [successful P05 CI run 36637726571](https://github.com/BillMath2/data-reconciliation-workbench/actions/runs/36637726571), rendered as terminal captures with reading pauses. It shows the discrepancy, corrected source, and unchanged rerun. [Recording provenance](docs/evidence/p05/provenance.json) records the commit, supplied artifact links, and file hashes. This is a paced output replay, not desktop video.
-
-| Recorded stage | Verified result |
+| Stage | Verified behavior |
 |---|---|
-| [Discrepancy](docs/images/p05/step-1.png) | 100 source rows, 94 accepted; two duplicates, three unknown projects, and one missing project ID explain all six exclusions |
-| [Source correction](docs/images/p05/step-2.png) | Source and report agree: 98 completed activities and 197 units |
-| [Identical rerun](docs/images/p05/step-3.png) | No-op; the same publication and totals are reused |
+| Original snapshot | 100 rows to 94 accepted; two duplicate copies, three unknown projects, one missing project ID |
+| Exact accounting | 202 declared completed units to 189 accepted; all six excluded rows accounted for |
+| Source correction | 98 source/accepted activities and 197 source/accepted units; atomic date replacement |
+| Identical retry | Audited no-op referencing the successful publication; no duplicated facts/findings |
+| History | Original source and investigations stay frozen; six findings point to the correcting load |
 
-Inspect the [saved evidence and terminal recording](docs/evidence/p05/README.md), reproduce the [demo commands](docs/reconciliation.md#record-the-sql-walkthrough), or follow the [demonstration guide](docs/demo-guide.md).
+![Corrected source and report agree on 98 activities and 197 units](docs/images/p12/04-corrected.png)
 
-## Project status
+![Resolved findings retain captured source and the successor publication](docs/images/p12/05-history.png)
 
-**P01-P09, including P05A, are complete. P10 CI is user-confirmed green for `47a79fb`; its live-model/human-review gates remain open.** P11 adds interrupted-load recovery, a verified backup/restore rehearsal, and measured SQL query tuning. See [P11 validation](docs/p11-validation.md), the [recovery runbook](docs/recovery-runbook.md), and [query measurements](docs/sql-performance.md). P11's new CI result is still pending; P12 full release requires both P10 and P11 acceptance.
+## How it works
 
-**P11 local verification: [386 tests passed](docs/evidence/p11/sql-checks.txt), including all 64 SQL cases with no skips.** Abrupt-exit recovery and actual backup/restore passed. On the selected 100,000-activity query fixture, migration 009 reduced logical reads from 2,718 to 6 with identical results. The local database is migrated and the API is healthy. [Retained evidence](docs/evidence/p11/README.md) records the measurements and scope limits.
-
-**P09 local SQL verification: [338 tests passed](docs/evidence/p09-local/sql-checks.txt), including all 52 SQL cases with no skips.** Migration 008, repeatable setup, the reconciliation demo, API checks, and the complete browser workflow passed against Docker-hosted SQL Server on October 2, 2026. [Local evidence and provenance](docs/evidence/p09-local/README.md) are retained separately from the user-confirmed GitHub CI result. No live AI call was made for P09.
-
-**Verified P05 SQL suite: [164 tests passed](docs/evidence/p05/sql-checks.txt), including all 38 SQL cases, with no skips.** Both CI jobs were confirmed green; the downloaded artifacts were reviewed on October 1, 2026. See [P05 validation](docs/p05-validation.md) for provenance and checks, and [P04 verification](docs/p04-validation.md) for the earlier baseline.
-
-## Explain the discrepancy
-
-[Read the reviewed live AI explanation](docs/evidence/p05a/live.txt) alongside its [saved SQL evidence](docs/evidence/p05/golden-evidence.json), or try the explicitly labeled offline stub without SQL or an API key:
-
-```powershell
-.\scripts\uv.ps1 run --locked workbench explain --packet docs/evidence/p05/golden-evidence.json --provider stub --format text
+```mermaid
+flowchart LR
+    S[SQL + REST + CSV sources] --> C[Capture raw evidence]
+    C --> V[Validate and quarantine]
+    V --> P[Atomic SQL publication]
+    P --> R[Saved reconciliation and audit]
+    R --> W[Analyst / operator screen]
+    W --> I[Frozen investigation]
+    I --> A[Offline guidance or bounded AI notes]
 ```
 
-Code checks the answer's structured counts and citations. The assistant has no database credentials, tools, or repair path; when AI is unavailable, deterministic evidence and guidance remain visible. Live prose still requires review. See the [assistant guide](docs/assistant.md) for setup and limits, and [P05A validation](docs/p05a-validation.md) for the single accepted example and tests. P05A local suite at that checkpoint: **158 passed, 38 SQL tests skipped**; the user confirmed the expanded P05A CI run green for commit `59091f3`. The verified P05 SQL baseline above remains distinct.
+Each field has one authoritative source. Successful evaluation identities make
+retries safe; correction replaces one business-date partition and keeps history.
+The assistant has no database credentials or repair tools. Evidence and
+deterministic guidance remain usable with AI disabled.
 
-## Inspect evidence through the API
+Read the [architecture](docs/architecture.md), [schema diagram](docs/database-schema.md),
+[field dictionary](docs/data-dictionary.md), and [source contracts](docs/source-contracts.md).
 
-P06 adds authenticated report/evidence inspection and operator acknowledgement, with resolution linked to successful source correction. The API exposes the original saved packets and keeps lifecycle state separate. P07 adds the [operator screen at localhost:8000](docs/workbench-ui.md), server-clock freshness, and operator-only runs of the two supplied source snapshots. See the [API setup and endpoint guide](docs/evidence-api.md).
+## Verification and release status
 
-P08's **Who ran this load?** panel shows the selected attempt's actor, reason, and audit events, including separate failed and no-op attempts. Both roles can inspect it. Ingestion and acknowledgement remain operator-only. See the [role and audit guide](docs/permissions-audit.md).
+P01-P09, including P05A, and P11 have user-confirmed green CI checkpoints.
+P10 CI is green, but **expanded live-model evaluation and human semantic review
+remain open**. P12's local demonstration/documentation package is ready for review;
+its new CI result is pending. Full expanded-assistant release is not accepted.
 
-P09's **Explain this evidence** panel lets both roles save an investigation of a selected publication or finding. Facts are deterministic; notes cite the frozen evidence and selected runbooks. Reopening an investigation after source correction preserves what it showed at capture time. Start with offline guidance; live AI requires explicit server configuration and user selection. Apply migration 008 and rebuild the API before using it. See the [investigation guide](docs/investigations.md).
+- [P12 fresh replay](docs/p12-validation.md): nine migrations, unchanged repeat
+  setup, driver checks, real SQL CLI/browser workflows, recording, and isolated cleanup.
+- [P11 full SQL suite](docs/evidence/p11/sql-checks.txt): 386 passed, including
+  all 64 SQL cases without skips. Six abrupt-exit rehearsals and actual backup/restore passed.
+- [Measured SQL tuning](docs/sql-performance.md): selected query on 100,000
+  activities/findings reduced logical reads from 2,718 to 6 with identical results.
+  This is not a whole-application latency or throughput claim.
+- [Reviewed P05A live explanation](docs/evidence/p05a/live.txt) and
+  [P10 evaluation boundaries](docs/p10-validation.md) keep the accepted example
+  separate from the outstanding expanded evaluation.
 
-## Run the foundation with Docker Compose
+This is a local synthetic-data demo with one admitted worker and fixed references.
+Enterprise SSO, tenant isolation, deployment, retention, and offsite recovery
+remain outside scope. See [limits and remaining gates](docs/release-scope.md).
 
-Use an x86-64 Docker host with Linux containers and Compose v2 or later. On Windows, Docker Desktop provides this environment. No native Python or SQL Server installation is required for this path.
+## Run locally with Docker Compose
+
+Use an x86-64 Docker host with Linux containers. On Windows, Docker Desktop with
+WSL 2 supplies that environment. SQL runs in the container; no native SQL Server
+installation is required. Compose accepts the SQL Server Developer EULA for development.
 
 From PowerShell in the repository:
 
 ```powershell
 .\scripts\initialize-demo.ps1
 docker compose --env-file .env.workbench up -d --wait --wait-timeout 240 sqlserver
-docker compose --env-file .env.workbench build workbench
 docker compose --env-file .env.workbench --profile tools run --build --rm migrate
-docker compose --env-file .env.workbench run --rm workbench health
-docker compose --env-file .env.workbench run --rm workbench db-smoke
-docker compose --env-file .env.workbench --profile test run --build --rm tests
-docker compose --env-file .env.workbench down
+docker compose --env-file .env.workbench --profile sources up -d --build --wait mock-registry
+docker compose --env-file .env.workbench build workbench
+docker compose --env-file .env.workbench --profile tools run --rm migrate seed-departments
+$referenceHash = (Get-Content fixtures/generated/index.json -Raw | ConvertFrom-Json).reference_sets.default
+docker compose --env-file .env.workbench run --rm workbench load-departments --reference-hash $referenceHash
+docker compose --env-file .env.workbench run --rm workbench load-projects
+docker compose --env-file .env.workbench --profile web up -d --build --wait api
 ```
 
-The setup script creates or upgrades `.env.workbench` with distinct generated administrator and runtime passwords, preserving existing nonempty credentials. On other platforms, copy `.env.example` to `.env.workbench` and set both passwords to different strong values (16-128 characters for the runtime password) before running the same Docker commands.
+Open **http://127.0.0.1:8000/**. Read the ignored `.env.workbench` locally and use
+`WB_DEMO_OPERATOR_TOKEN` to sign in. Choose September 25, 2026, run **Golden source**
+with a reason, inspect a finding, then run **Corrected source**. The analyst token
+allows inspection/investigations without ingestion or acknowledgement rights.
+Never commit or capture token values. See the [screen guide](docs/workbench-ui.md).
 
-The `migrate` service creates the `workbench` database, applies pending migrations, and provisions the restricted `workbench_app` login. Rerunning it leaves applied migrations unchanged. The regular `workbench` service uses that runtime login. See the [schema and migration guide](docs/database-schema.md).
+Initialization preserves existing credentials. On other platforms, copy
+`.env.example` to `.env.workbench`, set different strong SQL administrator/runtime
+passwords and distinct demo tokens, then use the same Compose commands; obtain the
+reference hash from `fixtures/generated/index.json`. Setup applies pending migrations
+and verifies the restricted runtime login. SQL stays on the internal network;
+the API host port is localhost-only.
 
-The database uses a named volume and stays inside the Compose network. `down` stops containers and preserves that volume. SQL tests create and remove their own uniquely named disposable databases and start the mock registry. Setup leaves the application tables empty; follow the [screen guide](docs/workbench-ui.md) to seed reference sources and start the workbench, or use the [CLI ingestion guide](docs/ingestion.md). The Compose file accepts Microsoft's SQL Server Developer EULA for development use.
+An existing completed demo reuses prior publications. Inspect history or use the
+[isolated release replay](docs/demo-guide.md) for a new demonstration. Stop normally
+with `docker compose --env-file .env.workbench down`; this preserves the SQL volume.
+Do not remove the volume to reset a demonstration.
 
-## Inspect the synthetic sources
+## Test and investigate
 
 ```powershell
-.\scripts\uv.ps1 sync --locked --python 3.12
-.\scripts\uv.ps1 run --locked workbench-fixtures --check fixtures/generated
-.\scripts\uv.ps1 run --locked workbench-registry
+docker compose --env-file .env.workbench run --rm workbench health
+docker compose --env-file .env.workbench run --rm workbench db-smoke
+docker compose --env-file .env.workbench --profile test run --build --rm tests --run-sql
 ```
 
-The registry serves `http://127.0.0.1:8001/projects` with stable pagination. For the container version, use `docker compose --env-file .env.workbench --profile sources up -d --build --wait mock-registry`.
+SQL tests use disposable databases. Host-only pytest reports SQL tests as skipped.
+CI verifies the complete browser workflow and offline AI evaluation without paid
+provider calls. [Development setup](docs/development.md) covers uv/Python, lint,
+fixtures, and browser tooling.
 
-The [source-contract guide](docs/source-contracts.md) documents field ownership, manifests, fixture regeneration, the SQL seed, and S01-S12 scenario inputs. [Independent golden expectations](fixtures/expected/golden.json) specify the six excluded rows and expected totals. P04's SQL tests verified 94 accepted rows/189 units, then 98 rows/197 units after correction. P05 adds persisted reconciliation and the [read-only report/evidence commands](docs/reconciliation.md).
-
-## Engineering evidence
-
-- **Docker:** separate runtime/test image targets, a non-root Python process, a pinned SQL Server image, readiness checks, private database networking, and persistent storage.
-- **SQL engineering:** twelve tables and three reporting views, source-row lineage, saved findings/reconciliation/investigations, atomic publication, an applied-version ledger, and a restricted runtime role. P06-P09, including investigation migration 008, are accepted on user-confirmed green CI.
-- **Automation:** GitHub Actions builds the images, tests real SQL Server, and captures the guided SQL demo with its evidence packets and media. P07 adds browser verification and a separate `ui-demo` artifact.
-- **Reproducibility:** uv lockfile, explicit configuration, synthetic-data scope, and a Docker build context that excludes credentials.
-
-See the [implementation plan](docs/implementation-plan.md) for the remaining work, [development setup](docs/development.md) for tooling and troubleshooting, and [demonstration guide](docs/demo-guide.md) for the README/screenshot/recording sequence.
+Use the [operator runbook](docs/operations-runbook.md), [recovery/restore runbook](docs/recovery-runbook.md),
+[permissions and audit](docs/permissions-audit.md), [investigation guide](docs/investigations.md),
+and [API guide](docs/evidence-api.md). The [implementation plan](docs/implementation-plan.md)
+records milestone acceptance; [earlier P05 CI evidence](docs/evidence/p05/README.md)
+remains available for provenance.

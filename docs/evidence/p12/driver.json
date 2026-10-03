@@ -1,0 +1,5 @@
+{
+  "status": "ok",
+  "check": "sql-smoke",
+  "driver": "mssql-python"
+}

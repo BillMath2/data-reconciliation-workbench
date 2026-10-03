@@ -1,6 +1,12 @@
 # Database schema and migrations
 
-The current schema has twelve tables, eight migrations, and three reporting views. P03-P05 are verified in CI. P05 adds `ops.ReconciliationResult`, `report.vw_LoadReconciliation`, and `report.vw_ProjectActivity` in migration 006; these changes passed the P05 SQL run (164 tests, including all 38 SQL cases). See [reconciliation semantics](reconciliation.md), [P04 verification](p04-validation.md), and [P05 validation](p05-validation.md). P06 adds lifecycle columns and `report.vw_OpenExceptions` in migration 007; these are accepted on user-confirmed P06 green CI. Original finding evidence stays immutable, and runtime UPDATE permission is limited to lifecycle columns. P09 adds `ops.Investigation` in migration 008; its live SQL CI acceptance is pending. See [investigation persistence](investigations.md) and [P09 validation](p09-validation.md).
+The current schema has **twelve tables, nine migrations, and three reporting views**.
+P01-P09 and P11 are accepted on their recorded/user-confirmed CI checkpoints.
+Migration 006 adds saved reconciliation; 007 adds exception lifecycle; 008 adds
+immutable investigations; 009 adds the measured filtered unresolved-finding index.
+The P12 fresh Compose replay applied all nine migrations and repeated setup with
+none pending. See the [field dictionary](data-dictionary.md), [actual catalog](evidence/p12/schema.json),
+[P12 verification](p12-validation.md), and [query measurements](sql-performance.md).
 
 ## Initial tables
 
@@ -65,7 +71,11 @@ docker compose --env-file .env.workbench --profile tools run --rm migrate
 docker compose --env-file .env.workbench run --build --rm workbench health
 ```
 
-The first setup reports `applied: [1, 2, 3, 4, 5, 6, 7, 8]` for an empty database. An existing P08 database applies `[8]`; an unchanged rerun reports `applied: []` and `current_version: 8`. Empty-database setup and unchanged rerun were observed successfully on local SQL Server on October 2, 2026; P09 GitHub CI remains pending. See [local verification evidence](evidence/p09-local/README.md). Setup does not seed reference data or load curated records; use the separate commands in the ingestion guide.
+The first setup reports `applied: [1, 2, 3, 4, 5, 6, 7, 8, 9]` for an empty database.
+An existing P09/P10 database applies `[9]`; an unchanged P11 rerun reports
+`applied: []` and `current_version: 9`. These fresh/repeat results were observed in
+[P12](evidence/p12/setup.json). Setup does not seed references or load curated
+records; use the separate commands in the [screen guide](workbench-ui.md).
 
 The underlying CLI commands are:
 
@@ -76,7 +86,7 @@ The underlying CLI commands are:
 | `db-setup` | Create database, migrate, provision/verify runtime login | Administrator; requires both passwords |
 | `health` / `db-smoke` | Read-only connectivity / session-local transaction probe | Runtime |
 
-For direct Python use, supply `--env-file` explicitly and point it at an accessible SQL endpoint. Compose keeps SQL private and pins its application database to `workbench`. `--migration-dir` defaults to `sql/migrations` relative to the working directory. System databases are rejected; database names must start with an ASCII letter and contain only letters, digits, and underscores (maximum 63 characters).
+For direct Python use, supply `--env-file` explicitly and point it at an accessible SQL endpoint. Compose keeps SQL private; `WB_SQL_DATABASE` selects the application database, defaulting to `workbench`. `--migration-dir` defaults to `sql/migrations` relative to the working directory. System databases are rejected; database names must start with an ASCII letter and contain only letters, digits, and underscores (maximum 63 characters).
 
 ## Migration behavior and recovery
 

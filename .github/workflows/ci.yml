@@ -19,6 +19,8 @@ jobs:
       - run: uv sync --locked --python 3.12
       - run: uv run --locked ruff check .
       - run: uv run --locked ruff format --check .
+      - name: Verify release documentation and retained assets
+        run: uv run --locked python scripts/check-docs.py
       - run: uv run --locked workbench-fixtures --check fixtures/generated
       - run: uv run --locked pytest -q
       - name: Evaluate versioned investigation corpus offline (no paid provider calls)

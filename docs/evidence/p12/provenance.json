@@ -1,0 +1,77 @@
+{
+  "application_baseline_commit": "901db401ca5212dfc511a374f529511de1ee515a",
+  "ci_confirmation": "P11 green reported by user; exact run artifacts not independently inspected",
+  "capture_tooling": "P12 working tree; no application business logic or migration changes",
+  "recorded_at_utc": "2026-10-03T01:30:04.086778+00:00",
+  "completed_at_utc": "2026-10-03T01:40:26.487528+00:00",
+  "docker_compose_version": "5.5.1",
+  "sql_version": "16.0.4295.3",
+  "media_duration_seconds": 378.32,
+  "media_dimensions": [
+    1440,
+    1000
+  ],
+  "voice": "Synthetic narration using the installed Microsoft David Desktop voice; not Bill's voice.",
+  "ai_mode": "offline screen guidance; archived P05A live response shown separately",
+  "expanded_ai_release_accepted": false,
+  "paid_provider_calls_in_p12": 0,
+  "host_tests": {
+    "passed": 322,
+    "sql_skipped": 64
+  },
+  "prior_p11_full_sql_suite": {
+    "passed": 386,
+    "sql_cases": 64,
+    "skipped": 0
+  },
+  "p12_full_sql_pytest_rerun": false,
+  "media_review": "Full H.264/AAC decode, non-silent audio, caption loading, chapter seeking, screenshots and representative frames inspected; no human listening review claimed",
+  "encoding_tool": "imageio-ffmpeg 0.6.0 Windows wheel; FFmpeg 7.1; local optional production tool",
+  "source_exhibits": [
+    "docs/evidence/p05a/live.json",
+    "docs/evidence/p11/performance.json",
+    "docs/evidence/p11/backup-restore.json"
+  ],
+  "hash_policy": "Raw bytes for binary files; UTF-8 text normalized from CRLF to LF",
+  "sha256": {
+    "docs/evidence/p12/cli/corrected-evidence.json": "126f90d86de11e665dd400a1d8e2833da496e1d4b11c96e9f7463bffadc2176f",
+    "docs/evidence/p12/cli/corrected.json": "6b251877ee21b3735fe04780d58b43316511ee2c474bfcf9350692f7bf772c34",
+    "docs/evidence/p12/cli/golden-evidence.json": "bbc793dd0ed496c7898a6bd7c94aa0c4512e57f3d03a7ea3c2f2a3f561996470",
+    "docs/evidence/p12/cli/golden.json": "fab83d2288fc9aace01008c578787a8ba3eda099402a7293f1708e10e2d38b4b",
+    "docs/evidence/p12/cli/recording.json": "91cec2c399fbaa33db4ecab918d594aa9496848f0813e1602dc91cf80eac8367",
+    "docs/evidence/p12/cli/repeat-evidence.json": "126f90d86de11e665dd400a1d8e2833da496e1d4b11c96e9f7463bffadc2176f",
+    "docs/evidence/p12/cli/repeat.json": "75466641414d8e6623c9c5ec9fd89cdba95c281591b12d90e9a792b8ddb27d34",
+    "docs/evidence/p12/driver.json": "da0bcc3435a10520f99ce14a96d6f1db4cb20184761eca2ef22d0e7eba3f72d8",
+    "docs/evidence/p12/final-replay.json": "7c48169f4831cbc835e13898d092cff334f40f16cbe93a1f25fb06ef63475070",
+    "docs/evidence/p12/health.json": "72a769ad8ea0edca9c6b05b4584f019c0c5b92fb1b6148fa8399bff96d4ffe70",
+    "docs/evidence/p12/main-api-check.json": "6861cae25084c8b91d3207f3daacf2e115e5b3dabc06220ba1583234df5236db",
+    "docs/evidence/p12/media-qa.json": "8af59768fe3fef1328eaa8cf5321f87e014b950d0531198ae50a2b008952b1de",
+    "docs/evidence/p12/recording.json": "04931fd5ddd36a4a4cb311a2e1aa58e7a4485426c813f89f9bcd87d17e3ac714",
+    "docs/evidence/p12/rehearsal.json": "aa940b71d401789a1803b5db0a3b158235ec367219c091628b57d0180957b09c",
+    "docs/evidence/p12/schema.json": "3b47b898c2c320dc3930c9aee20c7b0ae8cde003cbff9fff3463f8e2a86f7fd8",
+    "docs/evidence/p12/setup-repeat.json": "938099c749e2bd85b8a1534e101035e02a4e5c3fc53123170bab7319d9af3e69",
+    "docs/evidence/p12/setup.json": "e834de009dd0ef0d8e890c9a0c85e25c932a0d4dfb6b42f93012e47ead73db00",
+    "docs/evidence/p12/ui-verification.json": "b021d795a8ffb6a85899e4133ec2ad4adb70a47713e6e91587a104a6e7d5cb17",
+    "docs/evidence/p12/unit-checks.txt": "bac100f0c66b1c9876abf10e9ca3e59798ad084b10878d282a14890d7b032bda",
+    "docs/images/p12/01-golden.png": "509db69afd82727ab42a1a6fcc0a47adc7566946b7e8c20f8073fba285465c59",
+    "docs/images/p12/02-finding.png": "f091e9d268a0bab439e244ba8555fafc7987899ddffe13e8debf42f38d7b1db4",
+    "docs/images/p12/03-investigation.png": "53b5da5e4b1da7b36b842f6b8c3ea1ea70cee2c7c164a4a0600e8b8eeeff8e85",
+    "docs/images/p12/04-corrected.png": "875f54f3159c3a5ab0efa10bd9e25d5750d7dc3bb1d5de79cca0ab931084e0c1",
+    "docs/images/p12/05-history.png": "939495831c73085cc66a2858c111dd6f37850dc353530c9af245cdd4b068cbae",
+    "docs/images/p12/06-noop.png": "47af81019655c07c8e6b94fa39690378e5d5526a0928e1614133cf26313bdb57",
+    "docs/images/p12/07-analyst.png": "c07559dbd8462801ee33541e60f34a38bcb410758e7823aa6286e1b4a93c860b",
+    "docs/images/p12/captions.vtt": "08ce41d4ea0d0980ce1f134ee4a8d7e5d632d9dd301ef6f96e82680760d2009c",
+    "docs/images/p12/index.html": "f97128b106f49d9bd73898554aada5b7859ea1e7fce00097e2a57b8de6ed6814",
+    "docs/images/p12/walkthrough.mp4": "8fe6bc12b9e9ad23f2413a4eb676852055675e7f28cab24351740bab7603cbe1",
+    "docs/release-narration.json": "69eba10bdfb42a7b9d1a353f6959892a98718ac5ef189bc0b1ce37c1232bf659"
+  },
+  "tooling_sha256": {
+    "scripts/check-docs.py": "0965f020028962138e9fee4f6b2b0c91dc6c5cc147d3217cb69d4969916e6214",
+    "scripts/export-schema.py": "2b47bc974e47cf131d6a197f5552047cb1d6eda273c671956a8a1e98c289000f",
+    "scripts/record-release.py": "e437190f5f73d45448bd2ea4fd4552b3ba2bc3f599f26ce81378b014b716d109",
+    "scripts/release-rehearsal.py": "8a4893a9f07366564a7a67aca807f141d5af8601023d2d8a0c32a0444e1bfb5b",
+    "scripts/release_media.py": "59922f3f1d631bdc7eaad84623b26258c62e8effdbddadd911cacfb014e1cda4",
+    "scripts/serve-release.py": "56623d4562236be2501989dbd44c0f3fe4d458ab5db83d3335398dc6b70f3bde",
+    "scripts/narrate-release.ps1": "b26863968f9e0a87659a02d371dced9d86e6975a7701dd9b1cb2996488654a48"
+  }
+}

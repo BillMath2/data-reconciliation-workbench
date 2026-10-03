@@ -1,6 +1,6 @@
 # P11 validation: recovery, restore, and SQL performance
 
-Status: implemented and locally verified on October 2, 2026; P11 GitHub CI pending. P10's rerun was
+Status: implemented and locally verified on October 2, 2026; the user subsequently confirmed P11 GitHub CI green for `901db40`. The exact CI run/artifacts were not independently inspected in this session. P10's rerun was
 confirmed green by the user for commit `47a79fb`; live-model evaluation and human
 semantic review remain open. P11 depends on accepted P08 and can proceed independently.
 
