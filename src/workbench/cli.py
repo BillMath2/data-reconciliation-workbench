@@ -7,7 +7,7 @@ from contextlib import closing, nullcontext
 from datetime import UTC, datetime
 from pathlib import Path
 
-from workbench import bootstrap, db, demo, freshness, migrations, pipeline, reports
+from workbench import bootstrap, db, demo, freshness, migrations, pipeline, recovery, reports
 from workbench.config import ConfigurationError, load_settings
 from workbench.validation import LoadError, parse_date, parse_timestamp
 
@@ -21,6 +21,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--registry-url", default="http://mock-registry:8001/projects")
     parser.add_argument("--reference-hash")
     parser.add_argument("--actor", default="cli")
+    parser.add_argument("--apply", action="store_true", help="Apply an explicit recovery operation")
+    parser.add_argument("--reason", help="Required operator reason when applying recovery")
     parser.add_argument("--business-date", type=parse_date)
     parser.add_argument("--load-id")
     parser.add_argument("--output-dir", type=Path, default=Path("runs/demo"))
@@ -51,9 +53,12 @@ def main(argv: list[str] | None = None) -> int:
             "evidence",
             "demo",
             "explain",
+            "recover-loads",
         ),
     )
     args = parser.parse_args(argv)
+    if (args.apply or args.reason is not None) and args.command != "recover-loads":
+        parser.error("--apply and --reason are only valid with recover-loads")
     if args.command == "explain":
         if args.packet is None:
             parser.error("explain requires --packet")
@@ -109,6 +114,10 @@ def main(argv: list[str] | None = None) -> int:
         try:
             if args.command == "health":
                 result = db.health(settings)
+            elif args.command == "recover-loads":
+                result = recovery.recover(
+                    settings, apply=args.apply, actor=args.actor, reason=args.reason
+                )
             elif args.command == "db-smoke":
                 result = db.smoke(settings)
             elif args.command == "db-create":

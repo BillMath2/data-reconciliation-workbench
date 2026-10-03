@@ -274,6 +274,8 @@ def ingest(
                     )
                 save_capture(cursor, load_id, capture)
                 connection.commit()
+                if fault is not None:
+                    fault("after_capture")
                 if capture.error:
                     raise capture.error
                 known = check_references(cursor, capture)
@@ -305,6 +307,8 @@ def ingest(
                 stage_rows(cursor, load_id, capture, rows)
                 cursor.execute("UPDATE ops.Load SET status='validated' WHERE load_id=?", (load_id,))
                 connection.commit()
+                if fault is not None:
+                    fault("after_validation")
                 status = publish(cursor, load_id, capture, rows, fault, actor=actor)
                 counts = {
                     name: sum(row.disposition == name for row in rows)
@@ -312,7 +316,7 @@ def ingest(
                 }
                 audit(cursor, load_id, actor, "load_published", counts)
                 connection.commit()
-                return {"status": status, "load_id": load_id, "raw_rows": len(rows), **counts}
+                result = {"status": status, "load_id": load_id, "raw_rows": len(rows), **counts}
             except Exception as error:
                 connection.rollback()
                 code = error.code if isinstance(error, LoadError) else "LOAD_FAILED"
@@ -330,6 +334,11 @@ def ingest(
                 audit(cursor, load_id, actor, "load_failed", {"code": code})
                 connection.commit()
                 return {"status": "failed", "load_id": load_id, "code": code, "message": message}
+            # Simulate lost acknowledgement only after the durable transaction. A
+            # test fault here must never relabel a committed publication as failed.
+            if fault is not None:
+                fault("after_commit")
+            return result
         finally:
             with suppress(Exception):
                 connection.rollback()

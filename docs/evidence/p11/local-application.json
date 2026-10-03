@@ -1,0 +1,35 @@
+{
+  "main-migrate": {
+    "status": "ok",
+    "check": "database-setup",
+    "created": false,
+    "applied": [
+      9
+    ],
+    "current_version": 9,
+    "runtime_login": "workbench_app"
+  },
+  "main-migrate-repeat": {
+    "status": "ok",
+    "check": "database-setup",
+    "created": false,
+    "applied": [],
+    "current_version": 9,
+    "runtime_login": "workbench_app"
+  },
+  "main-recovery-preview": {
+    "status": "ok",
+    "check": "recover-loads",
+    "applied": false,
+    "count": 0,
+    "items": []
+  },
+  "api": {
+    "status": "ok",
+    "check": "evidence-api",
+    "historical_count": 94,
+    "corrected_count": 98,
+    "resolved_findings": 6
+  },
+  "ai_live_enabled": false
+}

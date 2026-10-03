@@ -1,0 +1,29 @@
+{
+  "fault_point": "started",
+  "worker_exit": 23,
+  "before_recovery": [
+    94,
+    189
+  ],
+  "recovery": {
+    "status": "ok",
+    "check": "recover-loads",
+    "applied": true,
+    "count": 1,
+    "items": [
+      {
+        "load_id": "c16a3781-182f-4644-ba6e-dba04870d22a",
+        "source_id": "daily-activity",
+        "previous_status": "started",
+        "artifact_retained": false
+      }
+    ]
+  },
+  "retry_status": "published",
+  "final_totals": [
+    98,
+    197
+  ],
+  "reconciliation_records": 2,
+  "historical_packet_unchanged": true
+}

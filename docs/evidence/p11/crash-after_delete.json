@@ -1,0 +1,29 @@
+{
+  "fault_point": "after_delete",
+  "worker_exit": 23,
+  "before_recovery": [
+    94,
+    189
+  ],
+  "recovery": {
+    "status": "ok",
+    "check": "recover-loads",
+    "applied": true,
+    "count": 1,
+    "items": [
+      {
+        "load_id": "400462f7-4b19-41e5-939a-5c6f365f4ce2",
+        "source_id": "daily-activity",
+        "previous_status": "validated",
+        "artifact_retained": true
+      }
+    ]
+  },
+  "retry_status": "published",
+  "final_totals": [
+    98,
+    197
+  ],
+  "reconciliation_records": 2,
+  "historical_packet_unchanged": true
+}

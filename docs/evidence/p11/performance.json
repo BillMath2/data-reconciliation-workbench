@@ -1,0 +1,85 @@
+{
+  "activities": 100000,
+  "historical_findings": 100000,
+  "unresolved_findings": 100,
+  "fixture_kind": "set-based query-only synthetic fixture; not ingestion throughput",
+  "query": "SELECT e.exception_id, e.load_id, e.row_ordinal, e.rule_id, e.rule_set_version, e.field_name, e.created_at, e.acknowledged_at, e.acknowledged_by, e.acknowledgement_reason, e.resolved_at, e.resolved_by_load_id, e.resolution_reason FROM ops.Exception e JOIN ops.Load l ON l.load_id=e.load_id WHERE e.resolved_at IS NULL AND l.business_date=? ORDER BY l.attempt_number DESC, e.row_ordinal, e.rule_id, e.exception_id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY",
+  "parameters": [
+    "2026-09-25",
+    "0",
+    "50"
+  ],
+  "sql_version": "16.0.4295.3",
+  "cpu_count": 8,
+  "physical_memory_kb": 12934144,
+  "server_started_at": "2026-10-02 14:17:50.617000",
+  "warm_cache": true,
+  "before": [
+    {
+      "logical_reads": 2718,
+      "elapsed_ms_including_plan_transfer": 21.128,
+      "rows": 50,
+      "indexes": [
+        "[PK_Exception]",
+        "[PK_Load]"
+      ]
+    },
+    {
+      "logical_reads": 2718,
+      "elapsed_ms_including_plan_transfer": 20.833,
+      "rows": 50,
+      "indexes": [
+        "[PK_Exception]",
+        "[PK_Load]"
+      ]
+    },
+    {
+      "logical_reads": 2718,
+      "elapsed_ms_including_plan_transfer": 14.731,
+      "rows": 50,
+      "indexes": [
+        "[PK_Exception]",
+        "[PK_Load]"
+      ]
+    }
+  ],
+  "after": [
+    {
+      "logical_reads": 6,
+      "elapsed_ms_including_plan_transfer": 3.506,
+      "rows": 50,
+      "indexes": [
+        "[IX_Exception_UnresolvedPage]",
+        "[PK_Load]"
+      ]
+    },
+    {
+      "logical_reads": 6,
+      "elapsed_ms_including_plan_transfer": 4.52,
+      "rows": 50,
+      "indexes": [
+        "[IX_Exception_UnresolvedPage]",
+        "[PK_Load]"
+      ]
+    },
+    {
+      "logical_reads": 6,
+      "elapsed_ms_including_plan_transfer": 3.246,
+      "rows": 50,
+      "indexes": [
+        "[IX_Exception_UnresolvedPage]",
+        "[PK_Load]"
+      ]
+    }
+  ],
+  "median_logical_reads_before": 2718,
+  "median_logical_reads_after": 6,
+  "read_reduction_percent": 99.78,
+  "evidence_service_elapsed_ms": [
+    6.794,
+    4.841,
+    4.255
+  ],
+  "scope": "one selected date, first unresolved page; excludes HTTP/browser rendering",
+  "identical_results": true
+}

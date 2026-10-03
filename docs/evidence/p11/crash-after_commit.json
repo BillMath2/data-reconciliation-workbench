@@ -1,0 +1,22 @@
+{
+  "fault_point": "after_commit",
+  "worker_exit": 23,
+  "before_recovery": [
+    98,
+    197
+  ],
+  "recovery": {
+    "status": "ok",
+    "check": "recover-loads",
+    "applied": true,
+    "count": 0,
+    "items": []
+  },
+  "retry_status": "no_op",
+  "final_totals": [
+    98,
+    197
+  ],
+  "reconciliation_records": 2,
+  "historical_packet_unchanged": true
+}

@@ -64,7 +64,7 @@ P05 now saves reconciliation and its bounded evidence packet inside the publicat
 
 Load departments before projects and projects before activities. The registry adapter verifies its declared reference hash against the actual captured department/project pair. A changed fixture hash or changed previously published reference capture requires a fresh isolated demo database. A reference source's latest failed/interrupted attempt blocks dependent publication even if a previous snapshot remains visible; retry the original reference successfully before loading activities again.
 
-Row findings use the [fixed rule IDs](../config/rules.json). Structural failures include `SRC_SCHEMA`, `SRC_MANIFEST_COUNT`, `SRC_BUSINESS_DATE`, `SRC_PAGINATION`, and `REF_DUPLICATE`. Operational codes are separate: `SOURCE_UNAVAILABLE`, `DEPENDENCY_UNAVAILABLE`, `REFERENCE_CHANGED`, and `LOAD_FAILED`. `WORKER_BUSY` rejects an unadmitted overlapping request. Driver exception text and credentials are excluded from returned results and persisted failure messages.
+Row findings use the [fixed rule IDs](../config/rules.json). Structural failures include `SRC_SCHEMA`, `SRC_MANIFEST_COUNT`, `SRC_BUSINESS_DATE`, `SRC_PAGINATION`, and `REF_DUPLICATE`. Operational codes are separate: `SOURCE_UNAVAILABLE`, `DEPENDENCY_UNAVAILABLE`, `REFERENCE_CHANGED`, `LOAD_FAILED`, and `LOAD_INTERRUPTED`. `WORKER_BUSY` rejects an unadmitted overlapping request. Driver exception text and credentials are excluded from returned results and persisted failure messages.
 
 The demo bounds captures to 10 MiB, 10,000 rows, and 100 API pages, with a 10-second request timeout. It rejects repeated cursors, inconsistent snapshot metadata, incomplete totals, ambiguous JSON keys, malformed CSV records, and unexpected record fields. Retries of transport failures are explicit new load attempts.
 
@@ -72,7 +72,7 @@ The demo bounds captures to 10 MiB, 10,000 rows, and 100 API pages, with a 10-se
 
 `freshness` evaluates the requested business date's deadline at 09:00 America/New_York the following day. Its optional UTC clock makes S08 reproducible. An older date cannot satisfy the requested date; an explicitly published empty date can. When a failed replacement leaves a prior publication for that date, the result includes `failed_refresh: true` alongside availability. A freshness observation is read-only; it does not create findings merely because somebody checks status.
 
-Test-only fault callbacks interrupt publication after deleting the old partition or just before commit. They are not exposed as CLI switches. Recovery after process termination, connection loss during commit, and backup/restore rehearsal remain P11 work; an interrupted attempt can remain `started`, `captured`, or `validated` for later recovery handling. P04's rollback guarantee is exercised by the SQL transaction tests, not inferred from local unit tests.
+P11 adds test-only crash boundaries before and during publication and after commit. `workbench recover-loads` previews unpublished abandoned attempts; `--apply --actor NAME --reason TEXT` marks them failed with an atomic interruption finding/audit record under the ingestion lock. It preserves captured artifacts and prior publications, then the operator retries explicitly. A committed attempt remains published and its retry is a no-op. See the [recovery runbook](recovery-runbook.md) for the actual process-exit and backup/restore rehearsals and their limits.
 
 Run the complete suite on a Docker host:
 
@@ -80,7 +80,7 @@ Run the complete suite on a Docker host:
 docker compose --env-file .env.workbench --profile test run --build --rm tests
 ```
 
-The tests use administrator credentials only for isolated database setup and source seeding, then provision and use `workbench_app` for ingestion. They require both configured passwords. `WB_TEST_REGISTRY_URL` defaults to the mock Compose service; direct tests can point it at a separately running registry. No test writes fixture expected results or the configured application's curated tables.
+The tests use administrator credentials for isolated database setup, source seeding, backup/restore, and query-plan/index measurement; they provision and use `workbench_app` for ingestion, recovery, and evidence access. They require both configured passwords. `WB_TEST_REGISTRY_URL` defaults to the mock Compose service; direct tests can point it at a separately running registry. No test writes fixture expected results or the configured application's curated tables.
 
 ## P06 successor resolution
 

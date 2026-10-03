@@ -73,10 +73,14 @@ jobs:
           docker compose --profile web up -d --build --wait --wait-timeout 120 api
           python3 scripts/check-api.py
       - name: Run tests including real SQL Server transactions
+        timeout-minutes: 15
         run: |
-          mkdir -p runs
+          mkdir -p runs/p11
           set -o pipefail
-          docker compose --profile test run --build --rm tests 2>&1 | tee runs/sql-checks.txt
+          docker compose --profile test run --build --rm --user "$(id -u):$(id -g)" \
+            --volume "$PWD/runs/p11:/app/p11-evidence" \
+            -e WB_P11_EVIDENCE_DIR=/app/p11-evidence \
+            tests -v -p no:cacheprovider --run-sql --durations=15 2>&1 | tee runs/sql-checks.txt
       - uses: astral-sh/setup-uv@v6
         with:
           version: "0.12.20"
@@ -115,6 +119,13 @@ jobs:
         with:
           name: sql-checks
           path: runs/sql-checks.txt
+          if-no-files-found: ignore
+      - name: Save recovery, restore, and query-plan evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p11-evidence
+          path: runs/p11/
           if-no-files-found: ignore
       - name: Remove disposable containers and test database
         if: always()

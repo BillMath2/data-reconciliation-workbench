@@ -1,0 +1,71 @@
+{
+  "source_database": "workbench_schema_test_6dd20d6788a7464d81f34e6bb30501c3",
+  "restored_database": "workbench_restore_a3e0bc8a3f4a4604b6f7ae0e0ba5a947",
+  "backup_path_on_sql_server": "/var/opt/mssql/data/wb_rehearsal_a3e0bc8a3f4a4604b6f7ae0e0ba5a947.bak",
+  "backup_ms": 179,
+  "restore_ms": 811,
+  "copy_only": true,
+  "checksum_verified": true,
+  "checkdb_passed": true,
+  "replace_used": false,
+  "scope": "same-instance synthetic rehearsal",
+  "tables_verified": {
+    "meta.SchemaMigration": {
+      "count": 9,
+      "sha256": "a70fb47f2124e5a618ddbe515c30b85759dfcdf12e1cb28eef388d1d4f5f7eb8"
+    },
+    "source.Department": {
+      "count": 5,
+      "sha256": "5b01627ca5e9fbbb63a609803049eb217ac5ca1bb0c662a9d173de6f5cdf20c1"
+    },
+    "ops.InputArtifact": {
+      "count": 4,
+      "sha256": "fd06fe8152b6f398c0de602442f11dd472f8778702268ee0b41b0abcfd8fd75d"
+    },
+    "ops.Load": {
+      "count": 4,
+      "sha256": "4fceab8f94748685f71ad6feb00e07bb3ac7bb9f5fb32f9377d232a8709fb973"
+    },
+    "ops.Exception": {
+      "count": 7,
+      "sha256": "cd1d99abd33c1b4cfde4c3fceb5b50e45fd30fc26d3cc429e9d37a001fbe0ed6"
+    },
+    "ops.AuditEvent": {
+      "count": 10,
+      "sha256": "d33a3c4211d9743206d137146e82d1bc126474efb423b142ff635df0ab71d863"
+    },
+    "ops.ReconciliationResult": {
+      "count": 1,
+      "sha256": "e9a19e937981ce52ec0d3457cd4640171710d85c8fa830fe649876447cb12b42"
+    },
+    "ops.Investigation": {
+      "count": 1,
+      "sha256": "8b8c80678df99088a8bd0ecc173877966a957ed4670e06384fe47faae62520e6"
+    },
+    "stg.SourceRow": {
+      "count": 130,
+      "sha256": "bb42c1234d140e71bddae9be9b39f9f83da5175d605d4b430e8f31c4d2054a88"
+    },
+    "core.Department": {
+      "count": 5,
+      "sha256": "7ad6a3fadd715f1be7a29d1808f2eb3162724fc41906229a2a6183b79de64dbf"
+    },
+    "core.Project": {
+      "count": 25,
+      "sha256": "abee1fbfb081bba8187695f81f9270e3fe200d55cd4b205e4b83390240c4a6ae"
+    },
+    "core.Activity": {
+      "count": 94,
+      "sha256": "ceadbdbe807b34f324d89368b0f183af4756540da88483ee383e18bb125ed913"
+    }
+  },
+  "saved_investigation_unchanged": true,
+  "restored_runtime_login_works": true,
+  "retry_totals": [
+    98,
+    197
+  ],
+  "repeated_retry": "no_op",
+  "source_unchanged": true,
+  "owned_restored_database_removed": true
+}

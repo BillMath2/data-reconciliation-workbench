@@ -26,7 +26,9 @@ Inspect the [saved evidence and terminal recording](docs/evidence/p05/README.md)
 
 ## Project status
 
-**P01-P09, including P05A, are complete on recorded evidence and user-confirmed green CI.** The user confirmed P09 green for commit `67f7f78` on October 2, 2026; its exact CI artifacts were not independently inspected here. P10 adds a versioned assistant evaluation suite and failure checks. See [P10 validation](docs/p10-validation.md) for current results and outstanding live/human-review gates; [P09 validation](docs/p09-validation.md) retains the preceding checkpoint.
+**P01-P09, including P05A, are complete. P10 CI is user-confirmed green for `47a79fb`; its live-model/human-review gates remain open.** P11 adds interrupted-load recovery, a verified backup/restore rehearsal, and measured SQL query tuning. See [P11 validation](docs/p11-validation.md), the [recovery runbook](docs/recovery-runbook.md), and [query measurements](docs/sql-performance.md). P11's new CI result is still pending; P12 full release requires both P10 and P11 acceptance.
+
+**P11 local verification: [386 tests passed](docs/evidence/p11/sql-checks.txt), including all 64 SQL cases with no skips.** Abrupt-exit recovery and actual backup/restore passed. On the selected 100,000-activity query fixture, migration 009 reduced logical reads from 2,718 to 6 with identical results. The local database is migrated and the API is healthy. [Retained evidence](docs/evidence/p11/README.md) records the measurements and scope limits.
 
 **P09 local SQL verification: [338 tests passed](docs/evidence/p09-local/sql-checks.txt), including all 52 SQL cases with no skips.** Migration 008, repeatable setup, the reconciliation demo, API checks, and the complete browser workflow passed against Docker-hosted SQL Server on October 2, 2026. [Local evidence and provenance](docs/evidence/p09-local/README.md) are retained separately from the user-confirmed GitHub CI result. No live AI call was made for P09.
 

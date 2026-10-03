@@ -1,7 +1,7 @@
 # P10 validation: assistant scenarios and failure behavior
 
-Status: implemented and locally verified; live evaluation authorization, human
-semantic review, and GitHub CI remain open, October 2, 2026.
+Status: implemented and locally verified; live evaluation authorization and human
+semantic review remain open; GitHub CI was user-confirmed green for `47a79fb` after a rerun, October 2, 2026.
 P09 is accepted on the user's green CI confirmation for commit `67f7f78`;
 the exact CI run URL/artifacts were not independently inspected in this session.
 
@@ -50,8 +50,7 @@ ceiling. It does not affect deterministic workbench operation or offline tests.
 
 After authorization, retain every real answer and review each causal assertion
 against its supplied evidence; no model judge substitutes for a human reviewer.
-Any failed case blocks expanded assistant release. Green GitHub CI remains a
-separate checkpoint after these changes are committed/pushed.
+Any failed case blocks expanded assistant release. GitHub CI is now user-confirmed green for `47a79fb` after a rerun. The exact run artifacts were not independently inspected. This clears the CI checkpoint, not the live/human-review gates.
 
 See [evaluation instructions and scenario boundaries](../evals/README.md).
 P11 recovery/performance work remains independent of the expanded assistant gate.
