@@ -1,7 +1,7 @@
 {
   "mode": "live SQL browser recording",
   "preview": false,
-  "voice": "Synthetic narration using the installed Microsoft David Desktop voice; not Bill's voice.",
+  "voice": "Synthetic female British English narration using Piper Cori (en_GB-cori-high), generated locally; not Bill's voice.",
   "elapsed_seconds": 376.265,
   "chapters": [
     {
@@ -99,5 +99,6 @@
     "07-analyst.png"
   ],
   "passed": true,
-  "ai_mode": "offline screen guidance; archived P05A live response shown separately"
+  "ai_mode": "offline screen guidance; archived P05A live response shown separately",
+  "media_duration_seconds": 378.32
 }

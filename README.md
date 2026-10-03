@@ -11,12 +11,12 @@ audit history, and frozen investigations. Optional AI explains supplied evidence
 [![Actual SQL-backed screen: 100 source rows, 94 accepted, six explained exclusions](docs/images/p12/01-golden.png)](docs/images/p12/walkthrough.mp4)
 
 **[Watch or download the 6:18 narrated walkthrough](docs/images/p12/walkthrough.mp4)**
-([chapter player](docs/images/p12/index.html), [captions](docs/images/p12/captions.vtt),
+([voice sample](docs/images/p12/voice-preview.mp3), [chapter player](docs/images/p12/index.html), [captions](docs/images/p12/captions.vtt),
 [transcript](docs/release-narration.json)). GitHub may offer a download rather than
 inline playback. The [demo guide](docs/demo-guide.md) explains local playback and replay.
 
 Actual Chromium actions run against a fresh, isolated SQL Server stack. Narration
-is the synthetic Microsoft David Desktop voice, not Bill's voice. The screen uses
+is the synthetic female British English Cori voice, not Bill's voice. The screen uses
 labeled offline guidance; a separate chapter shows the reviewed, archived P05A
 live AI response. No new model call occurs. [Capture provenance](docs/evidence/p12/README.md)
 distinguishes the browser journey from historical AI/recovery exhibits.
@@ -59,7 +59,7 @@ Read the [architecture](docs/architecture.md), [schema diagram](docs/database-sc
 P01-P09, including P05A, and P11 have user-confirmed green CI checkpoints.
 P10 CI is green, but **expanded live-model evaluation and human semantic review
 remain open**. P12's local demonstration/documentation package is ready for review;
-its new CI result is pending. Full expanded-assistant release is not accepted.
+the user confirmed P12 CI green for `d69b176`. The subsequent voice update awaits its own CI check. Full expanded-assistant release is not accepted.
 
 - [P12 fresh replay](docs/p12-validation.md): nine migrations, unchanged repeat
   setup, driver checks, real SQL CLI/browser workflows, recording, and isolated cleanup.

@@ -4,7 +4,7 @@ This folder retains credential-free synthetic evidence from fresh local Compose
 replays on October 2, 2026 (America/New_York; UTC timestamps extend into October 3).
 Application baseline: P11 commit `901db40`, user-confirmed CI green. Capture and
 documentation helpers are the uncommitted P12 working tree at capture time.
-No new GitHub run or full expanded-AI release acceptance is claimed.
+P12 CI was subsequently user-confirmed green for `d69b176` on October 3, 2026; exact run artifacts were not independently inspected. Full expanded-AI release acceptance is not claimed.
 
 | File | Meaning |
 |---|---|
@@ -27,7 +27,7 @@ No new GitHub run or full expanded-AI release acceptance is claimed.
 The recording contains actual SQL-backed browser actions and reading pauses.
 Setup, archived P05A AI, and P11 recovery/query chapters are evidence exhibits,
 not reruns of a provider call or backup. The screen investigation uses the offline
-provider. Narration is locally synthesized using Microsoft David Desktop; it is
+provider. Narration is locally synthesized using Piper Cori (female British English); it is
 not Bill's voice. The [original narrative](../../release-narration.json) and
 [captions](../../images/p12/captions.vtt) are retained with the
 [MP4](../../images/p12/walkthrough.mp4).
@@ -47,3 +47,9 @@ excludes itself and evolving prose; it checks retained evidence and delivered me
 Use the [replay guide](../../demo-guide.md) and [P12 validation](../../p12-validation.md).
 The earlier full SQL suite and query/restore measurements remain in
 [P11 evidence](../p11/README.md); P10's live/human review remains separate.
+
+The [voice update](voice-update.json) replaces narration with female British
+English Cori speech and retimes captions. Original captured visuals are preserved
+by copying the H.264 stream; its payload hash is verified unchanged. This is an
+audio revision of the accepted recording, not another SQL execution. The original
+voice and file identity remain recorded in the update metadata and Git history.

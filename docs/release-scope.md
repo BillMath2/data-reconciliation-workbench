@@ -17,8 +17,9 @@ source records and demo identities. It is not an MSP/channel SaaS deployment.
 
 P11 CI was user-confirmed green for `901db40`. P10 CI was user-confirmed green
 for `47a79fb`, but those offline checks do not close its live/human-review gates.
-The P12 materials can be prepared and reviewed now; the **full expanded assistant
-release is not accepted** until the P10 gates and P12 CI/review checks are closed.
+P12 CI was user-confirmed green for `d69b176`; the requested narration update
+awaits a new CI check and listening review. The **full expanded assistant
+release is not accepted** until the P10 gates and delivery review are closed.
 
 No release tag, deployment, or publication to an external service is performed
 by the replay script. The maintained [implementation plan](implementation-plan.md)

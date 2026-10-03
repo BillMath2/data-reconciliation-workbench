@@ -1,8 +1,9 @@
 # Demonstration, recording, and replay
 
 The P12 demonstration is a **6:18 real-SQL browser recording** with synthetic
-Microsoft David Desktop narration, English captions, and seven current screenshots.
-Download [the MP4](images/p12/walkthrough.mp4), read the [transcript](release-narration.json),
+female British English Cori narration, English captions, and seven current screenshots.
+Listen to the [voice sample](images/p12/voice-preview.mp3),
+download [the MP4](images/p12/walkthrough.mp4), read the [transcript](release-narration.json),
 or serve the local chapter player:
 
 ```powershell
@@ -65,39 +66,61 @@ Compose arguments to shut down that owned project. Never substitute the normal
 project name. This replay is not a rerun of the full 386-test SQL suite; use the
 [operator verification command](operations-runbook.md#verify-the-installation) for that.
 
-## Produce a narrated recording
+## Generate or replace narration
 
-Optional production tools are separate from application dependencies. On Windows,
-the PowerShell helper uses installed Microsoft David Desktop speech. Install
-portable FFmpeg only for media encoding:
+The current voice is **Cori**, a synthetic female British English voice generated
+locally by Piper. The [publisher's model card](https://huggingface.co/rhasspy/piper-voices/blob/c10ece1aade47bb51c153c893d14e5bf8e5b7117/en/en_GB/cori/high/MODEL_CARD)
+identifies the voice and its public-domain LibriVox training dataset. Piper is an
+optional GPL-licensed production tool, separate from application dependencies.
+The [voice update record](evidence/p12/voice-update.json) retains the exact model
+revision/hash and chapter timing adjustments. No narration is sent to a cloud service.
+
+Install the optional tools under ignored `.tools/`, then download the voice:
 
 ```powershell
+.\scripts\uv.ps1 pip install --python .venv\Scripts\python.exe --target .tools/piper piper-tts==1.8.0
 .\scripts\uv.ps1 pip install --python .venv\Scripts\python.exe --target .tools/media imageio-ffmpeg==0.6.0
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/narrate-release.ps1 -Output runs/release-narration
-.\scripts\uv.ps1 run --locked python scripts/release-rehearsal.py --output runs/release-recording --record --audio runs/release-narration --ffmpeg .tools/media/imageio_ffmpeg/binaries/ffmpeg-win-x86_64-v7.1.exe
+$env:PYTHONPATH = Join-Path (Get-Location) '.tools/piper'
+.venv\Scripts\python.exe -m piper.download_voices en_GB-cori-high --download-dir .tools/voices/cori-high
+.venv\Scripts\python.exe scripts/narrate-piper.py --model .tools/voices/cori-high/en_GB-cori-high.onnx --ffmpeg .tools/media/imageio_ffmpeg/binaries/ffmpeg-win-x86_64-v7.1.exe --output runs/release-narration
 ```
 
-Run the preceding Playwright setup first. The pinned wheel supplies the Windows
-FFmpeg executable; other platforms can supply their own FFmpeg path and local WAV
-narration. Each sentence in `release-narration.json` maps to `<chapter>-<index>.wav`
-(24 kHz, 16-bit mono PCM). Keep narration within each recorded chapter.
+The downloader uses the publisher's current model. To reproduce this exact revision,
+use the pinned model/config URLs and SHA-256 in the voice update record instead.
+Use a fresh output directory. The script generates sentence WAVs, resamples them
+to 24 kHz mono PCM, and makes small pitch-preserving timing adjustments to fit each
+recorded chapter. It refuses excessive acceleration. Other platforms can supply
+their own FFmpeg binary path.
 
-The recorder checks its actions in a separate preview database, then repeats them
-with 30-second-or-longer chapter holds in another fresh database. It signs in
-through the API before creating the recorded page so tokens are never on screen.
-It saves original WebM, screenshots, MP4, captions, and timestamp metadata.
-Narration/captions can be rebuilt over that same raw video with
-`scripts/release_media.py --output <recording-folder> --audio <wav-folder> --ffmpeg <binary>`.
+To replace only the audio, copy the retained recording metadata into a fresh
+output directory and reuse the accepted MP4's video stream:
 
-Retain only synthetic, credential-free review assets in `docs/images/p12` and
-`docs/evidence/p12`. Raw local WAV/WebM and build logs stay ignored under `runs/`.
-`scripts/check-docs.py` checks links, dictionary coverage, and retained asset hashes
-in ordinary CI; CI does not synthesize voice or repeat the six-minute recording.
+```powershell
+New-Item -ItemType Directory runs/release-revoice
+Copy-Item docs/evidence/p12/recording.json runs/release-revoice/recording.json
+.venv\Scripts\python.exe scripts/release_media.py --output runs/release-revoice --audio runs/release-narration --ffmpeg .tools/media/imageio_ffmpeg/binaries/ffmpeg-win-x86_64-v7.1.exe --video docs/images/p12/walkthrough.mp4
+```
+
+This copies H.264 video without re-encoding, replaces its audio stream, and retimes
+captions. `media_duration_seconds` in the metadata pads narration to the complete
+video duration. Update the voice disclosure in `release-narration.json` when
+changing voices. Keep original media until the replacement has been reviewed.
+
+To record a new SQL browser journey, run the Playwright setup above, then use
+`release-rehearsal.py --output runs/release-recording --record --audio runs/release-narration --ffmpeg <binary>`.
+The recorder verifies a preview before capturing a separate fresh database; tokens
+never appear on screen. The Windows `narrate-release.ps1` helper remains available
+for the original Microsoft David voice, but is no longer the delivered soundtrack.
+
+Retain synthetic, credential-free review assets in `docs/images/p12` and
+`docs/evidence/p12`. Raw WAV/WebM and build logs stay ignored under `runs/`.
+`scripts/check-docs.py` verifies links, dictionary coverage, and asset hashes in CI.
+CI does not synthesize voice or repeat the six-minute recording.
 
 ## Acceptance
 
-P11 CI was user-confirmed green for `901db40`. P12 local replay/media are delivered
-for review; the new CI result is pending. The reduced demonstration uses the
+P11 CI was user-confirmed green for `901db40`. P12 CI was user-confirmed green for `d69b176`. The subsequent voice
+update awaits its own CI check and listening review. The reduced demonstration uses the
 accepted P05A example and offline screen guidance. P10's expanded live-model
 evaluation and human semantic review remain outstanding. See
 [P12 validation](p12-validation.md) and [release limits](release-scope.md).

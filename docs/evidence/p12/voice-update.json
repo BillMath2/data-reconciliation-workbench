@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-03T11:18:06.390595+00:00",
+  "accepted_p12_commit": "d69b176",
+  "ci_confirmation": "P12 green reported by user on October 3, 2026; exact run artifacts not independently inspected",
+  "change": "Female British English Cori narration; captions retimed; original H.264 stream copied unchanged",
+  "original_mp4_sha256": "8fe6bc12b9e9ad23f2413a4eb676852055675e7f28cab24351740bab7603cbe1",
+  "original_voice": "Synthetic narration using the installed Microsoft David Desktop voice; not Bill's voice.",
+  "video_stream_sha256": "c63e28c099e80158a833f7a2d9d1fbda5f75dfddc4ad21a483af5adaa41f587f",
+  "video_stream_unchanged": true,
+  "voice": {
+    "engine": "piper-tts 1.8.0",
+    "voice": "en_GB-cori-high",
+    "model_sha256": "470b4dd634c98f8a4850d7626ffc3dfc90774628eeef6605a6dd8f88f30a5903",
+    "length_scale": 0.9,
+    "chapters": [
+      {
+        "chapter": "intro",
+        "raw_seconds": 30.48780045351474,
+        "tempo": 1.0566703167443174
+      },
+      {
+        "chapter": "setup",
+        "raw_seconds": 29.16426303854875,
+        "tempo": 1.0346599944200179
+      },
+      {
+        "chapter": "golden",
+        "raw_seconds": 28.908843537414967,
+        "tempo": 1.0510141014850867
+      },
+      {
+        "chapter": "finding",
+        "raw_seconds": 25.611609977324264,
+        "tempo": 1.0
+      },
+      {
+        "chapter": "investigation",
+        "raw_seconds": 29.00172335600907,
+        "tempo": 1.020106871160856
+      },
+      {
+        "chapter": "correction",
+        "raw_seconds": 30.952199546485264,
+        "tempo": 1.0821485694244048
+      },
+      {
+        "chapter": "history",
+        "raw_seconds": 26.19210884353741,
+        "tempo": 1.0
+      },
+      {
+        "chapter": "noop",
+        "raw_seconds": 29.46612244897959,
+        "tempo": 1.071495361781076
+      },
+      {
+        "chapter": "roles",
+        "raw_seconds": 30.778049886621318,
+        "tempo": 1.0812008795104657
+      },
+      {
+        "chapter": "ai",
+        "raw_seconds": 32.18285714285714,
+        "tempo": 1.080248627891318
+      },
+      {
+        "chapter": "recovery",
+        "raw_seconds": 31.567528344671203,
+        "tempo": 1.0766964402512442
+      },
+      {
+        "chapter": "close",
+        "raw_seconds": 31.068299319727892,
+        "tempo": 1.076520756403012
+      }
+    ]
+  },
+  "source": {
+    "repository": "rhasspy/piper-voices",
+    "revision": "c10ece1aade47bb51c153c893d14e5bf8e5b7117",
+    "base_url": "https://huggingface.co/rhasspy/piper-voices/resolve/c10ece1aade47bb51c153c893d14e5bf8e5b7117/en/en_GB/cori/high/"
+  },
+  "model_url": "https://huggingface.co/rhasspy/piper-voices/resolve/c10ece1aade47bb51c153c893d14e5bf8e5b7117/en/en_GB/cori/high/en_GB-cori-high.onnx",
+  "config_url": "https://huggingface.co/rhasspy/piper-voices/resolve/c10ece1aade47bb51c153c893d14e5bf8e5b7117/en/en_GB/cori/high/en_GB-cori-high.onnx.json",
+  "model_card_url": "https://huggingface.co/rhasspy/piper-voices/resolve/c10ece1aade47bb51c153c893d14e5bf8e5b7117/en/en_GB/cori/high/MODEL_CARD",
+  "config_sha256": "9e7fb5b5671612c22f3c81cbe46c1ae87b031a4632bcb509e499dad6f1e2adec",
+  "audio_processing": "24 kHz mono PCM; chapter-specific FFmpeg atempo preserves pitch; final AAC soundtrack",
+  "local_only": true,
+  "sql_rerun": false,
+  "paid_provider_calls": 0,
+  "listening_review": "Awaiting user preference review; no human listening review claimed"
+}

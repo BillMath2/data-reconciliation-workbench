@@ -4,7 +4,8 @@ P11 CI was user-confirmed green for baseline `901db40`. P12 delivers the reduced
 release package allowed by the implementation plan: the deterministic workbench,
 offline screen investigations, and the previously reviewed P05A live explanation.
 **Expanded P10 live-model evaluation and human semantic review remain open.**
-P12's new GitHub CI and user review of these materials are pending; this is not
+The user confirmed P12 GitHub CI green for `d69b176` on October 3, 2026. The
+subsequent narration update and user review remain pending; this is not
 full expanded-assistant release acceptance.
 
 ## Delivered
@@ -44,14 +45,14 @@ business logic or schema migration changed.
 
 Media review checks screenshots and representative decoded frames, loads captions,
 seeks through the local player, and decodes the entire H.264/AAC file successfully.
-The voice is locally synthesized Microsoft David Desktop, not Bill's voice. Raw
+The voice is locally synthesized Piper Cori (female British English), not Bill's voice. Raw
 capture time and encoded container duration may differ slightly because of video
 finalization; the displayed duration uses actual media metadata. The final MP4
 is below 50 MB. Asset hashes and exact times are in the evidence folder.
 
 ## Remaining acceptance
 
-1. Commit/push the P12 changes and obtain green CI for that revision.
+1. P12 CI is user-confirmed green for `d69b176`; obtain CI for the subsequent voice update.
 2. Review the README, narration, video, and documented scope as the delivery package.
 3. Separately complete the authorized live-evaluation process and human semantic
    review described in [P10 validation](p10-validation.md) before accepting the
@@ -59,3 +60,12 @@ is below 50 MB. Asset hashes and exact times are in the evidence folder.
 
 No release tag, deployment, or external publication was performed. The
 [release-scope record](release-scope.md) retains production and AI limitations.
+
+## Narration update (October 3, 2026)
+
+At the user's request, the soundtrack now uses local Piper Cori, a female British
+English voice. The H.264 video stream is copied from the accepted P12 MP4; browser
+footage, SQL results, and chapter starts are unchanged. Captions are retimed to the
+new speech. The [voice update record](evidence/p12/voice-update.json) retains the
+model source/hash, timing adjustments, original media identity, and verification.
+This change does not rerun SQL or make a paid model request.
